@@ -1,96 +1,1198 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="A growing library of IELTS grammar notes and interactive practice pages.">
-<title>IELTS Grammar Lab | Study library</title>
+<meta name="theme-color" content="#10243a">
+<meta name="description" content="IELTS Grammar Lab: grammar lessons, vocabulary, and IELTS learning resources.">
+<title>IELTS Grammar Lab | English Learning Library</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+
 <style>
-:root{--navy:#10243a;--blue:#2458a6;--teal:#147d78;--ink:#172334;--muted:#617084;--paper:#f5f7fb;--line:#dce3ec;--white:#fff;--shadow:0 12px 34px rgba(16,36,58,.08)}
-*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 Inter,system-ui,sans-serif}a{color:inherit}.header{background:linear-gradient(125deg,#10243a,#183c64 70%,#1d5b75);color:white;padding:65px 22px}.wrap{max-width:1120px;margin:auto}.eyebrow{font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#c5d8f1}.header h1{font:700 clamp(2.4rem,5vw,4rem)/1.12 Lora,Georgia,serif;letter-spacing:-.035em;margin:14px 0}.header p{max-width:700px;color:#e0eaf6;font-size:1.05rem;margin:0}.main{max-width:1120px;margin:28px auto;padding:0 22px}.toolbar{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:18px}.toolbar h2{font:700 1.7rem Lora,Georgia,serif;color:var(--navy);margin:0}.search{width:min(100%,350px);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font:inherit;background:white}.status{color:var(--muted);font-size:.9rem;margin:8px 0 20px}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}.card{display:flex;flex-direction:column;background:white;border:1px solid var(--line);border-radius:15px;padding:20px;text-decoration:none;box-shadow:var(--shadow);transition:transform .18s,border-color .18s}.card:hover{transform:translateY(-3px);border-color:#8ba8d4}.tag{display:inline-block;width:max-content;background:#dce8f8;color:var(--blue);font-size:.72rem;font-weight:800;border-radius:99px;padding:4px 9px;margin-bottom:12px}.card h3{font-size:1.1rem;color:var(--navy);line-height:1.35;margin:0 0 9px;overflow-wrap:anywhere}.card p{font-size:.91rem;color:var(--muted);margin:0 0 18px}.open{font-size:.88rem;font-weight:800;color:var(--blue);margin-top:auto}.empty{padding:28px;border:1px dashed #aab8c9;border-radius:12px;background:white;color:var(--muted)}.manual{margin-top:25px;padding:19px 21px;background:white;border:1px solid var(--line);border-radius:14px}.manual h3{margin:0 0 7px;color:var(--navy)}.manual code{background:#edf2f8;padding:3px 6px;border-radius:5px;overflow-wrap:anywhere}.footer{text-align:center;padding:30px 15px;color:var(--muted);font-size:.85rem}@media(max-width:850px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.header{padding:48px 18px}.main{padding:0 14px}.cards{grid-template-columns:1fr}.toolbar{align-items:stretch}.search{width:100%}}
+:root {
+  --navy: #10243a;
+  --blue: #2458a6;
+  --teal: #168c88;
+  --text: #263548;
+  --muted: #68778a;
+  --bg: #f4f7fb;
+  --white: #fff;
+  --border: #e1e8f0;
+  --shadow: 0 8px 28px rgba(16,36,58,.07);
+  --radius: 17px;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 95px;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, sans-serif;
+  line-height: 1.65;
+}
+
+button, input { font: inherit; }
+button { cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(255,255,255,.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-wrap {
+  max-width: 1180px;
+  min-height: 72px;
+  margin: auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  flex-shrink: 0;
+}
+
+.brand-icon {
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  background: var(--navy);
+  color: white;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.brand-title {
+  display: block;
+  color: var(--navy);
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.brand-subtitle {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+.nav-link {
+  border: 0;
+  background: transparent;
+  color: #526176;
+  border-radius: 9px;
+  padding: 9px 11px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background: #eaf1fc;
+  color: var(--blue);
+}
+
+.menu-toggle {
+  display: none;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: white;
+  color: var(--navy);
+  padding: 7px 12px;
+  font-size: 22px;
+}
+
+main {
+  max-width: 1180px;
+  margin: auto;
+  padding: 30px 24px 65px;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 57px 48px;
+  border-radius: 25px;
+  color: white;
+  background: linear-gradient(120deg, #10243a, #173c68 58%, #2458a6);
+  box-shadow: 0 16px 38px rgba(16,36,58,.13);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 290px;
+  height: 290px;
+  right: -85px;
+  top: -120px;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 50%;
+  box-shadow: 0 0 0 35px rgba(255,255,255,.035),
+              0 0 0 75px rgba(255,255,255,.025);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+}
+
+.eyebrow {
+  display: inline-block;
+  padding: 7px 12px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 30px;
+  background: rgba(255,255,255,.1);
+  color: #dceaff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+}
+
+.hero h1 {
+  max-width: 670px;
+  margin: 21px 0 17px;
+  font-family: Lora, Georgia, serif;
+  font-size: clamp(34px, 5vw, 53px);
+  letter-spacing: -1.2px;
+  line-height: 1.18;
+}
+
+.hero p {
+  max-width: 640px;
+  margin: 0;
+  color: #d8e4f4;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 11px;
+  margin-top: 27px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 17px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  border: 1px solid transparent;
+  transition: .2s;
+}
+
+.btn-light {
+  background: white;
+  color: var(--navy);
+}
+
+.btn-light:hover { background: #eaf1fc; }
+
+.btn-outline {
+  border-color: rgba(255,255,255,.35);
+  color: white;
+  background: rgba(255,255,255,.05);
+}
+
+.btn-outline:hover { background: rgba(255,255,255,.12); }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 15px;
+  margin: 22px 0 34px;
+}
+
+.stat {
+  padding: 18px 21px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.stat-number {
+  color: var(--navy);
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: -.6px;
+}
+
+.stat-label {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin: 36px 0 22px;
+}
+
+.section-title {
+  margin: 0;
+  color: var(--navy);
+  font-family: Lora, Georgia, serif;
+  font-size: clamp(23px, 3vw, 30px);
+  letter-spacing: -.5px;
+  line-height: 1.35;
+}
+
+.section-description {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.search-box {
+  position: relative;
+  width: min(100%, 350px);
+}
+
+.search-box input {
+  width: 100%;
+  padding: 13px 15px 13px 42px;
+  outline: none;
+  border: 1px solid #d8e1ec;
+  border-radius: 11px;
+  background: white;
+  color: var(--text);
+  font-size: 13px;
+}
+
+.search-box input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(36,88,166,.1);
+}
+
+.search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #8290a2;
+  font-size: 18px;
+  pointer-events: none;
+}
+
+.category-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  padding: 7px;
+  margin-bottom: 26px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.category-btn {
+  border: 0;
+  padding: 10px 14px;
+  border-radius: 9px;
+  background: transparent;
+  color: #5d6d80;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.category-btn:hover {
+  color: var(--blue);
+  background: #f0f5fd;
+}
+
+.category-btn.active {
+  background: var(--blue);
+  color: white;
+}
+
+.count {
+  margin-left: 5px;
+  font-size: 10px;
+  opacity: .8;
+}
+
+.library-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 15px;
+  margin: 25px 0 18px;
+}
+
+.result-count {
+  color: var(--muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.lesson-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 17px;
+}
+
+.lesson-card {
+  min-width: 0;
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+  padding: 21px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: white;
+  box-shadow: 0 3px 12px rgba(16,36,58,.025);
+  transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+
+.lesson-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+  border-color: #c4d5ed;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.card-icon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: #eaf1fc;
+  color: var(--blue);
+  font-size: 19px;
+}
+
+.card-tag {
+  max-width: 65%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 5px 8px;
+  border-radius: 6px;
+  background: #f0f5fc;
+  color: #52719c;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.lesson-card h3 {
+  margin: 0 0 8px;
+  color: var(--navy);
+  font-size: 15px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.lesson-card p {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.card-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 13px;
+  border-top: 1px solid #edf1f6;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.lesson-card:hover .card-link span:last-child {
+  transform: translateX(4px);
+}
+
+.card-link span:last-child { transition: transform .2s; }
+
+.empty-state,
+.loading-state,
+.error-state {
+  padding: 38px 20px;
+  border: 1px dashed #cdd8e6;
+  border-radius: var(--radius);
+  background: white;
+  color: var(--muted);
+  text-align: center;
+}
+
+.empty-state strong,
+.error-state strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--navy);
+  font-size: 15px;
+}
+
+.empty-icon {
+  margin-bottom: 8px;
+  font-size: 28px;
+}
+
+.status-message {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.status-message a {
+  color: var(--blue);
+  text-decoration: underline;
+}
+
+.footer {
+  padding: 32px 24px;
+  background: var(--navy);
+  color: #d2dceb;
+}
+
+.footer-inner {
+  max-width: 1132px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.footer-title {
+  color: white;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.footer p {
+  margin: 5px 0 0;
+  color: #aebdd0;
+  font-size: 12px;
+}
+
+.footer a {
+  color: #d9e7fa;
+  font-size: 12px;
+}
+
+.hidden { display: none !important; }
+
+@media (max-width: 950px) {
+  .lesson-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .nav-wrap { gap: 10px; }
+  .nav-link { padding: 8px; }
+}
+
+@media (max-width: 680px) {
+  .nav-wrap {
+    min-height: 66px;
+    padding: 10px 16px;
+  }
+
+  .menu-toggle { display: block; }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 12px 16px 18px;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 12px 20px rgba(16,36,58,.08);
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav-links.open { display: flex; }
+
+  .nav-link {
+    width: 100%;
+    padding: 12px;
+    text-align: left;
+  }
+
+  main { padding: 19px 15px 45px; }
+
+  .hero {
+    padding: 35px 23px;
+    border-radius: 20px;
+  }
+
+  .hero h1 { font-size: 35px; }
+  .hero p { font-size: 14px; }
+
+  .stats { gap: 9px; margin: 15px 0 26px; }
+  .stat { padding: 13px 11px; }
+  .stat-number { font-size: 21px; }
+  .stat-label { font-size: 10px; }
+
+  .toolbar {
+    align-items: stretch;
+    margin-top: 28px;
+  }
+
+  .search-box { width: 100%; }
+  .category-nav { gap: 5px; }
+  .category-btn { padding: 9px 10px; }
+
+  .lesson-grid { grid-template-columns: 1fr; gap: 12px; }
+  .lesson-card { min-height: 185px; padding: 19px; }
+
+  .footer { padding: 27px 17px; }
+}
+
+@media print {
+  .header, .hero-actions, .toolbar, .category-nav, .footer { display: none !important; }
+  body { background: white; }
+  main { padding: 0; }
+  .hero { padding: 20px 0; background: white; color: black; box-shadow: none; }
+  .hero p { color: #444; }
+  .lesson-card { break-inside: avoid; }
+}
 </style>
 </head>
+
 <body>
-<header class="header"><div class="wrap"><div class="eyebrow">IELTS study library</div><h1>IELTS Grammar Lab</h1><p>Grammar explanations, practical examples, common errors, and interactive practice to help you prepare for IELTS.</p></div></header>
-<main class="main">
-  <div class="toolbar"><h2>Lessons</h2><input id="search" class="search" type="search" placeholder="Search lessons..." aria-label="Search grammar pages"></div>
-  <p id="status" class="status" role="status">Loading...</p>
-  <section id="pages" class="cards" aria-label="HTML study pages"></section>
-  
+
+<header class="header">
+  <div class="nav-wrap">
+    <a class="brand" href="#home" aria-label="IELTS Grammar Lab home">
+      <span class="brand-icon">GL</span>
+      <span>
+        <span class="brand-title">IELTS Grammar Lab</span>
+        <span class="brand-subtitle">Your English learning library</span>
+      </span>
+    </a>
+
+    <button class="menu-toggle" id="menuToggle"
+      aria-label="Toggle navigation" aria-expanded="false">☰</button>
+
+    <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+      <a class="nav-link active" href="#home">Home</a>
+      <button class="nav-link" data-category="tenses">Tenses</button>
+      <button class="nav-link" data-category="grammar">Grammar</button>
+      <button class="nav-link" data-category="vocabulary">Vocabulary</button>
+      <button class="nav-link" data-category="ielts">IELTS skills</button>
+      <button class="nav-link" data-category="all">All pages</button>
+    </nav>
+  </div>
+</header>
+
+<main id="home">
+
+  <section class="hero">
+    <div class="hero-content">
+      <span class="eyebrow">LEARN · PRACTISE · IMPROVE</span>
+      <h1>Build stronger English, one lesson at a time.</h1>
+      <p>
+        Welcome to your IELTS Grammar Lab — a growing library of clear grammar
+        explanations, practical examples, vocabulary resources, and IELTS-focused
+        learning materials. Study at your own pace and practise with purpose.
+      </p>
+      <div class="hero-actions">
+        <a href="#library" class="btn btn-light">Explore lessons →</a>
+        <button class="btn btn-outline" id="randomButton">Open a lesson ↗</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats" aria-label="Library statistics">
+    <div class="stat">
+      <div class="stat-number" id="totalCount">—</div>
+      <div class="stat-label">HTML learning resources</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number" id="tenseCount">—</div>
+      <div class="stat-label">Tense lessons</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">4</div>
+      <div class="stat-label">IELTS skills supported</div>
+    </div>
+  </section>
+
+  <section id="library">
+    <div class="toolbar">
+      <div>
+        <h2 class="section-title" id="libraryTitle">Explore the library</h2>
+        <p class="section-description" id="libraryDescription">
+          Choose a subject or search for a lesson.
+        </p>
+      </div>
+
+      <label class="search-box">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <input id="searchInput" type="search"
+          placeholder="Search lessons..." aria-label="Search lessons">
+      </label>
+    </div>
+
+    <nav class="category-nav" aria-label="Lesson categories">
+      <button class="category-btn active" data-category="all">All pages</button>
+      <button class="category-btn" data-category="tenses">Tenses</button>
+      <button class="category-btn" data-category="grammar">Grammar topics</button>
+      <button class="category-btn" data-category="vocabulary">Vocabulary</button>
+      <button class="category-btn" data-category="ielts">IELTS skills</button>
+    </nav>
+
+    <div class="library-heading">
+      <div>
+        <h2 class="section-title" id="resultsTitle">All learning resources</h2>
+        <p class="section-description" id="resultsDescription">
+          Your lessons are organised by subject.
+        </p>
+      </div>
+      <span class="result-count" id="resultCount" aria-live="polite">Loading…</span>
+    </div>
+
+    <div id="lessonGrid" class="lesson-grid">
+      <div class="loading-state">Loading your learning library…</div>
+    </div>
+
+    <div id="emptyState" class="empty-state hidden">
+      <div class="empty-icon">📚</div>
+      <strong id="emptyTitle">No lessons found</strong>
+      <span id="emptyDescription">Try another search or select a different category.</span>
+    </div>
+
+    <div class="status-message" id="statusMessage" role="status"></div>
+  </section>
+
 </main>
-<footer class="footer">IELTS Grammar Lab · Build your skills step by step.</footer>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-title">IELTS Grammar Lab</div>
+      <p>A growing library for better English and IELTS preparation.</p>
+    </div>
+    <div>
+      <a href="https://github.com/abubokkorshiddik/Eng-materials"
+         target="_blank" rel="noopener noreferrer">View repository on GitHub ↗</a>
+    </div>
+  </div>
+</footer>
+
 <script>
-/*
-  Repository settings:
-  owner: abubokkorshiddik
-  repo: Eng-materials
-  branch: main
-  Only root-level HTML files are listed; index.html is excluded.
-*/
-const OWNER='abubokkorshiddik';
-const REPO='Eng-materials';
-const BRANCH='main';
-const API=`https://api.github.com/repos/${OWNER}/${REPO}/contents/?ref=${encodeURIComponent(BRANCH)}`;
-const RAW_BASE=`https://${OWNER}.github.io/${REPO}/`;
-const EXCLUDE=new Set(['index.html','404.html','google-site-verification.html']);
-const pageHost=document.getElementById('pages');
-const statusEl=document.getElementById('status');
-const searchEl=document.getElementById('search');
-let allPages=[];
-function prettify(filename){
- return filename.replace(/\.html?$/i,'').replace(/[_-]+/g,' ').replace(/\s+/g,' ').trim().replace(/\b[a-z]/g,m=>m.toUpperCase());
-}
-function description(filename){
- const key=filename.toLowerCase();
- if(key.includes('present-simple')||key.includes('presentsimple'))return 'Learn the rules, compare the two tenses, review common mistakes, and practise with interactive questions.';
- if(key.includes('past'))return 'Grammar notes and examples for understanding and using past-tense forms.';
- if(key.includes('perfect'))return 'Learn the rules and meanings of perfect tense forms with examples and practice.';
- if(key.includes('future'))return 'Study future forms, plans, predictions, schedules, and arrangements.';
- if(key.includes('vocabulary')||key.includes('word'))return 'Vocabulary notes, useful expressions, and practice for IELTS.';
- if(key.includes('speaking'))return 'Useful language, examples, and practice to develop IELTS Speaking.';
- if(key.includes('reading'))return 'Reading strategies, language patterns, and IELTS practice.';
- if(key.includes('listening'))return 'Listening strategies, useful language, and IELTS practice.';
- return 'Open this study page to review its notes, examples, and practice activities.';
-}
-function render(){
- const term=searchEl.value.trim().toLowerCase();
- const shown=allPages.filter(p=>(p.title+' '+p.filename+' '+p.description).toLowerCase().includes(term));
- pageHost.replaceChildren();
- if(!shown.length){
-  const empty=document.createElement('div');empty.className='empty';empty.textContent=allPages.length?'No pages match your search. Try another word.':'No lesson pages were found in the repository root yet.';
-  pageHost.appendChild(empty);return;
- }
- shown.forEach(p=>{
-  const a=document.createElement('a');a.className='card';a.href=p.url;
-  const tag=document.createElement('span');tag.className='tag';tag.textContent='Grammar lesson';
-  const h=document.createElement('h3');h.textContent=p.title;
-  const desc=document.createElement('p');desc.textContent=p.description;
-  const open=document.createElement('span');open.className='open';open.textContent='Open lesson →';
-  a.append(tag,h,desc,open);pageHost.appendChild(a);
- });
-}
-async function loadPages(){
- try{
-  const response=await fetch(API,{headers:{'Accept':'application/vnd.github+json'}});
-  if(!response.ok)throw new Error(response.status===403?'GitHub API rate limit reached. Try again later.':'GitHub API returned '+response.status+'. Check repository visibility and branch name.');
-  const files=await response.json();
-  if(!Array.isArray(files))throw new Error('GitHub did not return a directory listing.');
-  allPages=files.filter(f=>f.type==='file'&&/\.html?$/i.test(f.name)&&!EXCLUDE.has(f.name.toLowerCase())&&!f.name.toLowerCase().startsWith('google')).map(f=>({filename:f.name,title:prettify(f.name),description:description(f.name),url:RAW_BASE+encodeURIComponent(f.name)})).sort((a,b)=>a.title.localeCompare(b.title));
-  statusEl.textContent=`Found ${allPages.length} Grammar lesson page${allPages.length===1?'':'s'} in the repository root.`;
-  render();
- }catch(err){
-  statusEl.textContent='Automatic page discovery could not load: '+err.message;
-  pageHost.innerHTML='';
-  const note=document.createElement('div');note.className='empty';
-  note.textContent='Check that the repository is public, the repository name and branch are correct, and GitHub Pages is enabled. You can still open the lesson by entering its URL directly.';
-  pageHost.appendChild(note);
- }
-}
-searchEl.addEventListener('input',render);
-loadPages();
+(() => {
+  "use strict";
+
+  const OWNER = "abubokkorshiddik";
+  const REPO = "Eng-materials";
+  const BRANCH = "main";
+
+  const API_URL =
+    `https://api.github.com/repos/${OWNER}/${REPO}/contents/?ref=${BRANCH}`;
+
+  const SITE_URL =
+    `https://${OWNER}.github.io/${REPO}/`;
+
+  const CATEGORY_INFO = {
+    all: {
+      title: "All learning resources",
+      description: "Browse every HTML lesson available in your library."
+    },
+    tenses: {
+      title: "English tenses",
+      description: "Study present, past, and future tenses with detailed explanations and examples."
+    },
+    grammar: {
+      title: "Grammar topics",
+      description: "Build your grammar knowledge with focused lessons and practical examples."
+    },
+    vocabulary: {
+      title: "Vocabulary and expressions",
+      description: "Explore words, academic expressions, collocations, idioms, and useful phrases."
+    },
+    ielts: {
+      title: "IELTS skills and practice",
+      description: "Find learning resources for IELTS Reading, Listening, Writing, Speaking, and practice tests."
+    }
+  };
+
+  const CATEGORY_ICONS = {
+    all: "📚",
+    tenses: "◷",
+    grammar: "✎",
+    vocabulary: "Aa",
+    ielts: "◎"
+  };
+
+  const els = {
+    grid: document.getElementById("lessonGrid"),
+    empty: document.getElementById("emptyState"),
+    emptyTitle: document.getElementById("emptyTitle"),
+    emptyDescription: document.getElementById("emptyDescription"),
+    search: document.getElementById("searchInput"),
+    title: document.getElementById("libraryTitle"),
+    description: document.getElementById("libraryDescription"),
+    resultsTitle: document.getElementById("resultsTitle"),
+    resultsDescription: document.getElementById("resultsDescription"),
+    count: document.getElementById("resultCount"),
+    totalCount: document.getElementById("totalCount"),
+    tenseCount: document.getElementById("tenseCount"),
+    status: document.getElementById("statusMessage"),
+    menuToggle: document.getElementById("menuToggle"),
+    navLinks: document.getElementById("navLinks"),
+    randomButton: document.getElementById("randomButton")
+  };
+
+  let lessons = [];
+  let activeCategory = "all";
+  let searchTerm = "";
+
+  function normalise(value) {
+    return value
+      .toLowerCase()
+      .replace(/&/g, " and ")
+      .replace(/[_-]+/g, " ")
+      .replace(/\.html?$/i, "")
+      .replace(/[^\p{L}\p{N}\s]/gu, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function titleFromFilename(filename) {
+    let title = filename
+      .replace(/\.html?$/i, "")
+      .replace(/[_-]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    title = title.replace(/\bielts\b/gi, "IELTS");
+    title = title.replace(/\bai\b/gi, "AI");
+    title = title.replace(/\b(bbc|usa|uk)\b/gi, word => word.toUpperCase());
+
+    return title.replace(/\b[a-z]/g, letter => letter.toUpperCase());
+  }
+
+  function categoryFor(filename) {
+    const name = normalise(filename);
+
+    /*
+      Match specific tense filenames first.
+      Examples:
+      present-simple-and-continuous.html
+      past-perfect.html
+      future-perfect-continuous.html
+    */
+    const tensePattern =
+      /\b(present|past|future)\b.*\b(simple|continuous|progressive|perfect)\b|\b(simple|continuous|progressive|perfect)\b.*\b(present|past|future)\b/;
+
+    const tenseNames = [
+      "present simple",
+      "present continuous",
+      "present progressive",
+      "present perfect",
+      "present perfect continuous",
+      "past simple",
+      "past continuous",
+      "past progressive",
+      "past perfect",
+      "past perfect continuous",
+      "future simple",
+      "future continuous",
+      "future progressive",
+      "future perfect",
+      "future perfect continuous"
+    ];
+
+    if (
+      tensePattern.test(name) ||
+      /\b(tenses|tense)\b/.test(name) ||
+      tenseNames.some(tense => name.includes(tense))
+    ) {
+      return "tenses";
+    }
+
+    if (
+      /\b(vocabulary|vocab|collocations?|idioms?|phrases?|word list|word power|word bank|academic words|word families|synonyms|antonyms)\b/.test(name)
+    ) {
+      return "vocabulary";
+    }
+
+    if (
+      /\b(ielts|reading|listening|speaking|writing|practice test|mock test|cambridge|task 1|task 2|band score)\b/.test(name)
+    ) {
+      return "ielts";
+    }
+
+    return "grammar";
+  }
+
+  function descriptionFor(category, title) {
+    const descriptions = {
+      tenses: "Learn how to use this tense with examples, rules, and practice.",
+      grammar: "Improve your grammar knowledge with explanations and examples.",
+      vocabulary: "Build your vocabulary and learn useful English expressions.",
+      ielts: "Develop your English and prepare for the IELTS examination.",
+      all: "Explore this learning resource."
+    };
+
+    return descriptions[category] || descriptions.all;
+  }
+
+  function makeLesson(file) {
+    const category = categoryFor(file.name);
+
+    return {
+      name: file.name,
+      title: titleFromFilename(file.name),
+      category,
+      url: SITE_URL + encodeURIComponent(file.name).replace(/%2F/g, "/"),
+      description: descriptionFor(category, file.name)
+    };
+  }
+
+  function matchesSearch(lesson, query) {
+    if (!query) return true;
+
+    const searchable = normalise(
+      `${lesson.title} ${lesson.name} ${lesson.category} ${lesson.description}`
+    );
+
+    return searchable.includes(query);
+  }
+
+  function createCard(lesson) {
+    const article = document.createElement("article");
+    article.className = "lesson-card";
+
+    const top = document.createElement("div");
+    top.className = "card-top";
+
+    const icon = document.createElement("div");
+    icon.className = "card-icon";
+    icon.setAttribute("aria-hidden", "true");
+    icon.textContent = CATEGORY_ICONS[lesson.category] || "📘";
+
+    const tag = document.createElement("span");
+    tag.className = "card-tag";
+    tag.textContent = CATEGORY_INFO[lesson.category].title;
+
+    top.append(icon, tag);
+
+    const heading = document.createElement("h3");
+    heading.textContent = lesson.title;
+
+    const description = document.createElement("p");
+    description.textContent = lesson.description;
+
+    const link = document.createElement("a");
+    link.className = "card-link";
+    link.href = lesson.url;
+    link.setAttribute("aria-label", `Open lesson: ${lesson.title}`);
+
+    const linkText = document.createElement("span");
+    linkText.textContent = "Open lesson";
+
+    const arrow = document.createElement("span");
+    arrow.textContent = "→";
+    arrow.setAttribute("aria-hidden", "true");
+
+    link.append(linkText, arrow);
+    article.append(top, heading, description, link);
+
+    return article;
+  }
+
+  function updateNavigation() {
+    document.querySelectorAll("[data-category]").forEach(button => {
+      const isActive = button.dataset.category === activeCategory;
+
+      if (button.classList.contains("category-btn")) {
+        button.classList.toggle("active", isActive);
+        button.setAttribute("aria-pressed", String(isActive));
+      } else {
+        button.classList.toggle("active", isActive);
+      }
+    });
+
+    document.querySelectorAll(".nav-link").forEach(link => {
+      if (link.tagName === "A") {
+        link.classList.toggle("active", activeCategory === "all" && link.getAttribute("href") === "#home");
+      }
+    });
+  }
+
+  function render() {
+    const info = CATEGORY_INFO[activeCategory];
+
+    els.title.textContent = info.title;
+    els.description.textContent = info.description;
+    els.resultsTitle.textContent = searchTerm
+      ? "Search results"
+      : info.title;
+
+    els.resultsDescription.textContent = searchTerm
+      ? `Results matching “${els.search.value.trim()}”.`
+      : info.description;
+
+    const filtered = lessons.filter(lesson => {
+      const categoryMatches =
+        activeCategory === "all" || lesson.category === activeCategory;
+
+      return categoryMatches && matchesSearch(lesson, searchTerm);
+    });
+
+    els.grid.replaceChildren();
+
+    if (filtered.length === 0) {
+      els.grid.classList.add("hidden");
+      els.empty.classList.remove("hidden");
+
+      if (searchTerm) {
+        els.emptyTitle.textContent = "No matching lessons";
+        els.emptyDescription.textContent =
+          "Try another keyword or choose a different category.";
+      } else if (activeCategory === "grammar") {
+        els.emptyTitle.textContent = "Your grammar library is ready to grow";
+        els.emptyDescription.textContent =
+          "Add HTML lessons about articles, prepositions, conditionals, passive voice, modals, and clauses to your repository.";
+      } else if (activeCategory === "vocabulary") {
+        els.emptyTitle.textContent = "Vocabulary resources coming soon";
+        els.emptyDescription.textContent =
+          "Add HTML files about vocabulary, collocations, idioms, or academic expressions.";
+      } else if (activeCategory === "ielts") {
+        els.emptyTitle.textContent = "IELTS resources coming soon";
+        els.emptyDescription.textContent =
+          "Add HTML lessons or practice materials for Reading, Listening, Writing, or Speaking.";
+      } else {
+        els.emptyTitle.textContent = "No lessons available yet";
+        els.emptyDescription.textContent =
+          "Add HTML lesson files to the root of your GitHub repository.";
+      }
+    } else {
+      els.grid.classList.remove("hidden");
+      els.empty.classList.add("hidden");
+
+      const fragment = document.createDocumentFragment();
+      filtered.forEach(lesson => fragment.appendChild(createCard(lesson)));
+      els.grid.appendChild(fragment);
+    }
+
+    els.count.textContent =
+      `${filtered.length} ${filtered.length === 1 ? "resource" : "resources"}`;
+
+    document.querySelectorAll(".category-btn").forEach(button => {
+      const category = button.dataset.category;
+      const count = category === "all"
+        ? lessons.length
+        : lessons.filter(lesson => lesson.category === category).length;
+
+      let badge = button.querySelector(".count");
+
+      if (!badge) {
+        badge = document.createElement("span");
+        badge.className = "count";
+        button.appendChild(badge);
+      }
+
+      badge.textContent = count;
+    });
+
+    updateNavigation();
+  }
+
+  function selectCategory(category, scroll = true) {
+    if (!CATEGORY_INFO[category]) category = "all";
+
+    activeCategory = category;
+    render();
+
+    els.navLinks.classList.remove("open");
+    els.menuToggle.setAttribute("aria-expanded", "false");
+    els.menuToggle.textContent = "☰";
+
+    if (scroll) {
+      document.getElementById("library").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  }
+
+  async function loadLessons() {
+    els.grid.classList.remove("hidden");
+    els.grid.innerHTML = '<div class="loading-state">Loading your learning library…</div>';
+    els.status.textContent = "";
+
+    try {
+      const response = await fetch(API_URL, {
+        headers: { Accept: "application/vnd.github+json" }
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          response.status === 403
+            ? "GitHub API rate limit reached. Please try again later."
+            : `GitHub returned status ${response.status}.`
+        );
+      }
+
+      const files = await response.json();
+
+      lessons = files
+        .filter(file =>
+          file.type === "file" &&
+          /\.html?$/i.test(file.name) &&
+          file.name.toLowerCase() !== "index.html"
+        )
+        .map(makeLesson)
+        .sort((a, b) => {
+          const order = { tenses: 0, grammar: 1, vocabulary: 2, ielts: 3 };
+          return (order[a.category] - order[b.category]) ||
+            a.title.localeCompare(b.title);
+        });
+
+      els.totalCount.textContent = lessons.length;
+      els.tenseCount.textContent =
+        lessons.filter(lesson => lesson.category === "tenses").length;
+
+      render();
+
+      if (lessons.length === 0) {
+        els.status.textContent =
+          "No HTML lessons were found in the repository root.";
+      } else {
+        els.status.textContent =
+          "Lessons are loaded automatically from your GitHub repository.";
+      }
+    } catch (error) {
+      console.error("Could not load lessons:", error);
+
+      lessons = [];
+      els.totalCount.textContent = "—";
+      els.tenseCount.textContent = "—";
+      render();
+
+      els.empty.classList.add("hidden");
+      els.grid.classList.remove("hidden");
+      els.grid.innerHTML = `
+        <div class="error-state">
+          <strong>Unable to load your lessons</strong>
+          <span>${escapeHTML(error.message)}</span>
+          <p>Check your internet connection and try again.</p>
+          <button class="btn btn-light" id="retryButton"
+            style="background:#2458a6;color:white">Try again</button>
+        </div>
+      `;
+
+      document.getElementById("retryButton")
+        .addEventListener("click", loadLessons);
+
+      els.status.innerHTML =
+        `Repository: <a href="https://github.com/${OWNER}/${REPO}/tree/${BRANCH}" target="_blank" rel="noopener noreferrer">view files on GitHub</a>`;
+    }
+  }
+
+  function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, char => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[char]);
+  }
+
+  document.querySelectorAll("[data-category]").forEach(button => {
+    button.addEventListener("click", () => {
+      selectCategory(button.dataset.category);
+    });
+  });
+
+  document.querySelectorAll('.nav-link[href="#home"]').forEach(link => {
+    link.addEventListener("click", () => {
+      activeCategory = "all";
+      render();
+      els.navLinks.classList.remove("open");
+      els.menuToggle.setAttribute("aria-expanded", "false");
+      els.menuToggle.textContent = "☰";
+    });
+  });
+
+  els.search.addEventListener("input", event => {
+    searchTerm = normalise(event.target.value);
+    render();
+  });
+
+  els.menuToggle.addEventListener("click", () => {
+    const isOpen = els.navLinks.classList.toggle("open");
+    els.menuToggle.setAttribute("aria-expanded", String(isOpen));
+    els.menuToggle.textContent = isOpen ? "×" : "☰";
+  });
+
+  els.randomButton.addEventListener("click", () => {
+    if (!lessons.length) {
+      els.status.textContent = "No lessons are available yet.";
+      return;
+    }
+
+    const candidates = activeCategory === "all"
+      ? lessons
+      : lessons.filter(lesson => lesson.category === activeCategory);
+
+    const pool = candidates.length ? candidates : lessons;
+    const lesson = pool[Math.floor(Math.random() * pool.length)];
+
+    window.location.href = lesson.url;
+  });
+
+  loadLessons();
+})();
 </script>
+
 </body>
 </html>
