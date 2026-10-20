@@ -2,666 +2,788 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#10243a">
-<meta name="description" content="Learn all 12 English tenses in a structured order with IELTS Grammar Lab.">
-<title>English Tenses | IELTS Grammar Lab</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+  <title>English Tenses | IELTS Grammar Lab</title>
+  <meta name="description" content="Learn all 12 English tenses in a clear learning order with explanations, examples, comparisons, and practice for IELTS.">
 
-<style>
-:root {
-  --navy: #10243a;
-  --blue: #2458a6;
-  --teal: #168c88;
-  --text: #263548;
-  --muted: #718096;
-  --bg: #f4f7fb;
-  --white: #fff;
-  --border: #e1e8f0;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
 
-* { box-sizing: border-box; }
+  <style>
+    :root {
+      --navy: #10243a;
+      --blue: #2458a6;
+      --blue-light: #edf4ff;
+      --teal: #168c88;
+      --text: #253449;
+      --muted: #68778b;
+      --border: #e2e8f0;
+      --background: #f6f8fc;
+      --white: #ffffff;
+      --shadow: 0 8px 26px rgba(16, 36, 58, 0.06);
+    }
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 90px;
-}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: Inter, sans-serif;
-  line-height: 1.7;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-a { color: inherit; text-decoration: none; }
+    body {
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background: var(--background);
+      line-height: 1.7;
+    }
 
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: rgba(255,255,255,.97);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(12px);
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-.nav {
-  max-width: 1120px;
-  min-height: 70px;
-  padding: 12px 24px;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-}
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+    }
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-}
+    /* Navigation */
+    .navbar {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
 
-.logo {
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  border-radius: 12px;
-  background: var(--navy);
-  color: white;
-  font-size: 14px;
-  font-weight: 800;
-}
+    .nav-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
 
-.brand-name {
-  color: var(--navy);
-  font-size: 14px;
-  font-weight: 800;
-}
+    .brand {
+      font-weight: 800;
+      color: var(--navy);
+      font-size: 1.05rem;
+      letter-spacing: -0.5px;
+    }
 
-.brand-sub {
-  display: block;
-  color: var(--muted);
-  font-size: 11px;
-}
+    .brand span {
+      color: var(--blue);
+    }
 
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
 
-.nav-links a {
-  color: #526176;
-  font-size: 12px;
-  font-weight: 700;
-}
+    .nav-links a {
+      color: var(--muted);
+      transition: color 0.2s;
+    }
 
-.nav-links a:hover { color: var(--blue); }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--blue);
+    }
 
-main {
-  max-width: 1120px;
-  padding: 28px 24px 65px;
-  margin: auto;
-}
+    /* Hero */
+    .hero {
+      background:
+        radial-gradient(circle at 85% 15%, rgba(22, 140, 136, 0.2), transparent 30%),
+        linear-gradient(135deg, #10243a 0%, #173e70 100%);
+      color: white;
+      padding: 76px 0 72px;
+    }
 
-.hero {
-  padding: 43px 42px;
-  border-radius: 23px;
-  background: linear-gradient(120deg, #10243a, #173c68 60%, #2458a6);
-  color: white;
-}
+    .hero-content {
+      max-width: 760px;
+    }
 
-.breadcrumb {
-  margin-bottom: 17px;
-  color: #d5e5fa;
-  font-size: 12px;
-}
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #c6e8ff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 100px;
+      padding: 6px 13px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-bottom: 22px;
+    }
 
-.breadcrumb a { color: white; }
-.breadcrumb a:hover { text-decoration: underline; }
+    .hero h1 {
+      font-family: "Lora", serif;
+      font-size: clamp(2.25rem, 5vw, 3.8rem);
+      line-height: 1.18;
+      letter-spacing: -1.3px;
+      margin-bottom: 20px;
+    }
 
-.eyebrow {
-  display: inline-block;
-  padding: 6px 11px;
-  border: 1px solid #ffffff35;
-  border-radius: 30px;
-  background: #ffffff12;
-  color: #dceaff;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 1.2px;
-}
+    .hero h1 span {
+      color: #8bdad5;
+    }
 
-.hero h1 {
-  margin: 18px 0 12px;
-  font: 700 clamp(32px, 5vw, 46px)/1.2 Lora, Georgia, serif;
-  letter-spacing: -.8px;
-}
+    .hero p {
+      color: #d5e1ef;
+      font-size: 1.04rem;
+      max-width: 650px;
+      margin-bottom: 28px;
+    }
 
-.hero p {
-  max-width: 680px;
-  margin: 0;
-  color: #d8e4f4;
-  font-size: 14px;
-}
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
 
-.hero-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 9px;
-  margin-top: 22px;
-}
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 19px;
+      border-radius: 9px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      transition: transform 0.2s, background 0.2s;
+    }
 
-.meta-pill {
-  padding: 7px 11px;
-  border-radius: 8px;
-  background: #ffffff12;
-  border: 1px solid #ffffff22;
-  color: #e2ecfa;
-  font-size: 11px;
-  font-weight: 600;
-}
+    .btn:hover {
+      transform: translateY(-2px);
+    }
 
-.intro {
-  margin: 30px 0 27px;
-}
+    .btn-primary {
+      color: var(--navy);
+      background: white;
+    }
 
-.section-title {
-  margin: 0;
-  color: var(--navy);
-  font: 600 25px/1.4 Lora, Georgia, serif;
-}
+    .btn-secondary {
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.06);
+    }
 
-.section-description {
-  margin: 7px 0 0;
-  color: var(--muted);
-  font-size: 13px;
-}
+    /* Main content */
+    main {
+      padding: 54px 0 72px;
+    }
 
-.study-order {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0,1fr));
-  gap: 12px;
-  margin-top: 20px;
-}
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 20px;
+      margin-bottom: 25px;
+    }
 
-.order-item {
-  padding: 16px;
-  border: 1px solid var(--border);
-  border-radius: 13px;
-  background: white;
-}
+    .section-heading h2 {
+      font-family: "Lora", serif;
+      color: var(--navy);
+      font-size: clamp(1.6rem, 3vw, 2.15rem);
+      line-height: 1.3;
+      margin-bottom: 7px;
+    }
 
-.order-number {
-  color: var(--blue);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: .6px;
-  text-transform: uppercase;
-}
+    .section-heading p {
+      color: var(--muted);
+      max-width: 650px;
+      font-size: 0.94rem;
+    }
 
-.order-item strong {
-  display: block;
-  margin-top: 5px;
-  color: var(--navy);
-  font-size: 13px;
-}
+    .lesson-count {
+      flex-shrink: 0;
+      color: var(--blue);
+      background: var(--blue-light);
+      padding: 7px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
 
-.order-item p {
-  margin: 5px 0 0;
-  color: var(--muted);
-  font-size: 11px;
-}
+    /* Learning note */
+    .learning-note {
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--teal);
+      border-radius: 12px;
+      padding: 19px 21px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow);
+    }
 
-.lessons-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin: 37px 0 17px;
-}
+    .note-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
+      border-radius: 10px;
+      color: var(--teal);
+      background: #e8f7f5;
+      font-size: 1.15rem;
+      font-weight: 800;
+    }
 
-.lesson-count {
-  color: var(--muted);
-  font-size: 12px;
-}
+    .learning-note h3 {
+      color: var(--navy);
+      font-size: 0.97rem;
+      margin-bottom: 4px;
+    }
 
-.lesson-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0,1fr));
-  gap: 15px;
-}
+    .learning-note p {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
 
-.lesson-card {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  min-height: 225px;
-  padding: 21px;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  background: white;
-  transition: .2s;
-}
+    /* Lesson cards */
+    .lesson-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
 
-.lesson-card:hover {
-  transform: translateY(-3px);
-  border-color: #bdcfe8;
-  box-shadow: 0 9px 25px #10243a0c;
-}
+    .lesson-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 224px;
+      padding: 23px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 3px 12px rgba(16, 36, 58, 0.025);
+      transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s;
+    }
 
-.card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-}
+    .lesson-card:hover {
+      transform: translateY(-4px);
+      border-color: #a9c5ed;
+      box-shadow: var(--shadow);
+    }
 
-.step {
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  background: #eaf1fc;
-  color: var(--blue);
-  font-size: 12px;
-  font-weight: 800;
-}
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 17px;
+    }
 
-.time-label {
-  padding: 5px 8px;
-  border-radius: 6px;
-  background: #f0f5fc;
-  color: #52719c;
-  font-size: 10px;
-  font-weight: 800;
-}
+    .lesson-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 11px;
+      color: var(--blue);
+      background: var(--blue-light);
+      font-size: 0.84rem;
+      font-weight: 800;
+    }
 
-.lesson-card h3 {
-  margin: 17px 0 7px;
-  color: var(--navy);
-  font-size: 16px;
-  line-height: 1.45;
-}
+    .tense-type {
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
 
-.lesson-card p {
-  margin: 0 0 17px;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.8;
-}
+    .lesson-card h3 {
+      font-family: "Lora", serif;
+      color: var(--navy);
+      font-size: 1.15rem;
+      line-height: 1.4;
+      margin-bottom: 9px;
+    }
 
-.lesson-link {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  margin-top: auto;
-  padding-top: 13px;
-  border-top: 1px solid #edf1f6;
-  color: var(--blue);
-  font-size: 12px;
-  font-weight: 800;
-}
+    .lesson-card p {
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
 
-.lesson-card:hover .arrow { transform: translateX(4px); }
-.arrow { transition: transform .2s; }
+    .lesson-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--blue);
+      font-size: 0.85rem;
+      font-weight: 800;
+      margin-top: auto;
+    }
 
-.revision {
-  margin-top: 34px;
-  padding: 23px;
-  border: 1px solid var(--border);
-  border-radius: 15px;
-  background: white;
-}
+    .lesson-card:hover .lesson-link {
+      color: var(--teal);
+    }
 
-.revision h2 {
-  margin: 0 0 8px;
-  color: var(--navy);
-  font-size: 16px;
-}
+    .combined-badge {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 4px 8px;
+      color: #13736f;
+      background: #e8f7f5;
+      border-radius: 5px;
+      font-size: 0.69rem;
+      font-weight: 700;
+      width: fit-content;
+    }
 
-.revision p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 13px;
-}
+    /* Study tips */
+    .study-section {
+      margin-top: 64px;
+    }
 
-.revision-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 9px;
-  margin-top: 16px;
-}
+    .study-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 24px;
+    }
 
-.revision-links a {
-  padding: 9px 12px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--blue);
-  font-size: 11px;
-  font-weight: 700;
-}
+    .study-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px;
+    }
 
-.revision-links a:hover {
-  background: #eaf1fc;
-}
+    .study-card .study-icon {
+      font-size: 1.35rem;
+      margin-bottom: 12px;
+    }
 
-.footer {
-  padding: 28px 24px;
-  background: var(--navy);
-  color: #d2dceb;
-}
+    .study-card h3 {
+      color: var(--navy);
+      font-size: 0.97rem;
+      margin-bottom: 7px;
+    }
 
-.footer-inner {
-  max-width: 1072px;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 15px;
-}
+    .study-card p {
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
 
-.footer strong { color: white; }
-.footer p { margin: 5px 0 0; color: #aebdd0; font-size: 12px; }
-.footer a { color: #d9e7fa; font-size: 12px; }
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      background: white;
+      padding: 25px 0;
+    }
 
-@media (max-width: 850px) {
-  .lesson-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
-  .study-order { grid-template-columns: repeat(2,minmax(0,1fr)); }
-}
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
 
-@media (max-width: 540px) {
-  .nav {
-    align-items: flex-start;
-    flex-direction: column;
-    padding: 12px 17px;
-    gap: 10px;
-  }
+    .footer-inner a {
+      color: var(--blue);
+      font-weight: 700;
+    }
 
-  .nav-links { flex-wrap: wrap; gap: 9px 17px; }
-  .nav-links a { font-size: 11px; }
+    /* Mobile navigation */
+    @media (max-width: 850px) {
+      .lesson-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
 
-  main { padding: 18px 15px 45px; }
-  .hero { padding: 30px 22px; border-radius: 18px; }
-  .hero h1 { font-size: 33px; }
-  .hero p { font-size: 13px; }
+      .study-grid {
+        grid-template-columns: 1fr;
+      }
+    }
 
-  .study-order { gap: 9px; }
-  .order-item { padding: 13px; }
+    @media (max-width: 600px) {
+      .nav-inner {
+        min-height: 64px;
+      }
 
-  .lesson-grid { grid-template-columns: 1fr; gap: 12px; }
-  .lesson-card { min-height: 195px; padding: 19px; }
+      .brand {
+        font-size: 0.93rem;
+      }
 
-  .section-title { font-size: 23px; }
-}
-</style>
+      .nav-links {
+        gap: 13px;
+        font-size: 0.78rem;
+      }
+
+      .hero {
+        padding: 55px 0 50px;
+      }
+
+      .hero h1 {
+        font-size: 2.35rem;
+      }
+
+      .hero p {
+        font-size: 0.94rem;
+      }
+
+      main {
+        padding: 38px 0 50px;
+      }
+
+      .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .lesson-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .lesson-card {
+        min-height: auto;
+        padding: 21px;
+      }
+
+      .learning-note {
+        padding: 16px;
+      }
+
+      .study-section {
+        margin-top: 45px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header class="header">
-  <nav class="nav">
-    <a class="brand" href="index.html">
-      <span class="logo">GL</span>
-      <span>
-        <span class="brand-name">IELTS Grammar Lab</span>
-        <span class="brand-sub">Your English learning library</span>
-      </span>
-    </a>
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html">
+        IELTS <span>Grammar Lab</span>
+      </a>
 
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="#lessons">All tense lessons</a>
-      <a href="#revision">Revision</a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="tenses.html" class="active">Tenses</a>
+        <a href="index.html#resources">Resources</a>
+      </nav>
     </div>
-  </nav>
-</header>
+  </header>
 
-<main>
-
+  <!-- Hero -->
   <section class="hero">
-    <div class="breadcrumb">
-      <a href="index.html">Home</a> / Grammar / English tenses
-    </div>
+    <div class="container hero-content">
+      <div class="eyebrow">GRAMMAR LEARNING PATH</div>
 
-    <span class="eyebrow">YOUR GRAMMAR LEARNING PATH</span>
+      <h1>Master the <span>English Tenses</span></h1>
 
-    <h1>Master all 12 English tenses.</h1>
+      <p>
+        Build a strong foundation in English grammar through 12 tense concepts.
+        Learn when to use each tense, understand the differences between similar
+        forms, and apply them confidently in IELTS Writing, Speaking, Reading,
+        and Listening.
+      </p>
 
-    <p>
-      Learn English tenses in a progressive order, from basic sentence
-      structures to advanced forms. Study each lesson, understand its
-      examples, complete the exercises, and revise before moving forward.
-    </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#lessons">
+          Explore the lessons <span aria-hidden="true">→</span>
+        </a>
 
-    <div class="hero-meta">
-      <span class="meta-pill">12 structured lessons</span>
-      <span class="meta-pill">Beginner to advanced</span>
-      <span class="meta-pill">IELTS-focused learning</span>
-    </div>
-  </section>
-
-  <section class="intro">
-    <h2 class="section-title">Your recommended learning order</h2>
-    <p class="section-description">
-      Learn the basic forms first, then progress to continuous, perfect,
-      and perfect continuous structures.
-    </p>
-
-    <div class="study-order">
-      <div class="order-item">
-        <span class="order-number">Stage 01</span>
-        <strong>Simple tenses</strong>
-        <p>Habits, facts, completed actions, and future events.</p>
-      </div>
-
-      <div class="order-item">
-        <span class="order-number">Stage 02</span>
-        <strong>Continuous tenses</strong>
-        <p>Actions in progress at a particular time.</p>
-      </div>
-
-      <div class="order-item">
-        <span class="order-number">Stage 03</span>
-        <strong>Perfect tenses</strong>
-        <p>Connections between actions and time.</p>
-      </div>
-
-      <div class="order-item">
-        <span class="order-number">Stage 04</span>
-        <strong>Perfect continuous</strong>
-        <p>Duration and ongoing activities across time.</p>
+        <a class="btn btn-secondary" href="index.html">
+          ← Back to home
+        </a>
       </div>
     </div>
   </section>
 
-  <section id="lessons">
-    <div class="lessons-heading">
-      <div>
-        <h2 class="section-title">The 12 tense lessons</h2>
-        <p class="section-description">
-          Follow the numbered sequence for a structured learning experience.
-        </p>
+  <!-- Main -->
+  <main class="container">
+
+    <section id="lessons">
+      <div class="section-heading">
+        <div>
+          <h2>Your learning path</h2>
+          <p>
+            Follow the lessons in order. Start with simple forms, move to
+            continuous and perfect forms, and finish with perfect continuous forms.
+          </p>
+        </div>
+
+        <span class="lesson-count">12 tense concepts</span>
       </div>
-      <span class="lesson-count">12 lessons</span>
+
+      <div class="learning-note">
+        <div class="note-icon" aria-hidden="true">i</div>
+
+        <div>
+          <h3>Learn the meaning before memorising the formula</h3>
+          <p>
+            For every tense, focus on its purpose, sentence structure,
+            time expressions, examples, common mistakes, and practical exercises.
+            The first two cards open the same combined lesson page.
+          </p>
+        </div>
+      </div>
+
+      <div class="lesson-grid">
+
+        <!-- 01 -->
+        <a class="lesson-card" href="present-simple-and-continuous.html">
+          <div class="card-top">
+            <span class="lesson-number">01</span>
+            <span class="tense-type">Present</span>
+          </div>
+          <h3>Present Simple</h3>
+          <p>
+            Habits, routines, facts, general truths, and permanent situations.
+          </p>
+          <span class="lesson-link">Start lesson <span>→</span></span>
+          <span class="combined-badge">Combined lesson: Simple + Continuous</span>
+        </a>
+
+        <!-- 02 -->
+        <a class="lesson-card" href="present-simple-and-continuous.html">
+          <div class="card-top">
+            <span class="lesson-number">02</span>
+            <span class="tense-type">Present</span>
+          </div>
+          <h3>Present Continuous</h3>
+          <p>
+            Actions happening now, temporary situations, changing trends,
+            and future arrangements.
+          </p>
+          <span class="lesson-link">Start lesson <span>→</span></span>
+          <span class="combined-badge">Combined lesson: Simple + Continuous</span>
+        </a>
+
+        <!-- 03 -->
+        <a class="lesson-card" href="past-simple.html">
+          <div class="card-top">
+            <span class="lesson-number">03</span>
+            <span class="tense-type">Past</span>
+          </div>
+          <h3>Past Simple</h3>
+          <p>
+            Completed past actions, historical events, and past routines.
+          </p>
+          <span class="lesson-link">Start lesson <span>→</span></span>
+        </a>
+
+        <!-- 04 -->
+        <a class="lesson-card" href="past-continuous.html">
+          <div class="card-top">
+            <span class="lesson-number">04</span>
+            <span class="tense-type">Past</span>
+          </div>
+          <h3>Past Continuous</h3>
+          <p>
+            Actions in progress at a particular time in the past and interrupted actions.
+          </p>
+          <span class="lesson-link">Start lesson <span>→</span></span>
+        </a>
+
+        <!-- 05 -->
+        <a class="lesson-card" href="future-simple.html">
+          <div class="card-top">
+            <span class="lesson-number">05</span>
+            <span class="tense-type">Future</span>
+          </div>
+          <h3>Future Simple</h3>
+          <p>
+            Predictions, spontaneous decisions, promises, and future expectations.
+          </p>
+          <span class="lesson-link">Start lesson <span>→</span></span>
+        </a>
+
+        <!-- 06 -->
+        <a class="lesson-card" href="future-continuous.html">
+          <div class="card-top">
+            <span class="lesson-number">06</span>
+            <span class="tense-type">Future</span>
+          </div>
+          <h3>Future Continuous</h3>
+          <p>
+            Actions that will be in progress at a particular time in the future.
+          </p>
+          <span class="lesson-link">Start lesson <span>→</span></span>
+        </a>
+
+        <!-- 07 -->
+        <a class="lesson-card" href="present-perfect.html">
+          <div class="card-top">
+            <span class="lesson-number">07</span>
+            <span class="tense-type">Present</span>
+          </div>
+          <h3>Present Perfect</h3>
+          <p>
+            Past actions connected to the present, life experiences, and recent results.
+          </p>
+          <span class="lesson-link">Start lesson <span>→</span></span>
+        </a>
+
+        <!-- 08 -->
+        <a class="lesson-card" href="past-perfect.html">
+          <div class="card-top">
+            <span class="lesson-number">08</span>
+            <span class="tense-type">Past</span>
+          </div>
+          <h3>Past Perfect</h3>
+          <p>
+            Actions completed before another past event or time.
+          </p>
+          <span class="lesson-link">Start lesson <span>→</span></span>
+        </a>
+
+        <!-- 09 -->
+        <a class="lesson-card" href="future-perfect.html">
+          <div class="card-top">
+            <span class="lesson-number">09</span>
+            <span class="tense-type">Future</span>
+          </div>
+          <h3>Future Perfect</h3>
+          <p>
+            Actions that will have been completed before a future deadline.
+          </p>
+          <span class="lesson-link">Start lesson <span>→</span></span>
+        </a>
+
+        <!-- 10 -->
+        <a class="lesson-card" href="present-perfect-continuous.html">
+          <div class="card-top">
+            <span class="lesson-number">10</span>
+            <span class="tense-type">Present</span>
+          </div>
+          <h3>Present Perfect Continuous</h3>
+          <p>
+            Actions that started in the past and continue now, or have recent effects.
+          </p>
+          <span class="lesson-link">Start lesson <span>→</span></span>
+        </a>
+
+        <!-- 11 -->
+        <a class="lesson-card" href="past-perfect-continuous.html">
+          <div class="card-top">
+            <span class="lesson-number">11</span>
+            <span class="tense-type">Past</span>
+          </div>
+          <h3>Past Perfect Continuous</h3>
+          <p>
+            Ongoing past actions viewed up to another point in the past.
+          </p>
+          <span class="lesson-link">Start lesson <span>→</span></span>
+        </a>
+
+        <!-- 12 -->
+        <a class="lesson-card" href="future-perfect-continuous.html">
+          <div class="card-top">
+            <span class="lesson-number">12</span>
+            <span class="tense-type">Future</span>
+          </div>
+          <h3>Future Perfect Continuous</h3>
+          <p>
+            The duration of an action up to a particular future time.
+          </p>
+          <span class="lesson-link">Start lesson <span>→</span></span>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Study tips -->
+    <section class="study-section">
+      <div class="section-heading">
+        <div>
+          <h2>How to study each lesson</h2>
+          <p>
+            Use the same routine with every tense to improve understanding and retention.
+          </p>
+        </div>
+      </div>
+
+      <div class="study-grid">
+
+        <article class="study-card">
+          <div class="study-icon" aria-hidden="true">📘</div>
+          <h3>1. Understand the rule</h3>
+          <p>
+            Learn when the tense is used, how sentences are formed,
+            and how affirmative, negative, and question forms work.
+          </p>
+        </article>
+
+        <article class="study-card">
+          <div class="study-icon" aria-hidden="true">✍️</div>
+          <h3>2. Practise with examples</h3>
+          <p>
+            Study examples in context, compare similar tenses,
+            identify common mistakes, and write your own sentences.
+          </p>
+        </article>
+
+        <article class="study-card">
+          <div class="study-icon" aria-hidden="true">🎯</div>
+          <h3>3. Apply it to IELTS</h3>
+          <p>
+            Use accurate tenses when describing trends in Writing Task 1,
+            discussing experiences in Speaking, and interpreting reading passages.
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> IELTS Grammar Lab</p>
+      <a href="index.html">Return to homepage ↑</a>
     </div>
+  </footer>
 
-    <div class="lesson-grid">
-
-      <!-- 01 -->
-      <a class="lesson-card" href="present-simple-and-continuous.html">
-        <div class="card-top">
-          <span class="step">01</span>
-          <span class="time-label">Present</span>
-        </div>
-        <h3>Present Simple</h3>
-        <p>Learn facts, routines, habits, general truths, and regular activities.</p>
-        <span class="lesson-link"><span>Start lesson</span><span class="arrow">→</span></span>
-      </a>
-
-      <!-- 02 -->
-      <a class="lesson-card" href="past-simple.html">
-        <div class="card-top">
-          <span class="step">02</span>
-          <span class="time-label">Past</span>
-        </div>
-        <h3>Past Simple</h3>
-        <p>Describe completed actions and events that happened in the past.</p>
-        <span class="lesson-link"><span>Start lesson</span><span class="arrow">→</span></span>
-      </a>
-
-      <!-- 03 -->
-      <a class="lesson-card" href="future-simple.html">
-        <div class="card-top">
-          <span class="step">03</span>
-          <span class="time-label">Future</span>
-        </div>
-        <h3>Future Simple</h3>
-        <p>Express predictions, spontaneous decisions, promises, and future events.</p>
-        <span class="lesson-link"><span>Start lesson</span><span class="arrow">→</span></span>
-      </a>
-
-      <!-- 04 -->
-      <a class="lesson-card" href="present-continuous.html">
-        <div class="card-top">
-          <span class="step">04</span>
-          <span class="time-label">Present</span>
-        </div>
-        <h3>Present Continuous</h3>
-        <p>Describe actions happening now, temporary situations, and arrangements.</p>
-        <span class="lesson-link"><span>Start lesson</span><span class="arrow">→</span></span>
-      </a>
-
-      <!-- 05 -->
-      <a class="lesson-card" href="past-continuous.html">
-        <div class="card-top">
-          <span class="step">05</span>
-          <span class="time-label">Past</span>
-        </div>
-        <h3>Past Continuous</h3>
-        <p>Describe actions in progress at a particular time in the past.</p>
-        <span class="lesson-link"><span>Start lesson</span><span class="arrow">→</span></span>
-      </a>
-
-      <!-- 06 -->
-      <a class="lesson-card" href="future-continuous.html">
-        <div class="card-top">
-          <span class="step">06</span>
-          <span class="time-label">Future</span>
-        </div>
-        <h3>Future Continuous</h3>
-        <p>Explain actions that will be in progress at a future time.</p>
-        <span class="lesson-link"><span>Start lesson</span><span class="arrow">→</span></span>
-      </a>
-
-      <!-- 07 -->
-      <a class="lesson-card" href="present-perfect.html">
-        <div class="card-top">
-          <span class="step">07</span>
-          <span class="time-label">Present</span>
-        </div>
-        <h3>Present Perfect</h3>
-        <p>Connect past experiences and completed actions with the present.</p>
-        <span class="lesson-link"><span>Start lesson</span><span class="arrow">→</span></span>
-      </a>
-
-      <!-- 08 -->
-      <a class="lesson-card" href="past-perfect.html">
-        <div class="card-top">
-          <span class="step">08</span>
-          <span class="time-label">Past</span>
-        </div>
-        <h3>Past Perfect</h3>
-        <p>Show that an action happened before another past event.</p>
-        <span class="lesson-link"><span>Start lesson</span><span class="arrow">→</span></span>
-      </a>
-
-      <!-- 09 -->
-      <a class="lesson-card" href="future-perfect.html">
-        <div class="card-top">
-          <span class="step">09</span>
-          <span class="time-label">Future</span>
-        </div>
-        <h3>Future Perfect</h3>
-        <p>Describe actions expected to be completed before a future deadline.</p>
-        <span class="lesson-link"><span>Start lesson</span><span class="arrow">→</span></span>
-      </a>
-
-      <!-- 10 -->
-      <a class="lesson-card" href="present-perfect-continuous.html">
-        <div class="card-top">
-          <span class="step">10</span>
-          <span class="time-label">Present</span>
-        </div>
-        <h3>Present Perfect Continuous</h3>
-        <p>Emphasise the duration of activities continuing up to the present.</p>
-        <span class="lesson-link"><span>Start lesson</span><span class="arrow">→</span></span>
-      </a>
-
-      <!-- 11 -->
-      <a class="lesson-card" href="past-perfect-continuous.html">
-        <div class="card-top">
-          <span class="step">11</span>
-          <span class="time-label">Past</span>
-        </div>
-        <h3>Past Perfect Continuous</h3>
-        <p>Explain how long an activity had continued before a past event.</p>
-        <span class="lesson-link"><span>Start lesson</span><span class="arrow">→</span></span>
-      </a>
-
-      <!-- 12 -->
-      <a class="lesson-card" href="future-perfect-continuous.html">
-        <div class="card-top">
-          <span class="step">12</span>
-          <span class="time-label">Future</span>
-        </div>
-        <h3>Future Perfect Continuous</h3>
-        <p>Express the duration of an activity up to a specific future time.</p>
-        <span class="lesson-link"><span>Start lesson</span><span class="arrow">→</span></span>
-      </a>
-
-    </div>
-  </section>
-
-  <section class="revision" id="revision">
-    <h2>How to study each tense effectively</h2>
-    <p>
-      Read the explanation, study affirmative, negative, and interrogative
-      forms, compare similar tenses, practise the exercises, and write your
-      own examples. Review difficult lessons regularly before IELTS practice.
-    </p>
-
-    <div class="revision-links">
-      <a href="present-simple-and-continuous.html">Present tense lesson</a>
-      <a href="past-simple.html">Past tense lesson</a>
-      <a href="future-simple.html">Future tense lesson</a>
-      <a href="index.html">← Back to homepage</a>
-    </div>
-  </section>
-
-</main>
-
-<footer class="footer">
-  <div class="footer-inner">
-    <div>
-      <strong>IELTS Grammar Lab</strong>
-      <p>Learn systematically. Practise consistently. Improve confidently.</p>
-    </div>
-    <a href="https://github.com/abubokkorshiddik/Eng-materials">
-      View repository on GitHub ↗
-    </a>
-  </div>
-</footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 
 </body>
 </html>
