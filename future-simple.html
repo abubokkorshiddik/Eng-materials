@@ -4,8 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Complete IELTS grammar lesson on future simple with will. Learn formation, uses, predictions, promises, offers, decisions, future time clauses, comparisons, advanced grammar, common mistakes, and interactive practice.">
-<meta name="theme-color" content="#10243a">
+<meta name="description" content="Learn future simple with will through easy questions and answers, detailed examples, IELTS applications, common mistakes and interactive practice.">
 <title>Future simple with will | IELTS Grammar Lab</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,20 +14,19 @@
 <style>
 :root{
   --navy:#10243a;
-  --navy2:#183c64;
   --blue:#2458a6;
-  --blue2:#dce8f8;
+  --blue-light:#edf3fc;
   --teal:#147d78;
   --ink:#172334;
   --muted:#617084;
-  --paper:#f5f7fb;
+  --paper:#f4f6fa;
+  --white:#ffffff;
   --line:#dce3ec;
-  --white:#fff;
-  --good:#176b4d;
-  --good-bg:#e5f4ec;
-  --bad:#a33434;
-  --bad-bg:#fbebeb;
-  --shadow:0 12px 34px rgba(16,36,58,.07);
+  --green:#176b4d;
+  --green-light:#e8f5ee;
+  --red:#a33434;
+  --red-light:#fbeeee;
+  --shadow:0 8px 28px rgba(16,36,58,.06);
 }
 
 *{box-sizing:border-box}
@@ -42,11 +40,11 @@ body{
   margin:0;
   background:var(--paper);
   color:var(--ink);
-  font:16px/1.78 Inter,system-ui,sans-serif;
+  font:15px/1.8 Inter,Arial,sans-serif;
 }
 
 a{color:var(--blue)}
-button,input,select,textarea{font:inherit}
+button,input{font:inherit}
 button{cursor:pointer}
 
 .topbar{
@@ -54,26 +52,26 @@ button{cursor:pointer}
   top:0;
   z-index:20;
   background:rgba(255,255,255,.96);
-  backdrop-filter:blur(14px);
+  backdrop-filter:blur(12px);
   border-bottom:1px solid var(--line);
 }
 
 .topbar-inner{
-  max-width:1250px;
+  max-width:1180px;
   margin:auto;
-  padding:12px 22px;
+  padding:12px 20px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:16px;
+  gap:14px;
 }
 
 .brand{
-  font-weight:800;
   color:var(--navy);
   text-decoration:none;
-  letter-spacing:-.035em;
-  white-space:nowrap;
+  font-size:1rem;
+  font-weight:800;
+  letter-spacing:-.04em;
 }
 
 .brand span{color:var(--blue)}
@@ -86,9 +84,9 @@ button{cursor:pointer}
 
 .toplinks a{
   color:var(--muted);
+  font-size:.83rem;
+  font-weight:700;
   text-decoration:none;
-  font-size:.84rem;
-  font-weight:600;
 }
 
 .toplinks a:hover{color:var(--blue)}
@@ -96,2970 +94,1682 @@ button{cursor:pointer}
 .hero{
   background:linear-gradient(125deg,#10243a,#183c64 70%,#1d5b75);
   color:white;
-  padding:62px 22px 55px;
+  padding:45px 20px 42px;
 }
 
 .hero-inner{
-  max-width:1120px;
+  max-width:1060px;
   margin:auto;
 }
 
 .eyebrow{
-  display:inline-flex;
-  border:1px solid #ffffff40;
+  display:inline-block;
+  padding:5px 11px;
+  border:1px solid #ffffff45;
   background:#ffffff12;
-  border-radius:99px;
-  padding:6px 12px;
-  font-size:.76rem;
+  border-radius:30px;
+  font-size:.75rem;
   font-weight:700;
-  letter-spacing:.06em;
-  text-transform:uppercase;
 }
 
 .hero h1{
-  font:700 clamp(2.2rem,5vw,3.8rem)/1.16 Lora,Georgia,serif;
-  max-width:900px;
-  margin:22px 0 18px;
+  max-width:780px;
+  font:700 clamp(2rem,5vw,3.5rem)/1.2 Lora,Georgia,serif;
+  margin:18px 0 13px;
   letter-spacing:-.035em;
 }
 
 .hero p{
-  max-width:810px;
+  max-width:720px;
   color:#e0eaf6;
-  font-size:1.05rem;
   margin:0;
+  font-size:1rem;
 }
 
 .hero-meta{
   display:flex;
-  gap:9px;
+  gap:8px;
   flex-wrap:wrap;
-  margin-top:23px;
+  margin-top:20px;
 }
 
 .hero-meta span{
-  font-size:.8rem;
-  padding:6px 10px;
+  padding:5px 10px;
+  border:1px solid #ffffff35;
   border-radius:8px;
-  background:#ffffff14;
-  border:1px solid #ffffff2b;
+  font-size:.78rem;
+  background:#ffffff10;
 }
 
-.progress-wrap{
-  height:4px;
-  background:#dce3ec;
+.progress-area{
+  background:white;
+  border-bottom:1px solid var(--line);
 }
 
-.progress-bar{
-  height:100%;
+.progress-inner{
+  max-width:1180px;
+  margin:auto;
+  padding:12px 20px;
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.progress-label{
+  flex-shrink:0;
+  color:var(--muted);
+  font-size:.8rem;
+  font-weight:700;
+}
+
+.progress-track{
+  flex:1;
+  height:7px;
+  background:#e8edf4;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress-fill{
   width:0;
+  height:100%;
   background:var(--teal);
-  transition:width .15s linear;
+  transition:width .2s;
+}
+
+.progress-count{
+  min-width:45px;
+  text-align:right;
+  font-size:.8rem;
+  font-weight:800;
+  color:var(--navy);
 }
 
 .layout{
-  max-width:1250px;
-  margin:28px auto;
-  padding:0 22px;
+  max-width:1180px;
+  margin:25px auto;
+  padding:0 20px;
   display:grid;
-  grid-template-columns:245px minmax(0,1fr);
-  gap:25px;
+  grid-template-columns:225px minmax(0,1fr);
+  gap:22px;
   align-items:start;
 }
 
-.toc{
+.sidebar{
   position:sticky;
-  top:91px;
+  top:115px;
+  max-height:calc(100vh - 135px);
+  overflow:auto;
   background:white;
   border:1px solid var(--line);
-  border-radius:15px;
-  padding:18px;
+  border-radius:14px;
+  padding:16px;
   box-shadow:var(--shadow);
-  max-height:calc(100vh - 110px);
-  overflow:auto;
 }
 
-.toc h2{
-  font-size:.94rem;
+.sidebar h2{
+  font-size:.9rem;
   margin:0 0 10px;
   color:var(--navy);
 }
 
-.toc a{
+.sidebar a{
   display:block;
   text-decoration:none;
   color:var(--muted);
   font-size:.81rem;
-  padding:5px 8px;
+  padding:7px 9px;
   border-radius:7px;
-  line-height:1.55;
+  line-height:1.5;
 }
 
-.toc a:hover,.toc a.active{
-  background:var(--blue2);
+.sidebar a:hover,
+.sidebar a.active{
+  background:var(--blue-light);
   color:var(--blue);
+  font-weight:700;
 }
 
-.toc .toc-sub{
-  padding-left:18px;
-  font-size:.77rem;
+.side-note{
+  margin-top:14px;
+  padding:11px;
+  border-radius:9px;
+  background:#f4f7fb;
+  font-size:.78rem;
+  color:var(--muted);
 }
 
 main{min-width:0}
 
-.intro,.section{
-  background:var(--white);
+.panel{
+  background:white;
   border:1px solid var(--line);
   border-radius:15px;
-  padding:clamp(20px,3vw,32px);
-  margin-bottom:21px;
+  padding:clamp(18px,3vw,29px);
+  margin-bottom:19px;
   box-shadow:var(--shadow);
 }
 
-h2,h3,h4{
+.panel-title{
+  margin:0 0 8px;
   color:var(--navy);
-  line-height:1.38;
+  font:700 1.55rem/1.35 Lora,Georgia,serif;
 }
 
-h2{
-  font:700 1.65rem/1.3 Lora,Georgia,serif;
-  margin:0 0 17px;
-}
-
-h3{
-  font-size:1.12rem;
-  margin:23px 0 9px;
-}
-
-h4{
-  font-size:.98rem;
-  margin:16px 0 7px;
-}
-
-p{margin:9px 0 13px}
-
-.lead{
-  font-size:1.02rem;
-  color:#415166;
-}
-
-.small{
-  font-size:.88rem;
+.panel-intro{
+  margin:0 0 20px;
   color:var(--muted);
 }
 
-.rulebox{
+.welcome-box{
+  background:var(--blue-light);
   border-left:4px solid var(--blue);
-  background:#f0f5fc;
-  padding:14px 16px;
-  border-radius:0 9px 9px 0;
-  margin:17px 0;
+  padding:15px 16px;
+  border-radius:0 10px 10px 0;
+  margin:16px 0;
 }
 
-.tipbox{
-  border-left:4px solid var(--teal);
-  background:#edf7f5;
-  padding:14px 16px;
-  border-radius:0 9px 9px 0;
-  margin:17px 0;
+.welcome-box strong{color:var(--navy)}
+
+.quick-structure{
+  background:var(--navy);
+  color:white;
+  border-radius:12px;
+  padding:18px;
+  text-align:center;
+  margin:18px 0;
 }
 
-.warningbox{
-  border-left:4px solid #a56a31;
-  background:#faf3e9;
-  padding:14px 16px;
-  border-radius:0 9px 9px 0;
-  margin:17px 0;
-}
-
-.grid2,.grid3{
-  display:grid;
-  gap:14px;
-}
-
-.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}
-.grid3{grid-template-columns:repeat(3,minmax(0,1fr))}
-
-.mini{
-  border:1px solid var(--line);
-  border-radius:11px;
-  padding:16px;
-  background:#fff;
-  min-width:0;
-}
-
-.mini h3,.mini h4{margin:0 0 8px}
-.mini p:last-child{margin-bottom:0}
-
-.pill{
-  display:inline-block;
-  background:var(--blue2);
-  color:var(--blue);
-  font-size:.72rem;
+.quick-structure .formula{
+  font-size:clamp(1.1rem,3vw,1.55rem);
   font-weight:800;
-  border-radius:99px;
-  padding:3px 9px;
-  margin-bottom:9px;
-}
-
-.why{
-  color:var(--muted);
-  font-size:.89rem;
-}
-
-.structure{
-  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
-  background:#10243a;
-  color:#f2f6fc;
-  padding:13px 15px;
-  border-radius:9px;
   overflow-wrap:anywhere;
-  margin:12px 0;
-  line-height:1.7;
+  line-height:1.6;
 }
+
+.quick-structure p{
+  margin:7px 0 0;
+  color:#d9e5f4;
+  font-size:.87rem;
+}
+
+.lesson-list{
+  display:grid;
+  gap:13px;
+}
+
+.lesson{
+  border:1px solid var(--line);
+  border-radius:12px;
+  overflow:hidden;
+  background:white;
+  scroll-margin-top:90px;
+}
+
+.lesson summary{
+  list-style:none;
+  cursor:pointer;
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  padding:16px;
+  font-weight:800;
+  color:var(--navy);
+  line-height:1.55;
+}
+
+.lesson summary::-webkit-details-marker{display:none}
+
+.lesson summary::after{
+  content:"+";
+  margin-left:auto;
+  color:var(--blue);
+  font-size:1.35rem;
+  line-height:1.1;
+  flex-shrink:0;
+}
+
+.lesson[open] summary::after{content:"−"}
+
+.lesson-number{
+  flex-shrink:0;
+  display:grid;
+  place-items:center;
+  width:30px;
+  height:30px;
+  background:var(--blue-light);
+  color:var(--blue);
+  border-radius:9px;
+  font-size:.8rem;
+}
+
+.lesson-content{
+  border-top:1px solid var(--line);
+  padding:17px;
+}
+
+.answer-label{
+  display:inline-block;
+  color:var(--teal);
+  text-transform:uppercase;
+  font-size:.7rem;
+  font-weight:800;
+  letter-spacing:.07em;
+  margin-bottom:6px;
+}
+
+.lesson-content h3{
+  color:var(--navy);
+  font-size:1.03rem;
+  margin:17px 0 7px;
+  line-height:1.5;
+}
+
+.lesson-content h3:first-child{margin-top:0}
+
+.lesson-content p{margin:8px 0}
 
 .example{
-  background:#f8fafc;
-  border:1px solid var(--line);
-  border-radius:9px;
   padding:12px 14px;
   margin:11px 0;
-}
-
-.example p{margin:3px 0}
-.example .meaning{font-size:.88rem;color:var(--muted)}
-
-.tablewrap{
-  overflow-x:auto;
-  margin:14px 0;
   border:1px solid var(--line);
   border-radius:9px;
+  background:#fafbfd;
+}
+
+.example strong{color:var(--navy)}
+
+.example .meaning{
+  display:block;
+  margin-top:4px;
+  font-size:.85rem;
+  color:var(--muted);
+}
+
+.rule{
+  margin:12px 0;
+  padding:13px 15px;
+  border-left:4px solid var(--teal);
+  border-radius:0 9px 9px 0;
+  background:#edf7f5;
+}
+
+.warning{
+  margin:12px 0;
+  padding:13px 15px;
+  border-left:4px solid #b46a38;
+  border-radius:0 9px 9px 0;
+  background:#fbf4ed;
+}
+
+.formula{
+  font-weight:800;
+  color:var(--navy);
+}
+
+.mini-practice{
+  background:#f4f7fb;
+  padding:14px;
+  border-radius:10px;
+  margin-top:17px;
+}
+
+.mini-practice h4{
+  color:var(--navy);
+  margin:0 0 9px;
+  font-size:.93rem;
+}
+
+.mini-practice label{
+  display:flex;
+  align-items:flex-start;
+  gap:9px;
+  padding:8px 10px;
+  margin:6px 0;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.mini-practice input{margin-top:6px;accent-color:var(--blue)}
+
+.mini-feedback{
+  display:none;
+  padding:10px 12px;
+  border-radius:8px;
+  margin-top:9px;
+  font-size:.88rem;
+}
+
+.mini-feedback.show{display:block}
+.mini-feedback.correct{background:var(--green-light);color:var(--green)}
+.mini-feedback.incorrect{background:var(--red-light);color:var(--red)}
+
+.btn{
+  border:0;
+  border-radius:8px;
+  padding:10px 14px;
+  font-weight:800;
+  font-size:.86rem;
+  background:var(--blue);
+  color:white;
+}
+
+.btn:hover{filter:brightness(.93)}
+
+.btn.secondary{
+  background:#edf1f7;
+  color:var(--navy);
+  border:1px solid var(--line);
+}
+
+.button-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:12px;
+}
+
+.table-wrap{
+  overflow-x:auto;
+  margin:14px 0;
 }
 
 table{
   width:100%;
+  min-width:510px;
   border-collapse:collapse;
-  font-size:.89rem;
-  min-width:500px;
+  font-size:.88rem;
 }
 
 th,td{
   text-align:left;
   vertical-align:top;
-  padding:11px 12px;
+  padding:11px;
   border-bottom:1px solid var(--line);
 }
-
-tr:last-child td{border-bottom:0}
 
 th{
   background:#edf2f8;
   color:var(--navy);
-  font-weight:700;
 }
 
-td:first-child{font-weight:500}
+td:first-child{font-weight:600}
 
-.good{color:var(--good);font-weight:700}
-.bad{color:var(--bad);font-weight:700}
-
-code{
-  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
-  background:#edf2f8;
-  color:#173b67;
-  padding:2px 5px;
-  border-radius:4px;
-  font-size:.92em;
-}
-
-ul,ol{padding-left:23px}
-li{margin:6px 0}
-
-details{
-  border:1px solid var(--line);
-  border-radius:9px;
-  padding:11px 14px;
-  margin:10px 0;
-  background:#fff;
-}
-
-summary{
-  cursor:pointer;
-  font-weight:700;
-  color:var(--navy);
-}
-
-details p:last-child{margin-bottom:3px}
+.good{color:var(--green);font-weight:700}
+.bad{color:var(--red);font-weight:700}
 
 .skill-grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:14px;
+  gap:12px;
 }
 
 .skill-card{
   border:1px solid var(--line);
   border-radius:11px;
-  padding:18px;
+  padding:15px;
 }
 
-.skill-card h3{margin:0 0 9px}
-.skill-card p:last-child{margin-bottom:0}
+.skill-card h3{
+  color:var(--navy);
+  margin:0 0 7px;
+  font-size:1rem;
+}
 
-.question{
-  border-top:1px solid var(--line);
+.skill-card p{margin:0;font-size:.9rem}
+
+.quiz-question{
   padding:17px 0;
+  border-bottom:1px solid var(--line);
 }
 
-.question:first-child{border-top:0}
+.quiz-question:last-child{border-bottom:0}
 
-.question p{
-  font-weight:700;
-  margin:0 0 11px;
+.quiz-question h3{
+  margin:0 0 10px;
+  color:var(--navy);
+  font-size:.98rem;
 }
 
-.question-number{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:27px;
-  height:27px;
-  background:var(--blue2);
-  color:var(--blue);
-  border-radius:7px;
-  margin-right:7px;
-  font-size:.82rem;
+.quiz-options{
+  display:grid;
+  gap:8px;
 }
 
-.options{display:grid;gap:8px}
-
-.option{
+.quiz-option{
   display:flex;
+  gap:10px;
   align-items:flex-start;
-  gap:10px;
+  border:1px solid var(--line);
+  border-radius:9px;
   padding:10px 12px;
-  border:1px solid var(--line);
-  border-radius:9px;
   cursor:pointer;
-  font-weight:400;
-  background:white;
 }
 
-.option:hover{
-  border-color:#8ba8d4;
-  background:#f7faff;
-}
+.quiz-option:hover{background:#f7f9fc}
+.quiz-option input{margin-top:6px;accent-color:var(--blue)}
 
-.option:has(input:checked){
-  border-color:var(--blue);
-  background:#f0f5fc;
-}
-
-.option input{
-  margin-top:7px;
-  accent-color:var(--blue);
-  flex-shrink:0;
-}
-
-.feedback{
-  font-size:.89rem;
+.quiz-feedback{
+  display:none;
   margin-top:10px;
-  padding:11px 13px;
-  border-radius:8px;
-}
-
-.feedback.correct{
-  background:var(--good-bg);
-  color:#155c42;
-}
-
-.feedback.incorrect{
-  background:var(--bad-bg);
-  color:#8f2929;
-}
-
-.actions{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:16px;
-}
-
-.btn{
-  border:0;
-  border-radius:8px;
-  padding:10px 15px;
-  font-weight:700;
-  background:var(--blue);
-  color:white;
-}
-
-.btn:hover{filter:brightness(.94)}
-
-.btn.secondary{
-  background:#edf2f8;
-  color:var(--navy);
-  border:1px solid var(--line);
-}
-
-.btn:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{
-  outline:3px solid #7fa6dc;
-  outline-offset:3px;
-}
-
-.score{
-  font-weight:800;
-  color:var(--navy);
-  margin-top:16px;
-  padding:14px;
-  background:#f0f5fc;
+  padding:11px 12px;
   border-radius:9px;
-}
-
-.score:empty{display:none}
-
-.quiz-controls{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  flex-wrap:wrap;
-  margin:12px 0;
-}
-
-.quiz-controls label{
-  font-weight:600;
   font-size:.88rem;
 }
 
-.quiz-controls select{
-  border:1px solid var(--line);
-  border-radius:7px;
-  padding:8px;
-  background:white;
-  color:var(--ink);
+.quiz-feedback.show{display:block}
+.quiz-feedback.correct{background:var(--green-light);color:var(--green)}
+.quiz-feedback.incorrect{background:var(--red-light);color:var(--red)}
+
+.score-box{
+  display:none;
+  padding:17px;
+  border-radius:10px;
+  background:var(--blue-light);
+  margin-top:16px;
 }
 
-.checklist li{margin:9px 0}
+.score-box.show{display:block}
+
+.score-number{
+  color:var(--navy);
+  font-size:1.45rem;
+  font-weight:800;
+}
+
+.checklist{
+  list-style:none;
+  padding:0;
+}
+
+.checklist li{margin:10px 0}
+
+.checklist label{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+}
+
+.checklist input{
+  margin-top:7px;
+  accent-color:var(--teal);
+}
 
 .footer{
-  max-width:1150px;
-  margin:auto;
-  padding:23px;
-  color:var(--muted);
-  font-size:.83rem;
   text-align:center;
+  color:var(--muted);
+  padding:24px 16px;
+  font-size:.82rem;
 }
 
-.backtop{
+.back-top{
   display:inline-block;
-  margin-top:13px;
+  margin-top:15px;
+  font-weight:800;
   text-decoration:none;
-  font-weight:700;
 }
 
-@media(max-width:950px){
+@media(max-width:850px){
   .layout{grid-template-columns:1fr}
-  .toc{
-    position:static;
-    max-height:none;
-  }
-  .toc nav{
+  .sidebar{position:static;max-height:none}
+  .sidebar nav{
     display:grid;
     grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:2px;
+    gap:3px;
   }
   .toplinks{display:none}
 }
 
-@media(max-width:600px){
-  body{font-size:15px}
-  .hero{padding:43px 18px}
-  .hero h1{font-size:2.15rem}
-  .layout{padding:0 12px;margin-top:15px}
-  .topbar-inner{padding:11px 15px}
-  .toc nav{grid-template-columns:1fr 1fr}
-  .intro,.section{padding:18px}
-  .grid2,.grid3,.skill-grid{grid-template-columns:1fr}
-  h2{font-size:1.45rem}
-  .hero-meta span{font-size:.74rem}
-  th,td{padding:9px}
+@media(max-width:520px){
+  body{font-size:14px}
+  .hero{padding:35px 17px}
+  .hero h1{font-size:2.1rem}
+  .layout{padding:0 11px;margin-top:15px}
+  .topbar-inner{padding:11px 14px}
+  .progress-inner{padding:10px 13px;gap:9px}
+  .progress-label{font-size:.73rem}
+  .panel{padding:17px;margin-bottom:13px}
+  .lesson summary{padding:13px;font-size:.9rem}
+  .lesson-content{padding:13px}
+  .skill-grid{grid-template-columns:1fr}
+  .sidebar nav{grid-template-columns:1fr 1fr}
 }
 
 @media print{
-  @page{margin:15mm}
-  body{background:white;font-size:10.5pt;line-height:1.55}
-  .topbar,.toc,.progress-wrap,.actions,.quiz-controls,.backtop{display:none!important}
-  .hero{
-    background:white!important;
-    color:var(--navy);
-    padding:10px 0 20px;
-  }
-  .hero p{color:var(--ink)}
-  .hero-meta span{
-    color:var(--navy);
-    background:white;
-    border:1px solid var(--line);
-  }
-  .layout{
-    display:block;
-    margin:0;
-    padding:0;
-    max-width:none;
-  }
-  .intro,.section{
-    box-shadow:none;
-    padding:15px 0;
-    border:0;
-    border-bottom:1px solid var(--line);
-    margin:0;
-    break-inside:auto;
-  }
-  .mini,.skill-card,.example,.rulebox,.tipbox,.warningbox,details{
-    break-inside:avoid;
-  }
-  .tablewrap{overflow:visible}
-  table{min-width:0;font-size:9pt}
-  th,td{padding:7px}
-  a{color:var(--navy);text-decoration:none}
-  .feedback[hidden]{display:none!important}
-  .footer{padding:10px 0}
+  .topbar,.progress-area,.sidebar,.button-row,.btn,.mini-practice,
+  .back-top{display:none!important}
+  .hero{background:white;color:var(--navy);padding:15px}
+  .hero p,.hero-meta span{color:var(--ink)}
+  .layout{display:block;padding:0;margin:0}
+  .panel{box-shadow:none;break-inside:avoid}
+  .lesson-content{display:block}
+  .lesson:not([open]) .lesson-content{display:block}
+  body{background:white;font-size:10.5pt}
 }
 </style>
 </head>
 
 <body>
+
 <header class="topbar" id="top">
   <div class="topbar-inner">
     <a class="brand" href="index.html">IELTS <span>Grammar Lab</span></a>
-    <nav class="toplinks" aria-label="Main navigation">
-      <a href="#form">Form</a>
-      <a href="#uses">Uses</a>
-      <a href="#compare">Differences</a>
+    <nav class="toplinks">
+      <a href="#learn">Learn</a>
+      <a href="#compare">Compare</a>
       <a href="#mistakes">Mistakes</a>
-      <a href="#skills">IELTS skills</a>
-      <a href="#practice">Practice</a>
+      <a href="#ielts">IELTS skills</a>
+      <a href="#final-quiz">Final quiz</a>
     </nav>
-  </div>
-  <div class="progress-wrap" aria-hidden="true">
-    <div class="progress-bar" id="progressBar"></div>
   </div>
 </header>
 
 <section class="hero">
   <div class="hero-inner">
-    <span class="eyebrow">Complete grammar guide · Beginner to advanced</span>
+    <span class="eyebrow">Grammar lesson · Beginner to intermediate</span>
     <h1>Future simple with will</h1>
-    <p>
-      Learn how to form and use the future simple with will, including
-      predictions, spontaneous decisions, promises, offers, requests,
-      willingness, refusals, future facts, conditional sentences and future
-      time clauses. Understand the differences between similar future forms
-      and apply them accurately in all four IELTS skills.
-    </p>
+    <p>Learn when and how to use will through simple questions, clear answers, everyday examples, and IELTS practice. Each question includes its own explanation, so you do not need to search for answers in another section.</p>
     <div class="hero-meta">
-      <span>Complete grammar rules</span>
-      <span>Detailed examples</span>
-      <span>IELTS band development</span>
-      <span>30-question practice test</span>
-      <span>Printable notes</span>
+      <span>Question and answer format</span>
+      <span>Examples with explanations</span>
+      <span>Practice after each topic</span>
+      <span>All four IELTS skills</span>
     </div>
   </div>
 </section>
 
+<div class="progress-area">
+  <div class="progress-inner">
+    <span class="progress-label">Lesson progress</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <span class="progress-count" id="progressCount">0/12</span>
+  </div>
+</div>
+
 <div class="layout">
 
-<aside class="toc">
-  <h2>On this page</h2>
-  <nav>
-    <a href="#overview">1. Overview</a>
-    <a href="#meaning">2. Meaning and concept</a>
-    <a href="#form">3. Form and structure</a>
-    <a class="toc-sub" href="#positive">Positive statements</a>
-    <a class="toc-sub" href="#negative">Negative statements</a>
-    <a class="toc-sub" href="#questions">Questions and short answers</a>
-    <a class="toc-sub" href="#contractions">Contractions</a>
-    <a href="#uses">4. Main uses</a>
-    <a class="toc-sub" href="#predictions">Predictions</a>
-    <a class="toc-sub" href="#decisions">Spontaneous decisions</a>
-    <a class="toc-sub" href="#promises">Promises and willingness</a>
-    <a class="toc-sub" href="#offers">Offers, requests and refusals</a>
-    <a href="#compare">5. Compare future forms</a>
-    <a href="#time">6. Time expressions</a>
-    <a href="#clauses">7. Future time clauses</a>
-    <a href="#conditionals">8. Conditional sentences</a>
-    <a href="#advanced">9. Advanced patterns</a>
-    <a href="#mistakes">10. Common mistakes</a>
-    <a href="#speaking">11. Speaking practice</a>
-    <a href="#writing">12. Writing practice</a>
-    <a href="#reading">13. Reading practice</a>
-    <a href="#listening">14. Listening practice</a>
-    <a href="#practice">15. Interactive test</a>
-    <a href="#answers">16. Practice explanations</a>
-    <a href="#revision">17. Revision checklist</a>
+<aside class="sidebar">
+  <h2>Find a question</h2>
+  <nav id="lessonNav">
+    <a href="#start">Start here</a>
+    <a href="#learn">1. Meaning of will</a>
+    <a href="#form">2. Sentence structure</a>
+    <a href="#positive">3. Positive sentences</a>
+    <a href="#negative">4. Negative sentences</a>
+    <a href="#questions">5. Questions</a>
+    <a href="#uses">6. When to use will</a>
+    <a href="#predictions">7. Predictions</a>
+    <a href="#decisions">8. Decisions and offers</a>
+    <a href="#compare">9. Compare future forms</a>
+    <a href="#time">10. Time expressions</a>
+    <a href="#mistakes">11. Common mistakes</a>
+    <a href="#ielts">12. IELTS skills</a>
+    <a href="#final-quiz">Final quiz</a>
+    <a href="#revision">Revision checklist</a>
   </nav>
+  <div class="side-note">
+    <strong>Study tip</strong><br>
+    Open one question, understand the answer, read the examples, and complete its small practice activity before moving on.
+  </div>
 </aside>
 
 <main>
 
-<section class="intro" id="overview">
-  <h2>1. Overview of the future simple</h2>
+<section class="panel" id="start">
+  <h2 class="panel-title">Start here: what will you learn?</h2>
+  <p class="panel-intro">You do not need to memorise every rule at once. Follow the questions in order. Each answer builds on the previous one.</p>
 
-  <p class="lead">
-    The future simple with <strong>will</strong> is a way of talking about
-    future events, predictions, decisions, promises and other situations
-    viewed from the present.
-  </p>
-
-  <div class="structure">Subject + will + base form of the verb</div>
-
-  <div class="grid2">
-    <div class="mini">
-      <span class="pill">Positive</span>
-      <h3>Prediction</h3>
-      <p>I think technology <strong>will change</strong> education.</p>
-      <p class="why">The speaker predicts a future development.</p>
-    </div>
-
-    <div class="mini">
-      <span class="pill">Negative</span>
-      <h3>Future expectation</h3>
-      <p>The weather <strong>will not remain</strong> stable.</p>
-      <p class="why">The speaker expects something not to happen or continue.</p>
-    </div>
-
-    <div class="mini">
-      <span class="pill">Question</span>
-      <h3>Asking about the future</h3>
-      <p><strong>Will</strong> more people work remotely?</p>
-      <p class="why">The speaker asks about a possible future situation.</p>
-    </div>
-
-    <div class="mini">
-      <span class="pill">Spontaneous decision</span>
-      <h3>Decision made now</h3>
-      <p>The phone is ringing. I <strong>will answer</strong> it.</p>
-      <p class="why">The decision is made at the moment of speaking.</p>
-    </div>
+  <div class="welcome-box">
+    <strong>The most important rule</strong>
+    <p>Use <strong>will + the base form of a verb</strong> to express many future predictions, promises, offers, and decisions made at the moment of speaking.</p>
+    <p>Example: I think she <strong>will pass</strong> the exam.</p>
   </div>
 
-  <div class="rulebox">
-    <strong>Essential rule:</strong> Use will followed by the base form of a
-    verb. Do not add -s, -ed, -ing or to to the main verb immediately after
-    will.
+  <div class="quick-structure">
+    <div class="formula">Subject + will + base verb</div>
+    <p>I will learn. · She will learn. · They will learn.</p>
   </div>
 
-  <p>
-    For example, <strong>she will go</strong> is correct, not
-    <strong>she will goes</strong>. The modal auxiliary will does not change
-    according to the subject.
-  </p>
-</section>
+  <p><strong>How to use this page:</strong> Start with the first question. Open each lesson card to see the answer. Use the small practice activity immediately after learning a rule. At the end, take the final quiz.</p>
 
-<section class="section" id="meaning">
-  <h2>2. Understand the meaning before choosing the tense</h2>
-
-  <p>
-    English does not have one single grammatical tense that covers every
-    future meaning. Speakers use several structures, including will,
-    be going to, the present continuous and the present simple.
-  </p>
-
-  <p>
-    The choice depends on what the speaker wants to communicate. A sentence
-    about tomorrow can use different structures because the speaker may be
-    making a prediction, describing an arrangement or referring to a timetable.
-  </p>
-
-  <div class="example">
-    <p><strong>Prediction:</strong> I think it will rain tomorrow.</p>
-    <p><strong>Existing intention:</strong> I am going to study tonight.</p>
-    <p><strong>Arrangement:</strong> I am meeting my supervisor tomorrow.</p>
-    <p><strong>Timetable:</strong> The train leaves at 8 a.m.</p>
-  </div>
-
-  <h3>Time and meaning are not the same thing</h3>
-
-  <p>
-    A future time expression does not automatically require will. Similarly,
-    a sentence can contain will without mentioning a specific future time.
-  </p>
-
-  <div class="example">
-    <p><strong>With a time expression:</strong> I will call you tomorrow.</p>
-    <p><strong>Without a time expression:</strong> I promise I will help you.</p>
-    <p class="meaning">
-      The second sentence refers to a future commitment even though no date
-      or time is mentioned.
-    </p>
-  </div>
-
-  <div class="tipbox">
-    <strong>Learning strategy:</strong> First identify the meaning of the
-    sentence. Then choose the grammatical form that communicates that meaning.
-    This is more reliable than memorising time words alone.
+  <div class="rule">
+    <strong>Important:</strong> English does not use will for every future sentence. Sometimes the present simple, present continuous, or going to is more appropriate. You will learn the differences below.
   </div>
 </section>
 
-<section class="section" id="form">
-  <h2>3. Form and structure</h2>
+<section class="panel" id="learn">
+  <h2 class="panel-title">Part 1: understand the meaning</h2>
+  <p class="panel-intro">First, learn what will means and why speakers use it.</p>
 
-  <p>
-    Will is a modal auxiliary verb. It stays the same with I, you, he, she,
-    it, we and they. The main verb always remains in its base form when it
-    directly follows will.
-  </p>
+  <div class="lesson-list">
 
-  <h3 id="positive">3.1 Positive statements</h3>
+    <details class="lesson" open>
+      <summary><span class="lesson-number">1</span>What does will mean?</summary>
+      <div class="lesson-content">
+        <span class="answer-label">Simple answer</span>
+        <p><strong>Will</strong> is a modal auxiliary verb. We often use it to talk about what we think, expect, decide, promise, or offer to do in the future.</p>
 
-  <div class="structure">Subject + will + base verb + rest of sentence</div>
+        <h3>Look at these examples</h3>
+        <div class="example">
+          <strong>I will study tonight.</strong>
+          <span class="meaning">The speaker is talking about a future action.</span>
+        </div>
+        <div class="example">
+          <strong>It will probably rain tomorrow.</strong>
+          <span class="meaning">The speaker is making a prediction.</span>
+        </div>
+        <div class="example">
+          <strong>I will help you.</strong>
+          <span class="meaning">The speaker is offering help or making a promise.</span>
+        </div>
 
-  <div class="tablewrap">
-    <table>
-      <thead>
-        <tr><th>Subject</th><th>Structure</th><th>Example</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>I</td><td>I will + work</td><td>I will work tomorrow.</td></tr>
-        <tr><td>You</td><td>You will + work</td><td>You will improve with practice.</td></tr>
-        <tr><td>He</td><td>He will + work</td><td>He will attend the meeting.</td></tr>
-        <tr><td>She</td><td>She will + work</td><td>She will finish the report.</td></tr>
-        <tr><td>It</td><td>It will + work</td><td>It will probably rain later.</td></tr>
-        <tr><td>We</td><td>We will + work</td><td>We will discuss the results.</td></tr>
-        <tr><td>They</td><td>They will + work</td><td>They will publish the findings.</td></tr>
-      </tbody>
-    </table>
-  </div>
+        <h3>Does will always mean the same thing?</h3>
+        <p>No. The meaning depends on the situation. In one sentence, will may express a prediction. In another, it may express willingness, a promise, or a decision.</p>
 
-  <h4>Examples with different verbs</h4>
+        <div class="mini-practice">
+          <h4>Check your understanding</h4>
+          <p>Which sentence expresses a prediction?</p>
+          <label><input type="radio" name="mini1" value="a"> I will carry your bag.</label>
+          <label><input type="radio" name="mini1" value="b"> I think prices will rise next year.</label>
+          <label><input type="radio" name="mini1" value="c"> I will answer the phone.</label>
+          <button class="btn" onclick="checkMini('mini1','b','miniFeedback1','The speaker predicts that prices will rise in the future.')">Check answer</button>
+          <div class="mini-feedback" id="miniFeedback1"></div>
+        </div>
+      </div>
+    </details>
 
-  <ul>
-    <li>I will <strong>study</strong> English every day.</li>
-    <li>She will <strong>write</strong> the research proposal.</li>
-    <li>They will <strong>analyse</strong> the data carefully.</li>
-    <li>We will <strong>be</strong> ready by Monday.</li>
-    <li>The results will <strong>have</strong> important implications.</li>
-    <li>The new system will <strong>make</strong> the process easier.</li>
-  </ul>
+    <details class="lesson">
+      <summary><span class="lesson-number">2</span>What is the base form of a verb?</summary>
+      <div class="lesson-content">
+        <span class="answer-label">Simple answer</span>
+        <p>The base form is the basic form of a verb, without endings such as <strong>-s, -ed, or -ing</strong>, and without to.</p>
 
-  <div class="rulebox">
-    The base form is the ordinary dictionary form of the verb:
-    <strong>go, study, write, be, have, do, make</strong>.
-    The verb be is especially important because it does not become is or are
-    after will.
-  </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Base form</th><th>Other form</th><th>Correct with will</th></tr></thead>
+            <tbody>
+              <tr><td>go</td><td>goes</td><td>I will go.</td></tr>
+              <tr><td>study</td><td>studies</td><td>She will study.</td></tr>
+              <tr><td>write</td><td>wrote</td><td>They will write.</td></tr>
+              <tr><td>be</td><td>is / am / are</td><td>He will be ready.</td></tr>
+              <tr><td>have</td><td>has</td><td>We will have time.</td></tr>
+              <tr><td>do</td><td>does</td><td>She will do it.</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-  <h3 id="negative">3.2 Negative statements</h3>
+        <h3>Why does this matter?</h3>
+        <p>Unlike the present simple, the verb after will does not change for he, she, or it.</p>
+        <div class="example">
+          <strong>Correct:</strong> She will work. He will work. It will work.
+          <span class="meaning">The verb work remains unchanged.</span>
+        </div>
+        <div class="warning">
+          <strong>Remember:</strong> Do not write “She will works” or “He will to work.”
+        </div>
 
-  <div class="structure">Subject + will not + base verb</div>
-  <div class="structure">Subject + won't + base verb</div>
+        <div class="mini-practice">
+          <h4>Check your understanding</h4>
+          <p>Choose the correct sentence.</p>
+          <label><input type="radio" name="mini2" value="a"> He will studies English.</label>
+          <label><input type="radio" name="mini2" value="b"> He will to study English.</label>
+          <label><input type="radio" name="mini2" value="c"> He will study English.</label>
+          <button class="btn" onclick="checkMini('mini2','c','miniFeedback2','Study is the base form of the verb, so it follows will.')">Check answer</button>
+          <div class="mini-feedback" id="miniFeedback2"></div>
+        </div>
+      </div>
+    </details>
 
-  <p>
-    Will not is the full form. Won't is its standard negative contraction.
-    Both express a negative meaning, although the full form may receive more
-    emphasis in some contexts.
-  </p>
-
-  <div class="tablewrap">
-    <table>
-      <thead>
-        <tr><th>Full form</th><th>Contracted form</th><th>Example</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>I will not</td><td>I won't</td><td>I won't forget your advice.</td></tr>
-        <tr><td>You will not</td><td>You won't</td><td>You won't need to wait long.</td></tr>
-        <tr><td>He will not</td><td>He won't</td><td>He won't attend the conference.</td></tr>
-        <tr><td>She will not</td><td>She won't</td><td>She won't accept the offer.</td></tr>
-        <tr><td>It will not</td><td>It won't</td><td>It won't take much time.</td></tr>
-        <tr><td>We will not</td><td>We won't</td><td>We won't change the original data.</td></tr>
-        <tr><td>They will not</td><td>They won't</td><td>They won't arrive before noon.</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h4>Meaning and emphasis</h4>
-
-  <div class="example">
-    <p><strong>Ordinary negative:</strong> I won't attend the event.</p>
-    <p><strong>Emphatic refusal:</strong> I will not accept those conditions.</p>
-    <p class="meaning">
-      The second sentence may express stronger determination or refusal,
-      depending on the context and stress.
-    </p>
-  </div>
-
-  <p>
-    Remember that won't is not formed by adding not after the main verb.
-    The negative word belongs with the auxiliary: will not.
-  </p>
-
-  <h3>3.3 Negative meaning with other words</h3>
-
-  <p>
-    A negative sentence does not always need won't. Words such as never,
-    nobody and nothing can express negative meanings, although their placement
-    and grammatical role differ.
-  </p>
-
-  <div class="example">
-    <p>I will never forget this experience.</p>
-    <p>Nobody will know the answer until the results are released.</p>
-    <p>Nothing will change unless we take action.</p>
-  </div>
-
-  <p class="why">
-    Avoid double negatives in standard English. For example, use
-    “I won't do anything” or “I will do nothing”, rather than
-    “I won't do nothing”.
-  </p>
-
-  <h3 id="questions">3.4 Yes or no questions</h3>
-
-  <div class="structure">Will + subject + base verb + ...?</div>
-
-  <p>
-    To make a question, move will before the subject. Do not add do or does
-    to form an ordinary question with will.
-  </p>
-
-  <div class="tablewrap">
-    <table>
-      <thead>
-        <tr><th>Statement</th><th>Question</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>You will come.</td><td>Will you come?</td></tr>
-        <tr><td>She will finish.</td><td>Will she finish?</td></tr>
-        <tr><td>They will participate.</td><td>Will they participate?</td></tr>
-        <tr><td>He will be ready.</td><td>Will he be ready?</td></tr>
-        <tr><td>We will need assistance.</td><td>Will we need assistance?</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3>3.5 Wh-questions</h3>
-
-  <div class="structure">Question word + will + subject + base verb?</div>
-
-  <div class="tablewrap">
-    <table>
-      <thead>
-        <tr><th>Question word</th><th>Example</th><th>Information requested</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>What</td><td>What will you study?</td><td>Activity or subject</td></tr>
-        <tr><td>Where</td><td>Where will they stay?</td><td>Place</td></tr>
-        <tr><td>When</td><td>When will the results arrive?</td><td>Time</td></tr>
-        <tr><td>Why</td><td>Why will this matter?</td><td>Reason</td></tr>
-        <tr><td>Who</td><td>Who will lead the project?</td><td>Person</td></tr>
-        <tr><td>How</td><td>How will the policy work?</td><td>Method</td></tr>
-        <tr><td>How long</td><td>How long will it take?</td><td>Duration</td></tr>
-        <tr><td>How many</td><td>How many people will attend?</td><td>Quantity</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3>3.6 Short answers</h3>
-
-  <p>
-    In short answers, use will or won't instead of repeating the entire
-    sentence.
-  </p>
-
-  <div class="example">
-    <p><strong>Will you attend?</strong> Yes, I will. / No, I won't.</p>
-    <p><strong>Will she come?</strong> Yes, she will. / No, she won't.</p>
-    <p><strong>Will they help us?</strong> Yes, they will. / No, they won't.</p>
-  </div>
-
-  <div class="warningbox">
-    Avoid “Yes, I will do” as the ordinary short answer to “Will you do it?”
-    The natural answer is “Yes, I will.” The full verb may be repeated when
-    the context requires it, but it is not needed in the usual short answer.
-  </div>
-
-  <h3>3.7 Negative questions</h3>
-
-  <div class="structure">Won't + subject + base verb?</div>
-
-  <p>
-    Negative questions may express surprise, expectations, concern or a
-    request for confirmation.
-  </p>
-
-  <div class="example">
-    <p>Won't you join us for dinner?</p>
-    <p>Won't the new system solve this problem?</p>
-    <p>Won't they need additional training?</p>
-  </div>
-
-  <p>
-    The exact meaning depends on context. A negative question can suggest
-    that the speaker expected a positive answer, but this is not always so.
-  </p>
-
-  <h3 id="contractions">3.8 Contractions and pronunciation</h3>
-
-  <div class="tablewrap">
-    <table>
-      <thead>
-        <tr><th>Full form</th><th>Contraction</th><th>Example</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>I will</td><td>I'll</td><td>I'll call you later.</td></tr>
-        <tr><td>You will</td><td>You'll</td><td>You'll understand soon.</td></tr>
-        <tr><td>He will</td><td>He'll</td><td>He'll join the team.</td></tr>
-        <tr><td>She will</td><td>She'll</td><td>She'll explain the findings.</td></tr>
-        <tr><td>It will</td><td>It'll</td><td>It'll be fine.</td></tr>
-        <tr><td>We will</td><td>We'll</td><td>We'll review the report.</td></tr>
-        <tr><td>They will</td><td>They'll</td><td>They'll arrive shortly.</td></tr>
-        <tr><td>Will not</td><td>Won't</td><td>I won't forget.</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <p>
-    Contractions are very common in everyday conversation and listening
-    materials. In formal academic writing, full forms are often a safer
-    choice, particularly in research papers and formal reports.
-  </p>
-
-  <div class="tipbox">
-    <strong>IELTS listening tip:</strong> Practise recognising I'll, you'll,
-    he'll, she'll, we'll, they'll and won't. Focus on the meaning of the
-    complete sentence rather than trying to hear every word separately.
   </div>
 </section>
 
-<section class="section" id="uses">
-  <h2>4. The main uses of will</h2>
-
-  <p class="lead">
-    Will has several related uses. The same grammatical form can communicate
-    different meanings depending on the situation, intention and context.
-  </p>
-
-  <h3 id="predictions">4.1 Predictions and opinions about the future</h3>
-
-  <p>
-    Use will when predicting what may happen or expressing a belief about
-    the future. A prediction is not necessarily a certainty.
-  </p>
-
-  <div class="example">
-    <p>I think online education will become more accessible.</p>
-    <p>Many researchers believe temperatures will continue to rise.</p>
-    <p>In my opinion, public transport will play a greater role in urban life.</p>
-    <p>Perhaps people will spend less time commuting in the future.</p>
-  </div>
-
-  <h4>Common expressions used with predictions</h4>
-
-  <ul>
-    <li>I think ...</li>
-    <li>I believe ...</li>
-    <li>I expect ...</li>
-    <li>In my opinion ...</li>
-    <li>Perhaps ...</li>
-    <li>Probably ...</li>
-    <li>It is likely that ...</li>
-    <li>I doubt that ...</li>
-  </ul>
-
-  <div class="example">
-    <p>I think renewable energy will become more affordable.</p>
-    <p>Renewable energy will probably become more affordable.</p>
-    <p>It is likely that renewable energy will become more affordable.</p>
-    <p class="meaning">
-      These sentences express similar predictions through different grammatical
-      structures and degrees of emphasis.
-    </p>
-  </div>
-
-  <h4>Prediction versus certainty</h4>
-
-  <p>
-    Will often expresses an expectation, not an absolute guarantee. When
-    discussing uncertain outcomes, use cautious language where appropriate.
-  </p>
-
-  <div class="example">
-    <p><strong>Too certain without sufficient evidence:</strong> This policy will eliminate all poverty.</p>
-    <p><strong>More cautious:</strong> This policy may reduce poverty.</p>
-    <p><strong>Prediction with a qualification:</strong> This policy will probably reduce poverty if it is implemented effectively.</p>
-  </div>
-
-  <p class="why">
-    May, might and could express possibility. Will generally presents an
-    outcome as the speaker's expectation or prediction. The best choice
-    depends on the evidence and intended degree of confidence.
-  </p>
-
-  <h3>4.2 Predictions based on evidence</h3>
-
-  <p>
-    Both will and be going to can express predictions. However, be going to
-    is often preferred when the prediction is based on visible or present
-    evidence.
-  </p>
-
-  <div class="example">
-    <p><strong>Evidence-based prediction:</strong> Look at those clouds. It is going to rain.</p>
-    <p><strong>General prediction:</strong> I think it will rain tomorrow.</p>
-  </div>
-
-  <p>
-    This is a common tendency, not an absolute rule. Will can also describe
-    evidence-based predictions, and be going to can express a general
-    expectation.
-  </p>
-
-  <h3 id="decisions">4.3 Spontaneous decisions</h3>
-
-  <p>
-    Use will when deciding to do something at the moment of speaking,
-    rather than describing a plan already made.
-  </p>
-
-  <div class="example">
-    <p>The phone is ringing. I'll answer it.</p>
-    <p>That bag looks heavy. I'll carry it for you.</p>
-    <p>I am thirsty. I'll get some water.</p>
-    <p>We have no milk. I'll buy some on my way home.</p>
-  </div>
-
-  <h4>Why this matters</h4>
-
-  <p>
-    Compare a decision made now with a prior intention.
-  </p>
-
-  <div class="tablewrap">
-    <table>
-      <thead>
-        <tr><th>Situation</th><th>Example</th><th>Reason</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Decision now</td>
-          <td>I'll order the chicken.</td>
-          <td>The decision is made while ordering.</td>
-        </tr>
-        <tr>
-          <td>Prior intention</td>
-          <td>I'm going to order the chicken.</td>
-          <td>The speaker already has an intention.</td>
-        </tr>
-        <tr>
-          <td>Arrangement</td>
-          <td>I'm meeting my friend at seven.</td>
-          <td>The meeting is arranged.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3>4.4 Promises and commitments</h3>
-
-  <p>
-    Will is commonly used to make promises, assurances and commitments.
-  </p>
-
-  <div class="example">
-    <p>I will always support you.</p>
-    <p>I will send you the document by Friday.</p>
-    <p>We will protect the confidentiality of the data.</p>
-    <p>I won't tell anyone your secret.</p>
-  </div>
-
-  <p>
-    In academic or professional settings, use promises carefully. A
-    commitment should be realistic and consistent with the speaker's
-    responsibilities.
-  </p>
-
-  <h3 id="promises">4.5 Willingness and unwillingness</h3>
-
-  <p>
-    Will can express a person's willingness to do something. Won't can
-    describe unwillingness or refusal, although it may also describe an
-    ordinary prediction of non-occurrence.
-  </p>
-
-  <div class="example">
-    <p><strong>Willingness:</strong> I will help you revise the report.</p>
-    <p><strong>Unwillingness:</strong> He won't listen to any advice.</p>
-    <p><strong>Refusal:</strong> She won't sign the agreement.</p>
-    <p><strong>Prediction:</strong> The old computer won't run this software.</p>
-  </div>
-
-  <p class="why">
-    Context determines whether won't describes a person's refusal or an
-    expected result. For example, “The computer won't start” usually
-    describes a technical problem rather than a conscious decision.
-  </p>
-
-  <h3 id="offers">4.6 Offers of help</h3>
-
-  <p>
-    Use will to offer assistance or volunteer to do something.
-  </p>
-
-  <div class="example">
-    <p>I'll open the window for you.</p>
-    <p>I'll help you prepare for the interview.</p>
-    <p>We'll carry the equipment upstairs.</p>
-  </div>
-
-  <p>
-    These sentences are especially natural when the offer is made in
-    response to a situation.
-  </p>
-
-  <h3>4.7 Requests and polite questions</h3>
-
-  <p>
-    Will you ...? can be used to make a request. The level of politeness
-    depends on context, tone and the relationship between the speakers.
-  </p>
-
-  <div class="example">
-    <p>Will you close the door, please?</p>
-    <p>Will you send me the details this afternoon?</p>
-    <p>Will you wait here for a moment?</p>
-  </div>
-
-  <p>
-    Could you ...? and Would you ...? can sound more polite or less direct
-    in many situations.
-  </p>
-
-  <div class="tablewrap">
-    <table>
-      <thead>
-        <tr><th>Expression</th><th>Example</th><th>Typical use</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Will you ...?</td><td>Will you help me?</td><td>Direct request</td></tr>
-        <tr><td>Would you ...?</td><td>Would you help me?</td><td>Often more tentative or polite</td></tr>
-        <tr><td>Could you ...?</td><td>Could you help me?</td><td>Polite request about ability or willingness</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3>4.8 Future facts and expected events</h3>
-
-  <p>
-    Will can state what is expected to happen in the future, including
-    scheduled outcomes, expected results and anticipated events.
-  </p>
-
-  <div class="example">
-    <p>The examination results will be available next Monday.</p>
-    <p>The conference will begin with an opening address.</p>
-    <p>The new library will accommodate more students.</p>
-    <p>Our research team will present the findings in December.</p>
-  </div>
-
-  <p class="why">
-    For fixed timetables and official schedules, the present simple is often
-    more conventional. Will is appropriate when presenting an event as a
-    future expectation or outcome.
-  </p>
-
-  <h3>4.9 Threats, warnings and determination</h3>
-
-  <p>
-    Depending on context and intonation, will can express a warning,
-    determination or a strong commitment.
-  </p>
-
-  <div class="example">
-    <p>You will regret making that decision.</p>
-    <p>I will finish this project, no matter how difficult it becomes.</p>
-    <p>We will not tolerate discrimination.</p>
-  </div>
-
-  <p>
-    These are context-dependent uses. Will does not automatically create a
-    threat or strong promise; the intended meaning comes from the sentence
-    and the situation.
-  </p>
-
-  <h3>4.10 Consequences and logical expectations</h3>
-
-  <p>
-    Will can describe an expected consequence of a current situation.
-  </p>
-
-  <div class="example">
-    <p>If you leave ice in the sun, it will melt.</p>
-    <p>Without adequate preparation, students will find the test difficult.</p>
-    <p>Better data quality will improve the reliability of the analysis.</p>
-  </div>
-
-  <p class="why">
-    For scientific statements, distinguish between a general relationship,
-    a conditional prediction and an established fact. The appropriate tense
-    depends on the claim you are making.
-  </p>
-</section>
-
-<section class="section" id="compare">
-  <h2>5. Compare will with other future forms</h2>
-
-  <p>
-    These forms sometimes describe the same future event, but they can
-    present different viewpoints. Learn the typical distinctions without
-    assuming that any one form has only a single use.
-  </p>
-
-  <h3>5.1 Will versus be going to</h3>
-
-  <div class="tablewrap">
-    <table>
-      <thead>
-        <tr><th>Will</th><th>Be going to</th><th>Typical distinction</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>I think it will rain.</td>
-          <td>Look at the clouds. It is going to rain.</td>
-          <td>General prediction versus prediction based on present evidence.</td>
-        </tr>
-        <tr>
-          <td>I'll call her now.</td>
-          <td>I'm going to call her tonight.</td>
-          <td>Decision made now versus prior intention.</td>
-        </tr>
-        <tr>
-          <td>I will help you.</td>
-          <td>I'm going to help you.</td>
-          <td>May present a commitment versus an existing intention.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="tipbox">
-    <strong>Remember:</strong> These distinctions are tendencies. Both forms
-    can be used for predictions and intentions, and the wider context may
-    matter more than the form alone.
-  </div>
-
-  <h3>5.2 Will versus the present continuous</h3>
-
-  <p>
-    The present continuous often describes a personal arrangement that has
-    already been made.
-  </p>
-
-  <div class="tablewrap">
-    <table>
-      <thead>
-        <tr><th>Example</th><th>Likely interpretation</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>I'm meeting my supervisor tomorrow.</td>
-          <td>A meeting has been arranged.</td>
-        </tr>
-        <tr>
-          <td>I'll meet my supervisor tomorrow.</td>
-          <td>A decision, promise or future expectation, depending on context.</td>
-        </tr>
-        <tr>
-          <td>We're travelling to Dhaka next week.</td>
-          <td>A planned or arranged trip.</td>
-        </tr>
-        <tr>
-          <td>We'll travel to Dhaka next week.</td>
-          <td>A future statement, prediction or commitment.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3>5.3 Will versus the present simple</h3>
-
-  <p>
-    The present simple commonly describes timetables, programmes and
-    scheduled events.
-  </p>
-
-  <div class="example">
-    <p>The train leaves at 6:30 tomorrow morning.</p>
-    <p>The conference begins on Monday.</p>
-    <p>The semester ends in December.</p>
-  </div>
-
-  <p>
-    Will is also possible when the speaker wishes to express an expectation
-    rather than simply report the official schedule.
-  </p>
-
-  <div class="example">
-    <p>The train will leave shortly.</p>
-    <p>The conference will begin with a welcome speech.</p>
-  </div>
-
-  <h3>5.4 Will versus the future continuous</h3>
-
-  <div class="tablewrap">
-    <table>
-      <thead>
-        <tr><th>Future simple</th><th>Future continuous</th><th>Difference</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>I will study at eight.</td>
-          <td>I will be studying at eight.</td>
-          <td>The second emphasizes an activity in progress at that time.</td>
-        </tr>
-        <tr>
-          <td>Will you use the office tomorrow?</td>
-          <td>Will you be using the office tomorrow?</td>
-          <td>The second can sound more neutral when asking about an expected activity.</td>
-        </tr>
-        <tr>
-          <td>She will work tomorrow.</td>
-          <td>She will be working tomorrow.</td>
-          <td>The second emphasizes the ongoing activity or expected situation.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3>5.5 Will versus the future perfect</h3>
-
-  <div class="example">
-    <p><strong>Future simple:</strong> I will finish the report tomorrow.</p>
-    <p><strong>Future perfect:</strong> I will have finished the report by tomorrow.</p>
-    <p class="meaning">
-      The future perfect looks back from a future point and presents the
-      action as completed by that point.
-    </p>
-  </div>
-
-  <h3>5.6 Will versus may, might and could</h3>
-
-  <div class="tablewrap">
-    <table>
-      <thead>
-        <tr><th>Sentence</th><th>Typical meaning</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>It will rain tomorrow.</td><td>The speaker predicts rain.</td></tr>
-        <tr><td>It may rain tomorrow.</td><td>Rain is a possibility.</td></tr>
-        <tr><td>It might rain tomorrow.</td><td>Rain is a possibility, often expressed tentatively.</td></tr>
-        <tr><td>It could rain tomorrow.</td><td>Rain is one possible outcome.</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <p class="why">
-    There is no universal percentage attached to each modal. Their perceived
-    strength depends on context, speaker intention and the type of statement.
-  </p>
-
-  <h3>5.7 Quick comparison guide</h3>
-
-  <div class="grid2">
-    <div class="mini">
-      <h3>Choose will when</h3>
-      <ul>
-        <li>You make a spontaneous decision.</li>
-        <li>You offer help or make a promise.</li>
-        <li>You express a prediction or expectation.</li>
-        <li>You ask about or state a future outcome.</li>
-      </ul>
-    </div>
-    <div class="mini">
-      <h3>Consider another form when</h3>
-      <ul>
-        <li>You describe an existing intention.</li>
-        <li>You report an arranged meeting.</li>
-        <li>You report a fixed timetable.</li>
-        <li>You need to emphasize duration or completion.</li>
-      </ul>
-    </div>
+<section class="panel" id="form">
+  <h2 class="panel-title">Part 2: build the sentence</h2>
+  <p class="panel-intro">Learn the three main forms: positive, negative, and question.</p>
+
+  <div class="lesson-list">
+
+    <details class="lesson" id="positive">
+      <summary><span class="lesson-number">3</span>How do I make a positive sentence?</summary>
+      <div class="lesson-content">
+        <span class="answer-label">The rule</span>
+        <div class="quick-structure">
+          <div class="formula">Subject + will + base verb</div>
+          <p>She + will + study</p>
+        </div>
+
+        <h3>Examples</h3>
+        <div class="example"><strong>I will learn English.</strong><span class="meaning">Subject: I. Auxiliary: will. Verb: learn.</span></div>
+        <div class="example"><strong>She will visit her grandmother.</strong><span class="meaning">Use visit, not visits.</span></div>
+        <div class="example"><strong>They will arrive tomorrow.</strong><span class="meaning">The sentence describes a future event.</span></div>
+        <div class="example"><strong>We will be ready soon.</strong><span class="meaning">The base form of be is used after will.</span></div>
+
+        <h3>Can I use contractions?</h3>
+        <p>Yes. In everyday speaking and informal writing, will is often shortened.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Full form</th><th>Contraction</th></tr></thead>
+            <tbody>
+              <tr><td>I will</td><td>I'll</td></tr>
+              <tr><td>You will</td><td>You'll</td></tr>
+              <tr><td>He will</td><td>He'll</td></tr>
+              <tr><td>She will</td><td>She'll</td></tr>
+              <tr><td>We will</td><td>We'll</td></tr>
+              <tr><td>They will</td><td>They'll</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Contractions are very common in listening and speaking. In formal IELTS Writing Task 1 and Task 2, full forms are generally a safer choice.</p>
+
+        <div class="mini-practice">
+          <h4>Try it yourself</h4>
+          <p>Complete the sentence: My brother will _____ a doctor.</p>
+          <label><input type="radio" name="mini3" value="a"> becomes</label>
+          <label><input type="radio" name="mini3" value="b"> become</label>
+          <label><input type="radio" name="mini3" value="c"> becoming</label>
+          <button class="btn" onclick="checkMini('mini3','b','miniFeedback3','Become is the base form, so it follows will.')">Check answer</button>
+          <div class="mini-feedback" id="miniFeedback3"></div>
+        </div>
+      </div>
+    </details>
+
+    <details class="lesson" id="negative">
+      <summary><span class="lesson-number">4</span>How do I make a negative sentence?</summary>
+      <div class="lesson-content">
+        <span class="answer-label">The rule</span>
+        <div class="quick-structure">
+          <div class="formula">Subject + will not + base verb</div>
+          <p>Short form: won't</p>
+        </div>
+
+        <p>Put not immediately after will. The verb that follows remains in its base form.</p>
+
+        <div class="example"><strong>I will not forget your advice.</strong><span class="meaning">The speaker says the action will not happen.</span></div>
+        <div class="example"><strong>She won't attend the meeting.</strong><span class="meaning">Won't means will not.</span></div>
+        <div class="example"><strong>They will not agree with the decision.</strong><span class="meaning">Agree remains in its base form.</span></div>
+        <div class="example"><strong>He won't be late.</strong><span class="meaning">Use be, not is or will be not.</span></div>
+
+        <h3>Is won't formed in the usual way?</h3>
+        <p>No. Will not contracts to won't, which is an irregular contraction. Learn it as a pair.</p>
+
+        <div class="warning">
+          <strong>Common errors</strong>
+          <p class="bad">Incorrect: She don't will come.</p>
+          <p class="good">Correct: She will not come. / She won't come.</p>
+          <p class="bad">Incorrect: He won't goes.</p>
+          <p class="good">Correct: He won't go.</p>
+        </div>
+
+        <div class="mini-practice">
+          <h4>Try it yourself</h4>
+          <p>Choose the correct negative sentence.</p>
+          <label><input type="radio" name="mini4" value="a"> I won't to forget.</label>
+          <label><input type="radio" name="mini4" value="b"> I don't will forget.</label>
+          <label><input type="radio" name="mini4" value="c"> I won't forget.</label>
+          <button class="btn" onclick="checkMini('mini4','c','miniFeedback4','Won’t is followed directly by the base verb forget.')">Check answer</button>
+          <div class="mini-feedback" id="miniFeedback4"></div>
+        </div>
+      </div>
+    </details>
+
+    <details class="lesson" id="questions">
+      <summary><span class="lesson-number">5</span>How do I make a question with will?</summary>
+      <div class="lesson-content">
+        <span class="answer-label">The rule</span>
+        <div class="quick-structure">
+          <div class="formula">Will + subject + base verb?</div>
+          <p>Will + you + help?</p>
+        </div>
+
+        <p>To make a yes or no question, move will to the beginning of the sentence, before the subject.</p>
+
+        <div class="example"><strong>Will you help me?</strong><span class="meaning">Asks whether the person is willing to help.</span></div>
+        <div class="example"><strong>Will she join us tomorrow?</strong><span class="meaning">Asks about a possible future event.</span></div>
+        <div class="example"><strong>Will they be available next week?</strong><span class="meaning">Be remains in its base form.</span></div>
+
+        <h3>How do I answer a will question?</h3>
+        <p>Use will or won't in a short answer.</p>
+        <div class="example">
+          <strong>Will you come?</strong><br>
+          Yes, I will. / No, I won't.
+        </div>
+
+        <h3>How do I ask a question with a question word?</h3>
+        <div class="quick-structure">
+          <div class="formula">Question word + will + subject + base verb?</div>
+        </div>
+        <div class="example"><strong>When will you arrive?</strong></div>
+        <div class="example"><strong>Where will they stay?</strong></div>
+        <div class="example"><strong>What will she do after graduation?</strong></div>
+        <div class="example"><strong>How will the new policy affect students?</strong></div>
+
+        <div class="warning">
+          <strong>Do not use do or does with will in this structure.</strong>
+          <p class="bad">Incorrect: Do you will come?</p>
+          <p class="good">Correct: Will you come?</p>
+        </div>
+
+        <div class="mini-practice">
+          <h4>Try it yourself</h4>
+          <p>Choose the correct question.</p>
+          <label><input type="radio" name="mini5" value="a"> Where you will go?</label>
+          <label><input type="radio" name="mini5" value="b"> Where will you go?</label>
+          <label><input type="radio" name="mini5" value="c"> Where do will you go?</label>
+          <button class="btn" onclick="checkMini('mini5','b','miniFeedback5','The question word comes first, followed by will, the subject, and the base verb.')">Check answer</button>
+          <div class="mini-feedback" id="miniFeedback5"></div>
+        </div>
+      </div>
+    </details>
+
   </div>
 </section>
 
-<section class="section" id="time">
-  <h2>6. Time expressions commonly used with will</h2>
+<section class="panel" id="uses">
+  <h2 class="panel-title">Part 3: when should I use will?</h2>
+  <p class="panel-intro">The form is easy once you understand it. The next step is choosing when it fits the meaning.</p>
 
-  <p>
-    Time expressions can help locate a future event, but they do not determine
-    the tense by themselves.
-  </p>
+  <div class="lesson-list">
 
-  <div class="tablewrap">
+    <details class="lesson" open id="predictions">
+      <summary><span class="lesson-number">6</span>When should I use will for predictions?</summary>
+      <div class="lesson-content">
+        <span class="answer-label">Simple answer</span>
+        <p>Use will when you predict or express an opinion about something that may happen in the future.</p>
+
+        <h3>Examples from everyday life</h3>
+        <div class="example"><strong>I think it will rain tomorrow.</strong><span class="meaning">A prediction about the weather.</span></div>
+        <div class="example"><strong>People will use more renewable energy in the future.</strong><span class="meaning">A prediction about society.</span></div>
+        <div class="example"><strong>She will probably pass the examination.</strong><span class="meaning">A prediction about an individual.</span></div>
+        <div class="example"><strong>Technology will continue to change education.</strong><span class="meaning">A prediction about a long-term trend.</span></div>
+
+        <h3>Which words often appear with predictions?</h3>
+        <p>These expressions often show that you are making a prediction, although they do not automatically require will.</p>
+        <div class="rule">
+          I think · I believe · probably · perhaps · maybe · I expect · I am sure
+        </div>
+
+        <h3>Can I use will with probably?</h3>
+        <p>Yes. Probably often appears after will and before the main verb.</p>
+        <div class="example"><strong>She will probably arrive early.</strong></div>
+        <div class="example"><strong>They probably won't accept the offer.</strong></div>
+        <p>In negative sentences, probably can come before won't or after won't. For example, “They probably won't come” and “They won't probably come” are not equally natural in all contexts. The first is generally the more natural choice.</p>
+
+        <div class="warning">
+          <strong>Remember:</strong> A prediction is not a guarantee. Use words such as probably, possibly, and might when you want to show uncertainty.
+        </div>
+
+        <div class="mini-practice">
+          <h4>Check your understanding</h4>
+          <p>Which sentence expresses an opinion about the future?</p>
+          <label><input type="radio" name="mini6" value="a"> Water boils at 100°C at standard atmospheric pressure.</label>
+          <label><input type="radio" name="mini6" value="b"> I think public transport will improve.</label>
+          <label><input type="radio" name="mini6" value="c"> She is studying now.</label>
+          <button class="btn" onclick="checkMini('mini6','b','miniFeedback6','The speaker gives an opinion about a possible future improvement.')">Check answer</button>
+          <div class="mini-feedback" id="miniFeedback6"></div>
+        </div>
+      </div>
+    </details>
+
+    <details class="lesson" id="decisions">
+      <summary><span class="lesson-number">7</span>When should I use will for decisions, promises, and offers?</summary>
+      <div class="lesson-content">
+        <span class="answer-label">Simple answer</span>
+        <p>Use will when you decide to do something at the moment of speaking. You can also use it to offer help, make promises, or express willingness.</p>
+
+        <h3>A. Decisions made at the moment of speaking</h3>
+        <div class="example">
+          <strong>The phone is ringing. I'll answer it.</strong>
+          <span class="meaning">The speaker decides now to answer the phone.</span>
+        </div>
+        <div class="example">
+          <strong>I'm thirsty. I'll get some water.</strong>
+          <span class="meaning">The decision is made while speaking.</span>
+        </div>
+
+        <h3>B. Offers</h3>
+        <div class="example"><strong>I'll carry that bag for you.</strong><span class="meaning">The speaker offers assistance.</span></div>
+        <div class="example"><strong>I'll help you understand this lesson.</strong><span class="meaning">The speaker offers help.</span></div>
+
+        <h3>C. Promises</h3>
+        <div class="example"><strong>I will never forget your kindness.</strong><span class="meaning">The speaker makes a promise or strong commitment.</span></div>
+        <div class="example"><strong>I promise I won't tell anyone.</strong><span class="meaning">The speaker promises to keep something secret.</span></div>
+
+        <h3>D. Willingness</h3>
+        <div class="example"><strong>Don't worry. I will explain it again.</strong><span class="meaning">The speaker is willing to explain again.</span></div>
+
+        <h3>What is the difference between a decision and a plan?</h3>
+        <p>A decision made now often uses will. A plan or intention already formed before speaking often uses going to.</p>
+        <div class="example">
+          <strong>Decision now:</strong> The room is cold. I'll close the window.
+        </div>
+        <div class="example">
+          <strong>Plan made earlier:</strong> I've decided that I'm going to study abroad next year.
+        </div>
+
+        <div class="mini-practice">
+          <h4>Check your understanding</h4>
+          <p>Your friend has several bags. You decide to help immediately. What would you say?</p>
+          <label><input type="radio" name="mini7" value="a"> I helped you yesterday.</label>
+          <label><input type="radio" name="mini7" value="b"> I'll carry one for you.</label>
+          <label><input type="radio" name="mini7" value="c"> I carry one every day.</label>
+          <button class="btn" onclick="checkMini('mini7','b','miniFeedback7','I’ll carry one for you is a spontaneous offer of help.')">Check answer</button>
+          <div class="mini-feedback" id="miniFeedback7"></div>
+        </div>
+      </div>
+    </details>
+
+    <details class="lesson">
+      <summary><span class="lesson-number">8</span>Can will describe future facts and expectations?</summary>
+      <div class="lesson-content">
+        <span class="answer-label">Simple answer</span>
+        <p>Yes. Will can describe expected future events, future states, or things that are expected to happen.</p>
+
+        <div class="example"><strong>The results will be published next Monday.</strong><span class="meaning">An expected future event.</span></div>
+        <div class="example"><strong>My university will open a new laboratory next year.</strong><span class="meaning">A future event or development.</span></div>
+        <div class="example"><strong>It will be difficult to solve this problem.</strong><span class="meaning">An expectation about a future situation.</span></div>
+
+        <h3>Is will compulsory for every future fact?</h3>
+        <p>No. Timetables often use the present simple. Existing arrangements often use the present continuous. The best form depends on the type of event and the meaning.</p>
+
+        <div class="example"><strong>The train leaves at 7 a.m.</strong><span class="meaning">A timetable.</span></div>
+        <div class="example"><strong>I'm meeting my supervisor tomorrow.</strong><span class="meaning">An arranged meeting.</span></div>
+        <div class="example"><strong>I think the meeting will be useful.</strong><span class="meaning">A prediction or opinion.</span></div>
+
+        <div class="mini-practice">
+          <h4>Check your understanding</h4>
+          <p>Which sentence is a natural way to report a timetable?</p>
+          <label><input type="radio" name="mini8" value="a"> The train leaves at 8 a.m.</label>
+          <label><input type="radio" name="mini8" value="b"> The train will leaves at 8 a.m.</label>
+          <label><input type="radio" name="mini8" value="c"> The train leaving at 8 a.m.</label>
+          <button class="btn" onclick="checkMini('mini8','a','miniFeedback8','The present simple is commonly used for official timetables.')">Check answer</button>
+          <div class="mini-feedback" id="miniFeedback8"></div>
+        </div>
+      </div>
+    </details>
+
+    <details class="lesson">
+      <summary><span class="lesson-number">9</span>Can will be used to make requests?</summary>
+      <div class="lesson-content">
+        <span class="answer-label">Simple answer</span>
+        <p>Yes. Will you ...? can be used to ask someone to do something. It is often used for requests, although could and would may sound more polite in some situations.</p>
+
+        <div class="example"><strong>Will you open the window, please?</strong><span class="meaning">A request for help.</span></div>
+        <div class="example"><strong>Will you send me the document?</strong><span class="meaning">A request to send something.</span></div>
+        <div class="example"><strong>Will you please wait here?</strong><span class="meaning">A request to wait.</span></div>
+
+        <h3>Will you and Would you: what is the difference?</h3>
+        <p>Both can be used for requests. Would you is often more polite or less direct.</p>
+        <div class="example"><strong>Will you help me?</strong><span class="meaning">A direct request.</span></div>
+        <div class="example"><strong>Would you help me, please?</strong><span class="meaning">Often a more polite request.</span></div>
+
+        <div class="mini-practice">
+          <h4>Check your understanding</h4>
+          <p>Choose a natural request.</p>
+          <label><input type="radio" name="mini9" value="a"> Will you please explain this rule?</label>
+          <label><input type="radio" name="mini9" value="b"> Do will you explain this rule?</label>
+          <label><input type="radio" name="mini9" value="c"> Will you to explain this rule?</label>
+          <button class="btn" onclick="checkMini('mini9','a','miniFeedback9','Will you please + the base verb is a correct request structure.')">Check answer</button>
+          <div class="mini-feedback" id="miniFeedback9"></div>
+        </div>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<section class="panel" id="compare">
+  <h2 class="panel-title">Part 4: which future form should I choose?</h2>
+  <p class="panel-intro">This is one of the most important parts of learning future forms. Several structures can refer to the future, but they do not always express the same meaning.</p>
+
+  <div class="lesson-list">
+
+    <details class="lesson" open>
+      <summary><span class="lesson-number">10</span>What is the difference between will and going to?</summary>
+      <div class="lesson-content">
+        <span class="answer-label">Simple answer</span>
+        <p>Will is common for spontaneous decisions and predictions or opinions. Going to is common for plans already decided and predictions based on present evidence.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Situation</th><th>Example</th><th>Reason</th></tr></thead>
+            <tbody>
+              <tr><td>Decision now</td><td>I'll call him now.</td><td>The decision is made while speaking.</td></tr>
+              <tr><td>Earlier intention</td><td>I'm going to call him tonight.</td><td>The intention already exists.</td></tr>
+              <tr><td>Opinion</td><td>I think she will win.</td><td>The speaker expresses a prediction.</td></tr>
+              <tr><td>Visible evidence</td><td>Look at those clouds. It's going to rain.</td><td>The clouds provide evidence.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Are these rules absolute?</h3>
+        <p>No. Both forms can sometimes express predictions. The difference is often the speaker's viewpoint and the evidence or intention being emphasised.</p>
+
+        <div class="mini-practice">
+          <h4>Try it yourself</h4>
+          <p>You can see a glass falling off the table. Which prediction is especially natural?</p>
+          <label><input type="radio" name="mini10" value="a"> The glass is going to fall!</label>
+          <label><input type="radio" name="mini10" value="b"> The glass fell yesterday.</label>
+          <label><input type="radio" name="mini10" value="c"> The glass falls every day.</label>
+          <button class="btn" onclick="checkMini('mini10','a','miniFeedback10','Going to is especially natural for a prediction based on visible evidence.')">Check answer</button>
+          <div class="mini-feedback" id="miniFeedback10"></div>
+        </div>
+      </div>
+    </details>
+
+    <details class="lesson">
+      <summary><span class="lesson-number">11</span>What is the difference between will and the present continuous?</summary>
+      <div class="lesson-content">
+        <span class="answer-label">Simple answer</span>
+        <p>The present continuous can describe future arrangements, especially when details have already been organised.</p>
+
+        <div class="example">
+          <strong>I'm meeting my teacher tomorrow.</strong>
+          <span class="meaning">A meeting has been arranged.</span>
+        </div>
+        <div class="example">
+          <strong>I'll meet my teacher tomorrow.</strong>
+          <span class="meaning">Depending on the context, this can express a decision, promise, or expectation.</span>
+        </div>
+
+        <h3>How can I recognise an arrangement?</h3>
+        <p>There may be a fixed time, an appointment, a booking, or an agreement with another person.</p>
+        <div class="example"><strong>We're flying to Singapore next Friday.</strong><span class="meaning">A travel arrangement.</span></div>
+        <div class="example"><strong>She's seeing the dentist at 10 a.m.</strong><span class="meaning">An appointment.</span></div>
+
+        <p>Do not assume every future sentence with tomorrow must use will. Think about the intended meaning first.</p>
+
+        <div class="mini-practice">
+          <h4>Try it yourself</h4>
+          <p>You have already booked an appointment for tomorrow. Which sentence highlights the arrangement?</p>
+          <label><input type="radio" name="mini11" value="a"> I'm seeing the doctor tomorrow.</label>
+          <label><input type="radio" name="mini11" value="b"> I saw the doctor yesterday.</label>
+          <label><input type="radio" name="mini11" value="c"> I see doctors every year.</label>
+          <button class="btn" onclick="checkMini('mini11','a','miniFeedback11','The present continuous commonly describes a planned arrangement.')">Check answer</button>
+          <div class="mini-feedback" id="miniFeedback11"></div>
+        </div>
+      </div>
+    </details>
+
+    <details class="lesson">
+      <summary><span class="lesson-number">12</span>What is the difference between will and the present simple?</summary>
+      <div class="lesson-content">
+        <span class="answer-label">Simple answer</span>
+        <p>The present simple is commonly used for timetables, schedules, and future time clauses. Will is often used for predictions and future expectations.</p>
+
+        <div class="example"><strong>The bus arrives at 9 a.m.</strong><span class="meaning">A timetable.</span></div>
+        <div class="example"><strong>I think the bus will arrive soon.</strong><span class="meaning">A prediction.</span></div>
+        <div class="example"><strong>The course starts next Monday.</strong><span class="meaning">A scheduled event.</span></div>
+
+        <h3>What happens after when, before, after, until, and as soon as?</h3>
+        <p>When referring to the future, English commonly uses the present simple in these time clauses, even when the main clause uses will.</p>
+
+        <div class="example"><strong>When I arrive, I will call you.</strong></div>
+        <div class="example"><strong>I'll wait until she comes.</strong></div>
+        <div class="example"><strong>As soon as the results arrive, we will inform you.</strong></div>
+        <div class="example"><strong>Before you leave, I'll give you the documents.</strong></div>
+
+        <div class="warning">
+          <strong>Important distinction:</strong> A question beginning with when can still use will in the main question.
+          <p>“When will you arrive?” is correct.</p>
+          <p>“When I arrive, I will call you” is also correct.</p>
+          <p>The first asks about the time of arrival. The second uses a time clause.</p>
+        </div>
+
+        <div class="mini-practice">
+          <h4>Try it yourself</h4>
+          <p>Complete the sentence: When she _____ home, we will eat dinner.</p>
+          <label><input type="radio" name="mini12" value="a"> will come</label>
+          <label><input type="radio" name="mini12" value="b"> comes</label>
+          <label><input type="radio" name="mini12" value="c"> coming</label>
+          <button class="btn" onclick="checkMini('mini12','b','miniFeedback12','Use the present simple comes in the future time clause after when.')">Check answer</button>
+          <div class="mini-feedback" id="miniFeedback12"></div>
+        </div>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<section class="panel" id="time">
+  <h2 class="panel-title">Part 5: which time expressions can I use?</h2>
+  <p class="panel-intro">Time expressions help you understand when an event happens, but they do not decide the tense on their own.</p>
+
+  <div class="table-wrap">
     <table>
-      <thead>
-        <tr><th>Expression</th><th>Example</th><th>Meaning</th></tr>
-      </thead>
+      <thead><tr><th>Expression</th><th>Example</th><th>Meaning</th></tr></thead>
       <tbody>
-        <tr><td>Tomorrow</td><td>I'll call you tomorrow.</td><td>The following day.</td></tr>
-        <tr><td>Tonight</td><td>We will discuss it tonight.</td><td>Later today in the evening.</td></tr>
-        <tr><td>Soon</td><td>The results will arrive soon.</td><td>In the near future.</td></tr>
-        <tr><td>Later</td><td>She will explain it later.</td><td>At a subsequent time.</td></tr>
-        <tr><td>Next week</td><td>They will publish the report next week.</td><td>The following week.</td></tr>
-        <tr><td>In two days</td><td>I'll return in two days.</td><td>Two days from the reference time.</td></tr>
-        <tr><td>One day</td><td>One day, people will live on Mars.</td><td>An unspecified future time.</td></tr>
-        <tr><td>Eventually</td><td>The system will eventually improve.</td><td>After some time.</td></tr>
-        <tr><td>In the future</td><td>AI will play a larger role in healthcare.</td><td>At a future time.</td></tr>
-        <tr><td>By 2040</td><td>Demand will change by 2040.</td><td>On or before that future deadline, depending on context.</td></tr>
+        <tr><td>Tomorrow</td><td>I'll call you tomorrow.</td><td>The next day.</td></tr>
+        <tr><td>Next week</td><td>It will be ready next week.</td><td>The following week.</td></tr>
+        <tr><td>Soon</td><td>Things will improve soon.</td><td>In the near future.</td></tr>
+        <tr><td>In the future</td><td>People will live differently in the future.</td><td>An unspecified future period.</td></tr>
+        <tr><td>One day</td><td>One day, I will visit Japan.</td><td>An unspecified future day.</td></tr>
+        <tr><td>Probably</td><td>She will probably join us.</td><td>A likely future event.</td></tr>
+        <tr><td>I think</td><td>I think it will work.</td><td>An opinion or prediction.</td></tr>
       </tbody>
     </table>
   </div>
 
-  <h3>Adverbs of probability</h3>
-
-  <p>
-    Probably, possibly, certainly and perhaps can modify the statement
-    by expressing the speaker's attitude towards the expected outcome.
-  </p>
-
-  <div class="example">
-    <p>She will probably arrive early.</p>
-    <p>They probably won't accept the proposal.</p>
-    <p>Perhaps the situation will improve.</p>
-    <p>The new policy will certainly attract attention.</p>
-  </div>
-
-  <p>
-    In ordinary statements, probably usually comes after will and before
-    the main verb. With a negative contraction, it often appears before
-    won't or after won't, depending on the intended emphasis and variety
-    of English.
-  </p>
-
-  <div class="example">
-    <p>She probably won't attend.</p>
-    <p>She won't probably attend is generally less natural in standard usage.</p>
-  </div>
-
-  <div class="warningbox">
-    Avoid memorising time expressions as rigid tense rules. For example,
-    “tomorrow” can occur with will, be going to, the present continuous or
-    the present simple.
+  <div class="rule">
+    <strong>Remember:</strong> “Tomorrow” does not automatically mean will.
+    <p>I'll call you tomorrow. This can express a decision or promise.</p>
+    <p>I'm meeting her tomorrow. This describes an arrangement.</p>
+    <p>The train leaves tomorrow. This can describe a timetable.</p>
   </div>
 </section>
 
-<section class="section" id="clauses">
-  <h2>7. Will in future time clauses</h2>
+<section class="panel" id="mistakes">
+  <h2 class="panel-title">Part 6: what mistakes should I avoid?</h2>
+  <p class="panel-intro">Read each incorrect sentence, then compare it with the correct version and explanation.</p>
 
-  <p>
-    A time clause tells us when something happens. When a time clause refers
-    to the future, English normally uses the present simple in that clause
-    rather than will.
-  </p>
-
-  <div class="structure">Main clause: will + base verb</div>
-  <div class="structure">Time clause: present simple</div>
-
-  <h3>7.1 The word when</h3>
-
-  <div class="example">
-    <p><strong>Correct:</strong> When I arrive, I will call you.</p>
-    <p><strong>Incorrect:</strong> When I will arrive, I will call you.</p>
-  </div>
-
-  <p>
-    The first clause refers to a future arrival, but its verb is in the
-    present simple. The second clause expresses the expected future action.
-  </p>
-
-  <h3>7.2 Other time conjunctions</h3>
-
-  <div class="tablewrap">
+  <div class="table-wrap">
     <table>
-      <thead>
-        <tr><th>Conjunction</th><th>Example</th></tr>
-      </thead>
+      <thead><tr><th>Incorrect</th><th>Correct</th><th>Why?</th></tr></thead>
       <tbody>
-        <tr><td>When</td><td>When the results arrive, we will review them.</td></tr>
-        <tr><td>After</td><td>After she finishes, she will submit the form.</td></tr>
-        <tr><td>Before</td><td>Before you leave, I will give you the documents.</td></tr>
-        <tr><td>As soon as</td><td>As soon as I hear from them, I will let you know.</td></tr>
-        <tr><td>Until</td><td>I will wait until the meeting ends.</td></tr>
-        <tr><td>Once</td><td>Once the data arrive, we will begin the analysis.</td></tr>
-        <tr><td>By the time</td><td>By the time you arrive, I will have finished.</td></tr>
-        <tr><td>While</td><td>While you are away, I will look after the office.</td></tr>
+        <tr><td class="bad">She will goes home.</td><td class="good">She will go home.</td><td>Use the base verb after will.</td></tr>
+        <tr><td class="bad">I will to study.</td><td class="good">I will study.</td><td>Do not add to after will.</td></tr>
+        <tr><td class="bad">He will studies English.</td><td class="good">He will study English.</td><td>Will does not take the third person -s ending.</td></tr>
+        <tr><td class="bad">She don't will come.</td><td class="good">She won't come.</td><td>Form the negative with will not or won't.</td></tr>
+        <tr><td class="bad">Do you will help me?</td><td class="good">Will you help me?</td><td>Put will before the subject in questions.</td></tr>
+        <tr><td class="bad">Will she can attend?</td><td class="good">Will she be able to attend?</td><td>Do not place two modal verbs together in this structure.</td></tr>
+        <tr><td class="bad">When I will arrive, I will call.</td><td class="good">When I arrive, I will call.</td><td>Use present simple in this future time clause.</td></tr>
+        <tr><td class="bad">I will am ready.</td><td class="good">I will be ready.</td><td>Use the base form be after will.</td></tr>
+        <tr><td class="bad">They will went home.</td><td class="good">They will go home.</td><td>Use the base form, not the past form.</td></tr>
+        <tr><td class="bad">Will you to join us?</td><td class="good">Will you join us?</td><td>Use the base verb directly after the subject.</td></tr>
       </tbody>
     </table>
   </div>
 
-  <h3>7.3 Why the present simple is used</h3>
-
-  <p>
-    The time conjunction already establishes the future time relationship.
-    The present simple is the standard form in many future time clauses.
-    The main clause can then express the future action.
-  </p>
-
-  <div class="example">
-    <p>I'll contact you when I get home.</p>
-    <p>We'll start as soon as everyone arrives.</p>
-    <p>She will tell us after she speaks to the manager.</p>
-  </div>
-
-  <h3>7.4 Important distinction: indirect questions</h3>
-
-  <p>
-    Do not confuse a future time clause with an indirect question.
-    Indirect questions can use will when asking about a future event.
-  </p>
-
-  <div class="example">
-    <p><strong>Time clause:</strong> When he arrives, we will begin.</p>
-    <p><strong>Indirect question:</strong> I don't know when he will arrive.</p>
-  </div>
-
-  <p>
-    In the first sentence, when introduces the time at which an action will
-    happen. In the second, when introduces the information the speaker does
-    not know.
-  </p>
-
-  <div class="tipbox">
-    <strong>Exam technique:</strong> Identify the grammatical function of
-    when, before changing the verb. If it introduces a future time clause,
-    the present simple is usually required. If it introduces an indirect
-    question about the future, will may be correct.
-  </div>
-</section>
-
-<section class="section" id="conditionals">
-  <h2>8. Will in conditional sentences</h2>
-
-  <p>
-    Conditional sentences describe a condition and its possible or expected
-    result. Will is especially common in the result clause of first
-    conditional sentences.
-  </p>
-
-  <h3>8.1 First conditional</h3>
-
-  <div class="structure">If + present simple, subject + will + base verb</div>
-
-  <div class="example">
-    <p>If it rains tomorrow, we will stay at home.</p>
-    <p>If you study consistently, you will improve.</p>
-    <p>If the government invests in prevention, public health may improve.</p>
-  </div>
-
-  <p>
-    The condition is presented as a realistic future possibility. The result
-    clause expresses what the speaker expects or predicts if the condition
-    is met.
-  </p>
-
-  <h3>8.2 The order can change</h3>
-
-  <div class="example">
-    <p>If I finish early, I will call you.</p>
-    <p>I will call you if I finish early.</p>
-  </div>
-
-  <p>
-    When the if-clause comes first, it is normally followed by a comma.
-    When the main clause comes first, the comma is usually unnecessary.
-  </p>
-
-  <h3>8.3 Do not normally use will in the if-clause</h3>
-
-  <div class="tablewrap">
-    <table>
-      <thead>
-        <tr><th>Incorrect</th><th>Correct</th><th>Reason</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="bad">If it will rain, we will stay home.</td>
-          <td class="good">If it rains, we will stay home.</td>
-          <td>The if-clause normally uses the present simple for a realistic future condition.</td>
-        </tr>
-        <tr>
-          <td class="bad">If she will arrive early, we will start.</td>
-          <td class="good">If she arrives early, we will start.</td>
-          <td>Present simple expresses the future condition.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <p>
-    This is a useful general rule, but it is not absolute. Will can occur
-    in an if-clause when it expresses willingness or a deliberate choice,
-    rather than simply marking future time.
-  </p>
-
-  <div class="example">
-    <p>If you will wait here, the assistant will help you shortly.</p>
-    <p class="meaning">
-      Here, will can express willingness or polite cooperation. The sentence
-      is more formal and less common than “If you wait here ...”.
-    </p>
-  </div>
-
-  <h3>8.4 Unless</h3>
-
-  <p>
-    Unless means “if not”. It commonly introduces a negative condition,
-    while the main clause can contain will.
-  </p>
-
-  <div class="example">
-    <p>Unless we act now, the problem will become worse.</p>
-    <p>Unless you leave early, you will miss the bus.</p>
-  </div>
-
-  <p>
-    Avoid adding another negative if it would reverse the intended meaning.
-    “Unless you leave now” already means “if you do not leave now”.
-  </p>
-
-  <h3>8.5 Zero conditional versus first conditional</h3>
-
-  <div class="tablewrap">
-    <table>
-      <thead>
-        <tr><th>Zero conditional</th><th>First conditional</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>If water reaches 100°C at standard atmospheric pressure, it boils.</td>
-          <td>If the water reaches 100°C, it will boil.</td>
-        </tr>
-        <tr>
-          <td>Describes a general fact or regular result.</td>
-          <td>Describes an expected result in a particular possible situation.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <p>
-    Scientific statements need precise wording. A general law is often
-    expressed with the present simple, whereas a prediction about a
-    particular future situation can use will.
-  </p>
-</section>
-
-<section class="section" id="advanced">
-  <h2>9. Advanced patterns with will</h2>
-
-  <h3>9.1 Will be</h3>
-
-  <p>
-    Will be is the future simple form of be. It is followed by an adjective,
-    noun phrase or other complement.
-  </p>
-
-  <div class="example">
-    <p>The examination will be difficult.</p>
-    <p>She will be a valuable member of the team.</p>
-    <p>The findings will be useful for policymakers.</p>
-    <p>They will be ready by Monday.</p>
-  </div>
-
-  <h3>9.2 Will have</h3>
-
-  <p>
-    Have can be the main verb after will. Do not confuse this with the future
-    perfect, where will have is followed by a past participle.
-  </p>
-
-  <div class="example">
-    <p><strong>Ordinary future:</strong> We will have enough time.</p>
-    <p><strong>Future perfect:</strong> We will have completed the task by noon.</p>
-  </div>
-
-  <h3>9.3 Will be able to</h3>
-
-  <p>
-    Use will be able to to express future ability. The modal can does not
-    normally follow will directly.
-  </p>
-
-  <div class="example">
-    <p><strong>Correct:</strong> I will be able to attend tomorrow.</p>
-    <p><strong>Incorrect:</strong> I will can attend tomorrow.</p>
-  </div>
-
-  <h3>9.4 Will have to</h3>
-
-  <p>
-    Will have to expresses future necessity or obligation.
-  </p>
-
-  <div class="example">
-    <p>We will have to submit the application before Friday.</p>
-    <p>Researchers will have to consider possible sources of bias.</p>
-  </div>
-
-  <p>
-    Notice the difference between will have and will have to. The first can
-    mean possession or refer to an action depending on the following words.
-    The second expresses necessity.
-  </p>
-
-  <h3>9.5 Will need to</h3>
-
-  <div class="example">
-    <p>Students will need to practise regularly.</p>
-    <p>The research team will need to verify the data.</p>
-  </div>
-
-  <p>
-    Need to expresses a requirement or necessity. It is followed by a base
-    verb after to.
-  </p>
-
-  <h3>9.6 Will probably, definitely and possibly</h3>
-
-  <div class="example">
-    <p>The results will probably support the hypothesis.</p>
-    <p>The new policy will definitely require additional funding.</p>
-    <p>The programme will possibly attract international students.</p>
-  </div>
-
-  <p>
-    Probably and definitely are natural in many positions around the auxiliary
-    and main verb. Possibly is often more natural at the beginning or in
-    expressions such as “It is possible that ...”.
-  </p>
-
-  <h3>9.7 Will still, already and no longer</h3>
-
-  <div class="example">
-    <p>Many people will still depend on public transport.</p>
-    <p>The revised system will already be in use by then.</p>
-    <p>Some outdated methods will no longer be necessary.</p>
-  </div>
-
-  <p>
-    These expressions help clarify continuity, completion or change in a
-    future situation. Choose the position that sounds natural for the
-    particular adverb and sentence.
-  </p>
-
-  <h3>9.8 Will tend to</h3>
-
-  <p>
-    Will tend to describes an expected pattern or a likely general behaviour.
-    It can be useful when a statement should not be presented as universal.
-  </p>
-
-  <div class="example">
-    <p>People will tend to adopt technologies that save time.</p>
-    <p>Demand will tend to increase during periods of extreme heat.</p>
-  </div>
-
-  <p class="why">
-    For research writing, make sure a tendency is supported by evidence.
-    Avoid using will tend to as a substitute for an actual statistical result.
-  </p>
-
-  <h3>9.9 Shall and will</h3>
-
-  <p>
-    Shall appears in some questions and formal expressions, especially with
-    I and we. In contemporary English, will is much more common for ordinary
-    future statements.
-  </p>
-
-  <div class="example">
-    <p>Shall we begin?</p>
-    <p>Shall I open the window?</p>
-    <p>We will begin at nine.</p>
-  </div>
-
-  <p>
-    Shall I ...? and Shall we ...? often ask for suggestions or offer to do
-    something. In legal and contractual writing, shall can have specialised
-    uses, so interpret it according to the document and jurisdiction.
-  </p>
-
-  <h3>9.10 Will in reported speech</h3>
-
-  <p>
-    When reporting what someone said in the past, will often changes to
-    would if the reporting perspective moves into the past.
-  </p>
-
-  <div class="example">
-    <p><strong>Direct speech:</strong> She said, “I will return tomorrow.”</p>
-    <p><strong>Reported speech:</strong> She said that she would return the following day.</p>
-  </div>
-
-  <p>
-    This is a common backshift pattern, not a rule that applies in every
-    context. Will may remain when the future event is still future from the
-    speaker's current perspective or when the original meaning is being
-    preserved.
-  </p>
-
-  <h3>9.11 Will in passive sentences</h3>
-
-  <div class="structure">Subject + will + be + past participle</div>
-
-  <div class="example">
-    <p>The report will be published next month.</p>
-    <p>The data will be analysed using statistical models.</p>
-    <p>New guidelines will be introduced next year.</p>
-  </div>
-
-  <p>
-    Use the passive when the action or result is more important than the
-    person performing it. In academic writing, identify the agent when
-    doing so is important for accuracy.
-  </p>
-
-  <h3>9.12 Will with a future perfect or continuous form</h3>
-
-  <p>
-    The following are different future constructions. They are included
-    here so that you can recognise the limits of the future simple.
-  </p>
-
-  <div class="tablewrap">
-    <table>
-      <thead>
-        <tr><th>Structure</th><th>Example</th><th>Main emphasis</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Will + base verb</td>
-          <td>I will write the report.</td>
-          <td>Future action or outcome.</td>
-        </tr>
-        <tr>
-          <td>Will be + -ing</td>
-          <td>I will be writing the report at noon.</td>
-          <td>Action in progress at a future time.</td>
-        </tr>
-        <tr>
-          <td>Will have + past participle</td>
-          <td>I will have written the report by noon.</td>
-          <td>Completion by a future time.</td>
-        </tr>
-        <tr>
-          <td>Will have been + -ing</td>
-          <td>By noon, I will have been writing for three hours.</td>
-          <td>Duration up to a future point.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<section class="section" id="mistakes">
-  <h2>10. Common mistakes and why they happen</h2>
-
-  <p>
-    The following errors are common among English learners. Read the
-    explanation, not just the correction, so that you can apply the same
-    rule to unfamiliar sentences.
-  </p>
-
-  <div class="tablewrap">
-    <table>
-      <thead>
-        <tr><th>Incorrect</th><th>Correct</th><th>Explanation</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="bad">She will goes home.</td>
-          <td class="good">She will go home.</td>
-          <td>Will takes the base form, without -s.</td>
-        </tr>
-        <tr>
-          <td class="bad">He will went there.</td>
-          <td class="good">He will go there.</td>
-          <td>Do not use the past form after will.</td>
-        </tr>
-        <tr>
-          <td class="bad">I will to study.</td>
-          <td class="good">I will study.</td>
-          <td>Do not insert to between will and the main verb.</td>
-        </tr>
-        <tr>
-          <td class="bad">She will studying.</td>
-          <td class="good">She will study.</td>
-          <td>The future simple uses the base form, not -ing.</td>
-        </tr>
-        <tr>
-          <td class="bad">Will you can come?</td>
-          <td class="good">Will you be able to come?</td>
-          <td>Use be able to after will when expressing future ability.</td>
-        </tr>
-        <tr>
-          <td class="bad">Does she will come?</td>
-          <td class="good">Will she come?</td>
-          <td>Do not add do or does to an ordinary will question.</td>
-        </tr>
-        <tr>
-          <td class="bad">When I will arrive, I will call.</td>
-          <td class="good">When I arrive, I will call.</td>
-          <td>Use the present simple in a future time clause.</td>
-        </tr>
-        <tr>
-          <td class="bad">If it will rain, we will stay home.</td>
-          <td class="good">If it rains, we will stay home.</td>
-          <td>Use the present simple for a normal first conditional if-clause.</td>
-        </tr>
-        <tr>
-          <td class="bad">I will not goes.</td>
-          <td class="good">I will not go.</td>
-          <td>Negation does not change the base form after will.</td>
-        </tr>
-        <tr>
-          <td class="bad">He won't to help.</td>
-          <td class="good">He won't help.</td>
-          <td>Won't is followed directly by the base form.</td>
-        </tr>
-        <tr>
-          <td class="bad">I think she will comes.</td>
-          <td class="good">I think she will come.</td>
-          <td>Will stays unchanged for every subject.</td>
-        </tr>
-        <tr>
-          <td class="bad">Will they arrives soon?</td>
-          <td class="good">Will they arrive soon?</td>
-          <td>Use the base form in questions too.</td>
-        </tr>
-        <tr>
-          <td class="bad">The train will leaves at six.</td>
-          <td class="good">The train leaves at six.</td>
-          <td>Use the present simple for the ordinary timetable statement.</td>
-        </tr>
-        <tr>
-          <td class="bad">I am agree that it will work.</td>
-          <td class="good">I agree that it will work.</td>
-          <td>Agree is a verb, not an adjective requiring am.</td>
-        </tr>
-        <tr>
-          <td class="bad">The results will be publish.</td>
-          <td class="good">The results will be published.</td>
-          <td>Passive voice requires be plus the past participle.</td>
-        </tr>
-        <tr>
-          <td class="bad">I will have finish by Friday.</td>
-          <td class="good">I will have finished by Friday.</td>
-          <td>Future perfect requires the past participle after have.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3>Errors involving meaning rather than form</h3>
-
-  <details>
-    <summary>Mistake 1: Using will for every future event</summary>
-    <p><strong>Less suitable:</strong> I will meet my supervisor at 10 tomorrow, when describing an already arranged appointment.</p>
-    <p><strong>Often more natural:</strong> I am meeting my supervisor at 10 tomorrow.</p>
-    <p>
-      Will is not grammatically impossible in every such context. The present
-      continuous simply communicates an existing arrangement more directly.
-    </p>
-  </details>
-
-  <details>
-    <summary>Mistake 2: Confusing an intention with a spontaneous decision</summary>
-    <p><strong>Existing plan:</strong> I am going to apply for the scholarship.</p>
-    <p><strong>Decision now:</strong> I will apply for the scholarship.</p>
-    <p>
-      The distinction is useful, but context can allow either form. Do not
-      treat it as an absolute rule.
-    </p>
-  </details>
-
-  <details>
-    <summary>Mistake 3: Using will after every form of when</summary>
-    <p><strong>Time clause:</strong> I will tell you when I arrive.</p>
-    <p><strong>Indirect question:</strong> I don't know when I will arrive.</p>
-    <p>
-      Determine whether when refers to the time of an action or introduces
-      a question about the time.
-    </p>
-  </details>
-
-  <details>
-    <summary>Mistake 4: Making unsupported predictions in academic writing</summary>
-    <p><strong>Overstated:</strong> This intervention will solve the entire problem.</p>
-    <p><strong>More cautious:</strong> This intervention may reduce the problem if it is implemented effectively.</p>
-    <p>
-      Choose the modal that matches the strength of your evidence. Grammar
-      accuracy includes expressing uncertainty appropriately.
-    </p>
-  </details>
-
-  <details>
-    <summary>Mistake 5: Using future simple for an action in progress</summary>
-    <p><strong>General future:</strong> I will work tomorrow.</p>
-    <p><strong>Activity in progress:</strong> I will be working at noon tomorrow.</p>
-    <p>
-      The future continuous is more precise when the ongoing nature of the
-      activity matters.
-    </p>
-  </details>
-
-  <h3>Self-editing checklist</h3>
-
-  <ul class="checklist">
-    <li>Have I used the base verb after will or won't?</li>
-    <li>Have I formed questions by placing will before the subject?</li>
-    <li>Have I avoided unnecessary do or does?</li>
-    <li>Have I used the present simple in ordinary future time clauses?</li>
-    <li>Have I used the correct conditional structure?</li>
-    <li>Does the chosen future form communicate my intended meaning?</li>
-    <li>Is my prediction appropriately cautious for the evidence available?</li>
-  </ul>
-</section>
-
-<section class="section" id="speaking">
-  <h2>11. Use will in IELTS speaking</h2>
-
-  <p>
-    Will is especially useful in IELTS Speaking Part 1 when talking about
-    future plans, Part 2 when describing future expectations, and Part 3
-    when predicting social or technological changes.
-  </p>
-
-  <h3>11.1 Part 1: Personal predictions and intentions</h3>
-
-  <div class="example">
-    <p><strong>Question:</strong> Do you think you will continue studying in the future?</p>
-    <p><strong>Sample answer:</strong> Yes, I think I will continue studying because I want to develop my research skills and improve my academic English.</p>
-  </div>
-
-  <div class="example">
-    <p><strong>Question:</strong> Will you travel more in the future?</p>
-    <p><strong>Sample answer:</strong> I hope I will have more opportunities to travel, particularly to places with interesting cultures and research institutions.</p>
-  </div>
-
-  <h3>11.2 Part 2: A future goal</h3>
-
-  <p><strong>Possible cue card:</strong> Describe something you hope to achieve in the future.</p>
-
-  <div class="rulebox">
-    In the future, I hope I will become a more confident researcher and
-    develop the skills needed to contribute to meaningful scientific work.
-    I will continue improving my English, learning new analytical methods
-    and working on research projects. I believe these efforts will create
-    better opportunities for my professional development.
-  </div>
-
-  <p class="why">
-    This is a model for grammar practice. Adapt the ideas to your own
-    experience rather than memorising a complete answer.
-  </p>
-
-  <h3>11.3 Part 3: Predictions about society</h3>
-
-  <div class="example">
-    <p><strong>Question:</strong> How will technology change education?</p>
-    <p>
-      <strong>Sample answer:</strong> I think technology will make education
-      more accessible, particularly for students who live far from major
-      educational institutions. However, access to reliable internet and
-      digital devices will remain important.
-    </p>
-  </div>
-
-  <div class="example">
-    <p><strong>Question:</strong> How will cities change in the future?</p>
-    <p>
-      <strong>Sample answer:</strong> Cities will probably become more
-      dependent on digital services and public transport. Nevertheless,
-      whether these changes improve quality of life will depend on planning,
-      investment and how equitably the benefits are distributed.
-    </p>
-  </div>
-
-  <h3>11.4 Useful speaking patterns</h3>
-
-  <ul>
-    <li>I think ... will probably ...</li>
-    <li>In the future, I expect that ... will ...</li>
-    <li>One possible outcome is that ... will ...</li>
-    <li>If this trend continues, ... will ...</li>
-    <li>I hope I will be able to ...</li>
-    <li>I believe this will make it easier to ...</li>
-    <li>It is difficult to predict exactly what will happen, but ...</li>
-  </ul>
-
-  <div class="tipbox">
-    <strong>Speaking tip:</strong> Answer the question directly, explain your
-    reason, and give an example. Using will correctly is more important than
-    forcing it into every sentence.
-  </div>
-</section>
-
-<section class="section" id="writing">
-  <h2>12. Use will in IELTS writing</h2>
-
-  <p>
-    Will can express future predictions, expected consequences, proposals
-    and possible outcomes. In academic writing, however, a prediction should
-    not be presented as a proven fact unless the evidence justifies it.
-  </p>
-
-  <h3>12.1 IELTS Writing Task 1: Future projections</h3>
-
-  <p>
-    For a graph containing projections, use the tense and wording that
-    accurately reflect the time period and the source's level of certainty.
-  </p>
-
-  <div class="example">
-    <p><strong>Example:</strong> The proportion of urban residents is projected to increase by 2040.</p>
-    <p><strong>Alternative:</strong> The proportion of urban residents will increase by 2040.</p>
-    <p class="meaning">
-      The first explicitly presents the change as a projection. The second
-      makes a direct prediction and may sound more certain.
-    </p>
-  </div>
-
-  <h3>12.2 IELTS Writing Task 2: Predictions and consequences</h3>
-
-  <div class="example">
-    <p><strong>Topic:</strong> The growth of online education.</p>
-    <p>
-      Online education will probably become more widely available as digital
-      infrastructure improves. This development may reduce geographical
-      barriers to learning, although unequal access to technology will remain
-      a significant challenge.
-    </p>
-  </div>
-
-  <p>
-    Notice that the paragraph uses will probably for a prediction and may
-    for a possible consequence. This avoids presenting every future outcome
-    as certain.
-  </p>
-
-  <h3>12.3 First conditional in argumentative writing</h3>
-
-  <div class="example">
-    <p>
-      If governments invest in preventive healthcare, they will have more
-      opportunities to reduce avoidable illness and improve population health.
-    </p>
-  </div>
-
-  <p>
-    The conditional sentence explains a possible relationship between a
-    policy and an expected outcome. It does not, by itself, prove that the
-    outcome will occur.
-  </p>
-
-  <h3>12.4 Formal alternatives</h3>
-
-  <div class="tablewrap">
-    <table>
-      <thead>
-        <tr><th>Expression</th><th>Example</th><th>When useful</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Will</td><td>The policy will affect demand.</td><td>Direct prediction or expected result.</td></tr>
-        <tr><td>Is likely to</td><td>The policy is likely to affect demand.</td><td>Prediction expressed with qualification.</td></tr>
-        <tr><td>May</td><td>The policy may affect demand.</td><td>Possibility.</td></tr>
-        <tr><td>Is expected to</td><td>Demand is expected to rise.</td><td>Reported expectation or projection.</td></tr>
-        <tr><td>Is projected to</td><td>Demand is projected to rise.</td><td>Forecasts and numerical projections.</td></tr>
-        <tr><td>Could</td><td>The policy could affect demand.</td><td>Possible outcome or scenario.</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3>12.5 Common academic writing errors</h3>
-
-  <ul>
-    <li>Using will in every sentence about the future.</li>
-    <li>Presenting an uncertain projection as a guaranteed outcome.</li>
-    <li>Using will after when or if without considering the clause structure.</li>
-    <li>Repeating the same prediction structure in every sentence.</li>
-    <li>Using complex grammar that obscures the main argument.</li>
-  </ul>
-
-  <div class="tipbox">
-    <strong>Writing principle:</strong> Accuracy, clarity and logical
-    development matter more than the number of advanced grammatical
-    structures you use.
-  </div>
-</section>
-
-<section class="section" id="reading">
-  <h2>13. Recognise will in IELTS reading</h2>
-
-  <p>
-    In reading passages, will can signal an author's prediction, a forecast,
-    a stated consequence or a commitment. Determine whether the statement is
-    a fact, a possibility or an expectation.
-  </p>
-
-  <h3>Practice passage</h3>
-
-  <div class="example">
-    <p>
-      Many cities are investing in public transport to reduce congestion.
-      If these investments are accompanied by effective planning, they will
-      improve access to employment and education. However, the benefits will
-      not be distributed equally unless services are designed to reach
-      underserved communities. Experts expect that future transport systems
-      will rely more heavily on integrated digital services, although the
-      speed of this transition remains uncertain.
-    </p>
-  </div>
-
-  <h3>Reading questions</h3>
-
+  <h3>How can I correct my own sentences?</h3>
   <ol>
-    <li>Which sentence uses will to express a conditional consequence?</li>
-    <li>What does “will not be distributed equally” predict?</li>
-    <li>Does the passage present the transition to digital services as certain in its timing?</li>
-    <li>Which phrase explicitly attributes the prediction to experts?</li>
+    <li>Find the subject, such as I, she, or they.</li>
+    <li>Check whether the sentence needs will.</li>
+    <li>Check that the verb after will is in its base form.</li>
+    <li>For a negative sentence, check the position of not.</li>
+    <li>For a question, check whether will comes before the subject.</li>
+    <li>Check the meaning to see if another future form is more suitable.</li>
   </ol>
-
-  <details>
-    <summary>Reveal the reading answers</summary>
-    <ol>
-      <li>The sentence beginning “If these investments are accompanied by effective planning ...”.</li>
-      <li>It predicts that the benefits will be unequal unless services reach underserved communities.</li>
-      <li>No. The passage says the speed of the transition remains uncertain.</li>
-      <li>“Experts expect that ...”.</li>
-    </ol>
-  </details>
-
-  <div class="tipbox">
-    <strong>Reading tip:</strong> Pay attention to limiting language such as
-    unless, although, probably and may. These words can change the scope or
-    certainty of a prediction.
-  </div>
 </section>
 
-<section class="section" id="listening">
-  <h2>14. Recognise will in IELTS listening</h2>
+<section class="panel" id="ielts">
+  <h2 class="panel-title">Part 7: how can I use will in IELTS?</h2>
+  <p class="panel-intro">Grammar is more useful when you can apply it to real exam tasks. Learn how will works in speaking, writing, reading, and listening.</p>
 
-  <p>
-    In natural speech, will is often contracted and unstressed. The following
-    examples are useful for practising the grammar you may hear in dialogues
-    and announcements.
-  </p>
+  <div class="skill-grid">
 
-  <h3>14.1 Spoken examples</h3>
+    <article class="skill-card">
+      <h3>IELTS speaking</h3>
+      <p>Use will to make predictions, discuss future ambitions, or respond spontaneously.</p>
+      <div class="example">
+        <strong>Question:</strong> How do you think education will change in the future?
+        <span class="meaning"><strong>Answer:</strong> I think online learning will become more common, and students will have greater access to international courses.</span>
+      </div>
+      <p><strong>Practice:</strong> How will your city change in the next ten years?</p>
+    </article>
 
+    <article class="skill-card">
+      <h3>IELTS writing</h3>
+      <p>Use will when discussing expected outcomes, future consequences, or predictions. Make sure your claims are supported and appropriately cautious.</p>
+      <div class="example">
+        <strong>Example:</strong> If governments invest in public transport, traffic congestion may decrease and air quality will likely improve.
+      </div>
+      <p><strong>Tip:</strong> You can use may, might, or could when a future outcome is uncertain.</p>
+    </article>
+
+    <article class="skill-card">
+      <h3>IELTS reading</h3>
+      <p>Notice whether the writer is describing an established fact, a plan, or a prediction. Words such as will, may, and might can change the strength of a claim.</p>
+      <div class="example">
+        <strong>Example:</strong> The researchers believe the new treatment will reduce recovery time.
+        <span class="meaning">This is an expectation, not necessarily a confirmed result.</span>
+      </div>
+      <p><strong>Tip:</strong> Do not treat a prediction as a fact simply because the sentence uses will.</p>
+    </article>
+
+    <article class="skill-card">
+      <h3>IELTS listening</h3>
+      <p>Listen for contractions and negative forms. They may be pronounced quickly in natural speech.</p>
+      <div class="example">
+        <strong>I'll</strong> = I will<br>
+        <strong>They'll</strong> = They will<br>
+        <strong>Won't</strong> = Will not
+      </div>
+      <p><strong>Tip:</strong> Pay close attention to won't because missing the negative can reverse the meaning.</p>
+    </article>
+
+  </div>
+
+  <h3>Useful IELTS sentence patterns</h3>
   <div class="example">
-    <p>I'll send you the address later.</p>
-    <p>We'll probably arrive before noon.</p>
-    <p>They won't be able to attend the meeting.</p>
-    <p>When the speaker arrives, the session will begin.</p>
+    <strong>Prediction:</strong> I believe that this trend will continue in the coming years.
   </div>
-
-  <h3>14.2 Listening practice without audio</h3>
-
-  <p>
-    Read each line aloud or ask a study partner to read it while you write
-    what you hear. Then check the spelling of the contraction and the verb
-    form.
-  </p>
-
-  <ol>
-    <li>I'll meet you outside the library.</li>
-    <li>We won't have enough time to finish.</li>
-    <li>She'll probably send the report this evening.</li>
-    <li>As soon as the lecture ends, we'll leave.</li>
-    <li>Will you be able to attend tomorrow?</li>
-  </ol>
-
-  <div class="warningbox">
-    These are text-based listening drills, not recorded audio. For realistic
-    listening practice, read the lines aloud, use a text-to-speech tool, or
-    have a partner read them without showing you the text.
+  <div class="example">
+    <strong>Possible consequence:</strong> This development will likely have a positive effect on public health.
   </div>
-
-  <h3>14.3 What to listen for</h3>
-
-  <ul>
-    <li>Contracted forms such as I'll, she'll and they'll.</li>
-    <li>The negative contraction won't.</li>
-    <li>The base form following will.</li>
-    <li>Time expressions that establish the future reference.</li>
-    <li>Conditional words such as if and unless.</li>
-    <li>Whether the speaker is predicting, offering or making a promise.</li>
-  </ul>
+  <div class="example">
+    <strong>Uncertainty:</strong> These measures may reduce pollution, but their long-term effects remain uncertain.
+  </div>
+  <div class="example">
+    <strong>Personal ambition:</strong> In the future, I hope I will be able to contribute to meaningful research.
+  </div>
 </section>
 
-<section class="section" id="practice">
-  <h2>15. Interactive practice test</h2>
-
-  <p class="lead">
-    Complete the 30 questions to test your understanding of future simple
-    with will. The questions cover verb forms, meaning, time clauses,
-    conditionals, comparisons and IELTS usage.
-  </p>
-
-  <div class="rulebox">
-    <strong>Instructions:</strong> Choose one answer for each question.
-    Submit the test to see your score, the correct answers and explanations.
-    You can reset the test and try again.
-  </div>
-
-  <div class="quiz-controls">
-    <label for="quizMode">Practice mode</label>
-    <select id="quizMode">
-      <option value="all">All questions</option>
-      <option value="basic">Basic forms</option>
-      <option value="meaning">Meaning and comparisons</option>
-      <option value="advanced">Advanced grammar</option>
-    </select>
-    <span class="small" id="questionCount">30 questions</span>
-  </div>
+<section class="panel" id="final-quiz">
+  <h2 class="panel-title">Final quiz: test your understanding</h2>
+  <p class="panel-intro">Answer all 15 questions. Each question has one best answer. When you finish, select “Check all answers” to see your score and an explanation for each question.</p>
 
   <form id="quizForm">
-    <div id="questions"></div>
+    <div id="quizQuestions"></div>
 
-    <div class="actions">
-      <button class="btn" type="submit">Check answers and explanations</button>
-      <button class="btn secondary" type="button" id="resetQuiz">Try again</button>
+    <div class="button-row">
+      <button type="submit" class="btn">Check all answers</button>
+      <button type="button" class="btn secondary" id="resetQuiz">Try again</button>
     </div>
 
-    <div id="score" class="score" aria-live="polite"></div>
+    <div class="score-box" id="scoreBox" aria-live="polite">
+      <div class="score-number" id="scoreNumber"></div>
+      <p id="scoreMessage"></p>
+    </div>
   </form>
 </section>
 
-<section class="section" id="answers">
-  <h2>16. How to learn from your mistakes</h2>
+<section class="panel" id="revision">
+  <h2 class="panel-title">Final revision checklist</h2>
+  <p class="panel-intro">Before moving to the next tense, check what you can do confidently.</p>
 
-  <p>
-    After completing the quiz, review every incorrect answer. Do not simply
-    memorise the correct option. Identify the grammar rule that explains it.
-  </p>
-
-  <div class="grid2">
-    <div class="mini">
-      <h3>If you struggle with form</h3>
-      <p>
-        Review the positive, negative and question structures. Write five
-        statements, change them into negatives, and then turn them into
-        questions.
-      </p>
-    </div>
-
-    <div class="mini">
-      <h3>If you struggle with meaning</h3>
-      <p>
-        Compare will with be going to, the present continuous and the present
-        simple. Explain why each form fits the situation.
-      </p>
-    </div>
-
-    <div class="mini">
-      <h3>If you struggle with clauses</h3>
-      <p>
-        Practise sentences with when, as soon as, before, after, if and unless.
-        Mark the main clause and the subordinate clause.
-      </p>
-    </div>
-
-    <div class="mini">
-      <h3>If you struggle with IELTS use</h3>
-      <p>
-        Write a short prediction paragraph, answer three speaking questions,
-        and identify future claims in an English article.
-      </p>
-    </div>
+  <div class="checklist" id="revisionChecklist">
+    <label><input type="checkbox"> I understand the main meanings of will.</label>
+    <label><input type="checkbox"> I can make positive sentences correctly.</label>
+    <label><input type="checkbox"> I can make negative sentences with won't.</label>
+    <label><input type="checkbox"> I can form yes or no questions.</label>
+    <label><input type="checkbox"> I can use the base form after will.</label>
+    <label><input type="checkbox"> I can distinguish will from going to.</label>
+    <label><input type="checkbox"> I can recognise future arrangements.</label>
+    <label><input type="checkbox"> I can use will in IELTS speaking and writing.</label>
+    <label><input type="checkbox"> I can identify contractions in listening.</label>
+    <label><input type="checkbox"> I understand why my quiz answers were correct or incorrect.</label>
   </div>
 
-  <div class="tipbox">
-    <strong>Suggested review cycle:</strong> Review the lesson today, retake
-    the test tomorrow, and write your own examples after two or three days.
-    Revisit the questions you answered incorrectly until you can explain
-    the grammar without looking at the notes.
-  </div>
-</section>
-
-<section class="section" id="revision">
-  <h2>17. Final revision checklist</h2>
-
-  <p>Before moving to another grammar topic, check that you can do the following.</p>
-
-  <ul class="checklist">
-    <li>Explain the main uses of will in your own words.</li>
-    <li>Form positive statements using will plus the base verb.</li>
-    <li>Form negative statements with will not and won't.</li>
-    <li>Ask yes or no questions and wh-questions accurately.</li>
-    <li>Recognise common contractions in listening.</li>
-    <li>Use will for predictions, spontaneous decisions, promises and offers.</li>
-    <li>Distinguish willingness and refusal from ordinary prediction.</li>
-    <li>Compare will with be going to.</li>
-    <li>Distinguish future predictions from existing arrangements.</li>
-    <li>Use the present simple in ordinary future time clauses.</li>
-    <li>Form first conditional sentences accurately.</li>
-    <li>Recognise will be able to, will have to and will need to.</li>
-    <li>Recognise future passive structures.</li>
-    <li>Use cautious language when predictions are uncertain.</li>
-    <li>Apply the grammar naturally in all four IELTS skills.</li>
-  </ul>
-
-  <h3>Quick reference sheet</h3>
-
-  <div class="tablewrap">
-    <table>
-      <thead>
-        <tr><th>Purpose</th><th>Structure</th><th>Example</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Positive</td><td>Subject + will + base verb</td><td>She will study.</td></tr>
-        <tr><td>Negative</td><td>Subject + won't + base verb</td><td>She won't study.</td></tr>
-        <tr><td>Question</td><td>Will + subject + base verb?</td><td>Will she study?</td></tr>
-        <tr><td>Prediction</td><td>Will + base verb</td><td>Prices will probably rise.</td></tr>
-        <tr><td>Offer</td><td>I'll + base verb</td><td>I'll help you.</td></tr>
-        <tr><td>Promise</td><td>Will + base verb</td><td>I will keep my promise.</td></tr>
-        <tr><td>Time clause</td><td>When + present simple</td><td>When I arrive, I'll call.</td></tr>
-        <tr><td>First conditional</td><td>If + present simple, will + base verb</td><td>If it rains, we'll stay home.</td></tr>
-        <tr><td>Future passive</td><td>Will + be + past participle</td><td>The report will be published.</td></tr>
-        <tr><td>Future ability</td><td>Will + be able to</td><td>I will be able to attend.</td></tr>
-      </tbody>
-    </table>
+  <div class="rule">
+    <strong>Recommended study method</strong>
+    <p>First, study two or three questions. Next, answer the small practice activities without looking at the explanations. Finally, take the final quiz and revisit any topic you found difficult.</p>
   </div>
 
-  <div class="rulebox">
-    <strong>The most important lesson:</strong> Will is followed by the base
-    form of the verb. However, choosing the correct future structure requires
-    more than knowing the form. You must also understand the speaker's
-    intention, the time relationship and the context.
-  </div>
-
-  <a class="backtop" href="#top">↑ Back to the top</a>
+  <a class="back-top" href="#top">↑ Back to the top</a>
 </section>
 
 </main>
 </div>
 
 <footer class="footer">
-  IELTS Grammar Lab · Grammar notes, practical examples and interactive learning.
-  <br>
-  <a href="index.html">Return to the grammar library</a>
+  IELTS Grammar Lab · Learn grammar one question at a time.
 </footer>
 
 <script>
-"use strict";
+/* Small practice activities */
 
-/* =========================================
-   Reading progress indicator
-========================================= */
+function checkMini(groupName,correctValue,feedbackId,explanation){
+  const selected=document.querySelector(
+    'input[name="'+groupName+'"]:checked'
+  );
+  const feedback=document.getElementById(feedbackId);
 
-const progressBar = document.getElementById("progressBar");
+  feedback.className='mini-feedback show';
 
-function updateReadingProgress(){
-  const root = document.documentElement;
-  const available = root.scrollHeight - root.clientHeight;
-  const percentage = available > 0
-    ? (root.scrollTop / available) * 100
-    : 0;
-
-  progressBar.style.width = Math.min(100, Math.max(0, percentage)) + "%";
-}
-
-window.addEventListener("scroll", updateReadingProgress, {passive:true});
-window.addEventListener("resize", updateReadingProgress);
-updateReadingProgress();
-
-/* =========================================
-   Table of contents active section
-========================================= */
-
-const tocLinks = [...document.querySelectorAll(".toc nav a")];
-
-if ("IntersectionObserver" in window) {
-  const sectionObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-
-      tocLinks.forEach(link => {
-        const active = link.getAttribute("href") === "#" + entry.target.id;
-        link.classList.toggle("active", active);
-      });
-    });
-  }, {
-    rootMargin: "-15% 0px -75% 0px",
-    threshold: 0
-  });
-
-  document.querySelectorAll("main section[id], main h3[id]").forEach(section => {
-    sectionObserver.observe(section);
-  });
-}
-
-/* =========================================
-   Interactive practice questions
-
-   Category:
-   basic    = formation and base verb
-   meaning  = uses and comparisons
-   advanced = time clauses, conditionals and advanced structures
-========================================= */
-
-const quiz = [
-  {
-    category:"basic",
-    question:"She ___ to the library tomorrow.",
-    options:["will goes","will go","will going","will to go"],
-    answer:1,
-    explanation:"Will is followed directly by the base form go. Do not add -s, -ing or to."
-  },
-  {
-    category:"basic",
-    question:"Which sentence is grammatically correct?",
-    options:[
-      "He will studies English.",
-      "He will studied English.",
-      "He will study English.",
-      "He will studying English."
-    ],
-    answer:2,
-    explanation:"The future simple uses will + base verb, so will study is correct."
-  },
-  {
-    category:"basic",
-    question:"Choose the correct negative sentence.",
-    options:[
-      "They don't will attend.",
-      "They won't attend.",
-      "They won't attending.",
-      "They not will attend."
-    ],
-    answer:1,
-    explanation:"Won't is the contracted form of will not and is followed by the base verb."
-  },
-  {
-    category:"basic",
-    question:"Which is the correct question?",
-    options:[
-      "Do you will come?",
-      "Will you come?",
-      "Will come you?",
-      "Are you will come?"
-    ],
-    answer:1,
-    explanation:"Place will before the subject to form an ordinary yes or no question."
-  },
-  {
-    category:"basic",
-    question:"Complete the sentence: I promise I ___ your secret.",
-    options:["won't tell","won't tells","won't telling","don't will tell"],
-    answer:0,
-    explanation:"Won't tell expresses a negative promise. The verb tell remains in its base form."
-  },
-  {
-    category:"basic",
-    question:"Choose the correct short answer: Will she be there?",
-    options:["Yes, she does.","Yes, she is.","Yes, she will.","Yes, she will be there will."],
-    answer:2,
-    explanation:"Short answers to questions with will use will or won't."
-  },
-  {
-    category:"basic",
-    question:"Complete the sentence: The results ___ available next week.",
-    options:["will are","will be","will being","will been"],
-    answer:1,
-    explanation:"Will be is the future simple form of be."
-  },
-  {
-    category:"basic",
-    question:"Choose the correct question: ___ they arrive on time?",
-    options:["Will","Do will","Are will","Does"],
-    answer:0,
-    explanation:"Use will + subject + base verb to form the future simple question."
-  },
-  {
-    category:"meaning",
-    question:"The phone is ringing. I ___ it.",
-    options:["will answer","answering","will to answer","am answer"],
-    answer:0,
-    explanation:"Will often expresses a decision made at the moment of speaking."
-  },
-  {
-    category:"meaning",
-    question:"Which sentence most clearly describes a general prediction?",
-    options:[
-      "I think technology will transform healthcare.",
-      "I transformed healthcare yesterday.",
-      "I am transforming healthcare at the moment.",
-      "I have transformed healthcare."
-    ],
-    answer:0,
-    explanation:"I think ... will ... is a common pattern for expressing a prediction or opinion about the future."
-  },
-  {
-    category:"meaning",
-    question:"You see dark clouds and predict rain based on the evidence. Which is often the most natural choice?",
-    options:[
-      "It went to rain.",
-      "It is going to rain.",
-      "It has rain.",
-      "It will to rain."
-    ],
-    answer:1,
-    explanation:"Be going to is often used for a prediction based on present evidence. Will can also be possible in suitable contexts."
-  },
-  {
-    category:"meaning",
-    question:"You already arranged a meeting with your supervisor for tomorrow. Which form most directly expresses the arrangement?",
-    options:[
-      "I am meeting my supervisor tomorrow.",
-      "I met my supervisor tomorrow.",
-      "I have meet my supervisor tomorrow.",
-      "I meeting my supervisor tomorrow."
-    ],
-    answer:0,
-    explanation:"The present continuous commonly describes an existing personal arrangement."
-  },
-  {
-    category:"meaning",
-    question:"Which sentence most naturally reports a fixed timetable?",
-    options:[
-      "The train will leaves at six.",
-      "The train leaves at six.",
-      "The train leave at six yesterday.",
-      "The train is leave at six."
-    ],
-    answer:1,
-    explanation:"The present simple is conventional for fixed timetables and scheduled events."
-  },
-  {
-    category:"meaning",
-    question:"Which sentence expresses possibility rather than a direct prediction?",
-    options:[
-      "It may rain tomorrow.",
-      "It rains yesterday.",
-      "It will to rain.",
-      "It raining tomorrow."
-    ],
-    answer:0,
-    explanation:"May expresses possibility. Will often presents the outcome as the speaker's prediction."
-  },
-  {
-    category:"meaning",
-    question:"Which sentence most clearly offers help in response to a situation?",
-    options:[
-      "I'll carry those bags for you.",
-      "I carried those bags yesterday.",
-      "I carry bags every day.",
-      "I have carried those bags."
-    ],
-    answer:0,
-    explanation:"I'll carry those bags for you is a natural offer made in response to the situation."
-  },
-  {
-    category:"meaning",
-    question:"What is the usual meaning of 'The computer won't start'?",
-    options:[
-      "The computer has made a conscious decision.",
-      "The computer is expected not to start or is failing to start.",
-      "The computer started yesterday.",
-      "The computer must start immediately."
-    ],
-    answer:1,
-    explanation:"Won't can describe a failure or expected non-occurrence, not just a person's refusal."
-  },
-  {
-    category:"advanced",
-    question:"When I ___ home, I will call you.",
-    options:["will arrive","arrive","arrived","am arrive"],
-    answer:1,
-    explanation:"Ordinary future time clauses introduced by when use the present simple: when I arrive."
-  },
-  {
-    category:"advanced",
-    question:"If it ___ tomorrow, we will stay at home.",
-    options:["will rain","rains","raining","rain"],
-    answer:1,
-    explanation:"In a normal first conditional, the if-clause uses the present simple and the main clause can use will."
-  },
-  {
-    category:"advanced",
-    question:"As soon as she ___, we will begin.",
-    options:["will arrive","arrives","arrive","arriving"],
-    answer:1,
-    explanation:"As soon as introduces a future time clause, which normally takes the present simple."
-  },
-  {
-    category:"advanced",
-    question:"Choose the correct future ability structure.",
-    options:[
-      "I will can attend.",
-      "I will be able to attend.",
-      "I will able attend.",
-      "I can will attend."
-    ],
-    answer:1,
-    explanation:"Use will be able to for future ability because can does not normally follow will directly."
-  },
-  {
-    category:"advanced",
-    question:"Choose the correct first conditional sentence.",
-    options:[
-      "If you study, you will improve.",
-      "If you will study, you improve yesterday.",
-      "If you studied tomorrow, you improve.",
-      "If you studying, you will improved."
-    ],
-    answer:0,
-    explanation:"If + present simple, will + base verb is a standard first conditional pattern."
-  },
-  {
-    category:"advanced",
-    question:"Choose the correct future passive sentence.",
-    options:[
-      "The report will publish next week.",
-      "The report will be published next week.",
-      "The report will be publish next week.",
-      "The report will published next week."
-    ],
-    answer:1,
-    explanation:"The future passive uses will + be + past participle."
-  },
-  {
-    category:"advanced",
-    question:"Which sentence correctly uses the future perfect?",
-    options:[
-      "I will have finish by noon.",
-      "I will have finished by noon.",
-      "I will finished by noon.",
-      "I will have finishing by noon."
-    ],
-    answer:1,
-    explanation:"The future perfect uses will have + past participle: will have finished."
-  },
-  {
-    category:"advanced",
-    question:"Choose the correct indirect question.",
-    options:[
-      "I don't know when he will arrive.",
-      "I don't know when will he arrive.",
-      "I don't know when does he will arrive.",
-      "I don't know when he arrives yesterday."
-    ],
-    answer:0,
-    explanation:"Indirect questions normally use statement word order. Will can be used when asking indirectly about a future arrival."
-  },
-  {
-    category:"advanced",
-    question:"Which sentence best expresses a completed action by a future deadline?",
-    options:[
-      "I will finish the report at some point.",
-      "I will have finished the report by Friday.",
-      "I am finishing the report yesterday.",
-      "I have finish the report tomorrow."
-    ],
-    answer:1,
-    explanation:"Will have finished presents the action as completed by the future deadline."
-  },
-  {
-    category:"advanced",
-    question:"Complete the sentence: Unless we act now, the problem ___ worse.",
-    options:["become","will become","will became","will becoming"],
-    answer:1,
-    explanation:"Unless means if not. The main clause can use will + base verb to state the expected result."
-  },
-  {
-    category:"meaning",
-    question:"Which sentence uses will to make a commitment?",
-    options:[
-      "I will send the document by Friday.",
-      "I sent the document last Friday.",
-      "I send documents every Friday.",
-      "I was sending the document."
-    ],
-    answer:0,
-    explanation:"Will can express a promise or commitment to complete a future action."
-  },
-  {
-    category:"advanced",
-    question:"Choose the correct reported-speech sentence.",
-    options:[
-      "She said she would return the following day.",
-      "She said she will returned the following day.",
-      "She said she would returns the following day.",
-      "She said she return the following day yesterday."
-    ],
-    answer:0,
-    explanation:"Would is a common backshift form of will in reported speech when the reporting perspective moves into the past."
-  },
-  {
-    category:"meaning",
-    question:"Which statement is the most cautious prediction?",
-    options:[
-      "This policy will certainly solve every problem.",
-      "This policy may reduce the problem if implemented effectively.",
-      "This policy solved every future problem yesterday.",
-      "This policy is solve the problem."
-    ],
-    answer:1,
-    explanation:"May reduce presents a possible outcome rather than a guaranteed result. The qualification also identifies a condition."
-  },
-  {
-    category:"advanced",
-    question:"Which sentence emphasizes an activity in progress at a future time?",
-    options:[
-      "I will study at eight.",
-      "I will be studying at eight.",
-      "I studied at eight tomorrow.",
-      "I will have study at eight."
-    ],
-    answer:1,
-    explanation:"Will be studying is the future continuous, which emphasizes an activity in progress at a future time."
+  if(!selected){
+    feedback.classList.add('incorrect');
+    feedback.textContent='Please select an answer first.';
+    return;
   }
+
+  if(selected.value===correctValue){
+    feedback.classList.add('correct');
+    feedback.textContent='Correct! '+explanation;
+  }else{
+    feedback.classList.add('incorrect');
+    feedback.textContent='Not quite. Try reviewing the explanation. '+explanation;
+  }
+}
+
+/* Final quiz */
+
+const quiz=[
+{
+q:"1. Choose the correct sentence.",
+options:[
+"She will goes to university.",
+"She will go to university.",
+"She will going to university."
+],
+answer:1,
+explanation:"Use the base form go after will."
+},
+{
+q:"2. Which sentence is negative?",
+options:[
+"He will come.",
+"He will not come.",
+"Will he come?"
+],
+answer:1,
+explanation:"A negative future sentence uses will not or won't."
+},
+{
+q:"3. Choose the correct question.",
+options:[
+"Will they join us?",
+"Do they will join us?",
+"Will they to join us?"
+],
+answer:0,
+explanation:"Put will before the subject and use the base verb."
+},
+{
+q:"4. The phone is ringing. I _____ it.",
+options:[
+"will answer",
+"will answers",
+"will answering"
+],
+answer:0,
+explanation:"Will answer expresses a spontaneous decision."
+},
+{
+q:"5. I think technology _____ education in the future.",
+options:[
+"changed",
+"will change",
+"changing"
+],
+answer:1,
+explanation:"Will change is appropriate for a prediction."
+},
+{
+q:"6. Which sentence contains a promise?",
+options:[
+"I promise I won't tell anyone.",
+"I am reading a book.",
+"The bus leaves at six."
+],
+answer:0,
+explanation:"The speaker promises not to reveal information."
+},
+{
+q:"7. Choose the correct negative form.",
+options:[
+"She doesn't will come.",
+"She won't come.",
+"She won't comes."
+],
+answer:1,
+explanation:"Won't is followed by the base verb come."
+},
+{
+q:"8. When he _____, we will begin.",
+options:[
+"will arrive",
+"arrives",
+"arriving"
+],
+answer:1,
+explanation:"Use present simple in the future time clause after when."
+},
+{
+q:"9. Look at those dark clouds! It _____ rain.",
+options:[
+"is going to",
+"will to",
+"going"
+],
+answer:0,
+explanation:"Going to is especially natural for a prediction based on present evidence."
+},
+{
+q:"10. Which sentence describes a future arrangement?",
+options:[
+"I'm meeting my supervisor tomorrow.",
+"I'll answer the phone.",
+"I think it will rain."
+],
+answer:0,
+explanation:"The present continuous commonly describes an arrangement already made."
+},
+{
+q:"11. The train _____ at 8 a.m. according to the timetable.",
+options:[
+"will leaves",
+"leave",
+"leaves"
+],
+answer:2,
+explanation:"The present simple is commonly used for timetables."
+},
+{
+q:"12. What is the contraction of will not?",
+options:[
+"wouldn't",
+"won't",
+"don't"
+],
+answer:1,
+explanation:"Will not contracts to won't."
+},
+{
+q:"13. Which sentence is correct?",
+options:[
+"He will be ready soon.",
+"He will is ready soon.",
+"He will being ready soon."
+],
+answer:0,
+explanation:"The base form be follows will."
+},
+{
+q:"14. Which is a natural offer of help?",
+options:[
+"I'll carry that for you.",
+"I carried that tomorrow.",
+"I'll to carry that for you."
+],
+answer:0,
+explanation:"I'll carry that for you is a spontaneous offer."
+},
+{
+q:"15. Which sentence expresses a prediction?",
+options:[
+"I think prices will rise next year.",
+"I am studying now.",
+"She visited yesterday."
+],
+answer:0,
+explanation:"The speaker predicts a future increase in prices."
+}
 ];
 
-/* =========================================
-   Build the quiz
-========================================= */
+const quizHost=document.getElementById('quizQuestions');
 
-const host = document.getElementById("questions");
-const form = document.getElementById("quizForm");
-const scoreBox = document.getElementById("score");
-const modeSelect = document.getElementById("quizMode");
-const questionCount = document.getElementById("questionCount");
+quiz.forEach((item,index)=>{
+  const box=document.createElement('div');
+  box.className='quiz-question';
+  box.dataset.index=index;
 
-let submitted = false;
+  const title=document.createElement('h3');
+  title.textContent=item.q;
+  box.appendChild(title);
 
-function createQuiz(){
-  const mode = modeSelect.value;
+  const options=document.createElement('div');
+  options.className='quiz-options';
 
-  const selectedQuestions = quiz
-    .map((item, originalIndex) => ({...item, originalIndex}))
-    .filter(item => mode === "all" || item.category === mode);
+  item.options.forEach((option,j)=>{
+    const label=document.createElement('label');
+    label.className='quiz-option';
 
-  host.replaceChildren();
-  scoreBox.textContent = "";
-  submitted = false;
+    const radio=document.createElement('input');
+    radio.type='radio';
+    radio.name='finalq'+index;
+    radio.value=j;
 
-  selectedQuestions.forEach((item, displayIndex) => {
-    const box = document.createElement("div");
-    box.className = "question";
-    box.dataset.originalIndex = item.originalIndex;
+    const text=document.createElement('span');
+    text.textContent=option;
 
-    const title = document.createElement("p");
-    const number = document.createElement("span");
-    number.className = "question-number";
-    number.textContent = displayIndex + 1;
-
-    title.appendChild(number);
-    title.appendChild(document.createTextNode(item.question));
-    box.appendChild(title);
-
-    const options = document.createElement("div");
-    options.className = "options";
-
-    item.options.forEach((option, optionIndex) => {
-      const label = document.createElement("label");
-      label.className = "option";
-
-      const radio = document.createElement("input");
-      radio.type = "radio";
-      radio.name = "q" + item.originalIndex;
-      radio.value = optionIndex;
-      radio.setAttribute("aria-label", option);
-
-      const text = document.createElement("span");
-      text.textContent = option;
-
-      label.append(radio, text);
-      options.appendChild(label);
-    });
-
-    box.appendChild(options);
-
-    const feedback = document.createElement("div");
-    feedback.className = "feedback";
-    feedback.hidden = true;
-    feedback.setAttribute("aria-live", "polite");
-    box.appendChild(feedback);
-
-    host.appendChild(box);
+    label.append(radio,text);
+    options.appendChild(label);
   });
 
-  questionCount.textContent =
-    selectedQuestions.length + (selectedQuestions.length === 1 ? " question" : " questions");
-}
+  box.appendChild(options);
 
-form.addEventListener("submit", event => {
-  event.preventDefault();
+  const feedback=document.createElement('div');
+  feedback.className='quiz-feedback';
+  feedback.setAttribute('aria-live','polite');
 
-  const boxes = [...host.querySelectorAll(".question")];
+  box.appendChild(feedback);
+  quizHost.appendChild(box);
+});
 
-  if (!boxes.length) return;
+document.getElementById('quizForm').addEventListener('submit',function(e){
+  e.preventDefault();
 
-  let correct = 0;
-  let unanswered = 0;
+  let score=0;
+  let unanswered=0;
 
-  boxes.forEach(box => {
-    const originalIndex = Number(box.dataset.originalIndex);
-    const item = quiz[originalIndex];
-    const selected = box.querySelector("input:checked");
-    const feedback = box.querySelector(".feedback");
+  quiz.forEach((item,index)=>{
+    const box=quizHost.querySelector('[data-index="'+index+'"]');
+    const selected=box.querySelector('input:checked');
+    const feedback=box.querySelector('.quiz-feedback');
 
-    feedback.hidden = false;
+    feedback.className='quiz-feedback show';
 
-    if (!selected) {
+    if(!selected){
       unanswered++;
+      feedback.classList.add('incorrect');
+      feedback.textContent=
+        'Not answered. Correct answer: '+
+        item.options[item.answer]+'. '+item.explanation;
+      return;
     }
 
-    if (selected && Number(selected.value) === item.answer) {
-      correct++;
-      feedback.className = "feedback correct";
-      feedback.textContent = "Correct. " + item.explanation;
-    } else {
-      feedback.className = "feedback incorrect";
-
-      const correctAnswer = item.options[item.answer];
-
-      feedback.textContent =
-        (selected ? "Incorrect. " : "Not answered. ") +
-        "Correct answer: " + correctAnswer + ". " +
+    if(Number(selected.value)===item.answer){
+      score++;
+      feedback.classList.add('correct');
+      feedback.textContent='Correct! '+item.explanation;
+    }else{
+      feedback.classList.add('incorrect');
+      feedback.textContent=
+        'Correct answer: '+item.options[item.answer]+'. '+
         item.explanation;
     }
   });
 
-  const percentage = Math.round((correct / boxes.length) * 100);
+  const percentage=Math.round(score/quiz.length*100);
+  const scoreBox=document.getElementById('scoreBox');
 
-  let performance = "";
+  scoreBox.classList.add('show');
+  document.getElementById('scoreNumber').textContent=
+    'Your score: '+score+' / '+quiz.length+' ('+percentage+'%)';
 
-  if (percentage >= 90) {
-    performance = "Excellent work. Your understanding is very strong.";
-  } else if (percentage >= 75) {
-    performance = "Good work. Review the few rules you missed.";
-  } else if (percentage >= 50) {
-    performance = "A useful start. Review the explanations and try again.";
-  } else {
-    performance = "Review the lesson sections before attempting the test again.";
+  let message;
+
+  if(percentage>=90){
+    message='Excellent work! You have a strong understanding of this lesson.';
+  }else if(percentage>=70){
+    message='Good work! Review the explanations for the questions you missed.';
+  }else if(percentage>=50){
+    message='You are making progress. Revisit the relevant lesson questions and try again.';
+  }else{
+    message='Review the lesson from the beginning, then attempt the quiz again.';
   }
 
-  scoreBox.textContent =
-    "Your score: " + correct + " / " + boxes.length +
-    " (" + percentage + "%). " +
-    unanswered + " unanswered. " + performance;
+  if(unanswered>0){
+    message+=' You left '+unanswered+' question(s) unanswered.';
+  }
 
-  submitted = true;
+  document.getElementById('scoreMessage').textContent=message;
+
+  scoreBox.scrollIntoView({behavior:'smooth',block:'center'});
 });
 
-document.getElementById("resetQuiz").addEventListener("click", () => {
-  form.reset();
-  createQuiz();
-  host.scrollIntoView({behavior:"smooth", block:"start"});
+document.getElementById('resetQuiz').addEventListener('click',function(){
+  document.getElementById('quizForm').reset();
+
+  quizHost.querySelectorAll('.quiz-feedback').forEach(feedback=>{
+    feedback.className='quiz-feedback';
+    feedback.textContent='';
+  });
+
+  document.getElementById('scoreBox').classList.remove('show');
+  document.getElementById('scoreNumber').textContent='';
+  document.getElementById('scoreMessage').textContent='';
 });
 
-modeSelect.addEventListener("change", () => {
-  createQuiz();
+/* Lesson progress */
+
+const lessonLinks=[...document.querySelectorAll('#lessonNav a')];
+const progressFill=document.getElementById('progressFill');
+const progressCount=document.getElementById('progressCount');
+
+function updateProgress(){
+  const completed=lessonLinks.filter(link=>{
+    const target=document.querySelector(link.getAttribute('href'));
+    return target && target.dataset.visited==='yes';
+  }).length;
+
+  progressFill.style.width=(completed/lessonLinks.length*100)+'%';
+  progressCount.textContent=completed+'/'+lessonLinks.length;
+}
+
+lessonLinks.forEach(link=>{
+  link.addEventListener('click',()=>{
+    const target=document.querySelector(link.getAttribute('href'));
+
+    if(target){
+      target.dataset.visited='yes';
+
+      const details=target.closest('details.lesson');
+      if(details)details.open=true;
+
+      updateProgress();
+    }
+  });
 });
 
-createQuiz();
+const observedSections=[
+  ...document.querySelectorAll(
+    'main > section[id], main details.lesson[id]'
+  )
+];
+
+if('IntersectionObserver' in window){
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const id=entry.target.id;
+
+        const matching=lessonLinks.find(
+          link=>link.getAttribute('href')==='#'+id
+        );
+
+        if(matching){
+          lessonLinks.forEach(link=>link.classList.remove('active'));
+          matching.classList.add('active');
+        }
+      }
+    });
+  },{rootMargin:'-15% 0px -70% 0px'});
+
+  observedSections.forEach(section=>observer.observe(section));
+}
+
+/* Mark the opening section as visited when the page loads */
+
+const firstLink=lessonLinks[0];
+if(firstLink){
+  const firstTarget=document.querySelector(firstLink.getAttribute('href'));
+  if(firstTarget)firstTarget.dataset.visited='yes';
+  updateProgress();
+}
 </script>
 
 </body>
