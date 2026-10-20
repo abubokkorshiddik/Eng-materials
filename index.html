@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A growing library of IELTS grammar notes and interactive practice pages.">
+<title>IELTS Grammar Lab | Study library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#10243a;--blue:#2458a6;--teal:#147d78;--ink:#172334;--muted:#617084;--paper:#f5f7fb;--line:#dce3ec;--white:#fff;--shadow:0 12px 34px rgba(16,36,58,.08)}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 Inter,system-ui,sans-serif}a{color:inherit}.header{background:linear-gradient(125deg,#10243a,#183c64 70%,#1d5b75);color:white;padding:65px 22px}.wrap{max-width:1120px;margin:auto}.eyebrow{font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#c5d8f1}.header h1{font:700 clamp(2.4rem,5vw,4rem)/1.12 Lora,Georgia,serif;letter-spacing:-.035em;margin:14px 0}.header p{max-width:700px;color:#e0eaf6;font-size:1.05rem;margin:0}.main{max-width:1120px;margin:28px auto;padding:0 22px}.toolbar{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:18px}.toolbar h2{font:700 1.7rem Lora,Georgia,serif;color:var(--navy);margin:0}.search{width:min(100%,350px);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font:inherit;background:white}.status{color:var(--muted);font-size:.9rem;margin:8px 0 20px}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}.card{display:flex;flex-direction:column;background:white;border:1px solid var(--line);border-radius:15px;padding:20px;text-decoration:none;box-shadow:var(--shadow);transition:transform .18s,border-color .18s}.card:hover{transform:translateY(-3px);border-color:#8ba8d4}.tag{display:inline-block;width:max-content;background:#dce8f8;color:var(--blue);font-size:.72rem;font-weight:800;border-radius:99px;padding:4px 9px;margin-bottom:12px}.card h3{font-size:1.1rem;color:var(--navy);line-height:1.35;margin:0 0 9px;overflow-wrap:anywhere}.card p{font-size:.91rem;color:var(--muted);margin:0 0 18px}.open{font-size:.88rem;font-weight:800;color:var(--blue);margin-top:auto}.empty{padding:28px;border:1px dashed #aab8c9;border-radius:12px;background:white;color:var(--muted)}.manual{margin-top:25px;padding:19px 21px;background:white;border:1px solid var(--line);border-radius:14px}.manual h3{margin:0 0 7px;color:var(--navy)}.manual code{background:#edf2f8;padding:3px 6px;border-radius:5px;overflow-wrap:anywhere}.footer{text-align:center;padding:30px 15px;color:var(--muted);font-size:.85rem}@media(max-width:850px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.header{padding:48px 18px}.main{padding:0 14px}.cards{grid-template-columns:1fr}.toolbar{align-items:stretch}.search{width:100%}}
+</style>
+</head>
+<body>
+<header class="header"><div class="wrap"><div class="eyebrow">IELTS study library</div><h1>IELTS Grammar Lab</h1><p>Grammar explanations, practical examples, common errors, and interactive practice to help you prepare for IELTS.</p></div></header>
+<main class="main">
+  <div class="toolbar"><h2>Lessons</h2><input id="search" class="search" type="search" placeholder="Search lessons..." aria-label="Search grammar pages"></div>
+  <p id="status" class="status" role="status">Loading HTML pages from GitHub…</p>
+  <section id="pages" class="cards" aria-label="HTML study pages"></section>
+  <section class="manual"><h3>About this library</h3><p>Lessons are listed automatically from the public GitHub repository. To add a lesson, upload its HTML file to the repository root on the main branch.</p><p><strong>Important:</strong> the list can only be automatic if the repository is public and the GitHub API is reachable. This page lists HTML files only and filters out <code>index.html</code> and common verification files.</p></section>
+</main>
+<footer class="footer">IELTS Grammar Lab · Build your skills step by step.</footer>
+<script>
+/*
+  Repository settings:
+  owner: abubokkorshiddik
+  repo: Eng-materials
+  branch: main
+  Only root-level HTML files are listed; index.html is excluded.
+*/
+const OWNER='abubokkorshiddik';
+const REPO='Eng-materials';
+const BRANCH='main';
+const API=`https://api.github.com/repos/${OWNER}/${REPO}/contents/?ref=${encodeURIComponent(BRANCH)}`;
+const RAW_BASE=`https://${OWNER}.github.io/${REPO}/`;
+const EXCLUDE=new Set(['index.html','404.html','google-site-verification.html']);
+const pageHost=document.getElementById('pages');
+const statusEl=document.getElementById('status');
+const searchEl=document.getElementById('search');
+let allPages=[];
+function prettify(filename){
+ return filename.replace(/\.html?$/i,'').replace(/[_-]+/g,' ').replace(/\s+/g,' ').trim().replace(/\b[a-z]/g,m=>m.toUpperCase());
+}
+function description(filename){
+ const key=filename.toLowerCase();
+ if(key.includes('present-simple')||key.includes('presentsimple'))return 'Learn the rules, compare the two tenses, review common mistakes, and practise with interactive questions.';
+ if(key.includes('past'))return 'Grammar notes and examples for understanding and using past-tense forms.';
+ if(key.includes('perfect'))return 'Learn the rules and meanings of perfect tense forms with examples and practice.';
+ if(key.includes('future'))return 'Study future forms, plans, predictions, schedules, and arrangements.';
+ if(key.includes('vocabulary')||key.includes('word'))return 'Vocabulary notes, useful expressions, and practice for IELTS.';
+ if(key.includes('speaking'))return 'Useful language, examples, and practice to develop IELTS Speaking.';
+ if(key.includes('reading'))return 'Reading strategies, language patterns, and IELTS practice.';
+ if(key.includes('listening'))return 'Listening strategies, useful language, and IELTS practice.';
+ return 'Open this study page to review its notes, examples, and practice activities.';
+}
+function render(){
+ const term=searchEl.value.trim().toLowerCase();
+ const shown=allPages.filter(p=>(p.title+' '+p.filename+' '+p.description).toLowerCase().includes(term));
+ pageHost.replaceChildren();
+ if(!shown.length){
+  const empty=document.createElement('div');empty.className='empty';empty.textContent=allPages.length?'No pages match your search. Try another word.':'No lesson pages were found in the repository root yet.';
+  pageHost.appendChild(empty);return;
+ }
+ shown.forEach(p=>{
+  const a=document.createElement('a');a.className='card';a.href=p.url;
+  const tag=document.createElement('span');tag.className='tag';tag.textContent='Grammar lesson';
+  const h=document.createElement('h3');h.textContent=p.title;
+  const desc=document.createElement('p');desc.textContent=p.description;
+  const open=document.createElement('span');open.className='open';open.textContent='Open lesson →';
+  a.append(tag,h,desc,open);pageHost.appendChild(a);
+ });
+}
+async function loadPages(){
+ try{
+  const response=await fetch(API,{headers:{'Accept':'application/vnd.github+json'}});
+  if(!response.ok)throw new Error(response.status===403?'GitHub API rate limit reached. Try again later.':'GitHub API returned '+response.status+'. Check repository visibility and branch name.');
+  const files=await response.json();
+  if(!Array.isArray(files))throw new Error('GitHub did not return a directory listing.');
+  allPages=files.filter(f=>f.type==='file'&&/\.html?$/i.test(f.name)&&!EXCLUDE.has(f.name.toLowerCase())&&!f.name.toLowerCase().startsWith('google')).map(f=>({filename:f.name,title:prettify(f.name),description:description(f.name),url:RAW_BASE+encodeURIComponent(f.name)})).sort((a,b)=>a.title.localeCompare(b.title));
+  statusEl.textContent=`Found ${allPages.length} Grammar lesson page${allPages.length===1?'':'s'} in the repository root.`;
+  render();
+ }catch(err){
+  statusEl.textContent='Automatic page discovery could not load: '+err.message;
+  pageHost.innerHTML='';
+  const note=document.createElement('div');note.className='empty';
+  note.textContent='Check that the repository is public, the repository name and branch are correct, and GitHub Pages is enabled. You can still open the lesson by entering its URL directly.';
+  pageHost.appendChild(note);
+ }
+}
+searchEl.addEventListener('input',render);
+loadPages();
+</script>
+</body>
+</html>
