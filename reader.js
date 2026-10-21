@@ -546,6 +546,7 @@ if (
       if (qf && qf.contains(el)) {
   return false;
 }
+       
 
       if (
         el.matches('main .say') &&
