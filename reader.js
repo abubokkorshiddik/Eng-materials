@@ -63,9 +63,16 @@
 
   function init() {
     var body = document.body;
-    var main = document.querySelector('main');
+var main = document.querySelector('main');
 
-    if (!main || document.getElementById('rd-fab')) return;
+if (!main) return;
+
+if (
+  document.getElementById('rd-fab') &&
+  document.getElementById('rd-panel')
+) {
+  return;
+}
 
     var reduce = window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -536,12 +543,9 @@
 
       if (el.classList.contains('rd-meta')) return false;
 
-      if (qf && (
-        qf.contains(el) ||
-        (qf.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_FOLLOWING)
-      )) {
-        return false;
-      }
+      if (qf && qf.contains(el)) {
+  return false;
+}
 
       if (
         el.matches('main .say') &&
