@@ -2,16 +2,27 @@
 /* ==========================================================
    IELTS Grammar Lab | Complete reading tools
    File: reader.js
+
    Features:
-   Reading settings, themes, focus mode, progress, resume,
-   text to speech, section navigation, highlights and notes.
-   Self-contained. Works on pages containing a <main> element.
+   1. Reading settings and themes
+   2. Separate floating settings, highlight and notes icons
+   3. Dedicated highlight and notes panels
+   4. Text size, fonts, spacing and content width
+   5. Focus mode and reading progress
+   6. Resume reading position
+   7. Text to speech with speed controls
+   8. Section navigation and answer controls
+   9. Persistent highlights and personal notes
+   10. Responsive layout and accessibility
+
+   Self-contained. Works on pages containing <main>.
    ========================================================== */
 
 (function () {
   'use strict';
 
   var KEY = 'ielts-gl-reader';
+
   var DEF = {
     fs: 0,
     font: 'serif',
@@ -63,16 +74,11 @@
 
   function init() {
     var body = document.body;
-var main = document.querySelector('main');
+    var main = document.querySelector('main');
 
-if (!main) return;
+    if (!main) return;
 
-if (
-  document.getElementById('rd-fab') &&
-  document.getElementById('rd-panel')
-) {
-  return;
-}
+    if (document.getElementById('rd-fab')) return;
 
     var reduce = window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -94,15 +100,21 @@ if (
     var h2s = [];
     var ui;
     var panel;
+    var highlightPanel;
+    var notesPanel;
     var fab;
+    var highlightFab;
+    var notesFab;
     var topBtn;
     var prog;
     var listenBtn;
     var noteArea;
     var P;
+
     var pkey = 'rd-hl:' + location.pathname;
 
-    var canSpeak = 'speechSynthesis' in window &&
+    var canSpeak =
+      'speechSynthesis' in window &&
       'SpeechSynthesisUtterance' in window;
 
     /* ------------------------------------------------------
@@ -116,7 +128,7 @@ if (
         --rd-line: rgba(30, 41, 59, .18);
         --rd-ac: #1f2a44;
         color: var(--rd-fg);
-        font: 500 14px/1.45 Inter, system-ui, sans-serif;
+        font: 500 14px/1.5 Inter, system-ui, sans-serif;
       }
 
       html.rd-sepia .rd-ui {
@@ -138,8 +150,8 @@ if (
         cursor: pointer;
         border: 1px solid var(--rd-line);
         border-radius: 8px;
-        padding: 7px 11px;
-        min-height: 36px;
+        padding: 8px 11px;
+        min-height: 38px;
         background: transparent;
         color: var(--rd-fg);
       }
@@ -158,35 +170,59 @@ if (
       }
 
       .rd-fab,
+      .rd-tool-fab,
       .rd-top {
         position: fixed;
-        bottom: 16px;
         width: 48px;
         height: 48px;
         border-radius: 50% !important;
         padding: 0 !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         font-weight: 700 !important;
-        background: var(--rd-bg, #fff) !important;
-        border: 2px solid var(--rd-ac, #1f2a44) !important;
-        color: var(--rd-ac, #1f2a44) !important;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, .2);
+        background: #ffffff !important;
+        color: #1f2a44 !important;
+        border: 2px solid #1f2a44 !important;
+        box-shadow: 0 3px 12px rgba(15, 23, 42, .18);
         z-index: 10000;
       }
 
       .rd-fab {
         right: 16px;
+        bottom: 16px;
         font-size: 17px !important;
+      }
+
+      .rd-tool-fab {
+        right: 16px;
+        font-size: 21px !important;
+      }
+
+      #rd-highlight-fab {
+        bottom: 76px;
+      }
+
+      #rd-notes-fab {
+        bottom: 136px;
       }
 
       .rd-top {
         left: 16px;
-        font-size: 20px !important;
+        bottom: 16px;
+        font-size: 22px !important;
+      }
+
+      .rd-fab:hover,
+      .rd-tool-fab:hover,
+      .rd-top:hover {
+        background: #eef2f8 !important;
       }
 
       .rd-panel {
         position: fixed;
         right: 16px;
-        bottom: 74px;
+        bottom: 76px;
         width: min(390px, calc(100vw - 32px));
         max-height: 78vh;
         overflow: auto;
@@ -195,7 +231,7 @@ if (
         color: var(--rd-fg);
         border: 1px solid var(--rd-line);
         border-radius: 14px;
-        padding: 14px 16px;
+        padding: 16px;
         box-shadow: 0 8px 30px rgba(0, 0, 0, .25);
         z-index: 10001;
         overscroll-behavior: contain;
@@ -207,16 +243,41 @@ if (
         display: none !important;
       }
 
+      .rd-panel-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin: 0 0 16px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--rd-line);
+      }
+
+      .rd-panel-head h2 {
+        font-size: 17px;
+        line-height: 1.4;
+        margin: 0;
+        color: var(--rd-fg);
+      }
+
+      .rd-close {
+        flex-shrink: 0;
+        width: 36px;
+        min-height: 36px !important;
+        padding: 0 !important;
+        font-size: 21px !important;
+      }
+
       .rd-row {
-        margin: 0 0 14px;
+        margin: 0 0 16px;
       }
 
       .rd-lab {
         display: block;
         font-size: 12px;
         font-weight: 700;
-        opacity: .75;
-        margin: 0 0 6px;
+        opacity: .78;
+        margin: 0 0 7px;
       }
 
       .rd-seg {
@@ -232,14 +293,13 @@ if (
       .rd-jump {
         display: flex;
         flex-direction: column;
-        gap: 2px;
-        margin: 0;
+        gap: 3px;
       }
 
       .rd-jump a {
         color: var(--rd-fg) !important;
         text-decoration: none;
-        padding: 7px 8px;
+        padding: 8px;
         border-radius: 6px;
         font-size: 14px;
         overflow-wrap: anywhere;
@@ -251,8 +311,8 @@ if (
 
       .rd-note {
         font-size: 12px;
-        opacity: .75;
-        margin: 6px 0 0;
+        opacity: .78;
+        margin: 7px 0 12px;
       }
 
       .rd-prog {
@@ -261,7 +321,7 @@ if (
         top: 0;
         height: 4px;
         width: 0;
-        background: var(--a, #1f2a44);
+        background: #1f2a44;
         z-index: 10002;
         pointer-events: none;
       }
@@ -271,7 +331,7 @@ if (
         left: 50%;
         bottom: 76px;
         transform: translateX(-50%);
-        background: var(--rd-bg, #fff);
+        background: var(--rd-bg, #ffffff);
         color: var(--rd-fg, #222936);
         border: 1px solid var(--rd-line, #ddd);
         border-radius: 12px;
@@ -309,8 +369,6 @@ if (
 
       html.rd-sepia {
         color-scheme: light;
-        --bg: #f3ead7;
-        --paper: #f3ead7;
       }
 
       html.rd-sepia body {
@@ -324,9 +382,6 @@ if (
 
       html.rd-dark {
         color-scheme: dark;
-        --bg: #16181d;
-        --paper: #16181d;
-        --l: rgba(255, 255, 255, .16);
       }
 
       html.rd-dark body {
@@ -380,7 +435,7 @@ if (
         border-color: rgba(255, 255, 255, .28) !important;
       }
 
-      html.rd-dark button:not(.rd-fab):not(.rd-top),
+      html.rd-dark button:not(.rd-fab):not(.rd-tool-fab):not(.rd-top),
       html.rd-dark .btn {
         border-color: rgba(255, 255, 255, .35);
       }
@@ -399,10 +454,20 @@ if (
         color: #ff9b91;
       }
 
-      .rd-study-tools {
-        border-top: 1px solid var(--rd-line);
-        margin-top: 14px;
-        padding-top: 12px;
+      html.rd-dark .rd-fab,
+      html.rd-dark .rd-tool-fab,
+      html.rd-dark .rd-top {
+        background: #23262d !important;
+        color: #eceae4 !important;
+        border-color: #cdd6ff !important;
+      }
+
+      html.rd-sepia .rd-fab,
+      html.rd-sepia .rd-tool-fab,
+      html.rd-sepia .rd-top {
+        background: #fbf4e4 !important;
+        color: #3a3125 !important;
+        border-color: #5b4636 !important;
       }
 
       .rd-study-tools h3 {
@@ -428,14 +493,15 @@ if (
       .rd-saved-item {
         border: 1px solid var(--rd-line);
         border-radius: 8px;
-        padding: 9px;
+        padding: 10px;
         margin: 8px 0;
       }
 
       .rd-saved-text {
         font-size: 13px;
         overflow-wrap: anywhere;
-        margin: 0 0 8px;
+        margin: 0 0 10px;
+        line-height: 1.6;
       }
 
       .rd-saved-item button {
@@ -448,23 +514,65 @@ if (
         color: inherit;
       }
 
+      .rd-color-btn {
+        min-width: 70px;
+      }
+
+      .rd-color-dot {
+        display: inline-block;
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        margin-right: 5px;
+        border: 1px solid rgba(0, 0, 0, .18);
+      }
+
+      .rd-primary {
+        background: #1f2a44 !important;
+        color: #ffffff !important;
+        border-color: #1f2a44 !important;
+      }
+
+      .rd-danger {
+        color: #a22c2c !important;
+      }
+
       @media (max-width: 620px) {
         .rd-panel {
           left: 8px;
           right: 8px;
           width: auto;
-          bottom: 72px;
+          bottom: 70px;
           max-height: 76vh;
+          padding: 14px;
         }
 
         .rd-fab {
           right: 12px;
           bottom: 12px;
+          width: 44px;
+          height: 44px;
+        }
+
+        .rd-tool-fab {
+          right: 12px;
+          width: 44px;
+          height: 44px;
+        }
+
+        #rd-highlight-fab {
+          bottom: 66px;
+        }
+
+        #rd-notes-fab {
+          bottom: 120px;
         }
 
         .rd-top {
           left: 12px;
           bottom: 12px;
+          width: 44px;
+          height: 44px;
         }
       }
 
@@ -490,10 +598,12 @@ if (
       }
     `;
 
-    var st = document.createElement('style');
-    st.id = 'rd-reader-styles';
-    st.textContent = css;
-    document.head.appendChild(st);
+    if (!document.getElementById('rd-reader-styles')) {
+      var st = document.createElement('style');
+      st.id = 'rd-reader-styles';
+      st.textContent = css;
+      document.head.appendChild(st);
+    }
 
     /* ------------------------------------------------------
        Sections and reading time
@@ -543,10 +653,7 @@ if (
 
       if (el.classList.contains('rd-meta')) return false;
 
-      if (qf && qf.contains(el)) {
-  return false;
-}
-       
+      if (qf && qf.contains(el)) return false;
 
       if (
         el.matches('main .say') &&
@@ -570,6 +677,27 @@ if (
        Utility functions
        ------------------------------------------------------ */
 
+    function make(tag, cls, value) {
+      var node = document.createElement(tag);
+
+      if (cls) node.className = cls;
+      if (value != null) node.textContent = value;
+
+      return node;
+    }
+
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, function (ch) {
+        return {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;'
+        }[ch];
+      });
+    }
+
     function seg(key, items) {
       return '<div class="rd-seg">' +
         items.map(function (item) {
@@ -579,15 +707,6 @@ if (
             item[1] + '</button>';
         }).join('') +
         '</div>';
-    }
-
-    function make(tag, cls, value) {
-      var node = document.createElement(tag);
-
-      if (cls) node.className = cls;
-      if (value != null) node.textContent = value;
-
-      return node;
     }
 
     function toast(message) {
@@ -610,8 +729,44 @@ if (
       }, 2800);
     }
 
+    function closeAllPanels(returnFocus) {
+      panel.hidden = true;
+      highlightPanel.hidden = true;
+      notesPanel.hidden = true;
+
+      fab.setAttribute('aria-expanded', 'false');
+      highlightFab.setAttribute('aria-expanded', 'false');
+      notesFab.setAttribute('aria-expanded', 'false');
+
+      if (returnFocus && returnFocus.focus) returnFocus.focus();
+    }
+
+    function openPanel(which) {
+      closeAllPanels(false);
+
+      if (which === 'settings') {
+        panel.hidden = false;
+        fab.setAttribute('aria-expanded', 'true');
+        var first = panel.querySelector('button');
+        if (first) first.focus();
+      }
+
+      if (which === 'highlights') {
+        highlightPanel.hidden = false;
+        highlightFab.setAttribute('aria-expanded', 'true');
+        var hButton = highlightPanel.querySelector('button');
+        if (hButton) hButton.focus();
+      }
+
+      if (which === 'notes') {
+        notesPanel.hidden = false;
+        notesFab.setAttribute('aria-expanded', 'true');
+        noteArea.focus();
+      }
+    }
+
     /* ------------------------------------------------------
-       Reader interface
+       Main interface and dedicated panels
        ------------------------------------------------------ */
 
     ui = document.createElement('div');
@@ -621,12 +776,28 @@ if (
       '<button type="button" class="rd-top" id="rd-top"' +
         ' aria-label="Back to top" hidden>↑</button>' +
 
+      '<button type="button" class="rd-tool-fab" id="rd-notes-fab"' +
+        ' aria-label="Open personal notes" title="Personal notes"' +
+        ' aria-expanded="false" aria-controls="rd-notes-panel">' +
+        '📝</button>' +
+
+      '<button type="button" class="rd-tool-fab" id="rd-highlight-fab"' +
+        ' aria-label="Open highlights" title="Highlight text"' +
+        ' aria-expanded="false" aria-controls="rd-highlight-panel">' +
+        '🖍️</button>' +
+
       '<button type="button" class="rd-fab" id="rd-fab"' +
-        ' aria-label="Reading options" aria-expanded="false"' +
-        ' aria-controls="rd-panel">Aa</button>' +
+        ' aria-label="Reading settings" title="Reading settings"' +
+        ' aria-expanded="false" aria-controls="rd-panel">Aa</button>' +
 
       '<div class="rd-panel" id="rd-panel" role="dialog"' +
-        ' aria-label="Reading options" hidden>' +
+        ' aria-label="Reading settings" hidden>' +
+
+        '<div class="rd-panel-head">' +
+          '<h2>Reading settings</h2>' +
+          '<button type="button" class="rd-close" data-close' +
+            ' aria-label="Close settings">×</button>' +
+        '</div>' +
 
         '<div class="rd-row">' +
           '<span class="rd-lab">Text size</span>' +
@@ -635,7 +806,7 @@ if (
               ' aria-label="Smaller text">A−</button>' +
             '<button type="button" data-act="bigger"' +
               ' aria-label="Larger text">A+</button>' +
-            '<button type="button" data-act="reset">Reset all</button>' +
+            '<button type="button" data-act="reset">Reset settings</button>' +
           '</div>' +
         '</div>' +
 
@@ -708,7 +879,7 @@ if (
               ]) +
             '</div>' +
             '<p class="rd-note">' +
-              'Double-click a paragraph to start listening from there.' +
+              'Double-click a paragraph to listen from that point.' +
             '</p>' +
           '</div>' : '') +
 
@@ -717,15 +888,32 @@ if (
             '<span class="rd-lab">Jump to a section</span>' +
             '<nav class="rd-jump" aria-label="Lesson sections">' +
               h2s.map(function (h) {
-                var a = document.createElement('a');
-                a.href = '#' + h.id;
-                a.textContent = h.textContent;
-                return '<a href="#' + h.id + '">' +
+                return '<a href="#' + escapeHTML(h.id) + '">' +
                   escapeHTML(h.textContent) + '</a>';
               }).join('') +
             '</nav>' +
           '</div>' : '') +
 
+      '</div>' +
+
+      '<div class="rd-panel" id="rd-highlight-panel"' +
+        ' role="dialog" aria-label="Text highlights" hidden>' +
+        '<div class="rd-panel-head">' +
+          '<h2>🖍️ Text highlights</h2>' +
+          '<button type="button" class="rd-close" data-close' +
+            ' aria-label="Close highlights">×</button>' +
+        '</div>' +
+        '<div id="rd-highlight-tools"></div>' +
+      '</div>' +
+
+      '<div class="rd-panel" id="rd-notes-panel"' +
+        ' role="dialog" aria-label="Personal notes" hidden>' +
+        '<div class="rd-panel-head">' +
+          '<h2>📝 Personal notes</h2>' +
+          '<button type="button" class="rd-close" data-close' +
+            ' aria-label="Close notes">×</button>' +
+        '</div>' +
+        '<div id="rd-notes-tools"></div>' +
       '</div>';
 
     body.appendChild(ui);
@@ -736,24 +924,16 @@ if (
     body.appendChild(prog);
 
     fab = document.getElementById('rd-fab');
+    highlightFab = document.getElementById('rd-highlight-fab');
+    notesFab = document.getElementById('rd-notes-fab');
     panel = document.getElementById('rd-panel');
+    highlightPanel = document.getElementById('rd-highlight-panel');
+    notesPanel = document.getElementById('rd-notes-panel');
     topBtn = document.getElementById('rd-top');
     listenBtn = document.getElementById('rd-listen');
 
-    function escapeHTML(value) {
-      return String(value).replace(/[&<>"']/g, function (ch) {
-        return {
-          '&': '&amp;',
-          '<': '&lt;',
-          '>': '&gt;',
-          '"': '&quot;',
-          "'": '&#39;'
-        }[ch];
-      });
-    }
-
     /* ------------------------------------------------------
-       Apply reader settings
+       Settings
        ------------------------------------------------------ */
 
     var fonts = {
@@ -785,14 +965,16 @@ if (
     function apply() {
       S.fs = Math.max(-3, Math.min(6, Number(S.fs) || 0));
 
-      if (!fonts[S.font] && S.font !== 'serif') {
-        S.font = DEF.font;
-      }
-
+      if (!(S.font in fonts)) S.font = DEF.font;
       if (!(S.lh in lineHeights)) S.lh = DEF.lh;
       if (!(S.w in widths)) S.w = DEF.w;
+
       if (!['light', 'sepia', 'dark'].includes(S.theme)) {
         S.theme = DEF.theme;
+      }
+
+      if (![0.8, 1, 1.25].includes(Number(S.rate))) {
+        S.rate = DEF.rate;
       }
 
       setProperty(
@@ -824,17 +1006,14 @@ if (
 
       root.classList.toggle('rd-focus', !!S.focus);
 
-      Array.prototype.forEach.call(
-        ui.querySelectorAll('button[data-k]'),
-        function (button) {
-          button.setAttribute(
-            'aria-pressed',
-            String(S[button.dataset.k]) === button.dataset.v
-              ? 'true'
-              : 'false'
-          );
-        }
-      );
+      ui.querySelectorAll('button[data-k]').forEach(function (button) {
+        button.setAttribute(
+          'aria-pressed',
+          String(S[button.dataset.k]) === button.dataset.v
+            ? 'true'
+            : 'false'
+        );
+      });
 
       var focusButton = ui.querySelector('[data-act="focus"]');
 
@@ -848,56 +1027,34 @@ if (
       updateFocus();
     }
 
-    /* ------------------------------------------------------
-       Open and close settings
-       ------------------------------------------------------ */
-
-    function openPanel(open) {
-      panel.hidden = !open;
-      fab.setAttribute('aria-expanded', open ? 'true' : 'false');
-
-      if (open) {
-        var first = panel.querySelector('button');
-
-        if (first) first.focus();
-      } else {
-        fab.focus();
-      }
-    }
-
     fab.addEventListener('click', function () {
-      openPanel(panel.hidden);
+      openPanel(panel.hidden ? 'settings' : '');
     });
 
-    document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape' && !panel.hidden) {
-        openPanel(false);
-      }
+    highlightFab.addEventListener('click', function () {
+      openPanel(highlightPanel.hidden ? 'highlights' : '');
     });
 
-    document.addEventListener('click', function (event) {
-      if (!panel.hidden && !ui.contains(event.target)) {
-        panel.hidden = true;
-        fab.setAttribute('aria-expanded', 'false');
-      }
+    notesFab.addEventListener('click', function () {
+      openPanel(notesPanel.hidden ? 'notes' : '');
     });
 
-    topBtn.addEventListener('click', function () {
-      window.scrollTo({
-        top: 0,
-        behavior: reduce ? 'auto' : 'smooth'
-      });
-    });
+    ui.addEventListener('click', function (event) {
+      var closeButton = event.target.closest('[data-close]');
 
-    panel.addEventListener('click', function (event) {
-      var anchor = event.target.closest('a');
-
-      if (anchor) {
-        openPanel(false);
+      if (closeButton) {
+        closeAllPanels(false);
         return;
       }
 
-      var button = event.target.closest('button');
+      var anchor = event.target.closest('.rd-jump a');
+
+      if (anchor) {
+        closeAllPanels(false);
+        return;
+      }
+
+      var button = event.target.closest('#rd-panel button');
 
       if (!button) return;
 
@@ -953,10 +1110,44 @@ if (
         case 'stop':
           stopSpeech();
           return;
+
+        default:
+          return;
       }
 
       saveSettings();
       apply();
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        if (
+          !panel.hidden ||
+          !highlightPanel.hidden ||
+          !notesPanel.hidden
+        ) {
+          closeAllPanels(false);
+        }
+      }
+    });
+
+    document.addEventListener('click', function (event) {
+      if (
+        !panel.hidden ||
+        !highlightPanel.hidden ||
+        !notesPanel.hidden
+      ) {
+        if (!ui.contains(event.target)) {
+          closeAllPanels(false);
+        }
+      }
+    });
+
+    topBtn.addEventListener('click', function () {
+      window.scrollTo({
+        top: 0,
+        behavior: reduce ? 'auto' : 'smooth'
+      });
     });
 
     /* ------------------------------------------------------
@@ -1013,6 +1204,7 @@ if (
 
         var doc = document.documentElement;
         var max = doc.scrollHeight - window.innerHeight;
+
         var percent = max > 0
           ? Math.min(100, window.scrollY / max * 100)
           : 0;
@@ -1054,7 +1246,6 @@ if (
 
         go.type = 'button';
         dismiss.type = 'button';
-        dismiss.setAttribute('aria-label', 'Dismiss resume prompt');
 
         resumeToast.append(message, go, dismiss);
         body.appendChild(resumeToast);
@@ -1244,7 +1435,7 @@ if (
     });
 
     /* ------------------------------------------------------
-       Highlights and notes
+       Highlights and notes storage
        ------------------------------------------------------ */
 
     function loadPageData() {
@@ -1252,7 +1443,16 @@ if (
         var data = JSON.parse(localStorage.getItem(pkey) || 'null');
 
         if (data && Array.isArray(data.items)) {
+          data.items = data.items.filter(function (item) {
+            return item &&
+              typeof item.id === 'string' &&
+              Number.isInteger(item.start) &&
+              Number.isInteger(item.end) &&
+              item.end > item.start;
+          });
+
           data.note = typeof data.note === 'string' ? data.note : '';
+
           return data;
         }
       } catch (e) {}
@@ -1324,7 +1524,9 @@ if (
         }
       );
 
-      while (walker.nextNode()) nodes.push(walker.currentNode);
+      while (walker.nextNode()) {
+        nodes.push(walker.currentNode);
+      }
 
       return nodes;
     }
@@ -1446,10 +1648,6 @@ if (
     }
 
     function restoreHighlights() {
-      /*
-       * Saved ranges use character offsets in the lesson text.
-       * Restore earlier highlights first.
-       */
       P.items.sort(function (a, b) {
         return a.start - b.start;
       });
@@ -1565,10 +1763,12 @@ if (
         list.appendChild(
           make('p', 'rd-note', 'Your saved highlights will appear here.')
         );
+        return;
       }
 
       P.items.forEach(function (item) {
         var row = make('div', 'rd-saved-item');
+
         var preview = make(
           'p',
           'rd-saved-text',
@@ -1589,12 +1789,14 @@ if (
               behavior: reduce ? 'auto' : 'smooth',
               block: 'center'
             });
+
+            closeAllPanels(false);
           } else {
             toast('The saved text could not be located.');
           }
         });
 
-        var remove = make('button', '', 'Remove');
+        var remove = make('button', 'rd-danger', 'Remove');
         remove.type = 'button';
 
         remove.addEventListener('click', function () {
@@ -1606,16 +1808,19 @@ if (
       });
     }
 
-    function buildStudyTools() {
-      var section = make('section', 'rd-study-tools');
-      section.id = 'rd-study-tools';
+    /* ------------------------------------------------------
+       Dedicated highlight tools
+       ------------------------------------------------------ */
 
-      section.appendChild(make('h3', '', 'Highlight text'));
+    function buildHighlightTools() {
+      var section = document.getElementById('rd-highlight-tools');
+
+      section.replaceChildren();
 
       section.appendChild(make(
         'p',
         'rd-note',
-        'Select text in the lesson, then choose a colour below.'
+        'Select text in the lesson first. Then choose a colour to save your highlight.'
       ));
 
       var colors = [
@@ -1628,8 +1833,13 @@ if (
       var colorRow = make('div', 'rd-seg');
 
       colors.forEach(function (color) {
-        var button = make('button', '', color.label);
+        var button = make('button', 'rd-color-btn');
         button.type = 'button';
+
+        var dot = make('span', 'rd-color-dot');
+        dot.style.backgroundColor = color.value;
+
+        button.append(dot, document.createTextNode(color.label));
 
         button.addEventListener('click', function () {
           addHighlight(color.value);
@@ -1645,18 +1855,37 @@ if (
       list.id = 'rd-saved-items';
       section.appendChild(list);
 
-      section.appendChild(make('h3', '', 'Personal notes'));
+      renderHighlights();
+    }
+
+    /* ------------------------------------------------------
+       Dedicated notes tools
+       ------------------------------------------------------ */
+
+    function buildNotesTools() {
+      var section = document.getElementById('rd-notes-tools');
+
+      section.replaceChildren();
+
+      section.appendChild(make(
+        'p',
+        'rd-note',
+        'Write down grammar rules, new vocabulary, examples or questions from this lesson. Your notes are saved in this browser.'
+      ));
 
       noteArea = document.createElement('textarea');
       noteArea.id = 'rd-personal-note';
-      noteArea.rows = 5;
+      noteArea.rows = 9;
       noteArea.value = P.note;
       noteArea.placeholder = 'Write your lesson notes here...';
       noteArea.setAttribute('aria-label', 'Personal reading notes');
 
       section.appendChild(noteArea);
 
-      var saveNote = make('button', '', 'Save notes');
+      var buttons = make('div', 'rd-seg');
+      buttons.style.marginTop = '10px';
+
+      var saveNote = make('button', 'rd-primary', 'Save notes');
       saveNote.type = 'button';
 
       saveNote.addEventListener('click', function () {
@@ -1670,14 +1899,14 @@ if (
         }
       });
 
-      section.appendChild(saveNote);
-
-      var clearNote = make('button', '', 'Clear notes');
+      var clearNote = make('button', 'rd-danger', 'Clear notes');
       clearNote.type = 'button';
-      clearNote.style.marginLeft = '6px';
 
       clearNote.addEventListener('click', function () {
-        if (!noteArea.value.trim()) return;
+        if (!noteArea.value.trim()) {
+          toast('There are no notes to clear.');
+          return;
+        }
 
         if (!window.confirm('Clear your personal notes?')) return;
 
@@ -1693,22 +1922,25 @@ if (
         }
       });
 
-      section.appendChild(clearNote);
+      buttons.append(saveNote, clearNote);
+      section.appendChild(buttons);
 
-      panel.appendChild(section);
+      var status = make(
+        'p',
+        'rd-note',
+        'Notes are stored locally on this device. They are not synced to other devices.'
+      );
 
-      renderHighlights();
+      section.appendChild(status);
     }
-
-    /*
-     * Restore saved highlights before building the controls.
-     */
-    restoreHighlights();
-    buildStudyTools();
 
     /* ------------------------------------------------------
        Finish initialisation
        ------------------------------------------------------ */
+
+    restoreHighlights();
+    buildHighlightTools();
+    buildNotesTools();
 
     apply();
     onScroll();
