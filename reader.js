@@ -270,3 +270,74 @@
     apply(); onScroll();
   }
 })();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* ---------- highlights and notes (saved in this browser only) ---------- */
+    var pkey = 'rd-hl:' + location.pathname, P = loadP();
+    function loadP() {
+      try { var o = JSON.parse(localStorage.getItem(pkey)); if (o && o.items) return o; } catch (e) {}
+      return { t: document.title.replace(/\s*\|.*$/, ''), items: [], note: '' };
+    }
+    function savePg() {
+      P.u = Date.now();
+      try {
+        if (!P.items.length && !P.note) localStorage.removeItem(pkey);
+        else localStorage.setItem(pkey, JSON.stringify(P));
+      } catch (e) { flash('Could not save. Browser storage may be full or blocked.'); }
+    }
+    function el(t, c, x) { var e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; }
+    function mkid() { return 'h' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+    function getIt(id) { for (var i = 0; i < P.items.length; i++) if (P.items[i].id === id) return P.items[i]; return null; }
+    function marksOf(id) { return [].slice.call(main.querySelectorAll('mark.rd-hl[data-id="' + id + '"]')); }
+    var msgT;
+    function flash(t) {
+      var n = document.getElementById('rd-msg'); if (!n) { n = el('div', 'rd-toast'); n.id = 'rd-msg'; n.setAttribute('role', 'status'); ui.appendChild(n); }
+      n.textContent = t; n.hidden = false; clearTimeout(msgT); msgT = setTimeout(function () { n.hidden = true; }, 2800);
+    }
+
+    function tnodes() {
+      var out = [], w = document.createTreeWalker(main, NodeFilter.SHOW_TEXT, {
+        acceptNode: function (n) { var p = n.parentElement; return p && !p.closest('#qf,.rd-meta,.nav,script,style') ? 1 : 2; }
+      });
+      while (w.nextNode()) out.push(w.currentNode);
+      return out;
+    }
+    function fullText() { return tnodes().map(function (n) { return n.data; }).join(''); }
+    function offsetOf(node, off) {
+      var ts = tnodes(), acc = 0, i;
+      if (node.nodeType === 3) {
+        for (i = 0; i < ts.length; i++) { if (ts[i] === node) return acc + off; acc += ts[i].length; }
+        return -1;
+      }
+      var r = document.createRange(); r.setStart(node, off); r.collapse(true);
+      for (i = 0; i < ts.length; i++) { if (r.comparePoint(ts[i], 0) >= 0) return acc; acc += ts[i].length; }
+      return acc;
+    }
+    function wrap(s, e, id, color) {
+      var ts = tnodes(), acc = 0, first = true;
+      for (var i = 0; i < ts.length; i++) {
+        var n = ts[i], a = acc, b = acc + n.length; acc = b;
+        if (b <= s) continue; if (a >= e) break;
+        if (!/\S/.test(n.data)) continue;
+        var from = Math.max(s, a) - a, to = Math.min(e, b) - a;
+        if (to <= from) continue;
+        var mid = n; if (from > 0) mid = n.splitText(from);
+        if (to - from < mid.length) mid.splitText(to - from);
+        var mk = document.createElement('mark');
+        mk.className = 'rd-hl rd-c-' + color + (first ? ' rd-first' : ''); mk.dataset.id = id;
+        mid.parentNode.insertBefore(mk, mid); mk.appendChild(mid); first = false;
+      }
+
