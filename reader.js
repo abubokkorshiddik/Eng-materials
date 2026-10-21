@@ -4,16 +4,18 @@
    File: reader.js
 
    Features:
-   1. Reading settings and themes
-   2. Separate floating settings, highlight and notes icons
-   3. Dedicated highlight and notes panels
-   4. Text size, fonts, spacing and content width
-   5. Focus mode and reading progress
-   6. Resume reading position
-   7. Text to speech with speed controls
-   8. Section navigation and answer controls
-   9. Persistent highlights and personal notes
-   10. Responsive layout and accessibility
+   1. Separate reading settings icon
+   2. Separate highlight icon and highlight panel
+   3. Separate personal notes icon and notes panel
+   4. Separate print icon
+   5. Font size, font family, spacing and text width
+   6. Light, sepia and dark themes
+   7. Focus mode
+   8. Text to speech, speed and paragraph navigation
+   9. Reading progress and resume position
+   10. Lesson section navigation
+   11. Saved highlights and personal notes
+   12. Keyboard accessibility and mobile support
 
    Self-contained. Works on pages containing <main>.
    ========================================================== */
@@ -78,12 +80,13 @@
 
     if (!main) return;
 
-    if (document.getElementById('rd-fab')) return;
+    if (document.getElementById('rd-reader-root')) return;
 
     var reduce = window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     var base = parseFloat(getComputedStyle(body).fontSize) || 18;
+
     var qf = document.getElementById('qf');
 
     var speaking = false;
@@ -99,12 +102,13 @@
     var blocks = [];
     var h2s = [];
     var ui;
-    var panel;
+    var settingsPanel;
     var highlightPanel;
     var notesPanel;
-    var fab;
+    var settingsFab;
     var highlightFab;
     var notesFab;
+    var printFab;
     var topBtn;
     var prog;
     var listenBtn;
@@ -113,8 +117,7 @@
 
     var pkey = 'rd-hl:' + location.pathname;
 
-    var canSpeak =
-      'speechSynthesis' in window &&
+    var canSpeak = 'speechSynthesis' in window &&
       'SpeechSynthesisUtterance' in window;
 
     /* ------------------------------------------------------
@@ -128,7 +131,7 @@
         --rd-line: rgba(30, 41, 59, .18);
         --rd-ac: #1f2a44;
         color: var(--rd-fg);
-        font: 500 14px/1.5 Inter, system-ui, sans-serif;
+        font: 500 14px/1.45 Inter, system-ui, sans-serif;
       }
 
       html.rd-sepia .rd-ui {
@@ -150,8 +153,8 @@
         cursor: pointer;
         border: 1px solid var(--rd-line);
         border-radius: 8px;
-        padding: 8px 11px;
-        min-height: 38px;
+        padding: 7px 11px;
+        min-height: 36px;
         background: transparent;
         color: var(--rd-fg);
       }
@@ -169,34 +172,44 @@
         outline-offset: 3px;
       }
 
-      .rd-fab,
-      .rd-tool-fab,
-      .rd-top {
+      /* Floating icons */
+
+      .rd-fab {
         position: fixed;
+        right: 16px;
         width: 48px;
         height: 48px;
+        min-height: 48px !important;
         border-radius: 50% !important;
         padding: 0 !important;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-weight: 700 !important;
         background: #ffffff !important;
         color: #1f2a44 !important;
         border: 2px solid #1f2a44 !important;
         box-shadow: 0 3px 12px rgba(15, 23, 42, .18);
         z-index: 10000;
+        font-size: 20px !important;
+        font-weight: 700 !important;
+        line-height: 1;
+        cursor: pointer;
+        transition: transform .15s, box-shadow .15s;
       }
 
-      .rd-fab {
-        right: 16px;
+      .rd-fab:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(15, 23, 42, .24);
+      }
+
+      .rd-fab:focus-visible {
+        outline: 3px solid #5275bd;
+        outline-offset: 3px;
+      }
+
+      #rd-fab {
         bottom: 16px;
-        font-size: 17px !important;
-      }
-
-      .rd-tool-fab {
-        right: 16px;
-        font-size: 21px !important;
+        font-family: Georgia, serif !important;
       }
 
       #rd-highlight-fab {
@@ -207,22 +220,28 @@
         bottom: 136px;
       }
 
-      .rd-top {
-        left: 16px;
-        bottom: 16px;
-        font-size: 22px !important;
+      #rd-print-fab {
+        bottom: 196px;
       }
 
-      .rd-fab:hover,
-      .rd-tool-fab:hover,
-      .rd-top:hover {
-        background: #eef2f8 !important;
+      html.rd-sepia .rd-fab {
+        background: #fbf4e4 !important;
+        color: #5b4636 !important;
+        border-color: #5b4636 !important;
       }
+
+      html.rd-dark .rd-fab {
+        background: #23262d !important;
+        color: #eceae4 !important;
+        border-color: #cdd6ff !important;
+      }
+
+      /* Floating panels */
 
       .rd-panel {
         position: fixed;
         right: 16px;
-        bottom: 76px;
+        bottom: 74px;
         width: min(390px, calc(100vw - 32px));
         max-height: 78vh;
         overflow: auto;
@@ -231,7 +250,7 @@
         color: var(--rd-fg);
         border: 1px solid var(--rd-line);
         border-radius: 14px;
-        padding: 16px;
+        padding: 14px 16px;
         box-shadow: 0 8px 30px rgba(0, 0, 0, .25);
         z-index: 10001;
         overscroll-behavior: contain;
@@ -243,41 +262,39 @@
         display: none !important;
       }
 
-      .rd-panel-head {
+      .rd-panel-title {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 12px;
-        margin: 0 0 16px;
-        padding-bottom: 12px;
+        gap: 10px;
+        margin: 0 0 14px;
+        padding-bottom: 10px;
         border-bottom: 1px solid var(--rd-line);
       }
 
-      .rd-panel-head h2 {
+      .rd-panel-title h2 {
         font-size: 17px;
-        line-height: 1.4;
         margin: 0;
         color: var(--rd-fg);
       }
 
-      .rd-close {
-        flex-shrink: 0;
-        width: 36px;
-        min-height: 36px !important;
-        padding: 0 !important;
-        font-size: 21px !important;
+      .rd-panel-close {
+        flex: 0 0 auto;
+        min-width: 36px;
+        padding: 5px !important;
+        font-size: 18px !important;
       }
 
       .rd-row {
-        margin: 0 0 16px;
+        margin: 0 0 14px;
       }
 
       .rd-lab {
         display: block;
         font-size: 12px;
         font-weight: 700;
-        opacity: .78;
-        margin: 0 0 7px;
+        opacity: .75;
+        margin: 0 0 6px;
       }
 
       .rd-seg {
@@ -293,13 +310,14 @@
       .rd-jump {
         display: flex;
         flex-direction: column;
-        gap: 3px;
+        gap: 2px;
+        margin: 0;
       }
 
       .rd-jump a {
         color: var(--rd-fg) !important;
         text-decoration: none;
-        padding: 8px;
+        padding: 7px 8px;
         border-radius: 6px;
         font-size: 14px;
         overflow-wrap: anywhere;
@@ -311,8 +329,8 @@
 
       .rd-note {
         font-size: 12px;
-        opacity: .78;
-        margin: 7px 0 12px;
+        opacity: .75;
+        margin: 6px 0 0;
       }
 
       .rd-prog {
@@ -326,14 +344,22 @@
         pointer-events: none;
       }
 
+      html.rd-dark .rd-prog {
+        background: #cdd6ff;
+      }
+
+      html.rd-sepia .rd-prog {
+        background: #8b6848;
+      }
+
       .rd-toast {
         position: fixed;
         left: 50%;
         bottom: 76px;
         transform: translateX(-50%);
-        background: var(--rd-bg, #ffffff);
-        color: var(--rd-fg, #222936);
-        border: 1px solid var(--rd-line, #ddd);
+        background: #ffffff;
+        color: #222936;
+        border: 1px solid #d5d9e1;
         border-radius: 12px;
         padding: 10px 14px;
         display: flex;
@@ -343,6 +369,17 @@
         z-index: 10003;
         box-shadow: 0 6px 20px rgba(0, 0, 0, .2);
         max-width: calc(100vw - 24px);
+      }
+
+      html.rd-dark .rd-toast {
+        background: #23262d;
+        color: #eceae4;
+        border-color: rgba(255, 255, 255, .22);
+      }
+
+      html.rd-sepia .rd-toast {
+        background: #fbf4e4;
+        color: #3a3125;
       }
 
       .rd-meta {
@@ -369,6 +406,8 @@
 
       html.rd-sepia {
         color-scheme: light;
+        --bg: #f3ead7;
+        --paper: #f3ead7;
       }
 
       html.rd-sepia body {
@@ -382,6 +421,9 @@
 
       html.rd-dark {
         color-scheme: dark;
+        --bg: #16181d;
+        --paper: #16181d;
+        --l: rgba(255, 255, 255, .16);
       }
 
       html.rd-dark body {
@@ -435,7 +477,7 @@
         border-color: rgba(255, 255, 255, .28) !important;
       }
 
-      html.rd-dark button:not(.rd-fab):not(.rd-tool-fab):not(.rd-top),
+      html.rd-dark button:not(.rd-fab):not(.rd-top),
       html.rd-dark .btn {
         border-color: rgba(255, 255, 255, .35);
       }
@@ -454,20 +496,8 @@
         color: #ff9b91;
       }
 
-      html.rd-dark .rd-fab,
-      html.rd-dark .rd-tool-fab,
-      html.rd-dark .rd-top {
-        background: #23262d !important;
-        color: #eceae4 !important;
-        border-color: #cdd6ff !important;
-      }
-
-      html.rd-sepia .rd-fab,
-      html.rd-sepia .rd-tool-fab,
-      html.rd-sepia .rd-top {
-        background: #fbf4e4 !important;
-        color: #3a3125 !important;
-        border-color: #5b4636 !important;
+      .rd-study-tools {
+        margin: 0;
       }
 
       .rd-study-tools h3 {
@@ -493,15 +523,14 @@
       .rd-saved-item {
         border: 1px solid var(--rd-line);
         border-radius: 8px;
-        padding: 10px;
+        padding: 9px;
         margin: 8px 0;
       }
 
       .rd-saved-text {
         font-size: 13px;
         overflow-wrap: anywhere;
-        margin: 0 0 10px;
-        line-height: 1.6;
+        margin: 0 0 8px;
       }
 
       .rd-saved-item button {
@@ -514,27 +543,16 @@
         color: inherit;
       }
 
-      .rd-color-btn {
-        min-width: 70px;
+      .rd-panel textarea {
+        width: 100%;
+        min-height: 160px;
       }
 
-      .rd-color-dot {
-        display: inline-block;
-        width: 11px;
-        height: 11px;
-        border-radius: 50%;
-        margin-right: 5px;
-        border: 1px solid rgba(0, 0, 0, .18);
-      }
-
-      .rd-primary {
-        background: #1f2a44 !important;
-        color: #ffffff !important;
-        border-color: #1f2a44 !important;
-      }
-
-      .rd-danger {
-        color: #a22c2c !important;
+      .rd-action-row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 10px;
       }
 
       @media (max-width: 620px) {
@@ -542,22 +560,19 @@
           left: 8px;
           right: 8px;
           width: auto;
-          bottom: 70px;
+          bottom: 72px;
           max-height: 76vh;
-          padding: 14px;
         }
 
         .rd-fab {
           right: 12px;
-          bottom: 12px;
           width: 44px;
           height: 44px;
+          min-height: 44px !important;
         }
 
-        .rd-tool-fab {
-          right: 12px;
-          width: 44px;
-          height: 44px;
+        #rd-fab {
+          bottom: 12px;
         }
 
         #rd-highlight-fab {
@@ -568,16 +583,19 @@
           bottom: 120px;
         }
 
+        #rd-print-fab {
+          bottom: 174px;
+        }
+
         .rd-top {
           left: 12px;
           bottom: 12px;
-          width: 44px;
-          height: 44px;
         }
       }
 
       @media (prefers-reduced-motion: reduce) {
-        html.rd-focus .rd-b {
+        html.rd-focus .rd-b,
+        .rd-fab {
           transition: none;
         }
 
@@ -588,22 +606,32 @@
 
       @media print {
         .rd-ui,
-        .rd-prog {
+        .rd-prog,
+        .rd-toast,
+        #rd-print-fab {
           display: none !important;
         }
 
         html.rd-focus .rd-b {
           opacity: 1 !important;
         }
+
+        html,
+        body {
+          background: #ffffff !important;
+          color: #000000 !important;
+        }
+
+        main {
+          max-width: none !important;
+        }
       }
     `;
 
-    if (!document.getElementById('rd-reader-styles')) {
-      var st = document.createElement('style');
-      st.id = 'rd-reader-styles';
-      st.textContent = css;
-      document.head.appendChild(st);
-    }
+    var st = document.createElement('style');
+    st.id = 'rd-reader-styles';
+    st.textContent = css;
+    document.head.appendChild(st);
 
     /* ------------------------------------------------------
        Sections and reading time
@@ -674,7 +702,7 @@
     });
 
     /* ------------------------------------------------------
-       Utility functions
+       Helpers
        ------------------------------------------------------ */
 
     function make(tag, cls, value) {
@@ -729,74 +757,42 @@
       }, 2800);
     }
 
-    function closeAllPanels(returnFocus) {
-      panel.hidden = true;
-      highlightPanel.hidden = true;
-      notesPanel.hidden = true;
-
-      fab.setAttribute('aria-expanded', 'false');
-      highlightFab.setAttribute('aria-expanded', 'false');
-      notesFab.setAttribute('aria-expanded', 'false');
-
-      if (returnFocus && returnFocus.focus) returnFocus.focus();
-    }
-
-    function openPanel(which) {
-      closeAllPanels(false);
-
-      if (which === 'settings') {
-        panel.hidden = false;
-        fab.setAttribute('aria-expanded', 'true');
-        var first = panel.querySelector('button');
-        if (first) first.focus();
-      }
-
-      if (which === 'highlights') {
-        highlightPanel.hidden = false;
-        highlightFab.setAttribute('aria-expanded', 'true');
-        var hButton = highlightPanel.querySelector('button');
-        if (hButton) hButton.focus();
-      }
-
-      if (which === 'notes') {
-        notesPanel.hidden = false;
-        notesFab.setAttribute('aria-expanded', 'true');
-        noteArea.focus();
-      }
-    }
-
     /* ------------------------------------------------------
-       Main interface and dedicated panels
+       Floating toolbar and separate panels
        ------------------------------------------------------ */
 
     ui = document.createElement('div');
     ui.className = 'rd-ui';
+    ui.id = 'rd-reader-root';
 
     ui.innerHTML =
-      '<button type="button" class="rd-top" id="rd-top"' +
-        ' aria-label="Back to top" hidden>↑</button>' +
-
-      '<button type="button" class="rd-tool-fab" id="rd-notes-fab"' +
-        ' aria-label="Open personal notes" title="Personal notes"' +
-        ' aria-expanded="false" aria-controls="rd-notes-panel">' +
-        '📝</button>' +
-
-      '<button type="button" class="rd-tool-fab" id="rd-highlight-fab"' +
-        ' aria-label="Open highlights" title="Highlight text"' +
-        ' aria-expanded="false" aria-controls="rd-highlight-panel">' +
-        '🖍️</button>' +
-
       '<button type="button" class="rd-fab" id="rd-fab"' +
         ' aria-label="Reading settings" title="Reading settings"' +
         ' aria-expanded="false" aria-controls="rd-panel">Aa</button>' +
 
+      '<button type="button" class="rd-fab" id="rd-highlight-fab"' +
+        ' aria-label="Highlights" title="Highlights"' +
+        ' aria-expanded="false" aria-controls="rd-highlight-panel">' +
+        '🖍</button>' +
+
+      '<button type="button" class="rd-fab" id="rd-notes-fab"' +
+        ' aria-label="Personal notes" title="Personal notes"' +
+        ' aria-expanded="false" aria-controls="rd-notes-panel">' +
+        '📝</button>' +
+
+      '<button type="button" class="rd-fab" id="rd-print-fab"' +
+        ' aria-label="Print lesson" title="Print lesson">🖨</button>' +
+
+      '<button type="button" class="rd-top" id="rd-top"' +
+        ' aria-label="Back to top" hidden>↑</button>' +
+
       '<div class="rd-panel" id="rd-panel" role="dialog"' +
         ' aria-label="Reading settings" hidden>' +
 
-        '<div class="rd-panel-head">' +
+        '<div class="rd-panel-title">' +
           '<h2>Reading settings</h2>' +
-          '<button type="button" class="rd-close" data-close' +
-            ' aria-label="Close settings">×</button>' +
+          '<button type="button" class="rd-panel-close"' +
+            ' data-close="settings" aria-label="Close settings">×</button>' +
         '</div>' +
 
         '<div class="rd-row">' +
@@ -806,7 +802,7 @@
               ' aria-label="Smaller text">A−</button>' +
             '<button type="button" data-act="bigger"' +
               ' aria-label="Larger text">A+</button>' +
-            '<button type="button" data-act="reset">Reset settings</button>' +
+            '<button type="button" data-act="reset">Reset all</button>' +
           '</div>' +
         '</div>' +
 
@@ -867,8 +863,8 @@
           '<div class="rd-row">' +
             '<span class="rd-lab">Listen to the lesson</span>' +
             '<div class="rd-seg">' +
-              '<button type="button" data-act="listen"' +
-                ' id="rd-listen">▶ Listen</button>' +
+              '<button type="button" data-act="listen" id="rd-listen">' +
+                '▶ Listen</button>' +
               '<button type="button" data-act="stop">Stop</button>' +
             '</div>' +
             '<div class="rd-seg" style="margin-top:6px">' +
@@ -878,9 +874,7 @@
                 ['1.25', 'Fast']
               ]) +
             '</div>' +
-            '<p class="rd-note">' +
-              'Double-click a paragraph to listen from that point.' +
-            '</p>' +
+            '<p class="rd-note">Double-click a paragraph to listen from there.</p>' +
           '</div>' : '') +
 
         (h2s.length > 2 ?
@@ -897,23 +891,54 @@
       '</div>' +
 
       '<div class="rd-panel" id="rd-highlight-panel"' +
-        ' role="dialog" aria-label="Text highlights" hidden>' +
-        '<div class="rd-panel-head">' +
-          '<h2>🖍️ Text highlights</h2>' +
-          '<button type="button" class="rd-close" data-close' +
-            ' aria-label="Close highlights">×</button>' +
+        ' role="dialog" aria-label="Highlights" hidden>' +
+
+        '<div class="rd-panel-title">' +
+          '<h2>Highlights</h2>' +
+          '<button type="button" class="rd-panel-close"' +
+            ' data-close="highlight" aria-label="Close highlights">×</button>' +
         '</div>' +
-        '<div id="rd-highlight-tools"></div>' +
+
+        '<p class="rd-note">' +
+          'Select text in the lesson, then choose a highlight colour.' +
+        '</p>' +
+
+        '<div class="rd-seg" id="rd-highlight-colors" style="margin-top:10px">' +
+          '<button type="button" data-color="#f8df8b">Yellow</button>' +
+          '<button type="button" data-color="#b9e4d0">Mint</button>' +
+          '<button type="button" data-color="#c9d9ff">Blue</button>' +
+          '<button type="button" data-color="#efc7dc">Pink</button>' +
+        '</div>' +
+
+        '<h3>Saved highlights</h3>' +
+        '<div id="rd-saved-items"></div>' +
+
       '</div>' +
 
       '<div class="rd-panel" id="rd-notes-panel"' +
         ' role="dialog" aria-label="Personal notes" hidden>' +
-        '<div class="rd-panel-head">' +
-          '<h2>📝 Personal notes</h2>' +
-          '<button type="button" class="rd-close" data-close' +
-            ' aria-label="Close notes">×</button>' +
+
+        '<div class="rd-panel-title">' +
+          '<h2>Personal notes</h2>' +
+          '<button type="button" class="rd-panel-close"' +
+            ' data-close="notes" aria-label="Close notes">×</button>' +
         '</div>' +
-        '<div id="rd-notes-tools"></div>' +
+
+        '<p class="rd-note">' +
+          'Write your own explanations, examples and reminders for this lesson.' +
+        '</p>' +
+
+        '<textarea id="rd-personal-note" rows="8"' +
+          ' aria-label="Personal reading notes"' +
+          ' placeholder="Write your lesson notes here..."></textarea>' +
+
+        '<div class="rd-action-row">' +
+          '<button type="button" data-act="save-note">Save notes</button>' +
+          '<button type="button" data-act="clear-note">Clear notes</button>' +
+        '</div>' +
+
+        '<p class="rd-note">Notes are saved in this browser on this device.</p>' +
+
       '</div>';
 
     body.appendChild(ui);
@@ -923,17 +948,139 @@
     prog.setAttribute('aria-hidden', 'true');
     body.appendChild(prog);
 
-    fab = document.getElementById('rd-fab');
+    settingsFab = document.getElementById('rd-fab');
     highlightFab = document.getElementById('rd-highlight-fab');
     notesFab = document.getElementById('rd-notes-fab');
-    panel = document.getElementById('rd-panel');
+    printFab = document.getElementById('rd-print-fab');
+    topBtn = document.getElementById('rd-top');
+
+    settingsPanel = document.getElementById('rd-panel');
     highlightPanel = document.getElementById('rd-highlight-panel');
     notesPanel = document.getElementById('rd-notes-panel');
-    topBtn = document.getElementById('rd-top');
+
     listenBtn = document.getElementById('rd-listen');
+    noteArea = document.getElementById('rd-personal-note');
 
     /* ------------------------------------------------------
-       Settings
+       Panel management
+       ------------------------------------------------------ */
+
+    function closeAllPanels(returnFocus) {
+      settingsPanel.hidden = true;
+      highlightPanel.hidden = true;
+      notesPanel.hidden = true;
+
+      settingsFab.setAttribute('aria-expanded', 'false');
+      highlightFab.setAttribute('aria-expanded', 'false');
+      notesFab.setAttribute('aria-expanded', 'false');
+
+      if (returnFocus) returnFocus.focus();
+    }
+
+    function openPanel(name) {
+      var panel;
+      var fab;
+
+      closeAllPanels(null);
+
+      if (name === 'settings') {
+        panel = settingsPanel;
+        fab = settingsFab;
+      } else if (name === 'highlight') {
+        panel = highlightPanel;
+        fab = highlightFab;
+      } else {
+        panel = notesPanel;
+        fab = notesFab;
+      }
+
+      panel.hidden = false;
+      fab.setAttribute('aria-expanded', 'true');
+
+      var first = panel.querySelector(
+        'button, textarea, input, a[href]'
+      );
+
+      if (first) first.focus();
+    }
+
+    settingsFab.addEventListener('click', function () {
+      if (!settingsPanel.hidden) {
+        closeAllPanels(settingsFab);
+      } else {
+        openPanel('settings');
+      }
+    });
+
+    highlightFab.addEventListener('click', function () {
+      if (!highlightPanel.hidden) {
+        closeAllPanels(highlightFab);
+      } else {
+        openPanel('highlight');
+      }
+    });
+
+    notesFab.addEventListener('click', function () {
+      if (!notesPanel.hidden) {
+        closeAllPanels(notesFab);
+      } else {
+        openPanel('notes');
+      }
+    });
+
+    ui.addEventListener('click', function (event) {
+      var close = event.target.closest('[data-close]');
+
+      if (close) {
+        var name = close.dataset.close;
+
+        closeAllPanels(
+          name === 'settings' ? settingsFab :
+          name === 'highlight' ? highlightFab : notesFab
+        );
+        return;
+      }
+
+      var anchor = event.target.closest('.rd-jump a');
+
+      if (anchor) {
+        closeAllPanels(null);
+      }
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!ui.contains(event.target)) {
+        closeAllPanels(null);
+      }
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        if (
+          !settingsPanel.hidden ||
+          !highlightPanel.hidden ||
+          !notesPanel.hidden
+        ) {
+          closeAllPanels(null);
+        }
+      }
+    });
+
+    topBtn.addEventListener('click', function () {
+      window.scrollTo({
+        top: 0,
+        behavior: reduce ? 'auto' : 'smooth'
+      });
+    });
+
+    printFab.addEventListener('click', function () {
+      closeAllPanels(null);
+      stopSpeech();
+      window.print();
+    });
+
+    /* ------------------------------------------------------
+       Apply reading settings
        ------------------------------------------------------ */
 
     var fonts = {
@@ -971,10 +1118,6 @@
 
       if (!['light', 'sepia', 'dark'].includes(S.theme)) {
         S.theme = DEF.theme;
-      }
-
-      if (![0.8, 1, 1.25].includes(Number(S.rate))) {
-        S.rate = DEF.rate;
       }
 
       setProperty(
@@ -1027,34 +1170,8 @@
       updateFocus();
     }
 
-    fab.addEventListener('click', function () {
-      openPanel(panel.hidden ? 'settings' : '');
-    });
-
-    highlightFab.addEventListener('click', function () {
-      openPanel(highlightPanel.hidden ? 'highlights' : '');
-    });
-
-    notesFab.addEventListener('click', function () {
-      openPanel(notesPanel.hidden ? 'notes' : '');
-    });
-
-    ui.addEventListener('click', function (event) {
-      var closeButton = event.target.closest('[data-close]');
-
-      if (closeButton) {
-        closeAllPanels(false);
-        return;
-      }
-
-      var anchor = event.target.closest('.rd-jump a');
-
-      if (anchor) {
-        closeAllPanels(false);
-        return;
-      }
-
-      var button = event.target.closest('#rd-panel button');
+    settingsPanel.addEventListener('click', function (event) {
+      var button = event.target.closest('button');
 
       if (!button) return;
 
@@ -1110,48 +1227,14 @@
         case 'stop':
           stopSpeech();
           return;
-
-        default:
-          return;
       }
 
       saveSettings();
       apply();
     });
 
-    document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape') {
-        if (
-          !panel.hidden ||
-          !highlightPanel.hidden ||
-          !notesPanel.hidden
-        ) {
-          closeAllPanels(false);
-        }
-      }
-    });
-
-    document.addEventListener('click', function (event) {
-      if (
-        !panel.hidden ||
-        !highlightPanel.hidden ||
-        !notesPanel.hidden
-      ) {
-        if (!ui.contains(event.target)) {
-          closeAllPanels(false);
-        }
-      }
-    });
-
-    topBtn.addEventListener('click', function () {
-      window.scrollTo({
-        top: 0,
-        behavior: reduce ? 'auto' : 'smooth'
-      });
-    });
-
     /* ------------------------------------------------------
-       Progress, focus and resume position
+       Progress, focus and resume
        ------------------------------------------------------ */
 
     function updateFocus() {
@@ -1171,9 +1254,7 @@
         if (
           rect.bottom < -50 ||
           rect.top > window.innerHeight + 50
-        ) {
-          return;
-        }
+        ) return;
 
         var distance = Math.abs(
           (rect.top + rect.bottom) / 2 - middle
@@ -1435,7 +1516,7 @@
     });
 
     /* ------------------------------------------------------
-       Highlights and notes storage
+       Highlights and personal notes storage
        ------------------------------------------------------ */
 
     function loadPageData() {
@@ -1443,16 +1524,7 @@
         var data = JSON.parse(localStorage.getItem(pkey) || 'null');
 
         if (data && Array.isArray(data.items)) {
-          data.items = data.items.filter(function (item) {
-            return item &&
-              typeof item.id === 'string' &&
-              Number.isInteger(item.start) &&
-              Number.isInteger(item.end) &&
-              item.end > item.start;
-          });
-
           data.note = typeof data.note === 'string' ? data.note : '';
-
           return data;
         }
       } catch (e) {}
@@ -1465,6 +1537,8 @@
     }
 
     P = loadPageData();
+
+    noteArea.value = P.note;
 
     function savePageData() {
       P.u = Date.now();
@@ -1763,7 +1837,6 @@
         list.appendChild(
           make('p', 'rd-note', 'Your saved highlights will appear here.')
         );
-        return;
       }
 
       P.items.forEach(function (item) {
@@ -1790,13 +1863,13 @@
               block: 'center'
             });
 
-            closeAllPanels(false);
+            closeAllPanels(null);
           } else {
             toast('The saved text could not be located.');
           }
         });
 
-        var remove = make('button', 'rd-danger', 'Remove');
+        var remove = make('button', '', 'Remove');
         remove.type = 'button';
 
         remove.addEventListener('click', function () {
@@ -1809,86 +1882,28 @@
     }
 
     /* ------------------------------------------------------
-       Dedicated highlight tools
+       Highlight panel actions
        ------------------------------------------------------ */
 
-    function buildHighlightTools() {
-      var section = document.getElementById('rd-highlight-tools');
+    document.getElementById('rd-highlight-colors')
+      .addEventListener('click', function (event) {
+        var button = event.target.closest('button[data-color]');
 
-      section.replaceChildren();
+        if (!button) return;
 
-      section.appendChild(make(
-        'p',
-        'rd-note',
-        'Select text in the lesson first. Then choose a colour to save your highlight.'
-      ));
-
-      var colors = [
-        { value: '#f8df8b', label: 'Yellow' },
-        { value: '#b9e4d0', label: 'Mint' },
-        { value: '#c9d9ff', label: 'Blue' },
-        { value: '#efc7dc', label: 'Pink' }
-      ];
-
-      var colorRow = make('div', 'rd-seg');
-
-      colors.forEach(function (color) {
-        var button = make('button', 'rd-color-btn');
-        button.type = 'button';
-
-        var dot = make('span', 'rd-color-dot');
-        dot.style.backgroundColor = color.value;
-
-        button.append(dot, document.createTextNode(color.label));
-
-        button.addEventListener('click', function () {
-          addHighlight(color.value);
-        });
-
-        colorRow.appendChild(button);
+        addHighlight(button.dataset.color);
       });
 
-      section.appendChild(colorRow);
-      section.appendChild(make('h3', '', 'Saved highlights'));
-
-      var list = make('div', '');
-      list.id = 'rd-saved-items';
-      section.appendChild(list);
-
-      renderHighlights();
-    }
-
     /* ------------------------------------------------------
-       Dedicated notes tools
+       Personal notes actions
        ------------------------------------------------------ */
 
-    function buildNotesTools() {
-      var section = document.getElementById('rd-notes-tools');
+    notesPanel.addEventListener('click', function (event) {
+      var button = event.target.closest('button[data-act]');
 
-      section.replaceChildren();
+      if (!button) return;
 
-      section.appendChild(make(
-        'p',
-        'rd-note',
-        'Write down grammar rules, new vocabulary, examples or questions from this lesson. Your notes are saved in this browser.'
-      ));
-
-      noteArea = document.createElement('textarea');
-      noteArea.id = 'rd-personal-note';
-      noteArea.rows = 9;
-      noteArea.value = P.note;
-      noteArea.placeholder = 'Write your lesson notes here...';
-      noteArea.setAttribute('aria-label', 'Personal reading notes');
-
-      section.appendChild(noteArea);
-
-      var buttons = make('div', 'rd-seg');
-      buttons.style.marginTop = '10px';
-
-      var saveNote = make('button', 'rd-primary', 'Save notes');
-      saveNote.type = 'button';
-
-      saveNote.addEventListener('click', function () {
+      if (button.dataset.act === 'save-note') {
         var previous = P.note;
         P.note = noteArea.value;
 
@@ -1897,12 +1912,9 @@
         } else {
           P.note = previous;
         }
-      });
+      }
 
-      var clearNote = make('button', 'rd-danger', 'Clear notes');
-      clearNote.type = 'button';
-
-      clearNote.addEventListener('click', function () {
+      if (button.dataset.act === 'clear-note') {
         if (!noteArea.value.trim()) {
           toast('There are no notes to clear.');
           return;
@@ -1910,39 +1922,29 @@
 
         if (!window.confirm('Clear your personal notes?')) return;
 
-        var previous = P.note;
+        var previousNote = P.note;
+        var previousValue = noteArea.value;
+
         P.note = '';
         noteArea.value = '';
 
         if (savePageData()) {
           toast('Your notes have been cleared.');
         } else {
-          P.note = previous;
-          noteArea.value = previous;
+          P.note = previousNote;
+          noteArea.value = previousValue;
         }
-      });
-
-      buttons.append(saveNote, clearNote);
-      section.appendChild(buttons);
-
-      var status = make(
-        'p',
-        'rd-note',
-        'Notes are stored locally on this device. They are not synced to other devices.'
-      );
-
-      section.appendChild(status);
-    }
+      }
+    });
 
     /* ------------------------------------------------------
-       Finish initialisation
+       Restore highlights and initialise reader
        ------------------------------------------------------ */
 
     restoreHighlights();
-    buildHighlightTools();
-    buildNotesTools();
-
+    renderHighlights();
     apply();
     onScroll();
+
   }
 })();
