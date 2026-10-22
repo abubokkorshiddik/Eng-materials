@@ -3,50 +3,79 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>IELTS Grammar Lab | The ten grammar areas that matter most</title>
-<meta name="description" content="Plain-English grammar lessons for IELTS and everyday use: sentence structure, agreement, tenses, articles, clauses, conditionals, passive, gerunds and punctuation.">
+<title>English Materials | Grammar, Vocabulary and Books</title>
+<meta name="description" content="Free English learning materials: grammar lessons, vocabulary and a reading library for IELTS and everyday English.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Literata:wght@400;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#1f2a44;--blue:#1f4fbf;--paper:#fbfaf7;--line:#0002}
+:root{--ink:#1f2a44;--blue:#1f4fbf;--paper:#fbfaf7;--line:#0002;--text:#222;--muted:#555}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#e8ecf7;--blue:#8fb0ff;--paper:#14171f;--line:#fff3;--text:#e6e6e6;--muted:#a9afbd}}
 *{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:#222;font:18px/1.75 Literata,Georgia,serif}
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+body{margin:0;background:var(--paper);color:var(--text);font:18px/1.7 Literata,Georgia,serif}
 a{color:var(--blue)}
-.top{max-width:720px;margin:auto;padding:16px 18px;display:flex;justify-content:space-between;font:600 .9rem Inter,sans-serif}
-.top a{color:#333;text-decoration:none}
+.top{max-width:720px;margin:auto;padding:16px 18px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font:600 .9rem Inter,sans-serif}
+.top a{color:var(--ink);text-decoration:none}
 main{max-width:720px;margin:auto;padding:0 18px 70px}
 h1,h2,h3{font-family:Fraunces,Georgia,serif;color:var(--ink);line-height:1.2}
-h1{font-size:clamp(2.2rem,8vw,3.5rem);margin:30px 0 14px}
-h2{font-size:1.6rem;margin:50px 0 10px}
-h3{font-size:1.15rem;margin:0 0 4px}
-.lead{font-size:1.15rem}
-.btn{display:inline-block;background:var(--ink);color:#fff;padding:12px 20px;border-radius:6px;text-decoration:none;font:600 .95rem Inter,sans-serif;margin:6px 8px 6px 0}
+h1{font-size:clamp(2.2rem,8vw,3.3rem);margin:30px 0 14px}
+h2{font-size:1.6rem;margin:54px 0 6px}
+h3{font-size:1.1rem;margin:0 0 2px}
+.lead{font-size:1.1rem;color:var(--muted)}
+.sec-note{margin:0 0 14px;color:var(--muted);font-size:.97rem}
+.btn{display:inline-block;background:var(--ink);color:var(--paper);padding:11px 18px;border-radius:6px;text-decoration:none;font:600 .92rem Inter,sans-serif;margin:6px 8px 6px 0}
 .btn.alt{background:none;color:var(--ink);border:1px solid var(--ink)}
-.way{display:block;text-decoration:none;color:inherit;border-top:1px solid var(--line);padding:16px 0}
-.way:last-of-type{border-bottom:1px solid var(--line)}
+.way{display:block;text-decoration:none;color:inherit;border-top:1px solid var(--line);padding:14px 0}
+.way p{margin:0;color:var(--muted);font-size:.95rem}
 .way:hover h3{color:var(--blue)}
-.way p{margin:0;color:#555;font-size:.97rem}
-ol.path{padding-left:22px}
-ol.path li{margin:8px 0}
-ol.path span{color:#666;font-size:.93rem}
-ul{padding-left:22px}li{margin:8px 0}
-.foot{margin-top:60px;color:#666;font:.85rem Inter,sans-serif}
+.list>:last-child{border-bottom:1px solid var(--line)}
+details{border-top:1px solid var(--line)}
+details.last{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;padding:14px 0;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary h3::after{content:" ▾";font-size:.8em;color:var(--muted)}
+details[open] summary h3::after{content:" ▴"}
+summary p{margin:0;color:var(--muted);font-size:.95rem}
+details ol{margin:0 0 14px;padding-left:22px}
+details li{margin:6px 0;font-size:1rem}
+.book{border-top:1px solid var(--line);padding:16px 0}
+.book:last-of-type{border-bottom:1px solid var(--line)}
+.book p{margin:2px 0 8px;color:var(--muted);font-size:.95rem}
+.book .btn{padding:8px 14px;font-size:.85rem}
+.foot{margin-top:60px;color:var(--muted);font:.85rem Inter,sans-serif}
 :focus-visible{outline:3px solid var(--blue);outline-offset:2px}
 </style>
 <script src="reader.js"></script>
 </head>
 <body>
-<nav class="top"><a href="index.html">IELTS Grammar Lab</a><a href="tenses.html">Tenses</a></nav>
+<nav class="top"><a href="index.html">English Materials</a><span><a href="#grammar">Grammar</a> &nbsp; <a href="#vocabulary">Vocabulary</a> &nbsp; <a href="#reader">Reader</a></span></nav>
 <main>
-<h1>Grammar for IELTS, explained like a teacher would</h1>
-<p class="lead">For anyone who has studied grammar and still gets stuck. Ten areas cover most of the errors that cost marks. Each lesson gives you a plain explanation, the mistakes learners really make and why, exam traps, practice you can check yourself, and a quiz that explains every answer.</p>
-<p><a class="btn" href="sentence-structure.html">Start with lesson 1</a><a class="btn alt" href="#topics">See all ten topics</a></p>
+<h1>English materials in one place</h1>
+<p class="lead">Grammar lessons, vocabulary and a library of books to read, for IELTS, TOEFL, PTE and everyday English.</p>
+<p><a class="btn" href="#grammar">Grammar</a><a class="btn alt" href="#vocabulary">Vocabulary</a><a class="btn alt" href="#reader">Reader</a></p>
 
-<h2 id="topics">The ten topics</h2>
-<p>They are in a helpful order, from the building blocks to the finishing touches. Already comfortable with one? Jump straight to the one you need.</p>
+<h2 id="grammar">Grammar</h2>
+<p class="sec-note">Ten topics, from building blocks to finishing touches.</p>
+<div class="list">
 <a class="way" href="sentence-structure.html"><h3>1. Sentence structure</h3><p>Build complete, accurate sentences.</p></a>
 <a class="way" href="subject-verb-agreement.html"><h3>2. Subject–verb agreement</h3><p>Avoid errors such as “people is” instead of “people are”.</p></a>
-<a class="way" href="tenses.html"><h3>3. Tenses</h3><p>Choose the correct tense and keep time references consistent.</p></a>
+<details>
+<summary><h3>3. Tenses</h3><p>Choose the correct tense and keep time references consistent.</p></summary>
+<ol>
+<li><a href="tenses.html">Tenses overview</a></li>
+<li><a href="present-simple-and-continuous.html">Present simple and continuous</a></li>
+<li><a href="past-simple.html">Past simple</a></li>
+<li><a href="past-continuous.html">Past continuous</a></li>
+<li><a href="future-simple.html">Future simple</a></li>
+<li><a href="future-continuous.html">Future continuous</a></li>
+<li><a href="present-perfect.html">Present perfect</a></li>
+<li><a href="past-perfect.html">Past perfect</a></li>
+<li><a href="future-perfect.html">Future perfect</a></li>
+<li><a href="present-perfect-continuous.html">Present perfect continuous</a></li>
+<li><a href="past-perfect-continuous.html">Past perfect continuous</a></li>
+<li><a href="future-perfect-continuous.html">Future perfect continuous</a></li>
+</ol>
+</details>
 <a class="way" href="articles-and-nouns.html"><h3>4. Articles and nouns</h3><p>Use a, an, the, and plural forms correctly.</p></a>
 <a class="way" href="complex-sentences.html"><h3>5. Complex sentences</h3><p>Connect ideas clearly and accurately.</p></a>
 <a class="way" href="relative-clauses.html"><h3>6. Relative clauses</h3><p>Add information without creating multiple short sentences.</p></a>
@@ -54,33 +83,39 @@ ul{padding-left:22px}li{margin:8px 0}
 <a class="way" href="passive-voice.html"><h3>8. Passive voice</h3><p>Useful for academic writing and process descriptions.</p></a>
 <a class="way" href="gerunds-and-infinitives.html"><h3>9. Gerunds and infinitives</h3><p>Avoid errors such as “I enjoy to read” instead of “I enjoy reading”.</p></a>
 <a class="way" href="punctuation.html"><h3>10. Punctuation</h3><p>Separate ideas correctly and avoid comma splices.</p></a>
+</div>
 
-<h2>Inside the tenses topic</h2>
-<p>Tenses is the biggest topic, so it has its own set of lessons. <a href="tenses.html">Open the tenses page</a> or follow this order:</p>
-<ol class="path">
-<li><a href="present-simple-and-continuous.html">Present simple and continuous</a> <span>habits, facts, and what is happening now</span></li>
-<li><a href="past-simple.html">Past simple</a> <span>finished events and stories</span></li>
-<li><a href="past-continuous.html">Past continuous</a> <span>what was going on in the background</span></li>
-<li><a href="future-simple.html">Future simple</a> <span>promises, decisions and predictions</span></li>
-<li><a href="future-continuous.html">Future continuous</a> <span>what will be happening at a future time</span></li>
-<li><a href="present-perfect.html">Present perfect</a> <span>the bridge between past and now</span></li>
-<li><a href="past-perfect.html">Past perfect</a> <span>the earlier of two past events</span></li>
-<li><a href="future-perfect.html">Future perfect</a> <span>finished by a future deadline</span></li>
-<li><a href="present-perfect-continuous.html">Present perfect continuous</a> <span>how long, and the effects now</span></li>
-<li><a href="past-perfect-continuous.html">Past perfect continuous</a> <span>duration before a past moment</span></li>
-<li><a href="future-perfect-continuous.html">Future perfect continuous</a> <span>duration up to a future moment</span></li>
-</ol>
+<h2 id="vocabulary">Vocabulary</h2>
+<p class="sec-note">Build the word power you need for IELTS.</p>
+<div class="list">
+<a class="way" href="https://github.com/abubokkorshiddik/Eng-materials/blob/main/IELTS%20Vocabulary%20Booster.pdf"><h3>IELTS Vocabulary Booster</h3><p>Open the book in the reader below.</p></a>
+</div>
 
-<h2>How to get the most from each lesson</h2>
-<ul>
-<li>Read the plain-words paragraph first. It gives you the big idea before the rules.</li>
-<li>Read the mistakes slowly. Most exam errors are on that list.</li>
-<li>Do the practice before you look at the answers.</li>
-<li>Keep a notebook of your own mistakes and read it every other day.</li>
-<li>Take the quiz again after a day, three days and a week.</li>
-</ul>
+<h2 id="reader">Reader</h2>
+<p class="sec-note">Read online or download the PDF.</p>
 
-<p class="foot">IELTS Grammar Lab. Useful for IELTS, TOEFL, PTE and everyday English.</p>
+<div class="book">
+<h3>English Grammar in Use (Intermediate)</h3>
+<p>Clear explanations with exercises. Ideal for self-study.</p>
+<a class="btn" href="https://github.com/abubokkorshiddik/Eng-materials/blob/main/English-Grammer-In-Use-Intermediatr.pdf" target="_blank" rel="noopener">Read</a>
+<a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/English-Grammer-In-Use-Intermediatr.pdf" download>Download</a>
+</div>
+
+<div class="book">
+<h3>IELTS Vocabulary Booster</h3>
+<p>Topic-based words and phrases for higher band scores.</p>
+<a class="btn" href="https://github.com/abubokkorshiddik/Eng-materials/blob/main/IELTS%20Vocabulary%20Booster.pdf" target="_blank" rel="noopener">Read</a>
+<a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/IELTS%20Vocabulary%20Booster.pdf" download>Download</a>
+</div>
+
+<div class="book">
+<h3>High School English Grammar and Composition</h3>
+<p>Wren and Martin. The classic reference for grammar and writing.</p>
+<a class="btn" href="https://github.com/abubokkorshiddik/Eng-materials/blob/main/the-languagelab-library-high-school-english-grammar-and-composition-wren-and-martin-ZmlD.pdf" target="_blank" rel="noopener">Read</a>
+<a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/the-languagelab-library-high-school-english-grammar-and-composition-wren-and-martin-ZmlD.pdf" download>Download</a>
+</div>
+
+<p class="foot">English Materials. Useful for IELTS, TOEFL, PTE and everyday English.<br>© 2026 <a href="https://abubokkorshiddik.github.io/AbuBokkorShiddik.abs798/home" target="_blank" rel="noopener">Abu Bokkor Shiddik</a>. All rights reserved.</p>
 </main>
 </body>
 </html>
