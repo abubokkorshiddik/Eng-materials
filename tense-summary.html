@@ -1,65 +1,750 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tense summary | IELTS Grammar Lab</title><meta name="description" content="All twelve English tenses on one page, with a timeline for each and a five-question quiz."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Literata:ital,wght@0,400;0,700;1,400&family=Fraunces:wght@400;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="lesson.css"><script src="reader.js"></script><style>main{max-width:900px}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tense summary | IELTS Grammar Lab</title>
+<meta name="description" content="Learn all twelve English tenses with timelines, examples, grammar rules and a 20-passage practice quiz.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Literata:ital,wght@0,400;0,700;1,400&family=Fraunces:wght@400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="lesson.css">
+<script src="reader.js"></script>
+
+<style>
+main{max-width:900px}
 .zones{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0 6px}
 .zones div{border-top:6px solid var(--a);padding:8px 2px;font:500 .85rem/1.55 Inter,sans-serif}
-.zones div.pa{border-color:#7c3aed}.zones div.fu{border-color:#c2410c}
+.zones div.pa{border-color:#7c3aed}
+.zones div.fu{border-color:#c2410c}
 .zones b{display:block;font:700 1.1rem Fraunces,Georgia,serif;margin-bottom:2px}
-.zones i{font-style:normal;opacity:.75;font-size:.8rem}
 .shapes{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px 22px}
 .shapes p{margin:4px 0;font-size:.97rem}
 .sc{overflow-x:auto}
 .tt{width:100%;border-collapse:collapse;font:.92rem/1.45 Inter,sans-serif;min-width:560px}
 .tt th,.tt td{padding:9px 10px;border-bottom:1px solid rgba(128,128,128,.35);text-align:left;vertical-align:top}
-.tt th{font-weight:600;opacity:.8}.tt td a{font-weight:600;text-decoration:none}.tt td span{display:block;opacity:.8;margin-top:2px}
+.tt th{font-weight:600;opacity:.8}
+.tt td a{font-weight:600;text-decoration:none}
+.tt td span{display:block;opacity:.8;margin-top:2px}
 .tn{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:14px 0}
-.cd{border:1px solid rgba(128,128,128,.4);border-radius:12px;padding:14px 14px 12px}
-.cd.pa{--a:#7c3aed}.cd.fu{--a:#c2410c}
-.cd h3{margin:0 0 2px;font-size:1.1rem}
+.cd{border:1px solid rgba(128,128,128,.4);border-radius:12px;padding:14px}
+.cd.pa{--a:#7c3aed}
+.cd.fu{--a:#c2410c}
+.cd h3{margin:0 0 6px;font-size:1.1rem}
 .cd svg{width:100%;height:auto;display:block;margin:4px 0 6px;color:inherit}
 .cd .f{font:600 .8rem Inter,sans-serif;border-left:3px solid var(--a);padding-left:8px;margin:6px 0}
-.cd p{margin:6px 0;font-size:.95rem;line-height:1.55}.cd .k{font-size:.85rem;opacity:.8}.cd a{font:600 .85rem Inter,sans-serif}
-.ax{stroke:currentColor;opacity:.4;stroke-width:2}.nowl{stroke:currentColor;opacity:.7;stroke-width:1.5}
-.sp{fill:var(--a);opacity:.9}.dt{fill:var(--a)}.rg{fill:var(--bg);stroke:var(--a);stroke-width:3}
-.br{stroke:var(--a);stroke-width:4;stroke-dasharray:6 4}.tk{stroke:currentColor;stroke-width:2}
-.lb{font:600 10px Inter,sans-serif;fill:currentColor}.zn{font:600 9px Inter,sans-serif;fill:currentColor;opacity:.65}
-.qq{padding:16px 0;border-top:1px solid rgba(128,128,128,.4)}.qq p{margin:0 0 10px;font-weight:600;line-height:2.2}
-.qq select{font:500 .95rem Inter,sans-serif;padding:6px 8px;border-radius:6px;border:1px solid rgba(128,128,128,.7);background:var(--bg);color:inherit;max-width:100%}
-.qq .fb{font-size:.9rem;margin:2px 0}
-@media(max-width:620px){.zones{grid-template-columns:1fr}}
-</style></head><body>
-<nav class="top"><a href="index.html">IELTS Grammar Lab</a><a href="tenses.html">All tenses</a></nav><main>
-<div class="hd v3"><span class="lvl">All levels</span><h1>Tense summary</h1></div>
-<p class="sub">All twelve tenses on one page. Each one has a timeline that shows when it points to: the past, now or the future.</p>
-<div class="zones" aria-label="Three time zones"><div class="pa"><b>Past</b>past simple · past continuous · past perfect · past perfect continuous</div><div><b>Present</b>present simple · present continuous · present perfect · present perfect continuous</div><div class="fu"><b>Future</b>future simple · future continuous · future perfect · future perfect continuous</div></div>
+.cd p{margin:6px 0;font-size:.95rem;line-height:1.55}
+.cd .k{font-size:.85rem;opacity:.8}
+.cd a{font:600 .85rem Inter,sans-serif}
+.ax{stroke:currentColor;opacity:.4;stroke-width:2}
+.nowl{stroke:currentColor;opacity:.7;stroke-width:1.5}
+.sp{fill:var(--a);opacity:.9}
+.dt{fill:var(--a)}
+.rg{fill:var(--bg);stroke:var(--a);stroke-width:3}
+.br{stroke:var(--a);stroke-width:4;stroke-dasharray:6 4}
+.tk{stroke:currentColor;stroke-width:2}
+.lb{font:600 10px Inter,sans-serif;fill:currentColor}
+.zn{font:600 9px Inter,sans-serif;fill:currentColor;opacity:.65}
+
+.qq{padding:16px 0;border-top:1px solid rgba(128,128,128,.4)}
+.qq p{margin:0 0 10px;line-height:1.9}
+.qq .passage{font-weight:500}
+.qq select{font:500 .9rem Inter,sans-serif;padding:7px 8px;border-radius:7px;border:1px solid rgba(128,128,128,.7);background:var(--bg);color:inherit;max-width:100%;margin:3px 0}
+.qq select:focus{outline:2px solid #1a56db;outline-offset:2px}
+.qq .fb{font-size:.9rem;margin:8px 0;padding:9px 11px;border-radius:7px;line-height:1.6}
+.qq .fb.ok{border-left:3px solid #16805d}
+.qq .fb.no{border-left:3px solid #b54747}
+.quiz-tools{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0}
+.quiz-tools button{cursor:pointer}
+.quiz-progress{font:500 .9rem Inter,sans-serif;margin:12px 0}
+.progress-track{height:7px;background:rgba(128,128,128,.2);border-radius:20px;overflow:hidden;margin:8px 0 16px}
+.progress-fill{height:100%;width:0;background:#1a56db;transition:width .2s}
+.quiz-result{padding:15px 0;border-top:1px solid rgba(128,128,128,.35);margin-top:16px}
+.quiz-result h3{margin-bottom:8px}
+.score-number{font:700 1.8rem Fraunces,Georgia,serif}
+.score-detail{font-size:.95rem;line-height:1.7}
+.review-list{padding-left:20px;line-height:1.8}
+.quiz-note{font-size:.9rem;opacity:.8}
+@media(max-width:620px){
+ .zones{grid-template-columns:1fr}
+ .tn{grid-template-columns:1fr}
+ .qq select{max-width:100%}
+}
+</style>
+</head>
+
+<body>
+<nav class="top">
+<a href="index.html">IELTS Grammar Lab</a>
+<a href="tenses.html">All tenses</a>
+</nav>
+
+<main>
+<div class="hd v3">
+<span class="lvl">All levels</span>
+<h1>Tense summary</h1>
+</div>
+
+<p class="sub">All twelve English tenses on one page. Learn when to use each tense, understand the timelines, and test yourself with 20 short passages.</p>
+
+<div class="zones" aria-label="Three time zones">
+<div class="pa">
+<b>Past</b>
+past simple · past continuous · past perfect · past perfect continuous
+</div>
+<div>
+<b>Present</b>
+present simple · present continuous · present perfect · present perfect continuous
+</div>
+<div class="fu">
+<b>Future</b>
+future simple · future continuous · future perfect · future perfect continuous
+</div>
+</div>
+
 <h2>In plain words</h2>
 <p class="say">Every tense answers two questions. <b>When?</b> Past, present or future. <b>What shape is the action?</b> Choose the shape first, then the time, and the tense name follows.</p>
-<div class="shapes"><p><b>Simple</b><br>The whole fact, habit or event.</p><p><b>Continuous</b><br>In progress, not finished.</p><p><b>Perfect</b><br>Finished before, or linked to, a reference time.</p><p><b>Perfect continuous</b><br>Duration up to a reference time.</p></div>
+
+<div class="shapes">
+<p><b>Simple</b><br>The whole fact, habit or event.</p>
+<p><b>Continuous</b><br>An action in progress at a particular time.</p>
+<p><b>Perfect</b><br>An action completed before, or connected to, a reference time.</p>
+<p><b>Perfect continuous</b><br>The duration of an action up to a reference time.</p>
+</div>
+
 <h2>The big picture</h2>
-<p class="small">Same verb, twelve tenses. Tap a name to jump to its timeline.</p>
-<div class="sc"><table class="tt"><thead><tr><th></th><th>Past</th><th>Present</th><th>Future</th></tr></thead><tbody><tr><th scope="row">Simple</th><td><a href="#pas">Past simple</a><span>I worked.</span></td><td><a href="#ps">Present simple</a><span>I work.</span></td><td><a href="#fs">Future simple</a><span>I will work.</span></td></tr><tr><th scope="row">Continuous</th><td><a href="#pac">Past continuous</a><span>I was working.</span></td><td><a href="#pc">Present continuous</a><span>I am working.</span></td><td><a href="#fc">Future continuous</a><span>I will be working.</span></td></tr><tr><th scope="row">Perfect</th><td><a href="#pap">Past perfect</a><span>I had worked.</span></td><td><a href="#pp">Present perfect</a><span>I have worked.</span></td><td><a href="#fp">Future perfect</a><span>I will have worked.</span></td></tr><tr><th scope="row">Perfect continuous</th><td><a href="#papc">Past perfect continuous</a><span>I had been working.</span></td><td><a href="#ppc">Present perfect continuous</a><span>I have been working.</span></td><td><a href="#fpc">Future perfect continuous</a><span>I will have been working.</span></td></tr></tbody></table></div>
+<p class="small">Tap a tense name to jump to its timeline.</p>
+
+<div class="sc">
+<table class="tt">
+<thead>
+<tr><th></th><th>Past</th><th>Present</th><th>Future</th></tr>
+</thead>
+<tbody>
+<tr>
+<th scope="row">Simple</th>
+<td><a href="#pas">Past simple</a><span>I worked.</span></td>
+<td><a href="#ps">Present simple</a><span>I work.</span></td>
+<td><a href="#fs">Future simple</a><span>I will work.</span></td>
+</tr>
+<tr>
+<th scope="row">Continuous</th>
+<td><a href="#pac">Past continuous</a><span>I was working.</span></td>
+<td><a href="#pc">Present continuous</a><span>I am working.</span></td>
+<td><a href="#fc">Future continuous</a><span>I will be working.</span></td>
+</tr>
+<tr>
+<th scope="row">Perfect</th>
+<td><a href="#pap">Past perfect</a><span>I had worked.</span></td>
+<td><a href="#pp">Present perfect</a><span>I have worked.</span></td>
+<td><a href="#fp">Future perfect</a><span>I will have worked.</span></td>
+</tr>
+<tr>
+<th scope="row">Perfect continuous</th>
+<td><a href="#papc">Past perfect continuous</a><span>I had been working.</span></td>
+<td><a href="#ppc">Present perfect continuous</a><span>I have been working.</span></td>
+<td><a href="#fpc">Future perfect continuous</a><span>I will have been working.</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+
 <h2>How to read the timelines</h2>
-<p>The line goes from past (left) to future (right). The dashed line in the middle is <b>now</b>. A dot is one point in time. A bar is an action that lasts. A ring is a reference point, such as a past moment or a future deadline.</p>
-<h2>Present tenses</h2><div class="tn"><article class="cd pr" id="ps"><h3>Present simple</h3><svg viewBox="0 0 300 80" role="img" aria-label="Timeline for Present simple"><line class="ax" x1="6" y1="38" x2="294" y2="38"/><line class="nowl" x1="150" y1="12" x2="150" y2="64" stroke-dasharray="3 3"/><text class="zn" x="6" y="77">past</text><text class="zn" x="150" y="77" text-anchor="middle">now</text><text class="zn" x="294" y="77" text-anchor="end">future</text><circle class="dt" cx="40" cy="38" r="4"/><circle class="dt" cx="80" cy="38" r="4"/><circle class="dt" cx="120" cy="38" r="4"/><circle class="dt" cx="150" cy="38" r="4"/><circle class="dt" cx="180" cy="38" r="4"/><circle class="dt" cx="220" cy="38" r="4"/><circle class="dt" cx="260" cy="38" r="4"/><text class="lb" x="150" y="58" text-anchor="middle">again and again</text></svg><p class="f">I/you/we/they work · he/she/it works</p><p><span class="ex">She works every day.</span></p><p>Facts, habits, timetables.</p><p class="k">Clues: always, usually, every day, on Mondays</p><p><a href="present-simple-and-continuous.html">Full lesson &rarr;</a></p></article><article class="cd pr" id="pc"><h3>Present continuous</h3><svg viewBox="0 0 300 80" role="img" aria-label="Timeline for Present continuous"><line class="ax" x1="6" y1="38" x2="294" y2="38"/><line class="nowl" x1="150" y1="12" x2="150" y2="64" stroke-dasharray="3 3"/><text class="zn" x="6" y="77">past</text><text class="zn" x="150" y="77" text-anchor="middle">now</text><text class="zn" x="294" y="77" text-anchor="end">future</text><rect class="sp" x="122" y="33" width="56" height="10" rx="5"/><text class="lb" x="150" y="58" text-anchor="middle">around now</text></svg><p class="f">am / is / are + verb-ing</p><p><span class="ex">I am studying now.</span></p><p>Happening now, temporary, changing, arranged plans.</p><p class="k">Clues: now, at the moment, currently, this week</p><p><a href="present-simple-and-continuous.html">Full lesson &rarr;</a></p></article><article class="cd pr" id="pp"><h3>Present perfect</h3><svg viewBox="0 0 300 80" role="img" aria-label="Timeline for Present perfect"><line class="ax" x1="6" y1="38" x2="294" y2="38"/><line class="nowl" x1="150" y1="12" x2="150" y2="64" stroke-dasharray="3 3"/><text class="zn" x="6" y="77">past</text><text class="zn" x="150" y="77" text-anchor="middle">now</text><text class="zn" x="294" y="77" text-anchor="end">future</text><circle class="dt" cx="86" cy="38" r="6"/><line class="br" x1="86" y1="38" x2="150" y2="38"/><text class="lb" x="86" y="26" text-anchor="middle">past event</text><text class="lb" x="118" y="58" text-anchor="middle">connected to now</text></svg><p class="f">have / has + past participle</p><p><span class="ex">I have finished my homework.</span></p><p>A past event linked to now: experience, result, unfinished period.</p><p class="k">Clues: already, just, yet, ever, never, since, for</p><p><a href="present-perfect.html">Full lesson &rarr;</a></p></article><article class="cd pr" id="ppc"><h3>Present perfect continuous</h3><svg viewBox="0 0 300 80" role="img" aria-label="Timeline for Present perfect continuous"><line class="ax" x1="6" y1="38" x2="294" y2="38"/><line class="nowl" x1="150" y1="12" x2="150" y2="64" stroke-dasharray="3 3"/><text class="zn" x="6" y="77">past</text><text class="zn" x="150" y="77" text-anchor="middle">now</text><text class="zn" x="294" y="77" text-anchor="end">future</text><rect class="sp" x="70" y="33" width="80" height="10" rx="5"/><text class="lb" x="110" y="58" text-anchor="middle">duration up to now</text></svg><p class="f">have / has been + verb-ing</p><p><span class="ex">I have been waiting for an hour.</span></p><p>How long up to now, or an activity with a visible result.</p><p class="k">Clues: for, since, all day, lately, recently</p><p><a href="present-perfect-continuous.html">Full lesson &rarr;</a></p></article></div><h2>Past tenses</h2><div class="tn"><article class="cd pa" id="pas"><h3>Past simple</h3><svg viewBox="0 0 300 80" role="img" aria-label="Timeline for Past simple"><line class="ax" x1="6" y1="38" x2="294" y2="38"/><line class="nowl" x1="150" y1="12" x2="150" y2="64" stroke-dasharray="3 3"/><text class="zn" x="6" y="77">past</text><text class="zn" x="150" y="77" text-anchor="middle">now</text><text class="zn" x="294" y="77" text-anchor="end">future</text><circle class="dt" cx="70" cy="38" r="6"/><text class="lb" x="70" y="58" text-anchor="middle">finished</text></svg><p class="f">verb-ed or irregular form</p><p><span class="ex">I visited Rome in 2019.</span></p><p>A finished event at a finished time.</p><p class="k">Clues: yesterday, last week, in 2019, ago</p><p><a href="past-simple.html">Full lesson &rarr;</a></p></article><article class="cd pa" id="pac"><h3>Past continuous</h3><svg viewBox="0 0 300 80" role="img" aria-label="Timeline for Past continuous"><line class="ax" x1="6" y1="38" x2="294" y2="38"/><line class="nowl" x1="150" y1="12" x2="150" y2="64" stroke-dasharray="3 3"/><text class="zn" x="6" y="77">past</text><text class="zn" x="150" y="77" text-anchor="middle">now</text><text class="zn" x="294" y="77" text-anchor="end">future</text><rect class="sp" x="36" y="33" width="76" height="10" rx="5"/><line class="tk" x1="90" y1="24" x2="90" y2="52"/><text class="lb" x="90" y="18" text-anchor="middle">then</text><text class="lb" x="74" y="62" text-anchor="middle">in progress</text></svg><p class="f">was / were + verb-ing</p><p><span class="ex">I was cooking when you called.</span></p><p>In progress at a past moment: the background action.</p><p class="k">Clues: while, when, at 8 last night</p><p><a href="past-continuous.html">Full lesson &rarr;</a></p></article><article class="cd pa" id="pap"><h3>Past perfect</h3><svg viewBox="0 0 300 80" role="img" aria-label="Timeline for Past perfect"><line class="ax" x1="6" y1="38" x2="294" y2="38"/><line class="nowl" x1="150" y1="12" x2="150" y2="64" stroke-dasharray="3 3"/><text class="zn" x="6" y="77">past</text><text class="zn" x="150" y="77" text-anchor="middle">now</text><text class="zn" x="294" y="77" text-anchor="end">future</text><circle class="dt" cx="60" cy="38" r="6"/><circle class="rg" cx="122" cy="38" r="6"/><text class="lb" x="60" y="26" text-anchor="middle">earlier</text><text class="lb" x="122" y="26" text-anchor="middle">later</text><text class="lb" x="91" y="62" text-anchor="middle">both in the past</text></svg><p class="f">had + past participle</p><p><span class="ex">She had left before I arrived.</span></p><p>The earlier of two past events.</p><p class="k">Clues: by the time, before, after, already, when</p><p><a href="past-perfect.html">Full lesson &rarr;</a></p></article><article class="cd pa" id="papc"><h3>Past perfect continuous</h3><svg viewBox="0 0 300 80" role="img" aria-label="Timeline for Past perfect continuous"><line class="ax" x1="6" y1="38" x2="294" y2="38"/><line class="nowl" x1="150" y1="12" x2="150" y2="64" stroke-dasharray="3 3"/><text class="zn" x="6" y="77">past</text><text class="zn" x="150" y="77" text-anchor="middle">now</text><text class="zn" x="294" y="77" text-anchor="end">future</text><rect class="sp" x="30" y="33" width="72" height="10" rx="5"/><circle class="rg" cx="122" cy="38" r="6"/><text class="lb" x="66" y="62" text-anchor="middle">duration</text><text class="lb" x="122" y="26" text-anchor="middle">past moment</text></svg><p class="f">had been + verb-ing</p><p><span class="ex">She was tired because she had been working all night.</span></p><p>Duration up to a past moment, often explaining a result.</p><p class="k">Clues: for, since, all night, before that</p><p><a href="past-perfect-continuous.html">Full lesson &rarr;</a></p></article></div><h2>Future tenses</h2><div class="tn"><article class="cd fu" id="fs"><h3>Future simple</h3><svg viewBox="0 0 300 80" role="img" aria-label="Timeline for Future simple"><line class="ax" x1="6" y1="38" x2="294" y2="38"/><line class="nowl" x1="150" y1="12" x2="150" y2="64" stroke-dasharray="3 3"/><text class="zn" x="6" y="77">past</text><text class="zn" x="150" y="77" text-anchor="middle">now</text><text class="zn" x="294" y="77" text-anchor="end">future</text><circle class="dt" cx="228" cy="38" r="6"/><text class="lb" x="228" y="58" text-anchor="middle">decision / prediction</text></svg><p class="f">will + base verb</p><p><span class="ex">I will help you.</span></p><p>Decisions made now, promises, predictions.</p><p class="k">Clues: tomorrow, probably, I think, soon</p><p><a href="future-simple.html">Full lesson &rarr;</a></p></article><article class="cd fu" id="fc"><h3>Future continuous</h3><svg viewBox="0 0 300 80" role="img" aria-label="Timeline for Future continuous"><line class="ax" x1="6" y1="38" x2="294" y2="38"/><line class="nowl" x1="150" y1="12" x2="150" y2="64" stroke-dasharray="3 3"/><text class="zn" x="6" y="77">past</text><text class="zn" x="150" y="77" text-anchor="middle">now</text><text class="zn" x="294" y="77" text-anchor="end">future</text><rect class="sp" x="196" y="33" width="66" height="10" rx="5"/><text class="lb" x="229" y="58" text-anchor="middle">in progress then</text></svg><p class="f">will be + verb-ing</p><p><span class="ex">This time tomorrow I will be flying.</span></p><p>In progress at a future moment.</p><p class="k">Clues: this time tomorrow, at 8 tonight, next week</p><p><a href="future-continuous.html">Full lesson &rarr;</a></p></article><article class="cd fu" id="fp"><h3>Future perfect</h3><svg viewBox="0 0 300 80" role="img" aria-label="Timeline for Future perfect"><line class="ax" x1="6" y1="38" x2="294" y2="38"/><line class="nowl" x1="150" y1="12" x2="150" y2="64" stroke-dasharray="3 3"/><text class="zn" x="6" y="77">past</text><text class="zn" x="150" y="77" text-anchor="middle">now</text><text class="zn" x="294" y="77" text-anchor="end">future</text><circle class="dt" cx="190" cy="38" r="6"/><circle class="rg" cx="250" cy="38" r="6"/><text class="lb" x="190" y="26" text-anchor="middle">done</text><text class="lb" x="250" y="26" text-anchor="middle">deadline</text><text class="lb" x="220" y="62" text-anchor="middle">before the deadline</text></svg><p class="f">will have + past participle</p><p><span class="ex">By June I will have graduated.</span></p><p>Finished before a future deadline.</p><p class="k">Clues: by next June, by then, by the time</p><p><a href="future-perfect.html">Full lesson &rarr;</a></p></article><article class="cd fu" id="fpc"><h3>Future perfect continuous</h3><svg viewBox="0 0 300 80" role="img" aria-label="Timeline for Future perfect continuous"><line class="ax" x1="6" y1="38" x2="294" y2="38"/><line class="nowl" x1="150" y1="12" x2="150" y2="64" stroke-dasharray="3 3"/><text class="zn" x="6" y="77">past</text><text class="zn" x="150" y="77" text-anchor="middle">now</text><text class="zn" x="294" y="77" text-anchor="end">future</text><rect class="sp" x="150" y="33" width="100" height="10" rx="5"/><circle class="rg" cx="250" cy="38" r="6"/><text class="lb" x="200" y="62" text-anchor="middle">duration</text><text class="lb" x="250" y="26" text-anchor="middle">future moment</text></svg><p class="f">will have been + verb-ing</p><p><span class="ex">By July I will have been working here for ten years.</span></p><p>Duration up to a future moment.</p><p class="k">Clues: by next year, for ten years, by then</p><p><a href="future-perfect-continuous.html">Full lesson &rarr;</a></p></article></div>
+<p>The line goes from past on the left to future on the right. The dashed line in the middle represents now. A dot represents a point in time, while a bar represents an action that lasts.</p>
+
+<h2>Present tenses</h2>
+<div class="tn">
+
+<article class="cd pr" id="ps">
+<h3>Present simple</h3>
+<svg viewBox="0 0 300 80" role="img" aria-label="Repeated actions across time">
+<line class="ax" x1="6" y1="38" x2="294" y2="38"/>
+<line class="nowl" x1="150" y1="12" x2="150" y2="64" stroke-dasharray="3 3"/>
+<text class="zn" x="6" y="77">past</text><text class="zn" x="150" y="77" text-anchor="middle">now</text><text class="zn" x="294" y="77" text-anchor="end">future</text>
+<circle class="dt" cx="40" cy="38" r="4"/><circle class="dt" cx="80" cy="38" r="4"/><circle class="dt" cx="120" cy="38" r="4"/><circle class="dt" cx="180" cy="38" r="4"/><circle class="dt" cx="220" cy="38" r="4"/><circle class="dt" cx="260" cy="38" r="4"/>
+</svg>
+<p class="f">Subject + base verb; he/she/it + verb-s</p>
+<p><b>Example:</b> She works every day.</p>
+<p>Use it for facts, habits and regular activities.</p>
+<p class="k">Clues: always, usually, every day, on Mondays</p>
+<p><a href="present-simple-and-continuous.html">Full lesson →</a></p>
+</article>
+
+<article class="cd pr" id="pc">
+<h3>Present continuous</h3>
+<svg viewBox="0 0 300 80" role="img" aria-label="An action around the present">
+<line class="ax" x1="6" y1="38" x2="294" y2="38"/>
+<line class="nowl" x1="150" y1="12" x2="150" y2="64" stroke-dasharray="3 3"/>
+<text class="zn" x="6" y="77">past</text><text class="zn" x="150" y="77" text-anchor="middle">now</text><text class="zn" x="294" y="77" text-anchor="end">future</text>
+<rect class="sp" x="122" y="33" width="56" height="10" rx="5"/>
+</svg>
+<p class="f">am/is/are + verb-ing</p>
+<p><b>Example:</b> I am studying now.</p>
+<p>Use it for actions happening now, temporary situations and arranged plans.</p>
+<p class="k">Clues: now, at the moment, currently, this week</p>
+<p><a href="present-simple-and-continuous.html">Full lesson →</a></p>
+</article>
+
+<article class="cd pr" id="pp">
+<h3>Present perfect</h3>
+<svg viewBox="0 0 300 80" role="img" aria-label="A past event connected to now">
+<line class="ax" x1="6" y1="38" x2="294" y2="38"/>
+<line class="nowl" x1="150" y1="12" x2="150" y2="64" stroke-dasharray="3 3"/>
+<text class="zn" x="6" y="77">past</text><text class="zn" x="150" y="77" text-anchor="middle">now</text><text class="zn" x="294" y="77" text-anchor="end">future</text>
+<circle class="dt" cx="86" cy="38" r="6"/><line class="br" x1="86" y1="38" x2="150" y2="38"/>
+</svg>
+<p class="f">have/has + past participle</p>
+<p><b>Example:</b> I have finished my homework.</p>
+<p>Use it for experience, present results and unfinished periods.</p>
+<p class="k">Clues: already, just, yet, ever, never, since, for</p>
+<p><a href="present-perfect.html">Full lesson →</a></p>
+</article>
+
+<article class="cd pr" id="ppc">
+<h3>Present perfect continuous</h3>
+<svg viewBox="0 0 300 80" role="img" aria-label="Duration continuing up to now">
+<line class="ax" x1="6" y1="38" x2="294" y2="38"/>
+<line class="nowl" x1="150" y1="12" x2="150" y2="64" stroke-dasharray="3 3"/>
+<text class="zn" x="6" y="77">past</text><text class="zn" x="150" y="77" text-anchor="middle">now</text><text class="zn" x="294" y="77" text-anchor="end">future</text>
+<rect class="sp" x="70" y="33" width="80" height="10" rx="5"/>
+</svg>
+<p class="f">have/has been + verb-ing</p>
+<p><b>Example:</b> I have been waiting for an hour.</p>
+<p>Use it to stress duration up to now or a recent activity.</p>
+<p class="k">Clues: for, since, all day, lately, recently</p>
+<p><a href="present-perfect-continuous.html">Full lesson →</a></p>
+</article>
+</div>
+
+<h2>Past tenses</h2>
+<div class="tn">
+
+<article class="cd pa" id="pas">
+<h3>Past simple</h3>
+<svg viewBox="0 0 300 80" role="img" aria-label="A completed past event">
+<line class="ax" x1="6" y1="38" x2="294" y2="38"/><line class="nowl" x1="150" y1="12" x2="150" y2="64" stroke-dasharray="3 3"/>
+<text class="zn" x="6" y="77">past</text><text class="zn" x="150" y="77" text-anchor="middle">now</text><text class="zn" x="294" y="77" text-anchor="end">future</text>
+<circle class="dt" cx="70" cy="38" r="6"/>
+</svg>
+<p class="f">Past form of the verb</p>
+<p><b>Example:</b> I visited Rome in 2019.</p>
+<p>Use it for completed events at a finished time.</p>
+<p class="k">Clues: yesterday, last week, ago, in 2019</p>
+<p><a href="past-simple.html">Full lesson →</a></p>
+</article>
+
+<article class="cd pa" id="pac">
+<h3>Past continuous</h3>
+<svg viewBox="0 0 300 80" role="img" aria-label="An action in progress at a past moment">
+<line class="ax" x1="6" y1="38" x2="294" y2="38"/><line class="nowl" x1="150" y1="12" x2="150" y2="64" stroke-dasharray="3 3"/>
+<text class="zn" x="6" y="77">past</text><text class="zn" x="150" y="77" text-anchor="middle">now</text><text class="zn" x="294" y="77" text-anchor="end">future</text>
+<rect class="sp" x="36" y="33" width="76" height="10" rx="5"/><line class="tk" x1="90" y1="24" x2="90" y2="52"/>
+</svg>
+<p class="f">was/were + verb-ing</p>
+<p><b>Example:</b> I was cooking when you called.</p>
+<p>Use it for an action in progress at a past moment.</p>
+<p class="k">Clues: while, when, at 8 last night</p>
+<p><a href="past-continuous.html">Full lesson →</a></p>
+</article>
+
+<article class="cd pa" id="pap">
+<h3>Past perfect</h3>
+<svg viewBox="0 0 300 80" role="img" aria-label="An earlier event before another past event">
+<line class="ax" x1="6" y1="38" x2="294" y2="38"/><line class="nowl" x1="150" y1="12" x2="150" y2="64" stroke-dasharray="3 3"/>
+<text class="zn" x="6" y="77">past</text><text class="zn" x="150" y="77" text-anchor="middle">now</text><text class="zn" x="294" y="77" text-anchor="end">future</text>
+<circle class="dt" cx="60" cy="38" r="6"/><circle class="rg" cx="122" cy="38" r="6"/>
+</svg>
+<p class="f">had + past participle</p>
+<p><b>Example:</b> She had left before I arrived.</p>
+<p>Use it to make the order of two past events clear.</p>
+<p class="k">Clues: by the time, before, after, already</p>
+<p><a href="past-perfect.html">Full lesson →</a></p>
+</article>
+
+<article class="cd pa" id="papc">
+<h3>Past perfect continuous</h3>
+<svg viewBox="0 0 300 80" role="img" aria-label="Duration before a past reference moment">
+<line class="ax" x1="6" y1="38" x2="294" y2="38"/><line class="nowl" x1="150" y1="12" x2="150" y2="64" stroke-dasharray="3 3"/>
+<text class="zn" x="6" y="77">past</text><text class="zn" x="150" y="77" text-anchor="middle">now</text><text class="zn" x="294" y="77" text-anchor="end">future</text>
+<rect class="sp" x="30" y="33" width="72" height="10" rx="5"/><circle class="rg" cx="122" cy="38" r="6"/>
+</svg>
+<p class="f">had been + verb-ing</p>
+<p><b>Example:</b> She had been working all night.</p>
+<p>Use it to stress duration before a past moment, often explaining a result.</p>
+<p class="k">Clues: for, since, all night, before that</p>
+<p><a href="past-perfect-continuous.html">Full lesson →</a></p>
+</article>
+</div>
+
+<h2>Future tenses</h2>
+<div class="tn">
+
+<article class="cd fu" id="fs">
+<h3>Future simple</h3>
+<svg viewBox="0 0 300 80" role="img" aria-label="A future event">
+<line class="ax" x1="6" y1="38" x2="294" y2="38"/><line class="nowl" x1="150" y1="12" x2="150" y2="64" stroke-dasharray="3 3"/>
+<text class="zn" x="6" y="77">past</text><text class="zn" x="150" y="77" text-anchor="middle">now</text><text class="zn" x="294" y="77" text-anchor="end">future</text>
+<circle class="dt" cx="228" cy="38" r="6"/>
+</svg>
+<p class="f">will + base verb</p>
+<p><b>Example:</b> I will help you.</p>
+<p>Use it for predictions, promises and decisions made at the time of speaking.</p>
+<p class="k">Clues: tomorrow, probably, I think, soon</p>
+<p><a href="future-simple.html">Full lesson →</a></p>
+</article>
+
+<article class="cd fu" id="fc">
+<h3>Future continuous</h3>
+<svg viewBox="0 0 300 80" role="img" aria-label="An action in progress in the future">
+<line class="ax" x1="6" y1="38" x2="294" y2="38"/><line class="nowl" x1="150" y1="12" x2="150" y2="64" stroke-dasharray="3 3"/>
+<text class="zn" x="6" y="77">past</text><text class="zn" x="150" y="77" text-anchor="middle">now</text><text class="zn" x="294" y="77" text-anchor="end">future</text>
+<rect class="sp" x="196" y="33" width="66" height="10" rx="5"/>
+</svg>
+<p class="f">will be + verb-ing</p>
+<p><b>Example:</b> This time tomorrow I will be flying.</p>
+<p>Use it for an action that will be in progress at a future moment.</p>
+<p class="k">Clues: this time tomorrow, at 8 tonight</p>
+<p><a href="future-continuous.html">Full lesson →</a></p>
+</article>
+
+<article class="cd fu" id="fp">
+<h3>Future perfect</h3>
+<svg viewBox="0 0 300 80" role="img" aria-label="An action completed before a future deadline">
+<line class="ax" x1="6" y1="38" x2="294" y2="38"/><line class="nowl" x1="150" y1="12" x2="150" y2="64" stroke-dasharray="3 3"/>
+<text class="zn" x="6" y="77">past</text><text class="zn" x="150" y="77" text-anchor="middle">now</text><text class="zn" x="294" y="77" text-anchor="end">future</text>
+<circle class="dt" cx="190" cy="38" r="6"/><circle class="rg" cx="250" cy="38" r="6"/>
+</svg>
+<p class="f">will have + past participle</p>
+<p><b>Example:</b> By June I will have graduated.</p>
+<p>Use it for something completed before a future deadline.</p>
+<p class="k">Clues: by June, by then, by the time</p>
+<p><a href="future-perfect.html">Full lesson →</a></p>
+</article>
+
+<article class="cd fu" id="fpc">
+<h3>Future perfect continuous</h3>
+<svg viewBox="0 0 300 80" role="img" aria-label="Duration continuing up to a future moment">
+<line class="ax" x1="6" y1="38" x2="294" y2="38"/><line class="nowl" x1="150" y1="12" x2="150" y2="64" stroke-dasharray="3 3"/>
+<text class="zn" x="6" y="77">past</text><text class="zn" x="150" y="77" text-anchor="middle">now</text><text class="zn" x="294" y="77" text-anchor="end">future</text>
+<rect class="sp" x="150" y="33" width="100" height="10" rx="5"/><circle class="rg" cx="250" cy="38" r="6"/>
+</svg>
+<p class="f">will have been + verb-ing</p>
+<p><b>Example:</b> By July I will have been working here for ten years.</p>
+<p>Use it to stress the duration of an action up to a future moment.</p>
+<p class="k">Clues: by next year, for ten years, by then</p>
+<p><a href="future-perfect-continuous.html">Full lesson →</a></p>
+</article>
+</div>
+
 <h2>Quick way to choose</h2>
-<ul><li><b>Is it a habit or a fact?</b> Present simple.</li><li><b>Is it happening now, or around now?</b> Present continuous.</li><li><b>Did it finish at a stated time?</b> Past simple. Is there a link to now? Present perfect.</li><li><b>Two past events?</b> The earlier one is past perfect. The later one is past simple.</li><li><b>Do you stress how long?</b> Use a perfect continuous: present, past or future to match the reference point.</li><li><b>A deadline in the future?</b> Future perfect, or future perfect continuous for duration.</li></ul>
-<h2>Quiz</h2>
-<p class="small">Five short passages, twelve gaps, one for each tense. Choose the best verb form in each gap.</p>
-<form id="qf"><div id="qs"></div><p><button type="submit">Check my answers</button> <button type="button" class="g" id="rs">Start again</button></p><p id="sc" aria-live="polite"><b></b></p></form>
-<div class="nav"><a class="btn g" href="tenses.html">All tenses</a><a class="btn" href="index.html#topics">All topics</a></div></main>
+<ul>
+<li><b>Is it a habit or a fact?</b> Present simple.</li>
+<li><b>Is it happening now or around now?</b> Present continuous.</li>
+<li><b>Did it finish at a stated past time?</b> Past simple.</li>
+<li><b>Is a past event connected to now?</b> Present perfect.</li>
+<li><b>Were two events in the past?</b> Use past perfect for the earlier event when you need to make the order clear.</li>
+<li><b>Do you want to stress duration?</b> Consider a perfect continuous tense.</li>
+<li><b>Will something be completed before a future deadline?</b> Future perfect.</li>
+</ul>
+
+<h2>Practice quiz: 20 short passages</h2>
+<p>Complete all 20 passages. Each passage has two gaps, giving you <b>40 questions</b> in total. Choose the most appropriate verb form for each gap.</p>
+<p class="quiz-note">Choose an answer for every gap, then select “Check my answers” to see your score and explanations.</p>
+
+<div class="quiz-progress">
+<span id="answered">0</span> of 40 gaps answered
+<div class="progress-track"><div class="progress-fill" id="progress"></div></div>
+</div>
+
+<form id="qf">
+<div id="qs"></div>
+<div class="quiz-tools">
+<button type="submit">Check my answers</button>
+<button type="button" class="g" id="rs">Start again</button>
+</div>
+</form>
+
+<section class="quiz-result" id="result" aria-live="polite" hidden>
+<h3>Your results</h3>
+<div class="score-number" id="scoreNumber">0/40</div>
+<p class="score-detail" id="scoreDetail"></p>
+<p id="scoreMessage"></p>
+<div id="review"></div>
+</section>
+
+<div class="nav">
+<a class="btn g" href="tenses.html">All tenses</a>
+<a class="btn" href="index.html#topics">All topics</a>
+</div>
+</main>
+
 <script>
-const Q=[["My sister (1) ___ in a bank, but this week she (2) ___ at the head office.", [[["works", "is working", "worked", "has worked"], 0, "Present simple: her regular job."], [["works", "is working", "will work", "had worked"], 1, "Present continuous: a temporary arrangement this week."]]], ["When I (1) ___ home, my parents (2) ___ dinner, and my brother (3) ___ the table already.", [[["arrived", "was arriving", "had arrived", "arrive"], 0, "Past simple: a finished event."], [["cooked", "were cooking", "had cooked", "are cooking"], 1, "Past continuous: in progress when I arrived."], [["set", "was setting", "had set", "has set"], 2, "Past perfect: done before I arrived, the earlier past event."]]], ["Don’t call me at 8. At that time I (1) ___ for my exam, and by 10 I (2) ___ the whole chapter. I (3) ___ you after that.", [[["studied", "will be studying", "will have studied", "study"], 1, "Future continuous: in progress at a future moment."], [["have finished", "will be finishing", "will have finished", "finished"], 2, "Future perfect: finished before a future deadline."], [["will call", "will have called", "have called", "called"], 0, "Future simple: a promise."]]], ["I (1) ___ in this city since 2020, and I (2) ___ English for three years.", [[["live", "have lived", "lived", "had lived"], 1, "Present perfect: since 2020 links the past to now."], [["learn", "am learning", "have been learning", "had learned"], 2, "Present perfect continuous: duration up to now."]]], ["When I met her at 6 a.m., she looked exhausted because she (1) ___ for twelve hours without a break. By July she (2) ___ in this hospital for ten years.", [[["is working", "had been working", "has been working", "will have been working"], 1, "Past perfect continuous: duration up to a past moment."], [["works", "has been working", "will have been working", "had been working"], 2, "Future perfect continuous: duration up to a future moment."]]]];
-const qs=document.getElementById('qs');
-Q.forEach((q,qi)=>{const box=document.createElement('div');box.className='qq';const p=document.createElement('p');
- p.append((qi+1)+'. ');let n=0;
- q[0].split(/(\(\d\) ___)/).forEach(part=>{if(/^\(\d\) ___$/.test(part)){const g=q[1][n];const s=document.createElement('select');
-   s.setAttribute('aria-label','Question '+(qi+1)+', gap '+(n+1));const o0=document.createElement('option');o0.value='-1';o0.textContent='Choose…';s.append(o0);
-   g[0].forEach((t,j)=>{const o=document.createElement('option');o.value=j;o.textContent=t;s.append(o)});p.append('('+(n+1)+') ',s);n++}else p.append(part)});
- const fb=document.createElement('div');fb.hidden=true;box.append(p,fb);qs.append(box)});
-document.getElementById('qf').onsubmit=e=>{e.preventDefault();let full=0,gaps=0;
- [...qs.children].forEach((box,qi)=>{const fb=box.lastChild;fb.textContent='';fb.hidden=false;let all=true;
-  [...box.querySelectorAll('select')].forEach((s,gi)=>{const g=Q[qi][1][gi];const ok=+s.value===g[1];if(ok)gaps++;else all=false;
-   const d=document.createElement('p');d.className='fb '+(ok?'ok':'no');d.style.fontWeight='400';
-   d.textContent='('+(gi+1)+') '+(ok?'Right. ':'Not quite. The answer is “'+g[0][g[1]]+'”. ')+g[2];fb.append(d)});
-  if(all)full++});
- document.querySelector('#sc b').textContent='You got '+full+' out of '+Q.length+' passages fully right ('+gaps+' of 12 gaps).'};
-document.getElementById('rs').onclick=()=>{document.getElementById('qf').reset();[...qs.children].forEach(b=>{b.lastChild.hidden=true;b.lastChild.textContent=''});document.querySelector('#sc b').textContent=''};
-</script></body></html>
+const Q = [
+{
+p:"My brother usually (1) ___ to university by bus, but this week he (2) ___ his bicycle because the weather is pleasant.",
+a:[
+[["go","goes","is going","went"],1,"Present simple: use goes for a regular habit with he."],
+[["rides","rode","is riding","has ridden"],2,"Present continuous: this week describes a temporary situation."]
+]
+},
+{
+p:"The sun (1) ___ in the east, and at the moment the children (2) ___ in the garden.",
+a:[
+[["rose","rises","is rising","has risen"],1,"Present simple: this is a general fact."],
+[["play","played","are playing","have played"],2,"Present continuous: the activity is happening now."]
+]
+},
+{
+p:"I (1) ___ my assignment already, so I can relax now. I (2) ___ three chapters since this morning.",
+a:[
+[["finish","finished","have finished","had finished"],2,"Present perfect: already indicates a completed action connected to now."],
+[["read","am reading","have read","had read"],2,"Present perfect: since this morning links the reading to the present."]
+]
+},
+{
+p:"Rina's clothes are covered in paint because she (1) ___ her bedroom. She (2) ___ for two hours, and she still has one wall to finish.",
+a:[
+[["painted","has been painting","will paint","had painted"],1,"Present perfect continuous: the activity has a visible result now."],
+[["works","has been working","worked","had worked"],1,"Present perfect continuous: for two hours emphasises duration up to now."]
+]
+},
+{
+p:"Yesterday, we (1) ___ the national museum and (2) ___ several historical photographs.",
+a:[
+[["visit","visited","have visited","were visiting"],1,"Past simple: yesterday is a finished past time."],
+[["see","have seen","saw","had seen"],2,"Past simple: the action happened during the completed visit."]
+]
+},
+{
+p:"At nine last night, I (1) ___ for my examination while my sister (2) ___ television in the next room.",
+a:[
+[["studied","was studying","have studied","study"],1,"Past continuous: the studying was in progress at a particular past time."],
+[["watched","had watched","was watching","watches"],2,"Past continuous: the television watching was also in progress then."]
+]
+},
+{
+p:"When we (1) ___ at the station, the train (2) ___ already.",
+a:[
+[["arrived","had arrived","have arrived","were arriving"],0,"Past simple: arrived is the later event in this story."],
+[["left","leaves","had left","has left"],2,"Past perfect: the train left before we arrived."]
+]
+},
+{
+p:"The ground was wet because it (1) ___ all night. The rain (2) ___ before we left the house.",
+a:[
+[["rained","has rained","had been raining","will be raining"],2,"Past perfect continuous: it describes the ongoing rain leading up to a past situation."],
+[["stopped","had stopped","has stopped","stops"],1,"Past perfect: the rain had stopped before the later past event."]
+]
+},
+{
+p:"I think our team (1) ___ the match tomorrow. I promise I (2) ___ you the final score.",
+a:[
+[["wins","won","will win","has won"],2,"Future simple: will win expresses a prediction."],
+[["told","tell","will tell","have told"],2,"Future simple: will tell expresses a promise."]
+]
+},
+{
+p:"Please do not call at ten tomorrow morning. I (1) ___ a lecture then, and my classmates (2) ___ their presentations.",
+a:[
+[["attend","will attend","will be attending","attended"],2,"Future continuous: the lecture will be in progress at ten."],
+[["will give","will be giving","gave","have given"],1,"Future continuous: the presentations will be in progress at that future time."]
+]
+},
+{
+p:"By the end of this month, I (1) ___ the course. By then, I (2) ___ on the project for six months.",
+a:[
+[["complete","will complete","will have completed","completed"],2,"Future perfect: the course will be completed before a future deadline."],
+[["will work","will have worked","will have been working","had worked"],2,"Future perfect continuous: for six months emphasises duration up to that future point."]
+]
+},
+{
+p:"Nadia (1) ___ in Dhaka since 2021. She (2) ___ at the same research institute for the past three years.",
+a:[
+[["lives","lived","has lived","had lived"],2,"Present perfect: since 2021 connects a past starting point to now."],
+[["works","is working","has been working","had worked"],2,"Present perfect continuous: for the past three years stresses the duration of ongoing work."]
+]
+},
+{
+p:"While I (1) ___ home yesterday, I (2) ___ an old friend near the market.",
+a:[
+[["walked","was walking","have walked","had walked"],1,"Past continuous: walking provides the background action."],
+[["meet","was meeting","met","have met"],2,"Past simple: met is the completed event that occurred during the walk."]
+]
+},
+{
+p:"By the time the doctor arrived, the patient (1) ___. The nurse said that he (2) ___ unconscious for several minutes.",
+a:[
+[["wakes up","had woken up","has woken up","will wake up"],1,"Past perfect: the patient woke up before the doctor arrived."],
+[["was","has been","had been","will be"],2,"Past perfect: had been describes the patient's state before the later past reference."]
+]
+},
+{
+p:"I cannot meet you this afternoon because I (1) ___ my supervisor. We (2) ___ the research proposal together at that time.",
+a:[
+[["meet","met","am meeting","had met"],2,"Present continuous: am meeting describes an arranged future plan."],
+[["will discuss","will be discussing","discussed","have discussed"],1,"Future continuous: the discussion will be in progress at the agreed time."]
+]
+},
+{
+p:"By the time you read this email, I (1) ___ the report. I (2) ___ on it for several weeks.",
+a:[
+[["submit","submitted","will have submitted","have submitted"],2,"Future perfect: the report will be submitted before the future reference point."],
+[["worked","will have been working","am working","had worked"],1,"Future perfect continuous: it emphasises the duration of work up to that future point."]
+]
+},
+{
+p:"We (1) ___ this problem several times, but we still need a better solution. Our team (2) ___ on a new approach since Monday.",
+a:[
+[["discussed","have discussed","had discussed","will discuss"],1,"Present perfect: several times describes experience up to now."],
+[["works","worked","has been working","will have worked"],2,"Present perfect continuous: since Monday indicates an activity continuing to now."]
+]
+},
+{
+p:"When the electricity went out, I (1) ___ dinner. Fortunately, I (2) ___ the vegetables before the kitchen became dark.",
+a:[
+[["cooked","was cooking","have cooked","will cook"],1,"Past continuous: cooking was in progress when the electricity went out."],
+[["cut","had cut","have cut","will cut"],1,"Past perfect: the vegetables were prepared before the later past event."]
+]
+},
+{
+p:"Our university (1) ___ a research seminar every month. This month, the department (2) ___ two international speakers.",
+a:[
+[["organises","is organising","organised","has organised"],0,"Present simple: every month describes a regular event."],
+[["invites","invited","is inviting","had invited"],2,"Present continuous: this month describes a temporary arrangement."]
+]
+},
+{
+p:"By the time the conference begins next year, the researchers (1) ___ their analysis. They (2) ___ the dataset for almost a year.",
+a:[
+[["finish","finished","will have finished","have finished"],2,"Future perfect: the analysis will be complete before the conference begins."],
+[["will examine","will have been examining","examined","have examined"],1,"Future perfect continuous: almost a year stresses the duration up to a future point."]
+]
+}
+];
+
+const qs = document.getElementById("qs");
+const form = document.getElementById("qf");
+const result = document.getElementById("result");
+const progress = document.getElementById("progress");
+const answered = document.getElementById("answered");
+const scoreNumber = document.getElementById("scoreNumber");
+const scoreDetail = document.getElementById("scoreDetail");
+const scoreMessage = document.getElementById("scoreMessage");
+const review = document.getElementById("review");
+
+let checked = false;
+
+function buildQuiz(){
+  qs.replaceChildren();
+
+  Q.forEach((q,qi)=>{
+    const box = document.createElement("section");
+    box.className = "qq";
+
+    const p = document.createElement("p");
+    p.className = "passage";
+    p.append(document.createTextNode((qi+1)+". "));
+
+    let gapIndex = 0;
+    const parts = q.p.split(/(\(\d\) ___)/);
+
+    parts.forEach(part=>{
+      if(/^\(\d\) ___$/.test(part)){
+        const select = document.createElement("select");
+        select.setAttribute("aria-label","Passage "+(qi+1)+", gap "+(gapIndex+1));
+        select.dataset.question = qi;
+        select.dataset.gap = gapIndex;
+        select.required = true;
+
+        const placeholder = document.createElement("option");
+        placeholder.value = "";
+        placeholder.textContent = "Choose an answer";
+        select.append(placeholder);
+
+        q.a[gapIndex][0].forEach((answer,j)=>{
+          const option = document.createElement("option");
+          option.value = String(j);
+          option.textContent = answer;
+          select.append(option);
+        });
+
+        select.addEventListener("change",()=>{
+          updateProgress();
+          if(checked) markAnswers();
+        });
+
+        p.append(document.createTextNode("("+ (gapIndex+1)+") "));
+        p.append(select);
+        gapIndex++;
+      }else{
+        p.append(document.createTextNode(part));
+      }
+    });
+
+    const feedback = document.createElement("div");
+    feedback.className = "feedback";
+    feedback.hidden = true;
+
+    box.append(p,feedback);
+    qs.append(box);
+  });
+
+  updateProgress();
+}
+
+function updateProgress(){
+  const selects = [...qs.querySelectorAll("select")];
+  const count = selects.filter(s=>s.value!=="").length;
+  answered.textContent = count;
+  progress.style.width = (count/selects.length*100)+"%";
+}
+
+function markAnswers(){
+  let correct = 0;
+  let total = 0;
+  let unanswered = 0;
+  let fullyCorrect = 0;
+  const mistakes = [];
+
+  [...qs.children].forEach((box,qi)=>{
+    const feedback = box.querySelector(".feedback");
+    feedback.replaceChildren();
+    feedback.hidden = false;
+
+    let passageCorrect = 0;
+
+    [...box.querySelectorAll("select")].forEach((select,gi)=>{
+      const item = Q[qi].a[gi];
+      const answerIndex = item[1];
+      const isCorrect = select.value!=="" && Number(select.value)===answerIndex;
+      total++;
+
+      if(select.value==="") unanswered++;
+      if(isCorrect){
+        correct++;
+        passageCorrect++;
+      }
+
+      select.style.borderColor = isCorrect ? "#16805d" : "#b54747";
+      select.setAttribute("aria-invalid",String(!isCorrect));
+
+      const line = document.createElement("p");
+      line.className = "fb "+(isCorrect?"ok":"no");
+
+      const answerText = item[0][answerIndex];
+      line.textContent =
+        "Gap "+(gi+1)+": "+
+        (isCorrect ? "Correct. " :
+          (select.value==="" ? "Not answered. " : "Not quite. "))+
+        "Correct answer: “"+answerText+"”. "+
+        item[2];
+
+      feedback.append(line);
+
+      if(!isCorrect){
+        mistakes.push({
+          passage:qi+1,
+          gap:gi+1,
+          answer:answerText
+        });
+      }
+    });
+
+    if(passageCorrect===box.querySelectorAll("select").length){
+      fullyCorrect++;
+    }
+  });
+
+  checked = true;
+  result.hidden = false;
+
+  scoreNumber.textContent = correct+" / "+total;
+  scoreDetail.textContent =
+    "Correct answers: "+correct+
+    ". Incorrect or unanswered: "+(total-correct)+
+    ". Completely correct passages: "+fullyCorrect+
+    " out of "+Q.length+".";
+
+  const percentage = Math.round(correct/total*100);
+
+  if(percentage>=90){
+    scoreMessage.textContent =
+      "Excellent work! You have demonstrated strong control of these tense forms.";
+  }else if(percentage>=75){
+    scoreMessage.textContent =
+      "Very good progress. Review the explanations for the questions you missed.";
+  }else if(percentage>=50){
+    scoreMessage.textContent =
+      "Good effort. Review the relevant tense rules and try the quiz again.";
+  }else{
+    scoreMessage.textContent =
+      "Keep practising. Study the tense examples above, then repeat the quiz to improve your score.";
+  }
+
+  review.replaceChildren();
+
+  if(mistakes.length){
+    const heading = document.createElement("h3");
+    heading.textContent = "Questions to review";
+    review.append(heading);
+
+    const list = document.createElement("ul");
+    list.className = "review-list";
+
+    mistakes.forEach(m=>{
+      const li = document.createElement("li");
+      li.textContent =
+        "Passage "+m.passage+", gap "+m.gap+
+        ": correct answer is “"+m.answer+"”.";
+      list.append(li);
+    });
+
+    review.append(list);
+  }else{
+    const message = document.createElement("p");
+    message.textContent = "Perfect score! You answered all 40 questions correctly.";
+    review.append(message);
+  }
+
+  result.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+form.addEventListener("submit",e=>{
+  e.preventDefault();
+  markAnswers();
+});
+
+document.getElementById("rs").addEventListener("click",()=>{
+  checked = false;
+  form.reset();
+
+  [...qs.querySelectorAll("select")].forEach(select=>{
+    select.style.borderColor = "";
+    select.removeAttribute("aria-invalid");
+  });
+
+  [...qs.querySelectorAll(".feedback")].forEach(feedback=>{
+    feedback.hidden = true;
+    feedback.replaceChildren();
+  });
+
+  result.hidden = true;
+  review.replaceChildren();
+  scoreNumber.textContent = "0/40";
+  scoreDetail.textContent = "";
+  scoreMessage.textContent = "";
+
+  updateProgress();
+  document.querySelector(".quiz-progress").scrollIntoView({
+    behavior:"smooth",
+    block:"center"
+  });
+});
+
+buildQuiz();
+</script>
+</body>
+</html>
