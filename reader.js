@@ -1,23 +1,20 @@
-
 /* ==========================================================
    IELTS Grammar Lab | Complete reading tools
    File: reader.js
 
    Features:
-   1. Separate reading settings icon
-   2. Separate highlight icon and highlight panel
-   3. Separate personal notes icon and notes panel
-   4. Separate print icon
-   5. Font size, font family, spacing and text width
-   6. Light, sepia and dark themes
-   7. Focus mode
-   8. Text to speech, speed and paragraph navigation
-   9. Reading progress and resume position
-   10. Lesson section navigation
-   11. Saved highlights and personal notes
-   12. Keyboard accessibility and mobile support
+   1. Separate icons: reading settings, highlights, notes, print
+   2. Font size, font family, line spacing and text width
+   3. Light, sepia and dark themes (shared with the home page)
+   4. Focus mode
+   5. Text to speech with speed and paragraph jump
+   6. Reading progress, back to top and resume position
+   7. Lesson section navigation
+   8. Highlights that work across inline elements
+   9. Personal notes for each lesson
+   10. Keyboard accessibility and mobile support
 
-   Self-contained. Works on pages containing <main>.
+   Self-contained. Works on any page containing <main>.
    ========================================================== */
 
 (function () {
@@ -79,14 +76,12 @@
     var main = document.querySelector('main');
 
     if (!main) return;
-
     if (document.getElementById('rd-reader-root')) return;
 
     var reduce = window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     var base = parseFloat(getComputedStyle(body).fontSize) || 18;
-
     var qf = document.getElementById('qf');
 
     var speaking = false;
@@ -98,6 +93,7 @@
     var saveT;
     var msgT;
     var easyLoaded = false;
+    var lastRange = null;
 
     var blocks = [];
     var h2s = [];
@@ -116,6 +112,7 @@
     var P;
 
     var pkey = 'rd-hl:' + location.pathname;
+    var EXCLUDE = '.rd-ui,.rd-meta,.nav,#qf,script,style,textarea,input,button,select';
 
     var canSpeak = 'speechSynthesis' in window &&
       'SpeechSynthesisUtterance' in window;
@@ -133,498 +130,173 @@
         color: var(--rd-fg);
         font: 500 14px/1.45 Inter, system-ui, sans-serif;
       }
-
       html.rd-sepia .rd-ui {
-        --rd-bg: #fbf4e4;
-        --rd-fg: #3a3125;
-        --rd-line: rgba(58, 49, 37, .25);
-        --rd-ac: #5b4636;
+        --rd-bg: #fbf4e4; --rd-fg: #3a3125;
+        --rd-line: rgba(58, 49, 37, .25); --rd-ac: #5b4636;
       }
-
       html.rd-dark .rd-ui {
-        --rd-bg: #23262d;
-        --rd-fg: #eceae4;
-        --rd-line: rgba(255, 255, 255, .22);
-        --rd-ac: #cdd6ff;
+        --rd-bg: #23262d; --rd-fg: #eceae4;
+        --rd-line: rgba(255, 255, 255, .22); --rd-ac: #cdd6ff;
       }
-
       .rd-ui button {
-        font: inherit;
-        cursor: pointer;
-        border: 1px solid var(--rd-line);
-        border-radius: 8px;
-        padding: 7px 11px;
-        min-height: 36px;
-        background: transparent;
-        color: var(--rd-fg);
+        font: inherit; cursor: pointer;
+        border: 1px solid var(--rd-line); border-radius: 8px;
+        padding: 7px 11px; min-height: 36px;
+        background: transparent; color: var(--rd-fg);
       }
-
       .rd-ui button[aria-pressed="true"] {
-        background: var(--rd-ac);
-        color: var(--rd-bg);
-        border-color: var(--rd-ac);
+        background: var(--rd-ac); color: var(--rd-bg); border-color: var(--rd-ac);
       }
-
       .rd-ui button:focus-visible,
       .rd-jump a:focus-visible,
-      .rd-study-tools textarea:focus-visible {
-        outline: 3px solid #5275bd;
-        outline-offset: 3px;
+      .rd-ui textarea:focus-visible {
+        outline: 3px solid #5275bd; outline-offset: 3px;
       }
 
       /* Floating icons */
-
-      .rd-fab {
+      .rd-fab, .rd-top {
         position: fixed;
-        right: 16px;
-        width: 48px;
-        height: 48px;
-        min-height: 48px !important;
-        border-radius: 50% !important;
-        padding: 0 !important;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #ffffff !important;
-        color: #1f2a44 !important;
+        width: 48px; height: 48px; min-height: 48px !important;
+        border-radius: 50% !important; padding: 0 !important;
+        display: flex; align-items: center; justify-content: center;
+        background: #ffffff !important; color: #1f2a44 !important;
         border: 2px solid #1f2a44 !important;
         box-shadow: 0 3px 12px rgba(15, 23, 42, .18);
         z-index: 10000;
-        font-size: 20px !important;
-        font-weight: 700 !important;
-        line-height: 1;
-        cursor: pointer;
+        font-size: 20px !important; font-weight: 700 !important;
+        line-height: 1; cursor: pointer;
         transition: transform .15s, box-shadow .15s;
       }
-
-      .rd-fab:hover {
+      .rd-fab { right: 16px; }
+      .rd-top { left: 16px; bottom: 16px; }
+      .rd-fab:hover, .rd-top:hover {
         transform: translateY(-2px);
         box-shadow: 0 5px 15px rgba(15, 23, 42, .24);
       }
+      #rd-fab { bottom: 16px; font-family: Georgia, serif !important; }
+      #rd-highlight-fab { bottom: 76px; }
+      #rd-notes-fab { bottom: 136px; }
+      #rd-print-fab { bottom: 196px; }
 
-      .rd-fab:focus-visible {
-        outline: 3px solid #5275bd;
-        outline-offset: 3px;
+      html.rd-sepia .rd-fab, html.rd-sepia .rd-top {
+        background: #fbf4e4 !important; color: #5b4636 !important; border-color: #5b4636 !important;
+      }
+      html.rd-dark .rd-fab, html.rd-dark .rd-top {
+        background: #23262d !important; color: #eceae4 !important; border-color: #cdd6ff !important;
       }
 
-      #rd-fab {
-        bottom: 16px;
-        font-family: Georgia, serif !important;
-      }
-
-      #rd-highlight-fab {
-        bottom: 76px;
-      }
-
-      #rd-notes-fab {
-        bottom: 136px;
-      }
-
-      #rd-print-fab {
-        bottom: 196px;
-      }
-
-      html.rd-sepia .rd-fab {
-        background: #fbf4e4 !important;
-        color: #5b4636 !important;
-        border-color: #5b4636 !important;
-      }
-
-      html.rd-dark .rd-fab {
-        background: #23262d !important;
-        color: #eceae4 !important;
-        border-color: #cdd6ff !important;
-      }
-
-      /* Floating panels */
-
+      /* Panels */
       .rd-panel {
-        position: fixed;
-        right: 16px;
-        bottom: 74px;
-        width: min(390px, calc(100vw - 32px));
-        max-height: 78vh;
-        overflow: auto;
-        box-sizing: border-box;
-        background: var(--rd-bg);
-        color: var(--rd-fg);
-        border: 1px solid var(--rd-line);
-        border-radius: 14px;
-        padding: 14px 16px;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, .25);
-        z-index: 10001;
-        overscroll-behavior: contain;
+        position: fixed; right: 16px; bottom: 74px;
+        width: min(390px, calc(100vw - 32px)); max-height: 78vh;
+        overflow: auto; box-sizing: border-box;
+        background: var(--rd-bg); color: var(--rd-fg);
+        border: 1px solid var(--rd-line); border-radius: 14px;
+        padding: 14px 16px; box-shadow: 0 8px 30px rgba(0, 0, 0, .25);
+        z-index: 10001; overscroll-behavior: contain;
       }
-
-      .rd-panel[hidden],
-      .rd-top[hidden],
-      .rd-toast[hidden] {
-        display: none !important;
-      }
-
+      .rd-panel[hidden], .rd-top[hidden], .rd-toast[hidden] { display: none !important; }
       .rd-panel-title {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px;
-        margin: 0 0 14px;
-        padding-bottom: 10px;
+        display: flex; align-items: center; justify-content: space-between;
+        gap: 10px; margin: 0 0 14px; padding-bottom: 10px;
         border-bottom: 1px solid var(--rd-line);
       }
-
-      .rd-panel-title h2 {
-        font-size: 17px;
-        margin: 0;
-        color: var(--rd-fg);
-      }
-
-      .rd-panel-close {
-        flex: 0 0 auto;
-        min-width: 36px;
-        padding: 5px !important;
-        font-size: 18px !important;
-      }
-
-      .rd-row {
-        margin: 0 0 14px;
-      }
-
-      .rd-lab {
-        display: block;
-        font-size: 12px;
-        font-weight: 700;
-        opacity: .75;
-        margin: 0 0 6px;
-      }
-
-      .rd-seg {
-        display: flex;
-        gap: 6px;
-        flex-wrap: wrap;
-      }
-
-      .rd-seg button {
-        flex: 1 1 auto;
-      }
-
-      .rd-jump {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-        margin: 0;
-      }
-
+      .rd-panel-title h2 { font-size: 17px; margin: 0; color: var(--rd-fg); }
+      .rd-panel-close { flex: 0 0 auto; min-width: 36px; padding: 5px !important; font-size: 18px !important; }
+      .rd-row { margin: 0 0 14px; }
+      .rd-lab { display: block; font-size: 12px; font-weight: 700; opacity: .75; margin: 0 0 6px; }
+      .rd-seg { display: flex; gap: 6px; flex-wrap: wrap; }
+      .rd-seg button { flex: 1 1 auto; }
+      .rd-jump { display: flex; flex-direction: column; gap: 2px; margin: 0; }
       .rd-jump a {
-        color: var(--rd-fg) !important;
-        text-decoration: none;
-        padding: 7px 8px;
-        border-radius: 6px;
-        font-size: 14px;
-        overflow-wrap: anywhere;
+        color: var(--rd-fg) !important; text-decoration: none;
+        padding: 7px 8px; border-radius: 6px; font-size: 14px; overflow-wrap: anywhere;
       }
-
-      .rd-jump a:hover {
-        background: var(--rd-line);
-      }
-
-      .rd-note {
-        font-size: 12px;
-        opacity: .75;
-        margin: 6px 0 0;
-      }
+      .rd-jump a:hover { background: var(--rd-line); }
+      .rd-note { font-size: 12px; opacity: .75; margin: 6px 0 0; }
 
       .rd-prog {
-        position: fixed;
-        left: 0;
-        top: 0;
-        height: 4px;
-        width: 0;
-        background: #1f2a44;
-        z-index: 10002;
-        pointer-events: none;
+        position: fixed; left: 0; top: 0; height: 4px; width: 0;
+        background: #1f2a44; z-index: 10002; pointer-events: none;
       }
-
-      html.rd-dark .rd-prog {
-        background: #cdd6ff;
-      }
-
-      html.rd-sepia .rd-prog {
-        background: #8b6848;
-      }
+      html.rd-dark .rd-prog { background: #cdd6ff; }
+      html.rd-sepia .rd-prog { background: #8b6848; }
 
       .rd-toast {
-        position: fixed;
-        left: 50%;
-        bottom: 76px;
-        transform: translateX(-50%);
-        background: #ffffff;
-        color: #222936;
-        border: 1px solid #d5d9e1;
-        border-radius: 12px;
-        padding: 10px 14px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        align-items: center;
-        z-index: 10003;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, .2);
+        position: fixed; left: 50%; bottom: 76px; transform: translateX(-50%);
+        background: #ffffff; color: #222936; border: 1px solid #d5d9e1;
+        border-radius: 12px; padding: 10px 14px;
+        display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+        z-index: 10003; box-shadow: 0 6px 20px rgba(0, 0, 0, .2);
         max-width: calc(100vw - 24px);
       }
-
-      html.rd-dark .rd-toast {
-        background: #23262d;
-        color: #eceae4;
-        border-color: rgba(255, 255, 255, .22);
+      html.rd-dark .rd-toast { background: #23262d; color: #eceae4; border-color: rgba(255,255,255,.22); }
+      html.rd-sepia .rd-toast { background: #fbf4e4; color: #3a3125; }
+      .rd-toast button {
+        font: 600 13px Inter, system-ui, sans-serif; cursor: pointer;
+        border: 1px solid currentColor; border-radius: 8px;
+        padding: 6px 10px; background: transparent; color: inherit;
       }
 
-      html.rd-sepia .rd-toast {
-        background: #fbf4e4;
-        color: #3a3125;
-      }
-
-      .rd-meta {
-        font: 600 .85rem Inter, system-ui, sans-serif;
-        opacity: .7;
-        margin: -10px 0 20px;
-      }
-
+      .rd-meta { font: 600 .85rem Inter, system-ui, sans-serif; opacity: .7; margin: -10px 0 20px; }
       .rd-speak {
         background: rgba(191, 153, 59, .22) !important;
-        border-radius: 4px;
-        box-shadow: 0 0 0 3px rgba(191, 153, 59, .22);
+        border-radius: 4px; box-shadow: 0 0 0 3px rgba(191, 153, 59, .22);
       }
+      html.rd-focus .rd-b { opacity: .28; transition: opacity .2s; }
+      html.rd-focus .rd-b.rd-cur, html.rd-focus .rd-b.rd-speak { opacity: 1; }
 
-      html.rd-focus .rd-b {
-        opacity: .28;
-        transition: opacity .2s;
-      }
+      html.rd-sepia { color-scheme: light; --bg: #f3ead7; --paper: #f3ead7; }
+      html.rd-sepia body { background: #f3ead7 !important; color: #3a3125 !important; }
 
-      html.rd-focus .rd-b.rd-cur,
-      html.rd-focus .rd-b.rd-speak {
-        opacity: 1;
-      }
+      html.rd-dark { color-scheme: dark; --bg: #16181d; --paper: #16181d; --l: rgba(255,255,255,.16); }
+      html.rd-dark body { background: #16181d !important; color: #e8e6e1 !important; }
+      html.rd-dark h1, html.rd-dark h2, html.rd-dark h3 { color: #f1eee8 !important; }
+      html.rd-dark a, html.rd-dark .lvl, html.rd-dark summary, html.rd-dark .form b { color: #b9c9f7 !important; }
+      html.rd-dark .top a, html.rd-dark .way { color: #ddd !important; }
+      html.rd-dark .sub, html.rd-dark .why, html.rd-dark .small, html.rd-dark .way p,
+      html.rd-dark .path span, html.rd-dark .foot, html.rd-dark .tl { color: #b9b6ae !important; }
+      html.rd-dark del { color: #ff9b91; }
+      html.rd-dark ins { color: #9ce2bb; }
+      html.rd-dark .pair, html.rd-dark .q, html.rd-dark .way { border-color: rgba(255,255,255,.18) !important; }
+      html.rd-dark .q label { border-color: rgba(255,255,255,.28) !important; }
+      html.rd-dark button:not(.rd-fab):not(.rd-top), html.rd-dark .btn { border-color: rgba(255,255,255,.35); }
+      html.rd-dark .btn.g, html.rd-dark button.g, html.rd-dark .btn.alt { color: #e8e6e1 !important; }
+      html.rd-dark .ok { color: #9ce2bb; }
+      html.rd-dark .no { color: #ff9b91; }
 
-      html.rd-sepia {
-        color-scheme: light;
-        --bg: #f3ead7;
-        --paper: #f3ead7;
-      }
-
-      html.rd-sepia body {
-        background: #f3ead7 !important;
-        color: #3a3125 !important;
-      }
-
-      html.rd-sepia .rd-b.rd-cur {
-        background-color: rgba(120, 95, 55, .07);
-      }
-
-      html.rd-dark {
-        color-scheme: dark;
-        --bg: #16181d;
-        --paper: #16181d;
-        --l: rgba(255, 255, 255, .16);
-      }
-
-      html.rd-dark body {
-        background: #16181d !important;
-        color: #e8e6e1 !important;
-      }
-
-      html.rd-dark h1,
-      html.rd-dark h2,
-      html.rd-dark h3 {
-        color: #f1eee8 !important;
-      }
-
-      html.rd-dark a,
-      html.rd-dark .lvl,
-      html.rd-dark summary,
-      html.rd-dark .form b {
-        color: #b9c9f7 !important;
-      }
-
-      html.rd-dark .top a,
-      html.rd-dark .way {
-        color: #ddd !important;
-      }
-
-      html.rd-dark .sub,
-      html.rd-dark .why,
-      html.rd-dark .small,
-      html.rd-dark .way p,
-      html.rd-dark .path span,
-      html.rd-dark .foot,
-      html.rd-dark .tl {
-        color: #b9b6ae !important;
-      }
-
-      html.rd-dark del {
-        color: #ff9b91;
-      }
-
-      html.rd-dark ins {
-        color: #9ce2bb;
-      }
-
-      html.rd-dark .pair,
-      html.rd-dark .q,
-      html.rd-dark .way {
-        border-color: rgba(255, 255, 255, .18) !important;
-      }
-
-      html.rd-dark .q label {
-        border-color: rgba(255, 255, 255, .28) !important;
-      }
-
-      html.rd-dark button:not(.rd-fab):not(.rd-top),
-      html.rd-dark .btn {
-        border-color: rgba(255, 255, 255, .35);
-      }
-
-      html.rd-dark .btn.g,
-      html.rd-dark button.g,
-      html.rd-dark .btn.alt {
-        color: #e8e6e1 !important;
-      }
-
-      html.rd-dark .ok {
-        color: #9ce2bb;
-      }
-
-      html.rd-dark .no {
-        color: #ff9b91;
-      }
-
-      .rd-study-tools {
-        margin: 0;
-      }
-
-      .rd-study-tools h3 {
-        font-size: 14px;
-        margin: 14px 0 8px;
-        color: var(--rd-fg);
-      }
-
-      .rd-study-tools textarea {
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
-        padding: 10px;
-        border: 1px solid var(--rd-line);
-        border-radius: 8px;
-        background: var(--rd-bg);
-        color: var(--rd-fg);
-        font: inherit;
-        line-height: 1.6;
-        resize: vertical;
-      }
-
-      .rd-saved-item {
-        border: 1px solid var(--rd-line);
-        border-radius: 8px;
-        padding: 9px;
-        margin: 8px 0;
-      }
-
-      .rd-saved-text {
-        font-size: 13px;
-        overflow-wrap: anywhere;
-        margin: 0 0 8px;
-      }
-
-      .rd-saved-item button {
-        margin: 0 5px 4px 0;
-      }
-
-      .rd-hl {
-        border-radius: 2px;
-        padding: 0 1px;
-        color: inherit;
-      }
-
+      .rd-ui h3 { font-size: 14px; margin: 14px 0 8px; color: var(--rd-fg); }
       .rd-panel textarea {
-        width: 100%;
-        min-height: 160px;
+        display: block; width: 100%; min-height: 160px; box-sizing: border-box;
+        padding: 10px; border: 1px solid var(--rd-line); border-radius: 8px;
+        background: var(--rd-bg); color: var(--rd-fg);
+        font: inherit; line-height: 1.6; resize: vertical;
       }
-
-      .rd-action-row {
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-        margin-top: 10px;
-      }
+      .rd-saved-item { border: 1px solid var(--rd-line); border-radius: 8px; padding: 9px; margin: 8px 0; }
+      .rd-saved-text { font-size: 13px; overflow-wrap: anywhere; margin: 0 0 8px; }
+      .rd-saved-item button { margin: 0 5px 4px 0; }
+      .rd-hl { border-radius: 2px; padding: 0 1px; color: inherit; }
+      .rd-action-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
 
       @media (max-width: 620px) {
-        .rd-panel {
-          left: 8px;
-          right: 8px;
-          width: auto;
-          bottom: 72px;
-          max-height: 76vh;
-        }
-
-        .rd-fab {
-          right: 12px;
-          width: 44px;
-          height: 44px;
-          min-height: 44px !important;
-        }
-
-        #rd-fab {
-          bottom: 12px;
-        }
-
-        #rd-highlight-fab {
-          bottom: 66px;
-        }
-
-        #rd-notes-fab {
-          bottom: 120px;
-        }
-
-        #rd-print-fab {
-          bottom: 174px;
-        }
-
-        .rd-top {
-          left: 12px;
-          bottom: 12px;
-        }
+        .rd-panel { left: 8px; right: 8px; width: auto; bottom: 72px; max-height: 76vh; }
+        .rd-fab, .rd-top { width: 44px; height: 44px; min-height: 44px !important; }
+        .rd-fab { right: 12px; }
+        .rd-top { left: 12px; bottom: 12px; }
+        #rd-fab { bottom: 12px; }
+        #rd-highlight-fab { bottom: 66px; }
+        #rd-notes-fab { bottom: 120px; }
+        #rd-print-fab { bottom: 174px; }
       }
-
       @media (prefers-reduced-motion: reduce) {
-        html.rd-focus .rd-b,
-        .rd-fab {
-          transition: none;
-        }
-
-        html {
-          scroll-behavior: auto !important;
-        }
+        html.rd-focus .rd-b, .rd-fab, .rd-top { transition: none; }
+        html { scroll-behavior: auto !important; }
       }
-
       @media print {
-        .rd-ui,
-        .rd-prog,
-        .rd-toast,
-        #rd-print-fab {
-          display: none !important;
-        }
-
-        html.rd-focus .rd-b {
-          opacity: 1 !important;
-        }
-
-        html,
-        body {
-          background: #ffffff !important;
-          color: #000000 !important;
-        }
-
-        main {
-          max-width: none !important;
-        }
+        .rd-ui, .rd-prog, .rd-toast { display: none !important; }
+        html.rd-focus .rd-b { opacity: 1 !important; }
+        html, body { background: #ffffff !important; color: #000000 !important; }
+        main { max-width: none !important; }
       }
     `;
 
@@ -647,9 +319,7 @@
 
     if (sub && !main.querySelector('.rd-meta')) {
       var words = (main.innerText || main.textContent || '')
-        .trim()
-        .split(/\s+/)
-        .filter(Boolean).length;
+        .trim().split(/\s+/).filter(Boolean).length;
 
       var meta = document.createElement('p');
       meta.className = 'rd-meta';
@@ -664,7 +334,7 @@
     }
 
     /* ------------------------------------------------------
-       Reading blocks
+       Reading blocks (used by Listen and Focus)
        ------------------------------------------------------ */
 
     blocks = Array.prototype.slice.call(
@@ -675,21 +345,10 @@
         'main .two li, main .two h3, main .say'
       )
     ).filter(function (el) {
-      if (el.closest('.rd-ui, .nav, #rd-study-tools')) {
-        return false;
-      }
-
+      if (el.closest('.rd-ui, .nav')) return false;
       if (el.classList.contains('rd-meta')) return false;
-
       if (qf && qf.contains(el)) return false;
-
-      if (
-        el.matches('main .say') &&
-        el.parentElement !== main
-      ) {
-        return false;
-      }
-
+      if (el.matches('main .say') && el.parentElement !== main) return false;
       return true;
     });
 
@@ -707,22 +366,14 @@
 
     function make(tag, cls, value) {
       var node = document.createElement(tag);
-
       if (cls) node.className = cls;
       if (value != null) node.textContent = value;
-
       return node;
     }
 
     function escapeHTML(value) {
       return String(value).replace(/[&<>"']/g, function (ch) {
-        return {
-          '&': '&amp;',
-          '<': '&lt;',
-          '>': '&gt;',
-          '"': '&quot;',
-          "'": '&#39;'
-        }[ch];
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch];
       });
     }
 
@@ -730,11 +381,9 @@
       return '<div class="rd-seg">' +
         items.map(function (item) {
           return '<button type="button" data-k="' + key +
-            '" data-v="' + item[0] +
-            '" aria-pressed="false">' +
+            '" data-v="' + item[0] + '" aria-pressed="false">' +
             item[1] + '</button>';
-        }).join('') +
-        '</div>';
+        }).join('') + '</div>';
     }
 
     function toast(message) {
@@ -751,14 +400,11 @@
       node.hidden = false;
 
       clearTimeout(msgT);
-
-      msgT = setTimeout(function () {
-        node.hidden = true;
-      }, 2800);
+      msgT = setTimeout(function () { node.hidden = true; }, 2800);
     }
 
     /* ------------------------------------------------------
-       Floating toolbar and separate panels
+       Floating icons and separate panels
        ------------------------------------------------------ */
 
     ui = document.createElement('div');
@@ -772,173 +418,88 @@
 
       '<button type="button" class="rd-fab" id="rd-highlight-fab"' +
         ' aria-label="Highlights" title="Highlights"' +
-        ' aria-expanded="false" aria-controls="rd-highlight-panel">' +
-        '🖍</button>' +
+        ' aria-expanded="false" aria-controls="rd-highlight-panel">\uD83D\uDD8D</button>' +
 
       '<button type="button" class="rd-fab" id="rd-notes-fab"' +
         ' aria-label="Personal notes" title="Personal notes"' +
-        ' aria-expanded="false" aria-controls="rd-notes-panel">' +
-        '📝</button>' +
+        ' aria-expanded="false" aria-controls="rd-notes-panel">\uD83D\uDCDD</button>' +
 
       '<button type="button" class="rd-fab" id="rd-print-fab"' +
-        ' aria-label="Print lesson" title="Print lesson">🖨</button>' +
+        ' aria-label="Print lesson" title="Print lesson">\uD83D\uDDA8</button>' +
 
       '<button type="button" class="rd-top" id="rd-top"' +
-        ' aria-label="Back to top" hidden>↑</button>' +
+        ' aria-label="Back to top" hidden>\u2191</button>' +
 
-      '<div class="rd-panel" id="rd-panel" role="dialog"' +
-        ' aria-label="Reading settings" hidden>' +
+      /* Settings panel */
+      '<div class="rd-panel" id="rd-panel" role="dialog" aria-label="Reading settings" hidden>' +
+        '<div class="rd-panel-title"><h2>Reading settings</h2>' +
+          '<button type="button" class="rd-panel-close" data-close="settings" aria-label="Close settings">\u00D7</button></div>' +
 
-        '<div class="rd-panel-title">' +
-          '<h2>Reading settings</h2>' +
-          '<button type="button" class="rd-panel-close"' +
-            ' data-close="settings" aria-label="Close settings">×</button>' +
-        '</div>' +
+        '<div class="rd-row"><span class="rd-lab">Text size</span><div class="rd-seg">' +
+          '<button type="button" data-act="smaller" aria-label="Smaller text">A\u2212</button>' +
+          '<button type="button" data-act="bigger" aria-label="Larger text">A+</button>' +
+          '<button type="button" data-act="reset">Reset all</button></div></div>' +
 
-        '<div class="rd-row">' +
-          '<span class="rd-lab">Text size</span>' +
-          '<div class="rd-seg">' +
-            '<button type="button" data-act="smaller"' +
-              ' aria-label="Smaller text">A−</button>' +
-            '<button type="button" data-act="bigger"' +
-              ' aria-label="Larger text">A+</button>' +
-            '<button type="button" data-act="reset">Reset all</button>' +
-          '</div>' +
-        '</div>' +
+        '<div class="rd-row"><span class="rd-lab">Font</span>' +
+          seg('font', [['serif', 'Serif'], ['sans', 'Sans'], ['easy', 'Easy-read']]) + '</div>' +
 
-        '<div class="rd-row">' +
-          '<span class="rd-lab">Font</span>' +
-          seg('font', [
-            ['serif', 'Serif'],
-            ['sans', 'Sans'],
-            ['easy', 'Easy-read']
-          ]) +
-        '</div>' +
+        '<div class="rd-row"><span class="rd-lab">Line spacing</span>' +
+          seg('lh', [['tight', 'Tight'], ['normal', 'Normal'], ['roomy', 'Roomy']]) + '</div>' +
 
-        '<div class="rd-row">' +
-          '<span class="rd-lab">Line spacing</span>' +
-          seg('lh', [
-            ['tight', 'Tight'],
-            ['normal', 'Normal'],
-            ['roomy', 'Roomy']
-          ]) +
-        '</div>' +
+        '<div class="rd-row"><span class="rd-lab">Text width</span>' +
+          seg('w', [['narrow', 'Narrow'], ['normal', 'Normal'], ['wide', 'Wide']]) + '</div>' +
 
-        '<div class="rd-row">' +
-          '<span class="rd-lab">Text width</span>' +
-          seg('w', [
-            ['narrow', 'Narrow'],
-            ['normal', 'Normal'],
-            ['wide', 'Wide']
-          ]) +
-        '</div>' +
+        '<div class="rd-row"><span class="rd-lab">Reading colours</span>' +
+          seg('theme', [['light', 'Light'], ['sepia', 'Sepia'], ['dark', 'Dark']]) + '</div>' +
 
-        '<div class="rd-row">' +
-          '<span class="rd-lab">Reading colours</span>' +
-          seg('theme', [
-            ['light', 'Light'],
-            ['sepia', 'Sepia'],
-            ['dark', 'Dark']
-          ]) +
-        '</div>' +
-
-        '<div class="rd-row">' +
-          '<span class="rd-lab">Focus mode</span>' +
-          '<div class="rd-seg">' +
-            '<button type="button" data-act="focus"' +
-              ' aria-pressed="false">Dim other paragraphs</button>' +
-          '</div>' +
-        '</div>' +
+        '<div class="rd-row"><span class="rd-lab">Focus mode</span><div class="rd-seg">' +
+          '<button type="button" data-act="focus" aria-pressed="false">Dim other paragraphs</button></div></div>' +
 
         (main.querySelector('details') ?
-          '<div class="rd-row">' +
-            '<span class="rd-lab">Answers</span>' +
-            '<div class="rd-seg">' +
-              '<button type="button" data-act="open">Open all</button>' +
-              '<button type="button" data-act="close">Close all</button>' +
-            '</div>' +
-          '</div>' : '') +
+          '<div class="rd-row"><span class="rd-lab">Answers</span><div class="rd-seg">' +
+            '<button type="button" data-act="open">Open all</button>' +
+            '<button type="button" data-act="close">Close all</button></div></div>' : '') +
 
         (canSpeak ?
-          '<div class="rd-row">' +
-            '<span class="rd-lab">Listen to the lesson</span>' +
-            '<div class="rd-seg">' +
-              '<button type="button" data-act="listen" id="rd-listen">' +
-                '▶ Listen</button>' +
-              '<button type="button" data-act="stop">Stop</button>' +
-            '</div>' +
+          '<div class="rd-row"><span class="rd-lab">Listen to the lesson</span><div class="rd-seg">' +
+            '<button type="button" data-act="listen" id="rd-listen">\u25B6 Listen</button>' +
+            '<button type="button" data-act="stop">Stop</button></div>' +
             '<div class="rd-seg" style="margin-top:6px">' +
-              seg('rate', [
-                ['0.8', 'Slow'],
-                ['1', 'Normal'],
-                ['1.25', 'Fast']
-              ]) +
-            '</div>' +
-            '<p class="rd-note">Double-click a paragraph to listen from there.</p>' +
-          '</div>' : '') +
+              seg('rate', [['0.8', 'Slow'], ['1', 'Normal'], ['1.25', 'Fast']]) + '</div>' +
+            '<p class="rd-note">Starts from where you are. While listening, double-click a paragraph to jump there.</p></div>' : '') +
 
         (h2s.length > 2 ?
-          '<div class="rd-row">' +
-            '<span class="rd-lab">Jump to a section</span>' +
+          '<div class="rd-row"><span class="rd-lab">Jump to a section</span>' +
             '<nav class="rd-jump" aria-label="Lesson sections">' +
               h2s.map(function (h) {
-                return '<a href="#' + escapeHTML(h.id) + '">' +
-                  escapeHTML(h.textContent) + '</a>';
+                return '<a href="#' + escapeHTML(h.id) + '">' + escapeHTML(h.textContent) + '</a>';
               }).join('') +
-            '</nav>' +
-          '</div>' : '') +
-
+            '</nav></div>' : '') +
       '</div>' +
 
-      '<div class="rd-panel" id="rd-highlight-panel"' +
-        ' role="dialog" aria-label="Highlights" hidden>' +
-
-        '<div class="rd-panel-title">' +
-          '<h2>Highlights</h2>' +
-          '<button type="button" class="rd-panel-close"' +
-            ' data-close="highlight" aria-label="Close highlights">×</button>' +
-        '</div>' +
-
-        '<p class="rd-note">' +
-          'Select text in the lesson, then choose a highlight colour.' +
-        '</p>' +
-
+      /* Highlight panel */
+      '<div class="rd-panel" id="rd-highlight-panel" role="dialog" aria-label="Highlights" hidden>' +
+        '<div class="rd-panel-title"><h2>Highlights</h2>' +
+          '<button type="button" class="rd-panel-close" data-close="highlight" aria-label="Close highlights">\u00D7</button></div>' +
+        '<p class="rd-note">Select text in the lesson, then choose a colour.</p>' +
         '<div class="rd-seg" id="rd-highlight-colors" style="margin-top:10px">' +
           '<button type="button" data-color="#f8df8b">Yellow</button>' +
           '<button type="button" data-color="#b9e4d0">Mint</button>' +
           '<button type="button" data-color="#c9d9ff">Blue</button>' +
-          '<button type="button" data-color="#efc7dc">Pink</button>' +
-        '</div>' +
-
-        '<h3>Saved highlights</h3>' +
-        '<div id="rd-saved-items"></div>' +
-
+          '<button type="button" data-color="#efc7dc">Pink</button></div>' +
+        '<h3>Saved highlights</h3><div id="rd-saved-items"></div>' +
       '</div>' +
 
-      '<div class="rd-panel" id="rd-notes-panel"' +
-        ' role="dialog" aria-label="Personal notes" hidden>' +
-
-        '<div class="rd-panel-title">' +
-          '<h2>Personal notes</h2>' +
-          '<button type="button" class="rd-panel-close"' +
-            ' data-close="notes" aria-label="Close notes">×</button>' +
-        '</div>' +
-
-        '<p class="rd-note">' +
-          'Write your own explanations, examples and reminders for this lesson.' +
-        '</p>' +
-
-        '<textarea id="rd-personal-note" rows="8"' +
-          ' aria-label="Personal reading notes"' +
-          ' placeholder="Write your lesson notes here..."></textarea>' +
-
+      /* Notes panel */
+      '<div class="rd-panel" id="rd-notes-panel" role="dialog" aria-label="Personal notes" hidden>' +
+        '<div class="rd-panel-title"><h2>Personal notes</h2>' +
+          '<button type="button" class="rd-panel-close" data-close="notes" aria-label="Close notes">\u00D7</button></div>' +
+        '<p class="rd-note">Write your own explanations, examples and reminders for this lesson.</p>' +
+        '<textarea id="rd-personal-note" rows="8" aria-label="Personal reading notes" placeholder="Write your lesson notes here..."></textarea>' +
         '<div class="rd-action-row">' +
           '<button type="button" data-act="save-note">Save notes</button>' +
-          '<button type="button" data-act="clear-note">Clear notes</button>' +
-        '</div>' +
-
+          '<button type="button" data-act="clear-note">Clear notes</button></div>' +
         '<p class="rd-note">Notes are saved in this browser on this device.</p>' +
-
       '</div>';
 
     body.appendChild(ui);
@@ -978,54 +539,41 @@
     }
 
     function openPanel(name) {
-      var panel;
-      var fab;
+      var panel, fab;
 
       closeAllPanels(null);
 
-      if (name === 'settings') {
-        panel = settingsPanel;
-        fab = settingsFab;
-      } else if (name === 'highlight') {
-        panel = highlightPanel;
-        fab = highlightFab;
-      } else {
-        panel = notesPanel;
-        fab = notesFab;
-      }
+      if (name === 'settings') { panel = settingsPanel; fab = settingsFab; }
+      else if (name === 'highlight') { panel = highlightPanel; fab = highlightFab; }
+      else { panel = notesPanel; fab = notesFab; }
 
       panel.hidden = false;
       fab.setAttribute('aria-expanded', 'true');
 
-      var first = panel.querySelector(
-        'button, textarea, input, a[href]'
-      );
-
-      if (first) first.focus();
+      /* Keep the user's text selection: do not move focus for the highlight panel */
+      if (name !== 'highlight') {
+        var first = panel.querySelector('textarea, button, a[href]');
+        if (first) first.focus();
+      }
     }
 
     settingsFab.addEventListener('click', function () {
-      if (!settingsPanel.hidden) {
-        closeAllPanels(settingsFab);
-      } else {
-        openPanel('settings');
-      }
+      if (!settingsPanel.hidden) closeAllPanels(settingsFab); else openPanel('settings');
     });
 
     highlightFab.addEventListener('click', function () {
-      if (!highlightPanel.hidden) {
-        closeAllPanels(highlightFab);
-      } else {
-        openPanel('highlight');
-      }
+      if (!highlightPanel.hidden) closeAllPanels(highlightFab); else openPanel('highlight');
     });
 
     notesFab.addEventListener('click', function () {
-      if (!notesPanel.hidden) {
-        closeAllPanels(notesFab);
-      } else {
-        openPanel('notes');
-      }
+      if (!notesPanel.hidden) closeAllPanels(notesFab); else openPanel('notes');
+    });
+
+    /* Keep a text selection alive while tapping the highlight icon or colours */
+    [highlightFab, document.getElementById('rd-highlight-colors')].forEach(function (el) {
+      el.addEventListener('pointerdown', function (event) {
+        if (event.target.closest('button')) event.preventDefault();
+      });
     });
 
     ui.addEventListener('click', function (event) {
@@ -1033,7 +581,6 @@
 
       if (close) {
         var name = close.dataset.close;
-
         closeAllPanels(
           name === 'settings' ? settingsFab :
           name === 'highlight' ? highlightFab : notesFab
@@ -1041,36 +588,25 @@
         return;
       }
 
-      var anchor = event.target.closest('.rd-jump a');
-
-      if (anchor) {
-        closeAllPanels(null);
-      }
+      if (event.target.closest('.rd-jump a')) closeAllPanels(null);
     });
 
+    /* Clicking the lesson closes panels, except when the click ends a text selection */
     document.addEventListener('click', function (event) {
-      if (!ui.contains(event.target)) {
-        closeAllPanels(null);
-      }
+      if (ui.contains(event.target)) return;
+
+      var sel = window.getSelection();
+      if (sel && !sel.isCollapsed) return;
+
+      closeAllPanels(null);
     });
 
     document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape') {
-        if (
-          !settingsPanel.hidden ||
-          !highlightPanel.hidden ||
-          !notesPanel.hidden
-        ) {
-          closeAllPanels(null);
-        }
-      }
+      if (event.key === 'Escape') closeAllPanels(null);
     });
 
     topBtn.addEventListener('click', function () {
-      window.scrollTo({
-        top: 0,
-        behavior: reduce ? 'auto' : 'smooth'
-      });
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
     });
 
     printFab.addEventListener('click', function () {
@@ -1088,25 +624,12 @@
       sans: "Inter, system-ui, -apple-system, 'Segoe UI', sans-serif",
       easy: "'Atkinson Hyperlegible', Inter, system-ui, sans-serif"
     };
-
-    var lineHeights = {
-      tight: '1.55',
-      normal: null,
-      roomy: '2.05'
-    };
-
-    var widths = {
-      narrow: '560px',
-      normal: null,
-      wide: '880px'
-    };
+    var lineHeights = { tight: '1.55', normal: null, roomy: '2.05' };
+    var widths = { narrow: '560px', normal: null, wide: '880px' };
 
     function setProperty(el, property, value) {
-      if (value) {
-        el.style.setProperty(property, value, 'important');
-      } else {
-        el.style.removeProperty(property);
-      }
+      if (value) el.style.setProperty(property, value, 'important');
+      else el.style.removeProperty(property);
     }
 
     function apply() {
@@ -1115,25 +638,15 @@
       if (!(S.font in fonts)) S.font = DEF.font;
       if (!(S.lh in lineHeights)) S.lh = DEF.lh;
       if (!(S.w in widths)) S.w = DEF.w;
+      if (['light', 'sepia', 'dark'].indexOf(S.theme) < 0) S.theme = DEF.theme;
 
-      if (!['light', 'sepia', 'dark'].includes(S.theme)) {
-        S.theme = DEF.theme;
-      }
-
-      setProperty(
-        body,
-        'font-size',
-        S.fs ? (base + S.fs * 1.5) + 'px' : null
-      );
+      setProperty(body, 'font-size', S.fs ? (base + S.fs * 1.5) + 'px' : null);
 
       if (S.font === 'easy' && !easyLoaded) {
         easyLoaded = true;
-
         var link = document.createElement('link');
         link.rel = 'stylesheet';
-        link.href =
-          'https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap';
-
+        link.href = 'https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap';
         document.head.appendChild(link);
       }
 
@@ -1141,38 +654,24 @@
       setProperty(body, 'line-height', lineHeights[S.lh]);
       setProperty(main, 'max-width', widths[S.w]);
 
-      root.classList.remove('rd-sepia', 'rd-dark');
-
-      if (S.theme !== 'light') {
-        root.classList.add('rd-' + S.theme);
-      }
-
+      applyThemeEarly();
       root.classList.toggle('rd-focus', !!S.focus);
 
       ui.querySelectorAll('button[data-k]').forEach(function (button) {
         button.setAttribute(
           'aria-pressed',
-          String(S[button.dataset.k]) === button.dataset.v
-            ? 'true'
-            : 'false'
+          String(S[button.dataset.k]) === button.dataset.v ? 'true' : 'false'
         );
       });
 
       var focusButton = ui.querySelector('[data-act="focus"]');
-
-      if (focusButton) {
-        focusButton.setAttribute(
-          'aria-pressed',
-          S.focus ? 'true' : 'false'
-        );
-      }
+      if (focusButton) focusButton.setAttribute('aria-pressed', S.focus ? 'true' : 'false');
 
       updateFocus();
     }
 
     settingsPanel.addEventListener('click', function (event) {
       var button = event.target.closest('button');
-
       if (!button) return;
 
       if (button.dataset.k) {
@@ -1184,49 +683,23 @@
         saveSettings();
         apply();
 
-        if (key === 'rate' && speaking && !paused) {
-          speak(idx);
-        }
-
+        if (key === 'rate' && speaking && !paused) speak(idx);
         return;
       }
 
       switch (button.dataset.act) {
-        case 'smaller':
-          S.fs--;
-          break;
-
-        case 'bigger':
-          S.fs++;
-          break;
-
-        case 'reset':
-          S = JSON.parse(JSON.stringify(DEF));
-          break;
-
-        case 'focus':
-          S.focus = !S.focus;
-          break;
-
+        case 'smaller': S.fs--; break;
+        case 'bigger': S.fs++; break;
+        case 'reset': S = JSON.parse(JSON.stringify(DEF)); break;
+        case 'focus': S.focus = !S.focus; break;
         case 'open':
-          main.querySelectorAll('details').forEach(function (d) {
-            d.open = true;
-          });
+          main.querySelectorAll('details').forEach(function (d) { d.open = true; });
           return;
-
         case 'close':
-          main.querySelectorAll('details').forEach(function (d) {
-            d.open = false;
-          });
+          main.querySelectorAll('details').forEach(function (d) { d.open = false; });
           return;
-
-        case 'listen':
-          toggleListen();
-          return;
-
-        case 'stop':
-          stopSpeech();
-          return;
+        case 'listen': toggleListen(); return;
+        case 'stop': stopSpeech(); return;
       }
 
       saveSettings();
@@ -1234,7 +707,7 @@
     });
 
     /* ------------------------------------------------------
-       Progress, focus and resume
+       Progress, focus mode and resume position
        ------------------------------------------------------ */
 
     function updateFocus() {
@@ -1251,14 +724,9 @@
       blocks.forEach(function (block) {
         var rect = block.getBoundingClientRect();
 
-        if (
-          rect.bottom < -50 ||
-          rect.top > window.innerHeight + 50
-        ) return;
+        if (rect.bottom < -50 || rect.top > window.innerHeight + 50) return;
 
-        var distance = Math.abs(
-          (rect.top + rect.bottom) / 2 - middle
-        );
+        var distance = Math.abs((rect.top + rect.bottom) / 2 - middle);
 
         if (distance < bestDistance) {
           bestDistance = distance;
@@ -1268,16 +736,13 @@
 
       if (best !== cur) {
         if (cur) cur.classList.remove('rd-cur');
-
         if (best) best.classList.add('rd-cur');
-
         cur = best;
       }
     }
 
     function onScroll() {
       if (ticking) return;
-
       ticking = true;
 
       requestAnimationFrame(function () {
@@ -1285,10 +750,7 @@
 
         var doc = document.documentElement;
         var max = doc.scrollHeight - window.innerHeight;
-
-        var percent = max > 0
-          ? Math.min(100, window.scrollY / max * 100)
-          : 0;
+        var percent = max > 0 ? Math.min(100, window.scrollY / max * 100) : 0;
 
         prog.style.width = percent + '%';
         topBtn.hidden = window.scrollY < 700;
@@ -1297,13 +759,9 @@
       });
 
       clearTimeout(saveT);
-
       saveT = setTimeout(function () {
         try {
-          localStorage.setItem(
-            'rd-pos:' + location.pathname,
-            String(Math.round(window.scrollY))
-          );
+          localStorage.setItem('rd-pos:' + location.pathname, String(Math.round(window.scrollY)));
         } catch (e) {}
       }, 400);
     }
@@ -1312,10 +770,7 @@
     window.addEventListener('resize', onScroll);
 
     try {
-      var y = parseInt(
-        localStorage.getItem('rd-pos:' + location.pathname) || '0',
-        10
-      );
+      var y = parseInt(localStorage.getItem('rd-pos:' + location.pathname) || '0', 10);
 
       if (y > 900 && !location.hash && window.scrollY < 50) {
         var resumeToast = make('div', 'rd-toast');
@@ -1331,21 +786,14 @@
         resumeToast.append(message, go, dismiss);
         body.appendChild(resumeToast);
 
-        function hideResume() {
-          resumeToast.hidden = true;
-        }
+        var hideResume = function () { resumeToast.hidden = true; };
 
         go.addEventListener('click', function () {
-          window.scrollTo({
-            top: y,
-            behavior: reduce ? 'auto' : 'smooth'
-          });
-
+          window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
           hideResume();
         });
 
         dismiss.addEventListener('click', hideResume);
-
         setTimeout(hideResume, 9000);
       }
     } catch (e) {}
@@ -1357,11 +805,8 @@
     function textOf(element) {
       var clone = element.cloneNode(true);
 
-      clone.querySelectorAll(
-        'summary,button,textarea,input,select,.rd-ui'
-      ).forEach(function (node) {
-        node.remove();
-      });
+      clone.querySelectorAll('summary,button,textarea,input,select,.rd-ui')
+        .forEach(function (node) { node.remove(); });
 
       clone.querySelectorAll('details').forEach(function (node) {
         if (!node.open) node.remove();
@@ -1377,19 +822,12 @@
 
     function speechLabel() {
       if (!listenBtn) return;
-
-      listenBtn.textContent = !speaking
-        ? '▶ Listen'
-        : paused
-          ? '▶ Resume'
-          : 'Ⅱ Pause';
+      listenBtn.textContent = !speaking ? '\u25B6 Listen' : paused ? '\u25B6 Resume' : '\u23F8 Pause';
     }
 
     function markSpeech(element) {
       if (marked) marked.classList.remove('rd-speak');
-
       marked = element;
-
       if (marked) marked.classList.add('rd-speak');
     }
 
@@ -1406,7 +844,6 @@
       idx = index;
       speaking = true;
       paused = false;
-
       speechLabel();
 
       var block = blocks[index];
@@ -1422,10 +859,7 @@
       var rect = block.getBoundingClientRect();
 
       if (rect.top < 70 || rect.bottom > window.innerHeight - 70) {
-        block.scrollIntoView({
-          block: 'center',
-          behavior: reduce ? 'auto' : 'smooth'
-        });
+        block.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });
       }
 
       var utterance = new SpeechSynthesisUtterance(text);
@@ -1433,25 +867,19 @@
       utterance.rate = Number(S.rate) || 1;
 
       var voices = window.speechSynthesis.getVoices();
-      var voice = null;
 
       for (var i = 0; i < voices.length; i++) {
         if (/^en[-_](GB|US|AU|IN)/i.test(voices[i].lang)) {
-          voice = voices[i];
+          utterance.voice = voices[i];
           break;
         }
       }
 
-      if (voice) utterance.voice = voice;
-
       function done() {
-        if (speaking && !paused && idx === index) {
-          speak(index + 1);
-        }
+        if (speaking && !paused && idx === index) speak(index + 1);
       }
 
       utterance.onend = done;
-
       utterance.onerror = function (event) {
         if (/cancel|interrupt/i.test(event.error || '')) return;
         done();
@@ -1462,32 +890,24 @@
 
     function firstVisible() {
       for (var i = 0; i < blocks.length; i++) {
-        if (blocks[i].getBoundingClientRect().bottom > 60) {
-          return i;
-        }
+        if (blocks[i].getBoundingClientRect().bottom > 60) return i;
       }
-
       return 0;
     }
 
     function toggleListen() {
-      if (!speaking) {
-        speak(firstVisible());
-      } else if (!paused) {
+      if (!speaking) speak(firstVisible());
+      else if (!paused) {
         paused = true;
         window.speechSynthesis.cancel();
         speechLabel();
-      } else {
-        speak(idx);
-      }
+      } else speak(idx);
     }
 
     function stopSpeech() {
       speaking = false;
       paused = false;
-
       if (canSpeak) window.speechSynthesis.cancel();
-
       markSpeech(null);
       speechLabel();
     }
@@ -1496,28 +916,28 @@
       if (canSpeak) window.speechSynthesis.cancel();
     });
 
+    /* Double-click jumps only while listening, so double-clicking a word
+       still selects it for highlighting. */
     main.addEventListener('dblclick', function (event) {
-      if (!canSpeak) return;
+      if (!canSpeak || !speaking) return;
 
-      var block = event.target.closest &&
-        event.target.closest('.rd-b');
-
+      var block = event.target.closest && event.target.closest('.rd-b');
       if (!block) return;
 
       var index = blocks.indexOf(block);
-
       if (index < 0) return;
 
       var selection = window.getSelection();
-
       if (selection) selection.removeAllRanges();
 
       speak(index);
     });
 
     /* ------------------------------------------------------
-       Highlights and personal notes storage
+       Highlights and personal notes: storage
        ------------------------------------------------------ */
+
+    var COLOR_NAMES = { yellow: '#f8df8b', green: '#b9e4d0', mint: '#b9e4d0', blue: '#c9d9ff', pink: '#efc7dc' };
 
     function loadPageData() {
       try {
@@ -1525,31 +945,36 @@
 
         if (data && Array.isArray(data.items)) {
           data.note = typeof data.note === 'string' ? data.note : '';
+
+          data.items = data.items.filter(function (item) {
+            return item && typeof item.text === 'string';
+          }).map(function (item) {
+            /* migrate highlights saved by earlier versions (s, e, c) */
+            if (!Number.isInteger(item.start) && Number.isInteger(item.s)) {
+              item.start = item.s;
+              item.end = item.e;
+            }
+            if (!item.color) item.color = COLOR_NAMES[item.c] || '#f8df8b';
+            if (!item.id) item.id = makeId();
+            return item;
+          });
+
           return data;
         }
       } catch (e) {}
 
-      return {
-        t: document.title.replace(/\s*\|.*$/, ''),
-        items: [],
-        note: ''
-      };
+      return { t: document.title.replace(/\s*\|.*$/, ''), items: [], note: '' };
     }
 
     P = loadPageData();
-
     noteArea.value = P.note;
 
     function savePageData() {
       P.u = Date.now();
 
       try {
-        if (!P.items.length && !P.note.trim()) {
-          localStorage.removeItem(pkey);
-        } else {
-          localStorage.setItem(pkey, JSON.stringify(P));
-        }
-
+        if (!P.items.length && !P.note.trim()) localStorage.removeItem(pkey);
+        else localStorage.setItem(pkey, JSON.stringify(P));
         return true;
       } catch (e) {
         toast('Could not save. Browser storage may be full or blocked.');
@@ -1558,218 +983,203 @@
     }
 
     function makeId() {
-      return 'hl-' + Date.now().toString(36) +
-        '-' + Math.random().toString(36).slice(2, 7);
+      return 'hl-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 7);
     }
 
-    function getItem(id) {
-      for (var i = 0; i < P.items.length; i++) {
-        if (P.items[i].id === id) return P.items[i];
-      }
-
-      return null;
-    }
+    /* ------------------------------------------------------
+       Highlights: text positions
+       ------------------------------------------------------ */
 
     function textNodes() {
       var nodes = [];
 
-      var walker = document.createTreeWalker(
-        main,
-        NodeFilter.SHOW_TEXT,
-        {
-          acceptNode: function (node) {
-            var parent = node.parentElement;
+      var walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT, {
+        acceptNode: function (node) {
+          var parent = node.parentElement;
 
-            if (!parent || !node.data.length) {
-              return NodeFilter.FILTER_REJECT;
-            }
+          if (!parent || !node.data.length) return NodeFilter.FILTER_REJECT;
+          if (parent.closest(EXCLUDE)) return NodeFilter.FILTER_REJECT;
 
-            if (
-              parent.closest(
-                '.rd-ui,.rd-meta,.nav,script,style,' +
-                'textarea,input,button,select'
-              )
-            ) {
-              return NodeFilter.FILTER_REJECT;
-            }
-
-            return NodeFilter.FILTER_ACCEPT;
-          }
+          return NodeFilter.FILTER_ACCEPT;
         }
-      );
+      });
 
-      while (walker.nextNode()) {
-        nodes.push(walker.currentNode);
-      }
+      while (walker.nextNode()) nodes.push(walker.currentNode);
 
       return nodes;
     }
 
+    function fullText() {
+      return textNodes().map(function (n) { return n.data; }).join('');
+    }
+
+    /* Works for text-node and element boundaries (triple-click, drag across tags) */
+    function pointOffset(node, offset, nodes) {
+      var total = 0;
+      var i;
+
+      if (node.nodeType === 3) {
+        for (i = 0; i < nodes.length; i++) {
+          if (nodes[i] === node) return total + offset;
+          total += nodes[i].data.length;
+        }
+        return -1;
+      }
+
+      var r = document.createRange();
+      r.setStart(node, offset);
+      r.collapse(true);
+
+      for (i = 0; i < nodes.length; i++) {
+        if (r.comparePoint(nodes[i], 0) >= 0) return total;
+        total += nodes[i].data.length;
+      }
+
+      return total;
+    }
+
     function getOffsets(range) {
       var nodes = textNodes();
-      var total = 0;
-      var start = -1;
-      var end = -1;
-
-      for (var i = 0; i < nodes.length; i++) {
-        var node = nodes[i];
-        var length = node.data.length;
-
-        if (node === range.startContainer) {
-          start = total + range.startOffset;
-        }
-
-        if (node === range.endContainer) {
-          end = total + range.endOffset;
-        }
-
-        total += length;
-      }
+      var start = pointOffset(range.startContainer, range.startOffset, nodes);
+      var end = pointOffset(range.endContainer, range.endOffset, nodes);
 
       if (start < 0 || end <= start) return null;
 
       return { start: start, end: end };
     }
 
-    function createRange(start, end) {
-      var nodes = textNodes();
+    /* Wraps every text piece in the range separately, so it works across inline tags */
+    function wrapOffsets(start, end, id, color) {
       var total = 0;
-      var startNode = null;
-      var endNode = null;
-      var startOffset = 0;
-      var endOffset = 0;
+      var count = 0;
 
-      for (var i = 0; i < nodes.length; i++) {
-        var node = nodes[i];
-        var next = total + node.data.length;
+      textNodes().forEach(function (node) {
+        var from = total;
+        var to = total + node.data.length;
+        total = to;
 
-        if (!startNode && start >= total && start < next) {
-          startNode = node;
-          startOffset = start - total;
-        }
+        if (to <= start || from >= end || !/\S/.test(node.data)) return;
 
-        if (end > total && end <= next) {
-          endNode = node;
-          endOffset = end - total;
-          break;
-        }
+        var a = Math.max(start, from) - from;
+        var b = Math.min(end, to) - from;
+        var mid = node;
 
-        total = next;
-      }
+        if (a > 0) mid = node.splitText(a);
+        if (b - a < mid.data.length) mid.splitText(b - a);
 
-      if (!startNode || !endNode) return null;
+        var mark = document.createElement('mark');
+        mark.className = 'rd-hl';
+        mark.dataset.id = id;
+        mark.style.backgroundColor = color || '#f8df8b';
+        mark.style.color = 'inherit';
 
-      var range = document.createRange();
+        mid.parentNode.insertBefore(mark, mid);
+        mark.appendChild(mid);
+        count++;
+      });
 
-      try {
-        range.setStart(startNode, startOffset);
-        range.setEnd(endNode, endOffset);
-        return range;
-      } catch (e) {
-        return null;
-      }
+      return count > 0;
     }
 
     function getHighlightMarks(id) {
-      return Array.prototype.slice.call(
-        main.querySelectorAll('mark.rd-hl')
-      ).filter(function (mark) {
-        return mark.dataset.id === id;
-      });
+      return Array.prototype.slice.call(main.querySelectorAll('mark.rd-hl'))
+        .filter(function (mark) { return mark.dataset.id === id; });
     }
 
     function paintHighlight(item) {
-      if (
-        !item ||
-        !Number.isInteger(item.start) ||
-        !Number.isInteger(item.end) ||
-        item.end <= item.start
-      ) {
+      if (!item || !Number.isInteger(item.start) || !Number.isInteger(item.end) || item.end <= item.start) {
         return false;
       }
-
-      var range = createRange(item.start, item.end);
-
-      if (!range || range.collapsed) return false;
-
-      var mark = document.createElement('mark');
-      mark.className = 'rd-hl';
-      mark.dataset.id = item.id;
-      mark.style.backgroundColor = item.color || '#f8df8b';
-      mark.style.color = 'inherit';
-
-      try {
-        range.surroundContents(mark);
-        return true;
-      } catch (e) {
-        return false;
-      }
+      return wrapOffsets(item.start, item.end, item.id, item.color);
     }
 
     function unwrapHighlight(id) {
       getHighlightMarks(id).forEach(function (mark) {
         var parent = mark.parentNode;
-
         if (!parent) return;
 
-        while (mark.firstChild) {
-          parent.insertBefore(mark.firstChild, mark);
-        }
+        while (mark.firstChild) parent.insertBefore(mark.firstChild, mark);
 
         parent.removeChild(mark);
         parent.normalize();
       });
     }
 
+    /* Re-places highlights if the lesson text moved, and flags ones that cannot be found */
     function restoreHighlights() {
-      P.items.sort(function (a, b) {
-        return a.start - b.start;
-      });
+      var full = fullText();
+      var changed = false;
 
       P.items.forEach(function (item) {
-        if (!getHighlightMarks(item.id).length) {
-          paintHighlight(item);
+        item.lost = false;
+
+        var ok = Number.isInteger(item.start) && Number.isInteger(item.end) &&
+          full.substr(item.start, item.end - item.start) === item.text;
+
+        if (ok) return;
+
+        var found = item.text ? full.indexOf(item.text) : -1;
+
+        if (found < 0) {
+          item.lost = true;
+          return;
         }
+
+        item.start = found;
+        item.end = found + item.text.length;
+        changed = true;
       });
+
+      if (changed) savePageData();
+
+      P.items.slice()
+        .sort(function (a, b) { return (a.start || 0) - (b.start || 0); })
+        .forEach(function (item) {
+          if (!item.lost && !getHighlightMarks(item.id).length) {
+            if (!paintHighlight(item)) item.lost = true;
+          }
+        });
     }
 
     function selectionIsInLesson(range) {
-      var start = range.startContainer.nodeType === 1
-        ? range.startContainer
-        : range.startContainer.parentElement;
-
-      var end = range.endContainer.nodeType === 1
-        ? range.endContainer
-        : range.endContainer.parentElement;
+      var start = range.startContainer.nodeType === 1 ? range.startContainer : range.startContainer.parentElement;
+      var end = range.endContainer.nodeType === 1 ? range.endContainer : range.endContainer.parentElement;
 
       return !!(
         start && end &&
-        main.contains(start) &&
-        main.contains(end) &&
-        !start.closest('.rd-ui,.rd-meta,.nav') &&
-        !end.closest('.rd-ui,.rd-meta,.nav')
+        main.contains(start) && main.contains(end) &&
+        !start.closest('.rd-ui,.rd-meta,.nav,#qf') &&
+        !end.closest('.rd-ui,.rd-meta,.nav,#qf')
       );
     }
+
+    /* Remember the last text selection, so tapping the highlight icon cannot lose it */
+    document.addEventListener('selectionchange', function () {
+      var sel = window.getSelection();
+
+      if (sel && sel.rangeCount && !sel.isCollapsed) {
+        var r = sel.getRangeAt(0);
+
+        if (selectionIsInLesson(r) && r.toString().trim()) {
+          lastRange = r.cloneRange();
+        }
+      }
+    });
 
     function addHighlight(color) {
       var selection = window.getSelection();
 
-      if (!selection || !selection.rangeCount || selection.isCollapsed) {
+      var range = (selection && selection.rangeCount && !selection.isCollapsed)
+        ? selection.getRangeAt(0)
+        : lastRange;
+
+      if (!range) {
         toast('Select the text you want to highlight first.');
         return;
       }
 
-      var range = selection.getRangeAt(0);
-
       if (!selectionIsInLesson(range)) {
         toast('Select text inside the lesson.');
-        return;
-      }
-
-      var selectedText = range.toString();
-
-      if (!selectedText.trim()) {
-        toast('Select some meaningful text first.');
         return;
       }
 
@@ -1780,24 +1190,28 @@
         return;
       }
 
+      var text = fullText().slice(offsets.start, offsets.end);
+      var lead = text.length - text.replace(/^\s+/, '').length;
+
+      offsets.start += lead;
+      text = text.trim();
+      offsets.end = offsets.start + text.length;
+
+      if (text.length < 2) {
+        toast('Select some meaningful text first.');
+        return;
+      }
+
       var item = {
         id: makeId(),
         start: offsets.start,
         end: offsets.end,
-        text: selectedText,
+        text: text,
         color: color
       };
 
-      var mark = document.createElement('mark');
-      mark.className = 'rd-hl';
-      mark.dataset.id = item.id;
-      mark.style.backgroundColor = color;
-      mark.style.color = 'inherit';
-
-      try {
-        range.surroundContents(mark);
-      } catch (e) {
-        toast('Select text within one paragraph at a time.');
+      if (!wrapOffsets(item.start, item.end, item.id, color)) {
+        toast('This selection could not be highlighted.');
         return;
       }
 
@@ -1809,7 +1223,9 @@
         return;
       }
 
-      selection.removeAllRanges();
+      if (selection) selection.removeAllRanges();
+      lastRange = null;
+
       renderHighlights();
       toast('Highlight saved.');
     }
@@ -1817,9 +1233,7 @@
     function removeHighlight(id) {
       unwrapHighlight(id);
 
-      P.items = P.items.filter(function (item) {
-        return item.id !== id;
-      });
+      P.items = P.items.filter(function (item) { return item.id !== id; });
 
       savePageData();
       renderHighlights();
@@ -1828,90 +1242,72 @@
 
     function renderHighlights() {
       var list = document.getElementById('rd-saved-items');
-
       if (!list) return;
 
       list.replaceChildren();
 
       if (!P.items.length) {
-        list.appendChild(
-          make('p', 'rd-note', 'Your saved highlights will appear here.')
-        );
+        list.appendChild(make('p', 'rd-note', 'Your saved highlights will appear here.'));
       }
 
       P.items.forEach(function (item) {
         var row = make('div', 'rd-saved-item');
+        var preview = make('p', 'rd-saved-text', item.text || 'Saved highlight');
 
-        var preview = make(
-          'p',
-          'rd-saved-text',
-          item.text || 'Saved highlight'
-        );
-
-        preview.style.borderLeft = '4px solid ' + item.color;
+        preview.style.borderLeft = '4px solid ' + (item.color || '#f8df8b');
         preview.style.paddingLeft = '8px';
 
-        var go = make('button', '', 'Go to text');
-        go.type = 'button';
+        row.appendChild(preview);
 
-        go.addEventListener('click', function () {
-          var marks = getHighlightMarks(item.id);
+        if (item.lost) {
+          row.appendChild(make('p', 'rd-note', 'This part of the lesson has changed, so the highlight cannot be shown.'));
+        } else {
+          var go = make('button', '', 'Go to text');
+          go.type = 'button';
 
-          if (marks.length) {
-            marks[0].scrollIntoView({
-              behavior: reduce ? 'auto' : 'smooth',
-              block: 'center'
-            });
+          go.addEventListener('click', function () {
+            var marks = getHighlightMarks(item.id);
 
-            closeAllPanels(null);
-          } else {
-            toast('The saved text could not be located.');
-          }
-        });
+            if (marks.length) {
+              marks[0].scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+              closeAllPanels(null);
+            } else {
+              toast('The saved text could not be located.');
+            }
+          });
+
+          row.appendChild(go);
+        }
 
         var remove = make('button', '', 'Remove');
         remove.type = 'button';
+        remove.addEventListener('click', function () { removeHighlight(item.id); });
 
-        remove.addEventListener('click', function () {
-          removeHighlight(item.id);
-        });
-
-        row.append(preview, go, remove);
+        row.appendChild(remove);
         list.appendChild(row);
       });
     }
 
-    /* ------------------------------------------------------
-       Highlight panel actions
-       ------------------------------------------------------ */
-
     document.getElementById('rd-highlight-colors')
       .addEventListener('click', function (event) {
         var button = event.target.closest('button[data-color]');
-
-        if (!button) return;
-
-        addHighlight(button.dataset.color);
+        if (button) addHighlight(button.dataset.color);
       });
 
     /* ------------------------------------------------------
-       Personal notes actions
+       Personal notes
        ------------------------------------------------------ */
 
     notesPanel.addEventListener('click', function (event) {
       var button = event.target.closest('button[data-act]');
-
       if (!button) return;
 
       if (button.dataset.act === 'save-note') {
         var previous = P.note;
         P.note = noteArea.value;
 
-        if (savePageData()) {
-          toast('Your notes have been saved.');
-        } else {
-          P.note = previous;
-        }
+        if (savePageData()) toast('Your notes have been saved.');
+        else P.note = previous;
       }
 
       if (button.dataset.act === 'clear-note') {
@@ -1938,13 +1334,12 @@
     });
 
     /* ------------------------------------------------------
-       Restore highlights and initialise reader
+       Start
        ------------------------------------------------------ */
 
     restoreHighlights();
     renderHighlights();
     apply();
     onScroll();
-
   }
 })();
