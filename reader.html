@@ -1,123 +1,683 @@
+
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/10719400.png">
- 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>Reader | English Materials</title>
-<script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||'light'}catch(e){}</script>
+
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/10719400.png">
+<meta name="theme-color" content="#1f2a44">
+<meta name="description" content="Read English grammar books, vocabulary guides and classic literature online with adjustable themes and zoom.">
+
+<script>
+/* Share the same theme setting as the English Materials home page and lessons. */
+try {
+  var settings = JSON.parse(localStorage.getItem('ielts-gl-reader') || '{}');
+  document.documentElement.dataset.theme =
+    settings.theme || localStorage.getItem('theme') || 'light';
+} catch (e) {}
+</script>
+
 <style>
-:root{--bar:#fff;--bg:#e9e7e2;--text:#222;--line:#0002;--accent:#1f4fbf;--filter:none}
-html[data-theme=sepia]{--bar:#efe5cc;--bg:#e3d6b8;--text:#4a3b26;--line:#4a3b2633;--accent:#8a4b12;--filter:sepia(.5) saturate(.9) brightness(.97)}
-html[data-theme=dark]{--bar:#1b1f29;--bg:#10131a;--text:#e6e6e6;--line:#fff3;--accent:#8fb0ff;--filter:invert(1) hue-rotate(180deg) brightness(.92)}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:600 14px Inter,system-ui,sans-serif}
-.bar{position:sticky;top:0;z-index:5;background:var(--bar);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
-.bar a,.bar button{color:var(--text);background:none;border:1px solid var(--line);border-radius:6px;padding:7px 11px;font:inherit;text-decoration:none;cursor:pointer}
-.bar button[aria-pressed=true]{background:var(--accent);color:var(--bar);border-color:var(--accent)}
-.grp{display:flex;gap:6px;align-items:center}
-.bar input{width:64px;padding:7px;border:1px solid var(--line);border-radius:6px;background:none;color:var(--text);font:inherit;text-align:center}
-.title{flex:1 1 100%;font-size:13px;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#pages{display:flex;flex-direction:column;align-items:center;gap:12px;padding:12px 0 60px}
-.pg{background:#fff;box-shadow:0 1px 6px #0003;max-width:100%;overflow:hidden}
-.pg canvas{display:block;width:100%;height:auto;filter:var(--filter)}
-.pg.empty{background:var(--bar)}
-#msg{text-align:center;padding:40px 16px}
-:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+:root {
+  --bar: #fff;
+  --bg: #e9e7e2;
+  --text: #222;
+  --line: #0002;
+  --accent: #1f4fbf;
+  --filter: none;
+}
+
+html[data-theme="sepia"] {
+  --bar: #efe5cc;
+  --bg: #e3d6b8;
+  --text: #4a3b26;
+  --line: #4a3b2633;
+  --accent: #8a4b12;
+  --filter: sepia(.5) saturate(.9) brightness(.97);
+}
+
+html[data-theme="dark"] {
+  --bar: #1b1f29;
+  --bg: #10131a;
+  --text: #e6e6e6;
+  --line: #fff3;
+  --accent: #8fb0ff;
+  --filter: invert(1) hue-rotate(180deg) brightness(.92);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 600 14px Inter, system-ui, sans-serif;
+}
+
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--bar);
+  border-bottom: 1px solid var(--line);
+  padding: 8px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bar a,
+.bar button {
+  color: var(--text);
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 7px 11px;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.bar button[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--bar);
+  border-color: var(--accent);
+}
+
+.grp {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.bar input {
+  width: 64px;
+  padding: 7px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bar);
+  color: var(--text);
+  font: inherit;
+  text-align: center;
+}
+
+.title {
+  flex: 1 1 100%;
+  font-size: 13px;
+  opacity: .8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#pages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0 60px;
+}
+
+.pg {
+  background: #fff;
+  box-shadow: 0 1px 6px #0003;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.pg canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: var(--filter);
+}
+
+.pg.empty {
+  background: var(--bar);
+}
+
+#msg {
+  text-align: center;
+  padding: 40px 16px;
+  line-height: 1.8;
+}
+
+#msg a {
+  color: var(--accent);
+}
+
+#progress {
+  height: 3px;
+  background: var(--line);
+  width: 100%;
+}
+
+#progressBar {
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width .15s;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .bar {
+    gap: 7px;
+  }
+
+  .bar a,
+  .bar button {
+    padding: 7px 9px;
+  }
+
+  .grp {
+    gap: 4px;
+  }
+}
 </style>
 </head>
+
 <body>
-<div class="bar">
-<div class="grp"><a href="index.html#reader">← Back</a></div>
-<div class="grp"><button id="prev" aria-label="Previous page">‹</button><input id="num" type="number" min="1" value="1" aria-label="Page number"><span id="tot">/ –</span><button id="next" aria-label="Next page">›</button></div>
-<div class="grp"><button id="zo" aria-label="Zoom out">−</button><button id="zi" aria-label="Zoom in">+</button></div>
-<div class="grp" id="th"><button data-t="light">Light</button><button data-t="sepia">Sepia</button><button data-t="dark">Dark</button></div>
-<div class="title" id="title">Loading…</div>
+
+<header class="bar">
+  <div class="grp">
+    <a href="./index.html#reader">← Back to library</a>
+  </div>
+
+  <div class="grp" aria-label="Page navigation">
+    <button id="prev" type="button" aria-label="Previous page">‹</button>
+    <input id="num" type="number" min="1" value="1" aria-label="Page number">
+    <span id="tot">/ …</span>
+    <button id="next" type="button" aria-label="Next page">›</button>
+  </div>
+
+  <div class="grp" aria-label="Zoom controls">
+    <button id="zo" type="button" aria-label="Zoom out">−</button>
+    <button id="zi" type="button" aria-label="Zoom in">+</button>
+  </div>
+
+  <div class="grp" id="th" aria-label="Reading theme">
+    <button type="button" data-t="light">Light</button>
+    <button type="button" data-t="sepia">Sepia</button>
+    <button type="button" data-t="dark">Dark</button>
+  </div>
+
+  <div class="title" id="title">Loading book…</div>
+</header>
+
+<div id="progress" aria-hidden="true">
+  <div id="progressBar"></div>
 </div>
-<div id="msg">Opening book…</div>
+
+<div id="msg" role="status" aria-live="polite">Opening book…</div>
 <div id="pages"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
 <script>
-const RAW='https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/';
-const BOOKS={
- adv:{t:'Advanced Grammar in Use',f:'Advanced%20grammar%20in%20use.pdf'},
- oxford:{t:'Oxford Guide to English Grammar',f:'Oxford-Guide-to-English-Grammar.pdf'},
- gre:{t:'GRE Word Smart',f:'GRE-book-Word-Smart(1).pdf'},
- check:{t:'Check Your English Vocabulary for IELTS',f:'1.3rawdon-wyatt-check-your-english-vocabulary-for-ielts_-essential-words-and-phrases-to-help-you-maximise-your-ielts-score-bloomsbury-information-ltd-2017.pdf'},
- grammar:{t:'English Grammar in Use (Intermediate)',f:'English-Grammer-In-Use-Intermediatr.pdf'},
- vocab:{t:'IELTS Vocabulary Booster',f:'IELTS%20Vocabulary%20Booster.pdf'},
- wren:{t:'High School English Grammar and Composition (Wren & Martin)',f:'the-languagelab-library-high-school-english-grammar-and-composition-wren-and-martin-ZmlD.pdf'}
-};
-const $=id=>document.getElementById(id);
-const key=new URLSearchParams(location.search).get('b')||'grammar';
-const book=BOOKS[key]||BOOKS.grammar;
-document.title=book.t+' | Reader';$('title').textContent=book.t;
-const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+(function () {
+  "use strict";
 
-// Theme
-function setTheme(t){document.documentElement.dataset.theme=t;store.set('theme',t);document.querySelectorAll('#th button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===t))}
-document.querySelectorAll('#th button').forEach(b=>b.onclick=()=>setTheme(b.dataset.t));
-setTheme(document.documentElement.dataset.theme);
+  const RAW =
+    "https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/";
 
-pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-let pdf,ratio=1.4,zoom=+(store.get('zoom')||1),cur=1,pages=[];
-const box=$('pages');
+  /*
+    All books in the English Materials library.
 
-function width(){return Math.min(box.clientWidth-16,900)*zoom}
+    The key in each entry must match the b= value in the
+    corresponding reader.html link.
+  */
+  const BOOKS = {
+    adv: {
+      t: "Advanced Grammar in Use",
+      f: "Advanced%20grammar%20in%20use.pdf",
+      category: "Grammar"
+    },
 
-const lazy=new IntersectionObserver(es=>es.forEach(e=>{
-  const n=+e.target.dataset.n;
-  e.isIntersecting?draw(n):drop(n);
-}),{rootMargin:'1500px 0px'});
+    oxford: {
+      t: "Oxford Guide to English Grammar",
+      f: "Oxford-Guide-to-English-Grammar.pdf",
+      category: "Grammar"
+    },
 
-const mid=new IntersectionObserver(es=>es.forEach(e=>{
-  if(e.isIntersecting){cur=+e.target.dataset.n;$('num').value=cur;store.set('p:'+key,cur)}
-}),{rootMargin:'-45% 0px -54% 0px'});
+    gre: {
+      t: "GRE Word Smart",
+      f: "GRE-book-Word-Smart(1).pdf",
+      category: "Vocabulary"
+    },
 
-const busy={};
-async function draw(n){
-  const el=pages[n-1];
-  if(el.querySelector('canvas')||busy[n])return;
-  busy[n]=1;
-  try{
-    const p=await pdf.getPage(n);
-    const w=width(),dpr=Math.min(window.devicePixelRatio||1,2);
-    const vp1=p.getViewport({scale:1}),s=(w/vp1.width)*dpr;
-    const vp=p.getViewport({scale:s});
-    const c=document.createElement('canvas');c.width=vp.width;c.height=vp.height;
-    await p.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;
-    el.classList.remove('empty');el.replaceChildren(c);
-  }catch(e){}
-  busy[n]=0;
-}
-function drop(n){const el=pages[n-1];if(el&&el.firstChild){el.replaceChildren();el.classList.add('empty')}}
+    check: {
+      t: "Check Your English Vocabulary for IELTS",
+      f: "1.3rawdon-wyatt-check-your-english-vocabulary-for-ielts_-essential-words-and-phrases-to-help-you-maximise-your-ielts-score-bloomsbury-information-ltd-2017.pdf",
+      category: "Vocabulary"
+    },
 
-function layout(){
-  lazy.disconnect();mid.disconnect();
-  const w=width();
-  pages.forEach(el=>{el.style.width=w+'px';el.style.height=(w*ratio)+'px';el.replaceChildren();el.classList.add('empty');lazy.observe(el);mid.observe(el)});
-}
-function go(n){n=Math.max(1,Math.min(pdf.numPages,n|0));pages[n-1].scrollIntoView();}
+    grammar: {
+      t: "English Grammar in Use (Intermediate)",
+      f: "English-Grammer-In-Use-Intermediatr.pdf",
+      category: "Grammar"
+    },
 
-(async()=>{
-  try{
-    pdf=await pdfjsLib.getDocument({url:RAW+book.f,disableAutoFetch:true,rangeChunkSize:262144}).promise;
-    const p1=await pdf.getPage(1),v=p1.getViewport({scale:1});ratio=v.height/v.width;
-    $('msg').remove();$('tot').textContent='/ '+pdf.numPages;$('num').max=pdf.numPages;
-    for(let i=1;i<=pdf.numPages;i++){const d=document.createElement('div');d.className='pg empty';d.dataset.n=i;box.appendChild(d);pages.push(d)}
-    layout();
-    const last=+store.get('p:'+key)||1;if(last>1)go(last);
-  }catch(e){$('msg').innerHTML='Could not load the book. <a href="'+RAW+book.f+'">Open the PDF directly</a>.'}
+    vocab: {
+      t: "IELTS Vocabulary Booster",
+      f: "IELTS%20Vocabulary%20Booster.pdf",
+      category: "Vocabulary"
+    },
+
+    wren: {
+      t: "High School English Grammar and Composition",
+      f: "the-languagelab-library-high-school-english-grammar-and-composition-wren-and-martin-ZmlD.pdf",
+      category: "Grammar"
+    },
+
+    mistakes: {
+      t: "Common Mistakes in English",
+      f: "common-mistakes-in-english-by-t-j-fitikides.pdf",
+      category: "Grammar"
+    },
+
+    curious: {
+      t: "The Curious Incident of the Dog in the Night-Time",
+      f: "the_curious_incident_of_the_dog_in_the_night_time.pdf",
+      category: "English books"
+    },
+
+    metamorphosis: {
+      t: "The Metamorphosis",
+      f: "the-metamorphosis.pdf",
+      category: "English books"
+    },
+
+    alchemist: {
+      t: "The Alchemist",
+      f: "The-Alchemist-Paulo-Coelho.pdf",
+      category: "English books"
+    },
+
+    tom: {
+      t: "The Adventures of Tom Sawyer",
+      f: "THE%20ADVENTURES%20OF%20TOM%20SAWYER%20BY%20MARK%20TWAIN.pdf",
+      category: "English books"
+    }
+  };
+
+  const $ = id => document.getElementById(id);
+
+  const params = new URLSearchParams(location.search);
+  const requestedBook = params.get("b") || "grammar";
+  const book = BOOKS[requestedBook] || BOOKS.grammar;
+  const bookKey = BOOKS[requestedBook] ? requestedBook : "grammar";
+
+  document.title = book.t + " | English Materials Reader";
+  $("title").textContent = book.t;
+
+  /*
+    Reading settings are shared with the home page.
+    Page positions and zoom levels are saved separately for each book.
+  */
+  const SETTINGS_KEY = "ielts-gl-reader";
+
+  const store = {
+    get(key) {
+      try {
+        return localStorage.getItem(key);
+      } catch (e) {
+        return null;
+      }
+    },
+
+    set(key, value) {
+      try {
+        localStorage.setItem(key, value);
+      } catch (e) {}
+    },
+
+    getSettings() {
+      try {
+        return JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}");
+      } catch (e) {
+        return {};
+      }
+    },
+
+    setSettings(settings) {
+      try {
+        localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+      } catch (e) {}
+    }
+  };
+
+  /* Theme controls */
+  function setTheme(theme) {
+    if (!["light", "sepia", "dark"].includes(theme)) {
+      theme = "light";
+    }
+
+    document.documentElement.dataset.theme = theme;
+
+    const settings = store.getSettings();
+    settings.theme = theme;
+    store.setSettings(settings);
+
+    /* Retain compatibility with the older theme setting. */
+    store.set("theme", theme);
+
+    document.querySelectorAll("#th button").forEach(button => {
+      button.setAttribute(
+        "aria-pressed",
+        String(button.dataset.t === theme)
+      );
+    });
+  }
+
+  document.querySelectorAll("#th button").forEach(button => {
+    button.addEventListener("click", () => {
+      setTheme(button.dataset.t);
+    });
+  });
+
+  setTheme(
+    document.documentElement.dataset.theme || "light"
+  );
+
+  /* PDF.js setup */
+  if (typeof pdfjsLib === "undefined") {
+    $("msg").textContent =
+      "The PDF reader could not load. Please check your internet connection and reload the page.";
+    return;
+  }
+
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+  let pdf = null;
+  let ratio = 1.4;
+  let zoom = Number(store.get("zoom:" + bookKey) || store.get("zoom") || 1);
+  let cur = 1;
+  let pages = [];
+  let resizeTimer;
+
+  const box = $("pages");
+  const busy = Object.create(null);
+
+  function width() {
+    return Math.max(200, Math.min(box.clientWidth - 16, 900) * zoom);
+  }
+
+  /*
+    Render nearby pages only, to reduce memory usage on mobile devices.
+  */
+  const lazy = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const n = Number(entry.target.dataset.n);
+
+      if (entry.isIntersecting) {
+        draw(n);
+      } else {
+        drop(n);
+      }
+    });
+  }, {
+    rootMargin: "1500px 0px"
+  });
+
+  /*
+    Keep the page number and reading progress in sync with scrolling.
+  */
+  const mid = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+
+      cur = Number(entry.target.dataset.n);
+      $("num").value = cur;
+
+      store.set("p:" + bookKey, String(cur));
+
+      const percent = pdf
+        ? (cur / pdf.numPages) * 100
+        : 0;
+
+      $("progressBar").style.width = percent + "%";
+    });
+  }, {
+    rootMargin: "-45% 0px -54% 0px"
+  });
+
+  async function draw(n) {
+    const el = pages[n - 1];
+
+    if (!el || el.querySelector("canvas") || busy[n]) {
+      return;
+    }
+
+    busy[n] = true;
+
+    try {
+      const page = await pdf.getPage(n);
+      const targetWidth = width();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      const originalViewport = page.getViewport({ scale: 1 });
+      const scale = (targetWidth / originalViewport.width) * dpr;
+      const viewport = page.getViewport({ scale });
+
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.ceil(viewport.width);
+      canvas.height = Math.ceil(viewport.height);
+
+      const context = canvas.getContext("2d", {
+        alpha: false
+      });
+
+      if (!context) {
+        throw new Error("Canvas is unavailable.");
+      }
+
+      await page.render({
+        canvasContext: context,
+        viewport: viewport
+      }).promise;
+
+      /*
+        Do not replace a page if the layout was reset while it rendered.
+      */
+      if (pages[n - 1] === el) {
+        el.classList.remove("empty");
+        el.replaceChildren(canvas);
+      }
+    } catch (error) {
+      console.error("Could not render PDF page " + n, error);
+    } finally {
+      busy[n] = false;
+    }
+  }
+
+  function drop(n) {
+    const el = pages[n - 1];
+
+    if (el && el.firstChild && !busy[n]) {
+      el.replaceChildren();
+      el.classList.add("empty");
+    }
+  }
+
+  function layout() {
+    lazy.disconnect();
+    mid.disconnect();
+
+    const targetWidth = width();
+
+    pages.forEach(el => {
+      el.style.width = targetWidth + "px";
+      el.style.height = (targetWidth * ratio) + "px";
+      el.replaceChildren();
+      el.classList.add("empty");
+
+      lazy.observe(el);
+      mid.observe(el);
+    });
+  }
+
+  function go(n) {
+    if (!pdf || !pages.length) return;
+
+    n = Math.max(1, Math.min(pdf.numPages, Math.trunc(Number(n) || 1)));
+
+    cur = n;
+    $("num").value = n;
+
+    const page = pages[n - 1];
+
+    if (page) {
+      page.scrollIntoView({
+        behavior: "auto",
+        block: "start"
+      });
+    }
+  }
+
+  /*
+    Load the requested PDF.
+  */
+  async function loadBook() {
+    try {
+      const loadingTask = pdfjsLib.getDocument({
+        url: RAW + book.f,
+        disableAutoFetch: true,
+        rangeChunkSize: 262144
+      });
+
+      pdf = await loadingTask.promise;
+
+      const firstPage = await pdf.getPage(1);
+      const firstViewport = firstPage.getViewport({ scale: 1 });
+
+      ratio = firstViewport.height / firstViewport.width;
+
+      $("msg").remove();
+      $("tot").textContent = "/ " + pdf.numPages;
+      $("num").max = pdf.numPages;
+      $("num").min = 1;
+
+      for (let i = 1; i <= pdf.numPages; i++) {
+        const page = document.createElement("div");
+
+        page.className = "pg empty";
+        page.dataset.n = i;
+        page.setAttribute("aria-label", "Page " + i);
+
+        box.appendChild(page);
+        pages.push(page);
+      }
+
+      layout();
+
+      const lastPage = Number(store.get("p:" + bookKey) || 1);
+      go(lastPage);
+
+    } catch (error) {
+      console.error("PDF loading failed:", error);
+
+      $("msg").innerHTML =
+        "Could not load this book. Check your internet connection or open the PDF directly.<br><br>" +
+        '<a href="' + RAW + book.f + '" target="_blank" rel="noopener">Open the PDF directly</a>';
+    }
+  }
+
+  /* Page navigation */
+  $("prev").addEventListener("click", () => {
+    go(cur - 1);
+  });
+
+  $("next").addEventListener("click", () => {
+    go(cur + 1);
+  });
+
+  $("num").addEventListener("change", event => {
+    go(event.target.value);
+  });
+
+  $("num").addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+      go(event.target.value);
+      event.target.blur();
+    }
+  });
+
+  /* Zoom controls */
+  function setZoom(value) {
+    zoom = Math.max(0.6, Math.min(2.5, value));
+
+    store.set("zoom:" + bookKey, String(zoom));
+    store.set("zoom", String(zoom));
+
+    if (pdf) {
+      const page = cur;
+      layout();
+      go(page);
+    }
+  }
+
+  $("zi").addEventListener("click", () => {
+    setZoom(zoom + 0.2);
+  });
+
+  $("zo").addEventListener("click", () => {
+    setZoom(zoom - 0.2);
+  });
+
+  /* Keyboard navigation */
+  window.addEventListener("keydown", event => {
+    if (
+      event.target.tagName === "INPUT" ||
+      event.ctrlKey ||
+      event.metaKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
+    if (event.key === "ArrowRight") {
+      go(cur + 1);
+    }
+
+    if (event.key === "ArrowLeft") {
+      go(cur - 1);
+    }
+  });
+
+  /* Recalculate page sizes when the viewport changes. */
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+
+    resizeTimer = setTimeout(() => {
+      if (pdf) {
+        const page = cur;
+        layout();
+        go(page);
+      }
+    }, 250);
+  });
+
+  loadBook();
 })();
-
-$('prev').onclick=()=>go(cur-1);$('next').onclick=()=>go(cur+1);
-$('num').onchange=e=>go(+e.target.value);
-function setZoom(z){zoom=Math.max(.6,Math.min(2.5,z));store.set('zoom',zoom);const n=cur;layout();go(n)}
-$('zi').onclick=()=>setZoom(zoom+.2);$('zo').onclick=()=>setZoom(zoom-.2);
-let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{if(pdf){const n=cur;layout();go(n)}},250)});
-addEventListener('keydown',e=>{if(e.target.tagName==='INPUT')return;if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1)});
 </script>
+
 </body>
 </html>
