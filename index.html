@@ -28,6 +28,8 @@ try {
 } catch (e) {}
 </script>
 
+<script src="reader.js" defer></script>
+
 <style>
 :root {
   --ink: #1f2a44;
@@ -167,8 +169,8 @@ h3 {
 }
 
 .install-area {
-  margin: 20px 0 28px;
-  padding: 18px;
+  margin: 22px 0 30px;
+  padding: 20px;
   border: 1px solid var(--line);
   border-radius: 10px;
 }
@@ -180,13 +182,18 @@ h3 {
 .install-area p {
   color: var(--muted);
   font-size: .95rem;
-  margin: 0 0 8px;
+  margin: 0 0 10px;
 }
 
 .install-help {
   font: .85rem/1.6 Inter, sans-serif;
   color: var(--muted);
-  margin-top: 8px !important;
+  margin-top: 10px !important;
+}
+
+.install-icon {
+  font-size: 1.4rem;
+  margin-right: 5px;
 }
 
 .th {
@@ -235,10 +242,6 @@ details {
   border-top: 1px solid var(--line);
 }
 
-details.last {
-  border-bottom: 1px solid var(--line);
-}
-
 summary {
   cursor: pointer;
   padding: 14px 0;
@@ -280,10 +283,6 @@ details li {
   padding: 16px 0;
 }
 
-.book:last-of-type {
-  border-bottom: 1px solid var(--line);
-}
-
 .book p {
   margin: 2px 0 8px;
   color: var(--muted);
@@ -306,10 +305,6 @@ details li {
   outline-offset: 3px;
 }
 
-[hidden] {
-  display: none !important;
-}
-
 @media (max-width: 480px) {
   .top {
     align-items: flex-start;
@@ -322,19 +317,8 @@ details li {
   .th {
     flex-wrap: wrap;
   }
-
-  main {
-    padding-left: 18px;
-    padding-right: 18px;
-  }
-
-  .btn {
-    margin-right: 4px;
-  }
 }
 </style>
-
-<script src="reader.js" defer></script>
 </head>
 
 <body>
@@ -348,7 +332,7 @@ details li {
     <a href="#reader">Reader</a>
   </nav>
 
-  <div class="th" id="th" aria-label="Choose reading theme">
+  <div class="th" id="th" aria-label="Reading theme">
     <button type="button" data-t="light">Light</button>
     <button type="button" data-t="sepia">Sepia</button>
     <button type="button" data-t="dark">Dark</button>
@@ -356,216 +340,210 @@ details li {
 </header>
 
 <main>
-  <h1>English materials in one place</h1>
 
-  <p class="lead">
-    Grammar lessons, vocabulary and a library of books to read,
-    for IELTS, TOEFL, PTE and everyday English.
-  </p>
+<h1>English materials in one place</h1>
+
+<p class="lead">
+  Grammar lessons, vocabulary and a library of books to read,
+  for IELTS, TOEFL, PTE and everyday English.
+</p>
+
+<p>
+  <a class="btn" href="#grammar">Grammar</a>
+  <a class="btn alt" href="#vocabulary">Vocabulary</a>
+  <a class="btn alt" href="#reader">Reader</a>
+</p>
+
+<section class="install-area" aria-labelledby="installTitle">
+  <h3 id="installTitle">
+    <span class="install-icon" aria-hidden="true">📲</span>
+    Install English Materials
+  </h3>
 
   <p>
-    <a class="btn" href="#grammar">Grammar</a>
-    <a class="btn alt" href="#vocabulary">Vocabulary</a>
-    <a class="btn alt" href="#reader">Reader</a>
+    Add this free learning library to your home screen for quick access
+    to grammar lessons, vocabulary and books.
   </p>
 
-  <section class="install-area" id="installArea">
-    <h3>Install English Materials</h3>
-    <p>
-      Add this learning library to your home screen for quick access
-      to grammar lessons, vocabulary and reading resources.
-    </p>
+  <button class="btn" id="installApp" type="button">
+    Install app
+  </button>
 
-    <button class="btn" id="installApp" type="button" hidden>
-      Install app
-    </button>
+  <button class="btn alt" id="installHelp" type="button">
+    Installation help
+  </button>
 
-    <button class="btn alt" id="installHelp" type="button">
-      How to install
-    </button>
-
-    <p class="install-help" id="installMessage" aria-live="polite">
-      Use the install button when it appears, or follow the installation instructions.
-    </p>
-  </section>
-
-  <h2 id="grammar">Grammar</h2>
-  <p class="sec-note">
-    Ten topics, from building blocks to finishing touches.
+  <p class="install-help" id="installMessage" aria-live="polite">
+    Tap Install app to get started. If direct installation is unavailable,
+    we will show you how to add this website to your home screen.
   </p>
+</section>
 
-  <div class="list">
-    <a class="way" href="sentence-structure.html">
-      <h3>1. Sentence structure</h3>
-      <p>Build complete, accurate sentences.</p>
-    </a>
+<h2 id="grammar">Grammar</h2>
+<p class="sec-note">Ten topics, from building blocks to finishing touches.</p>
 
-    <a class="way" href="subject-verb-agreement.html">
-      <h3>2. Subject–verb agreement</h3>
-      <p>Avoid errors such as “people is” instead of “people are”.</p>
-    </a>
+<div class="list">
 
-    <details>
-      <summary>
-        <h3>3. Tenses</h3>
-        <p>Choose the correct tense and keep time references consistent.</p>
-      </summary>
-      <ol>
-        <li><a href="tenses.html">Tenses overview</a></li>
-        <li><a href="present-simple-and-continuous.html">Present simple and continuous</a></li>
-        <li><a href="past-simple.html">Past simple</a></li>
-        <li><a href="past-continuous.html">Past continuous</a></li>
-        <li><a href="future-simple.html">Future simple</a></li>
-        <li><a href="future-continuous.html">Future continuous</a></li>
-        <li><a href="present-perfect.html">Present perfect</a></li>
-        <li><a href="past-perfect.html">Past perfect</a></li>
-        <li><a href="future-perfect.html">Future perfect</a></li>
-        <li><a href="present-perfect-continuous.html">Present perfect continuous</a></li>
-        <li><a href="past-perfect-continuous.html">Past perfect continuous</a></li>
-        <li><a href="future-perfect-continuous.html">Future perfect continuous</a></li>
-      </ol>
-    </details>
+<a class="way" href="sentence-structure.html">
+  <h3>1. Sentence structure</h3>
+  <p>Build complete, accurate sentences.</p>
+</a>
 
-    <a class="way" href="articles-and-nouns.html">
-      <h3>4. Articles and nouns</h3>
-      <p>Use a, an, the, and plural forms correctly.</p>
-    </a>
+<a class="way" href="subject-verb-agreement.html">
+  <h3>2. Subject–verb agreement</h3>
+  <p>Avoid errors such as “people is” instead of “people are”.</p>
+</a>
 
-    <a class="way" href="complex-sentences.html">
-      <h3>5. Complex sentences</h3>
-      <p>Connect ideas clearly and accurately.</p>
-    </a>
+<details>
+  <summary>
+    <h3>3. Tenses</h3>
+    <p>Choose the correct tense and keep time references consistent.</p>
+  </summary>
+  <ol>
+    <li><a href="tenses.html">Tenses overview</a></li>
+    <li><a href="present-simple-and-continuous.html">Present simple and continuous</a></li>
+    <li><a href="past-simple.html">Past simple</a></li>
+    <li><a href="past-continuous.html">Past continuous</a></li>
+    <li><a href="future-simple.html">Future simple</a></li>
+    <li><a href="future-continuous.html">Future continuous</a></li>
+    <li><a href="present-perfect.html">Present perfect</a></li>
+    <li><a href="past-perfect.html">Past perfect</a></li>
+    <li><a href="future-perfect.html">Future perfect</a></li>
+    <li><a href="present-perfect-continuous.html">Present perfect continuous</a></li>
+    <li><a href="past-perfect-continuous.html">Past perfect continuous</a></li>
+    <li><a href="future-perfect-continuous.html">Future perfect continuous</a></li>
+  </ol>
+</details>
 
-    <a class="way" href="relative-clauses.html">
-      <h3>6. Relative clauses</h3>
-      <p>Add information without creating multiple short sentences.</p>
-    </a>
+<a class="way" href="articles-and-nouns.html">
+  <h3>4. Articles and nouns</h3>
+  <p>Use a, an, the, and plural forms correctly.</p>
+</a>
 
-    <a class="way" href="conditionals.html">
-      <h3>7. Conditionals</h3>
-      <p>Discuss possibilities, consequences, and hypothetical situations.</p>
-    </a>
+<a class="way" href="complex-sentences.html">
+  <h3>5. Complex sentences</h3>
+  <p>Connect ideas clearly and accurately.</p>
+</a>
 
-    <a class="way" href="passive-voice.html">
-      <h3>8. Passive voice</h3>
-      <p>Useful for academic writing and process descriptions.</p>
-    </a>
+<a class="way" href="relative-clauses.html">
+  <h3>6. Relative clauses</h3>
+  <p>Add information without creating multiple short sentences.</p>
+</a>
 
-    <a class="way" href="gerunds-and-infinitives.html">
-      <h3>9. Gerunds and infinitives</h3>
-      <p>Avoid errors such as “I enjoy to read” instead of “I enjoy reading”.</p>
-    </a>
+<a class="way" href="conditionals.html">
+  <h3>7. Conditionals</h3>
+  <p>Discuss possibilities, consequences, and hypothetical situations.</p>
+</a>
 
-    <a class="way" href="punctuation.html">
-      <h3>10. Punctuation</h3>
-      <p>Separate ideas correctly and avoid comma splices.</p>
-    </a>
-  </div>
+<a class="way" href="passive-voice.html">
+  <h3>8. Passive voice</h3>
+  <p>Useful for academic writing and process descriptions.</p>
+</a>
 
-  <h2 id="vocabulary">Vocabulary</h2>
-  <p class="sec-note">Build the word power you need for IELTS.</p>
+<a class="way" href="gerunds-and-infinitives.html">
+  <h3>9. Gerunds and infinitives</h3>
+  <p>Avoid errors such as “I enjoy to read” instead of “I enjoy reading”.</p>
+</a>
 
-  <div class="list">
-    <a class="way" href="reader.html?b=vocab">
-      <h3>IELTS Vocabulary Booster</h3>
-      <p>Open it in the reader.</p>
-    </a>
+<a class="way" href="punctuation.html">
+  <h3>10. Punctuation</h3>
+  <p>Separate ideas correctly and avoid comma splices.</p>
+</a>
 
-    <a class="way" href="reader.html?b=gre">
-      <h3>GRE Word Smart</h3>
-      <p>High-level words with meanings and examples.</p>
-    </a>
+</div>
 
-    <a class="way" href="reader.html?b=check">
-      <h3>Check Your English Vocabulary for IELTS</h3>
-      <p>Essential words and phrases to maximise your IELTS score.</p>
-    </a>
-  </div>
+<h2 id="vocabulary">Vocabulary</h2>
+<p class="sec-note">Build the word power you need for IELTS.</p>
 
-  <h2 id="reader">Reader</h2>
-  <p class="sec-note">
-    Read online in light, sepia or dark mode, or download the PDF.
-  </p>
+<div class="list">
 
-  <div class="book">
-    <h3>English Grammar in Use (Intermediate)</h3>
-    <p>Clear explanations with exercises. Ideal for self-study.</p>
-    <a class="btn" href="reader.html?b=grammar">Read</a>
-    <a class="btn alt"
-       href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/English-Grammer-In-Use-Intermediatr.pdf"
-       download>Download</a>
-  </div>
+<a class="way" href="reader.html?b=vocab">
+  <h3>IELTS Vocabulary Booster</h3>
+  <p>Topic-based vocabulary in the reader.</p>
+</a>
 
-  <div class="book">
-    <h3>IELTS Vocabulary Booster</h3>
-    <p>Topic-based words and phrases for higher band scores.</p>
-    <a class="btn" href="reader.html?b=vocab">Read</a>
-    <a class="btn alt"
-       href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/IELTS%20Vocabulary%20Booster.pdf"
-       download>Download</a>
-  </div>
+<a class="way" href="reader.html?b=gre">
+  <h3>GRE Word Smart</h3>
+  <p>High-level words with meanings and examples.</p>
+</a>
 
-  <div class="book">
-    <h3>High School English Grammar and Composition</h3>
-    <p>Wren and Martin. The classic reference for grammar and writing.</p>
-    <a class="btn" href="reader.html?b=wren">Read</a>
-    <a class="btn alt"
-       href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/the-languagelab-library-high-school-english-grammar-and-composition-wren-and-martin-ZmlD.pdf"
-       download>Download</a>
-  </div>
+<a class="way" href="reader.html?b=check">
+  <h3>Check Your English Vocabulary for IELTS</h3>
+  <p>Essential words and phrases to maximise your IELTS score.</p>
+</a>
 
-  <div class="book">
-    <h3>Advanced Grammar in Use</h3>
-    <p>Advanced grammar with clear explanations and exercises.</p>
-    <a class="btn" href="reader.html?b=adv">Read</a>
-    <a class="btn alt"
-       href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/Advanced%20grammar%20in%20use.pdf"
-       download>Download</a>
-  </div>
+</div>
 
-  <div class="book">
-    <h3>Oxford Guide to English Grammar</h3>
-    <p>A complete reference for how English works.</p>
-    <a class="btn" href="reader.html?b=oxford">Read</a>
-    <a class="btn alt"
-       href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/Oxford-Guide-to-English-Grammar.pdf"
-       download>Download</a>
-  </div>
+<h2 id="reader">Reader</h2>
+<p class="sec-note">
+  Read online in light, sepia or dark mode, or download the PDF.
+</p>
 
-  <div class="book">
-    <h3>GRE Word Smart</h3>
-    <p>High-level words with meanings and examples.</p>
-    <a class="btn" href="reader.html?b=gre">Read</a>
-    <a class="btn alt"
-       href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/GRE-book-Word-Smart(1).pdf"
-       download>Download</a>
-  </div>
+<div class="book">
+  <h3>English Grammar in Use (Intermediate)</h3>
+  <p>Clear explanations with exercises. Ideal for self-study.</p>
+  <a class="btn" href="reader.html?b=grammar">Read</a>
+  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/English-Grammer-In-Use-Intermediatr.pdf" download>Download</a>
+</div>
 
-  <div class="book">
-    <h3>Check Your English Vocabulary for IELTS</h3>
-    <p>Essential words and phrases to maximise your IELTS score.</p>
-    <a class="btn" href="reader.html?b=check">Read</a>
-    <a class="btn alt"
-       href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/1.3rawdon-wyatt-check-your-english-vocabulary-for-ielts_-essential-words-and-phrases-to-help-you-maximise-your-ielts-score-bloomsbury-information-ltd-2017.pdf"
-       download>Download</a>
-  </div>
+<div class="book">
+  <h3>IELTS Vocabulary Booster</h3>
+  <p>Topic-based words and phrases for higher band scores.</p>
+  <a class="btn" href="reader.html?b=vocab">Read</a>
+  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/IELTS%20Vocabulary%20Booster.pdf" download>Download</a>
+</div>
 
-  <footer class="foot">
-    English Materials. Useful for IELTS, TOEFL, PTE and everyday English.
-    <br>
-    © 2026
-    <a href="https://abubokkorshiddik.github.io/AbuBokkorShiddik.abs798/home"
-       target="_blank" rel="noopener">
-      Abu Bokkor Shiddik
-    </a>.
-    All rights reserved.
-  </footer>
+<div class="book">
+  <h3>High School English Grammar and Composition</h3>
+  <p>Wren and Martin. The classic reference for grammar and writing.</p>
+  <a class="btn" href="reader.html?b=wren">Read</a>
+  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/the-languagelab-library-high-school-english-grammar-and-composition-wren-and-martin-ZmlD.pdf" download>Download</a>
+</div>
+
+<div class="book">
+  <h3>Advanced Grammar in Use</h3>
+  <p>Advanced grammar with clear explanations and exercises.</p>
+  <a class="btn" href="reader.html?b=adv">Read</a>
+  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/Advanced%20grammar%20in%20use.pdf" download>Download</a>
+</div>
+
+<div class="book">
+  <h3>Oxford Guide to English Grammar</h3>
+  <p>A complete reference for how English works.</p>
+  <a class="btn" href="reader.html?b=oxford">Read</a>
+  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/Oxford-Guide-to-English-Grammar.pdf" download>Download</a>
+</div>
+
+<div class="book">
+  <h3>GRE Word Smart</h3>
+  <p>High-level words with meanings and examples.</p>
+  <a class="btn" href="reader.html?b=gre">Read</a>
+  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/GRE-book-Word-Smart(1).pdf" download>Download</a>
+</div>
+
+<div class="book">
+  <h3>Check Your English Vocabulary for IELTS</h3>
+  <p>Essential words and phrases to maximise your IELTS score.</p>
+  <a class="btn" href="reader.html?b=check">Read</a>
+  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/1.3rawdon-wyatt-check-your-english-vocabulary-for-ielts_-essential-words-and-phrases-to-help-you-maximise-your-ielts-score-bloomsbury-information-ltd-2017.pdf" download>Download</a>
+</div>
+
+<footer class="foot">
+  English Materials. Useful for IELTS, TOEFL, PTE and everyday English.
+  <br>
+  © 2026
+  <a href="https://abubokkorshiddik.github.io/AbuBokkorShiddik.abs798/home" target="_blank" rel="noopener">
+    Abu Bokkor Shiddik
+  </a>. All rights reserved.
+</footer>
+
 </main>
 
 <script>
 (function () {
   "use strict";
 
+  /* Theme switcher */
   function setTheme(theme) {
     document.documentElement.dataset.theme = theme;
 
@@ -589,60 +567,100 @@ details li {
 
   setTheme(document.documentElement.dataset.theme || "light");
 
+  /* PWA installation */
   var installPrompt = null;
   var installButton = document.getElementById("installApp");
   var installHelp = document.getElementById("installHelp");
   var installMessage = document.getElementById("installMessage");
 
+  function isStandalone() {
+    return window.matchMedia("(display-mode: standalone)").matches ||
+      window.navigator.standalone === true;
+  }
+
+  function updateInstallStatus() {
+    if (isStandalone()) {
+      installButton.textContent = "App installed";
+      installButton.disabled = true;
+      installMessage.textContent =
+        "English Materials is running as an installed app on this device.";
+    }
+  }
+
   window.addEventListener("beforeinstallprompt", function (event) {
     event.preventDefault();
     installPrompt = event;
-    installButton.hidden = false;
-
+    installButton.textContent = "Install app";
     installMessage.textContent =
-      "Your device can install English Materials. Tap Install app to continue.";
+      "Your browser supports direct installation. Tap Install app to continue.";
   });
 
   installButton.addEventListener("click", async function () {
-    if (!installPrompt) {
+    if (isStandalone()) {
       installMessage.textContent =
-        "Open your browser menu and look for Install app or Add to Home screen.";
+        "English Materials is already installed on this device.";
       return;
     }
 
-    installPrompt.prompt();
+    if (installPrompt) {
+      installPrompt.prompt();
 
-    var choice = await installPrompt.userChoice;
+      var result = await installPrompt.userChoice;
 
-    if (choice.outcome === "accepted") {
-      installMessage.textContent =
-        "Installation accepted. Follow the instructions on your device.";
-    } else {
-      installMessage.textContent =
-        "Installation was cancelled. You can try again from your browser menu.";
+      if (result.outcome === "accepted") {
+        installMessage.textContent =
+          "Installation accepted. Follow any remaining prompts on your device.";
+      } else {
+        installMessage.textContent =
+          "Installation was cancelled. You can try again later.";
+      }
+
+      installPrompt = null;
+      return;
     }
 
-    installPrompt = null;
-    installButton.hidden = true;
+    var ua = navigator.userAgent || "";
+    var isIOS = /iPhone|iPad|iPod/i.test(ua);
+    var isAndroid = /Android/i.test(ua);
+
+    if (isIOS) {
+      installMessage.textContent =
+        "Open this page in Safari, tap Share, then choose Add to Home Screen.";
+    } else if (isAndroid) {
+      installMessage.textContent =
+        "Open this page in Chrome. Tap the three-dot menu and select Install app or Add to Home screen. The available option depends on your browser and whether the website meets installation requirements.";
+    } else {
+      installMessage.textContent =
+        "Open this website in a supported browser and look for Install app or Add to Home screen in the browser menu.";
+    }
+  });
+
+  installHelp.addEventListener("click", function () {
+    installMessage.textContent =
+      "Android: open this website in Chrome, tap the three-dot menu, then select Install app or Add to Home screen. iPhone or iPad: open the website in Safari, tap Share, then Add to Home Screen.";
   });
 
   window.addEventListener("appinstalled", function () {
     installPrompt = null;
-    installButton.hidden = true;
-    installMessage.textContent = "English Materials has been installed.";
+    installButton.textContent = "App installed";
+    installButton.disabled = true;
+    installMessage.textContent =
+      "English Materials has been installed successfully.";
   });
 
-  installHelp.addEventListener("click", function () {
-    var isApple = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  updateInstallStatus();
 
-    if (isApple) {
-      installMessage.textContent =
-        "On iPhone or iPad, open this website in Safari, tap Share, then choose Add to Home Screen.";
-    } else {
-      installMessage.textContent =
-        "On Android, open this website in Chrome, tap the three-dot menu, then choose Install app or Add to Home screen. The exact option depends on your browser.";
-    }
-  });
+  /* Optional service worker.
+     Create service-worker.js before enabling this registration.
+     Remove this block if you do not want a service worker yet. */
+  if ("serviceWorker" in navigator && location.protocol === "https:") {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("./service-worker.js")
+        .catch(function (error) {
+          console.error("Service worker registration failed:", error);
+        });
+    });
+  }
 })();
 </script>
 
