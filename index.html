@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
@@ -22,13 +21,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Literata:wght@400;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
 
 <script>
+/* The home page and the lessons share one theme setting (ielts-gl-reader). */
 try {
-  document.documentElement.dataset.theme =
-    localStorage.getItem("theme") || "light";
+  var saved = JSON.parse(localStorage.getItem("ielts-gl-reader") || "{}");
+  document.documentElement.dataset.theme = saved.theme || "light";
 } catch (e) {}
 </script>
-
-<script src="reader.js" defer></script>
 
 <style>
 :root {
@@ -166,6 +164,11 @@ h3 {
 
 .btn:hover {
   opacity: .85;
+}
+
+.btn:disabled {
+  opacity: .6;
+  cursor: default;
 }
 
 .install-area {
@@ -400,6 +403,7 @@ details li {
     <p>Choose the correct tense and keep time references consistent.</p>
   </summary>
   <ol>
+    <li><a href="tense-summary.html">One-page tense summary (timelines and quiz)</a></li>
     <li><a href="tenses.html">Tenses overview</a></li>
     <li><a href="present-simple-and-continuous.html">Present simple and continuous</a></li>
     <li><a href="past-simple.html">Past simple</a></li>
@@ -543,12 +547,16 @@ details li {
 (function () {
   "use strict";
 
-  /* Theme switcher */
+  var SETTINGS_KEY = "ielts-gl-reader";
+
+  /* Theme switcher: saved in the same setting the lessons use */
   function setTheme(theme) {
     document.documentElement.dataset.theme = theme;
 
     try {
-      localStorage.setItem("theme", theme);
+      var settings = JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}");
+      settings.theme = theme;
+      localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
     } catch (e) {}
 
     document.querySelectorAll("#th button").forEach(function (button) {
@@ -650,9 +658,7 @@ details li {
 
   updateInstallStatus();
 
-  /* Optional service worker.
-     Create service-worker.js before enabling this registration.
-     Remove this block if you do not want a service worker yet. */
+  /* Service worker: needs service-worker.js in the same folder */
   if ("serviceWorker" in navigator && location.protocol === "https:") {
     window.addEventListener("load", function () {
       navigator.serviceWorker.register("./service-worker.js")
