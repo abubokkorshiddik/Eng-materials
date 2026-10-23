@@ -6,320 +6,486 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>English Materials | Grammar, Vocabulary and Books</title>
-<meta name="description" content="Free English learning materials, grammar lessons, vocabulary and a reading library for IELTS and everyday English.">
-<meta name="theme-color" content="#1f2a44">
-<meta name="application-name" content="English Materials">
-
-<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/10719400.png">
-<link rel="manifest" href="./manifest.json">
-
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="English Materials">
+<meta name="description" content="Free English learning materials, grammar lessons, vocabulary resources and English books for beginner, intermediate and advanced learners.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Literata:wght@400;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<script>
-/* The home page and the lessons share one theme setting (ielts-gl-reader). */
-try {
-  var saved = JSON.parse(localStorage.getItem("ielts-gl-reader") || "{}");
-  document.documentElement.dataset.theme = saved.theme || "light";
-} catch (e) {}
-</script>
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/10719400.png">
+
+<meta name="theme-color" content="#0b1f3a">
 
 <style>
-:root {
-  --ink: #1f2a44;
-  --blue: #1f4fbf;
-  --paper: #fbfaf7;
-  --line: #0002;
-  --text: #222;
-  --muted: #555;
+:root{
+  --navy:#0b1f3a;
+  --blue:#1a56db;
+  --blue-dark:#1746ad;
+  --teal:#0f766e;
+  --bg:#f5f7fb;
+  --surface:#ffffff;
+  --text:#172033;
+  --muted:#657187;
+  --border:#dce3ed;
+  --shadow:0 8px 24px rgba(11,31,58,.07);
+  --radius:16px;
 }
 
-html[data-theme="sepia"] {
-  --ink: #3b2f1e;
-  --blue: #8a4b12;
-  --paper: #f4ecd8;
-  --line: #4a3b2633;
-  --text: #4a3b26;
-  --muted: #7a6a52;
+[data-theme="dark"]{
+  --bg:#0b1220;
+  --surface:#111c2e;
+  --text:#e7edf7;
+  --muted:#a4b1c5;
+  --border:#29384d;
+  --shadow:0 8px 24px rgba(0,0,0,.18);
 }
 
-html[data-theme="dark"] {
-  --ink: #e8ecf7;
-  --blue: #8fb0ff;
-  --paper: #14171f;
-  --line: #fff3;
-  --text: #e6e6e6;
-  --muted: #a9afbd;
+*{box-sizing:border-box}
+
+html{
+  scroll-behavior:smooth;
+  scroll-padding-top:100px;
 }
 
-* {
-  box-sizing: border-box;
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,Arial,sans-serif;
+  line-height:1.7;
+  transition:background .2s,color .2s;
 }
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 20px;
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+
+button,input{font:inherit}
+
+button{cursor:pointer}
+
+.container{
+  width:min(1120px,calc(100% - 32px));
+  margin:0 auto;
 }
 
-body {
-  margin: 0;
-  background: var(--paper);
-  color: var(--text);
-  font: 18px/1.7 Literata, Georgia, serif;
-  overflow-wrap: anywhere;
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 3px 14px rgba(11,31,58,.04);
 }
 
-a {
-  color: var(--blue);
+.navbar{
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
 }
 
-button {
-  font: inherit;
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  color:var(--navy);
+  font-weight:800;
+  font-size:1.08rem;
 }
 
-.top {
-  max-width: 720px;
-  margin: auto;
-  padding: 16px 18px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  font: 600 .9rem Inter, sans-serif;
+[data-theme="dark"] .brand{color:#f0f5ff}
+
+.brand img{
+  width:42px;
+  height:42px;
+  object-fit:contain;
+  border-radius:10px;
 }
 
-.top a {
-  color: var(--ink);
-  text-decoration: none;
+.nav-links{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:20px;
+  flex-wrap:wrap;
 }
 
-.top nav {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
+.nav-links a{
+  color:var(--text);
+  font-size:.91rem;
+  font-weight:600;
 }
 
-main {
-  max-width: 720px;
-  margin: auto;
-  padding: 0 18px 70px;
+.theme-toggle{
+  border:1px solid var(--border);
+  background:var(--surface);
+  color:var(--text);
+  padding:8px 12px;
+  border-radius:10px;
 }
 
-h1, h2, h3 {
-  font-family: Fraunces, Georgia, serif;
-  color: var(--ink);
-  line-height: 1.2;
+.hero{
+  padding:66px 0 52px;
+  background:linear-gradient(135deg,#0b1f3a 0%,#143f79 58%,#1a56db 100%);
+  color:white;
 }
 
-h1 {
-  font-size: clamp(2.2rem, 8vw, 3.3rem);
-  margin: 30px 0 14px;
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.4fr .6fr;
+  align-items:center;
+  gap:36px;
 }
 
-h2 {
-  font-size: 1.6rem;
-  margin: 54px 0 6px;
+.eyebrow{
+  display:inline-block;
+  padding:5px 11px;
+  border:1px solid rgba(255,255,255,.28);
+  background:rgba(255,255,255,.09);
+  border-radius:999px;
+  font-size:.8rem;
+  font-weight:700;
+  letter-spacing:.04em;
 }
 
-h3 {
-  font-size: 1.1rem;
-  margin: 0 0 2px;
+.hero h1{
+  margin:18px 0 14px;
+  font-family:Lora,Georgia,serif;
+  font-size:clamp(2.1rem,5vw,3.6rem);
+  line-height:1.15;
+  letter-spacing:-.035em;
 }
 
-.lead {
-  font-size: 1.1rem;
-  color: var(--muted);
+.hero p{
+  max-width:680px;
+  color:#e0eaf8;
+  font-size:1.04rem;
+  margin:0 0 24px;
 }
 
-.sec-note {
-  margin: 0 0 14px;
-  color: var(--muted);
-  font-size: .97rem;
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
 }
 
-.btn {
-  display: inline-block;
-  background: var(--ink);
-  color: var(--paper);
-  padding: 11px 18px;
-  border: 1px solid var(--ink);
-  border-radius: 6px;
-  text-decoration: none;
-  font: 600 .92rem Inter, sans-serif;
-  margin: 6px 8px 6px 0;
-  cursor: pointer;
-  text-align: center;
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  border:1px solid transparent;
+  border-radius:10px;
+  padding:10px 16px;
+  font-weight:700;
+  font-size:.9rem;
+  text-decoration:none;
+  transition:transform .15s,background .15s;
 }
 
-.btn.alt {
-  background: transparent;
-  color: var(--ink);
-  border: 1px solid var(--ink);
+.btn:hover{
+  text-decoration:none;
+  transform:translateY(-1px);
 }
 
-.btn:hover {
-  opacity: .85;
+.btn-primary{
+  background:var(--blue);
+  color:white;
 }
 
-.btn:disabled {
-  opacity: .6;
-  cursor: default;
+.btn-primary:hover{background:var(--blue-dark)}
+
+.btn-light{
+  background:white;
+  color:var(--navy);
 }
 
-.install-area {
-  margin: 22px 0 30px;
-  padding: 20px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
+.btn-outline{
+  background:transparent;
+  color:var(--text);
+  border-color:var(--border);
 }
 
-.install-area h3 {
-  margin-bottom: 8px;
+.btn-download{
+  background:var(--navy);
+  color:white;
 }
 
-.install-area p {
-  color: var(--muted);
-  font-size: .95rem;
-  margin: 0 0 10px;
+.btn-download:hover{background:#17365f}
+
+.hero .btn-outline{
+  border-color:rgba(255,255,255,.45);
+  color:white;
 }
 
-.install-help {
-  font: .85rem/1.6 Inter, sans-serif;
-  color: var(--muted);
-  margin-top: 10px !important;
+.hero-card{
+  padding:25px;
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:20px;
+  background:rgba(255,255,255,.09);
+  backdrop-filter:blur(8px);
 }
 
-.install-icon {
-  font-size: 1.4rem;
-  margin-right: 5px;
+.hero-card .large{
+  font-size:2.7rem;
+  line-height:1.2;
+  font-weight:800;
 }
 
-.th {
-  display: flex;
-  gap: 6px;
+.hero-card p{
+  margin:8px 0 0;
+  font-size:.92rem;
 }
 
-.th button {
-  font: 600 .8rem Inter, sans-serif;
-  color: var(--ink);
-  background: none;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 5px 10px;
-  cursor: pointer;
+main{padding:34px 0 70px}
+
+.section{
+  margin:0 0 46px;
+  scroll-margin-top:100px;
 }
 
-.th button[aria-pressed="true"] {
-  background: var(--ink);
-  color: var(--paper);
+.section-heading{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:20px;
 }
 
-.way {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  border-top: 1px solid var(--line);
-  padding: 14px 0;
+.section-heading h2{
+  margin:0;
+  color:var(--navy);
+  font-family:Lora,Georgia,serif;
+  font-size:clamp(1.55rem,3vw,2.15rem);
+  line-height:1.3;
 }
 
-.way p {
-  margin: 0;
-  color: var(--muted);
-  font-size: .95rem;
+[data-theme="dark"] .section-heading h2{color:#e7efff}
+
+.section-heading p{
+  margin:6px 0 0;
+  color:var(--muted);
+  font-size:.95rem;
 }
 
-.way:hover h3 {
-  color: var(--blue);
+.category-nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:32px;
 }
 
-.list > :last-child {
-  border-bottom: 1px solid var(--line);
+.category-nav a{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:9px 14px;
+  border:1px solid var(--border);
+  border-radius:999px;
+  background:var(--surface);
+  color:var(--text);
+  font-size:.88rem;
+  font-weight:700;
 }
 
-details {
-  border-top: 1px solid var(--line);
+.category-nav a:hover{
+  border-color:var(--blue);
+  color:var(--blue);
+  text-decoration:none;
 }
 
-summary {
-  cursor: pointer;
-  padding: 14px 0;
-  list-style: none;
+.search-wrap{
+  margin:0 0 26px;
 }
 
-summary::-webkit-details-marker {
-  display: none;
+.search-input{
+  width:100%;
+  padding:13px 15px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  color:var(--text);
+  outline:none;
 }
 
-summary h3::after {
-  content: " ▾";
-  font-size: .8em;
-  color: var(--muted);
+.search-input:focus{
+  border-color:var(--blue);
+  box-shadow:0 0 0 3px rgba(26,86,219,.12);
 }
 
-details[open] summary h3::after {
-  content: " ▴";
+.book-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
 }
 
-summary p {
-  margin: 0;
-  color: var(--muted);
-  font-size: .95rem;
+.book-card{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  padding:22px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  transition:transform .18s,border-color .18s;
 }
 
-details ol {
-  margin: 0 0 14px;
-  padding-left: 22px;
+.book-card:hover{
+  transform:translateY(-3px);
+  border-color:#b6c9ee;
 }
 
-details li {
-  margin: 6px 0;
-  font-size: 1rem;
+.book-icon{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:48px;
+  height:48px;
+  margin-bottom:15px;
+  border-radius:13px;
+  background:#eaf0ff;
+  font-size:1.45rem;
 }
 
-.book {
-  border-top: 1px solid var(--line);
-  padding: 16px 0;
+[data-theme="dark"] .book-icon{
+  background:#1c3154;
 }
 
-.book p {
-  margin: 2px 0 8px;
-  color: var(--muted);
-  font-size: .95rem;
+.book-category{
+  margin-bottom:7px;
+  color:var(--teal);
+  text-transform:uppercase;
+  letter-spacing:.07em;
+  font-size:.72rem;
+  font-weight:800;
 }
 
-.book .btn {
-  padding: 8px 14px;
-  font-size: .85rem;
+.book-card h3{
+  margin:0 0 10px;
+  color:var(--text);
+  font-size:1.08rem;
+  line-height:1.5;
 }
 
-.foot {
-  margin-top: 60px;
-  color: var(--muted);
-  font: .85rem/1.8 Inter, sans-serif;
+.book-card p{
+  margin:0 0 18px;
+  color:var(--muted);
+  font-size:.9rem;
+  flex:1;
 }
 
-:focus-visible {
-  outline: 3px solid var(--blue);
-  outline-offset: 3px;
+.book-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:auto;
 }
 
-@media (max-width: 480px) {
-  .top {
-    align-items: flex-start;
+.book-actions .btn{
+  flex:1;
+  min-width:105px;
+  padding:9px 11px;
+  font-size:.84rem;
+}
+
+.empty-state{
+  display:none;
+  padding:25px;
+  background:var(--surface);
+  border:1px dashed var(--border);
+  border-radius:14px;
+  text-align:center;
+  color:var(--muted);
+}
+
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+
+.info-card{
+  padding:22px;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  background:var(--surface);
+}
+
+.info-card h3{
+  margin:0 0 8px;
+  color:var(--text);
+  font-size:1.02rem;
+}
+
+.info-card p{
+  margin:0;
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+footer{
+  padding:28px 0;
+  border-top:1px solid var(--border);
+  background:var(--surface);
+  color:var(--muted);
+  font-size:.88rem;
+}
+
+.footer-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:14px;
+}
+
+.footer-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px;
+}
+
+.footer-links a{font-weight:600}
+
+@media(max-width:850px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-card{max-width:450px}
+  .book-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .info-grid{grid-template-columns:1fr}
+  .nav-links{gap:12px}
+}
+
+@media(max-width:600px){
+  .container{width:min(100% - 24px,1120px)}
+  .navbar{
+    padding:10px 0;
+    align-items:flex-start;
+    flex-direction:column;
+    gap:10px;
   }
-
-  .top nav {
-    width: 100%;
+  .nav-links{
+    justify-content:flex-start;
+    gap:10px 15px;
   }
+  .nav-links a{font-size:.84rem}
+  .hero{padding:45px 0 38px}
+  .hero-card{padding:20px}
+  .section-heading{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+  .book-grid{grid-template-columns:1fr}
+  .book-card{padding:19px}
+  .book-actions .btn{flex:1}
+  .footer-inner{align-items:flex-start;flex-direction:column}
+}
 
-  .th {
-    flex-wrap: wrap;
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    scroll-behavior:auto!important;
+    transition:none!important;
   }
 }
 </style>
@@ -327,402 +493,392 @@ details li {
 
 <body>
 
-<header class="top">
-  <a href="./index.html">English Materials</a>
+<header>
+  <div class="container navbar">
+    <a class="brand" href="index.html" aria-label="English Materials home">
+      <img src="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/10719400.png" alt="English Materials logo" onerror="this.style.display='none'">
+      <span>English Materials</span>
+    </a>
 
-  <nav aria-label="Main navigation">
-    <a href="#grammar">Grammar</a>
-    <a href="#vocabulary">Vocabulary</a>
-    <a href="#reader">Reader</a>
-  </nav>
-
-  <div class="th" id="th" aria-label="Reading theme">
-    <button type="button" data-t="light">Light</button>
-    <button type="button" data-t="sepia">Sepia</button>
-    <button type="button" data-t="dark">Dark</button>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#vocabulary">Vocabulary</a>
+      <a href="#grammar">Grammar</a>
+      <a href="#english-books">English books</a>
+      <a href="#learning">Learning guide</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch colour theme">🌙 Theme</button>
+    </nav>
   </div>
 </header>
 
-<main>
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">YOUR ENGLISH LEARNING LIBRARY</span>
+      <h1>Build your English, one page at a time.</h1>
+      <p>
+        Explore grammar guides, vocabulary resources and English books in one place.
+        Choose a resource for your level, read online or download it for later.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-light" href="#library">Explore the library</a>
+        <a class="btn btn-outline" href="#learning">How to use this site</a>
+      </div>
+    </div>
 
-<h1>English materials in one place</h1>
-
-<p class="lead">
-  Grammar lessons, vocabulary and a library of books to read,
-  for IELTS, TOEFL, PTE and everyday English.
-</p>
-
-<p>
-  <a class="btn" href="#grammar">Grammar</a>
-  <a class="btn alt" href="#vocabulary">Vocabulary</a>
-  <a class="btn alt" href="#reader">Reader</a>
-</p>
-
-<section class="install-area" aria-labelledby="installTitle">
-  <h3 id="installTitle">
-    <span class="install-icon" aria-hidden="true">📲</span>
-    Install English Materials
-  </h3>
-
-  <p>
-    Add this free learning library to your home screen for quick access
-    to grammar lessons, vocabulary and books.
-  </p>
-
-  <button class="btn" id="installApp" type="button">
-    Install app
-  </button>
-
-  <button class="btn alt" id="installHelp" type="button">
-    Installation help
-  </button>
-
-  <p class="install-help" id="installMessage" aria-live="polite">
-    Tap Install app to get started. If direct installation is unavailable,
-    we will show you how to add this website to your home screen.
-  </p>
+    <div class="hero-card">
+      <div class="large" id="resourceCount">12+</div>
+      <strong>Learning resources</strong>
+      <p>Vocabulary, grammar and English reading materials for different learning levels.</p>
+    </div>
+  </div>
 </section>
 
-<h2 id="grammar">Grammar</h2>
-<p class="sec-note">Ten topics, from building blocks to finishing touches.</p>
+<main class="container" id="library">
 
-<div class="list">
+  <div class="category-nav" aria-label="Browse resource categories">
+    <a href="#vocabulary">📘 Vocabulary</a>
+    <a href="#grammar">✍️ Grammar</a>
+    <a href="#english-books">📚 English books</a>
+  </div>
 
-<a class="way" href="sentence-structure.html">
-  <h3>1. Sentence structure</h3>
-  <p>Build complete, accurate sentences.</p>
-</a>
+  <div class="search-wrap">
+    <label for="bookSearch" style="display:block;font-weight:700;margin-bottom:8px">Find a book or resource</label>
+    <input
+      id="bookSearch"
+      class="search-input"
+      type="search"
+      placeholder="Search by title, category or keyword..."
+      autocomplete="off"
+    >
+  </div>
 
-<a class="way" href="subject-verb-agreement.html">
-  <h3>2. Subject–verb agreement</h3>
-  <p>Avoid errors such as “people is” instead of “people are”.</p>
-</a>
+  <section class="section" id="vocabulary">
+    <div class="section-heading">
+      <div>
+        <h2>Vocabulary</h2>
+        <p>Build your word knowledge for everyday English and academic exams.</p>
+      </div>
+    </div>
 
-<details>
-  <summary>
-    <h3>3. Tenses</h3>
-    <p>Choose the correct tense and keep time references consistent.</p>
-  </summary>
-  <ol>
-    <li><a href="tense-summary.html">One-page tense summary (timelines and quiz)</a></li>
-    <li><a href="tenses.html">Tenses overview</a></li>
-    <li><a href="present-simple-and-continuous.html">Present simple and continuous</a></li>
-    <li><a href="past-simple.html">Past simple</a></li>
-    <li><a href="past-continuous.html">Past continuous</a></li>
-    <li><a href="future-simple.html">Future simple</a></li>
-    <li><a href="future-continuous.html">Future continuous</a></li>
-    <li><a href="present-perfect.html">Present perfect</a></li>
-    <li><a href="past-perfect.html">Past perfect</a></li>
-    <li><a href="future-perfect.html">Future perfect</a></li>
-    <li><a href="present-perfect-continuous.html">Present perfect continuous</a></li>
-    <li><a href="past-perfect-continuous.html">Past perfect continuous</a></li>
-    <li><a href="future-perfect-continuous.html">Future perfect continuous</a></li>
-  </ol>
-</details>
+    <div class="book-grid">
 
-<a class="way" href="articles-and-nouns.html">
-  <h3>4. Articles and nouns</h3>
-  <p>Use a, an, the, and plural forms correctly.</p>
-</a>
+      <article class="book-card" data-search="ielts vocabulary booster vocabulary ielts exam">
+        <div class="book-icon" aria-hidden="true">🗣️</div>
+        <div class="book-category">Vocabulary</div>
+        <h3>IELTS Vocabulary Booster</h3>
+        <p>Practise useful vocabulary and expressions to strengthen your IELTS preparation.</p>
+        <div class="book-actions">
+          <a class="btn btn-primary" href="reader.html?b=vocab">Read</a>
+          <a class="btn btn-download" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/IELTS%20Vocabulary%20Booster.pdf" download>Download</a>
+        </div>
+      </article>
 
-<a class="way" href="complex-sentences.html">
-  <h3>5. Complex sentences</h3>
-  <p>Connect ideas clearly and accurately.</p>
-</a>
+      <article class="book-card" data-search="gre word smart vocabulary advanced gre exam">
+        <div class="book-icon" aria-hidden="true">🧠</div>
+        <div class="book-category">Vocabulary</div>
+        <h3>GRE Word Smart</h3>
+        <p>Expand your advanced vocabulary and practise words useful for competitive exams.</p>
+        <div class="book-actions">
+          <a class="btn btn-primary" href="reader.html?b=gre">Read</a>
+          <a class="btn btn-download" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/GRE-book-Word-Smart(1).pdf" download>Download</a>
+        </div>
+      </article>
 
-<a class="way" href="relative-clauses.html">
-  <h3>6. Relative clauses</h3>
-  <p>Add information without creating multiple short sentences.</p>
-</a>
+      <article class="book-card" data-search="check your english vocabulary for ielts rawdon wyatt essential words phrases">
+        <div class="book-icon" aria-hidden="true">🎯</div>
+        <div class="book-category">Vocabulary</div>
+        <h3>Check Your English Vocabulary for IELTS</h3>
+        <p>Learn topic-based vocabulary and useful expressions for IELTS tasks.</p>
+        <div class="book-actions">
+          <a class="btn btn-primary" href="reader.html?b=check">Read</a>
+          <a class="btn btn-download" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/1.3rawdon-wyatt-check-your-english-vocabulary-for-ielts_-essential-words-and-phrases-to-help-you-maximise-your-ielts-score-bloomsbury-information-ltd-2017.pdf" download>Download</a>
+        </div>
+      </article>
 
-<a class="way" href="conditionals.html">
-  <h3>7. Conditionals</h3>
-  <p>Discuss possibilities, consequences, and hypothetical situations.</p>
-</a>
+    </div>
+  </section>
 
-<a class="way" href="passive-voice.html">
-  <h3>8. Passive voice</h3>
-  <p>Useful for academic writing and process descriptions.</p>
-</a>
+  <section class="section" id="grammar">
+    <div class="section-heading">
+      <div>
+        <h2>Grammar</h2>
+        <p>Study grammar rules, sentence structure and common mistakes.</p>
+      </div>
+    </div>
 
-<a class="way" href="gerunds-and-infinitives.html">
-  <h3>9. Gerunds and infinitives</h3>
-  <p>Avoid errors such as “I enjoy to read” instead of “I enjoy reading”.</p>
-</a>
+    <div class="book-grid">
 
-<a class="way" href="punctuation.html">
-  <h3>10. Punctuation</h3>
-  <p>Separate ideas correctly and avoid comma splices.</p>
-</a>
+      <article class="book-card" data-search="english grammar in use intermediate raymond murphy grammar">
+        <div class="book-icon" aria-hidden="true">✍️</div>
+        <div class="book-category">Grammar · Intermediate</div>
+        <h3>English Grammar in Use</h3>
+        <p>A practical grammar reference for intermediate learners, with explanations and exercises.</p>
+        <div class="book-actions">
+          <a class="btn btn-primary" href="reader.html?b=grammar">Read</a>
+          <a class="btn btn-download" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/English-Grammer-In-Use-Intermediatr.pdf" download>Download</a>
+        </div>
+      </article>
 
-</div>
+      <article class="book-card" data-search="advanced grammar in use advanced grammar">
+        <div class="book-icon" aria-hidden="true">📖</div>
+        <div class="book-category">Grammar · Advanced</div>
+        <h3>Advanced Grammar in Use</h3>
+        <p>Explore more complex grammatical structures and refine your written and spoken English.</p>
+        <div class="book-actions">
+          <a class="btn btn-primary" href="reader.html?b=adv">Read</a>
+          <a class="btn btn-download" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/Advanced%20grammar%20in%20use.pdf" download>Download</a>
+        </div>
+      </article>
 
-<!-- READING LIBRARY CATEGORY MENU -->
+      <article class="book-card" data-search="high school english grammar composition wren martin grammar">
+        <div class="book-icon" aria-hidden="true">📝</div>
+        <div class="book-category">Grammar · Reference</div>
+        <h3>High School English Grammar and Composition</h3>
+        <p>Review foundational grammar rules, composition and sentence construction.</p>
+        <div class="book-actions">
+          <a class="btn btn-primary" href="reader.html?b=wren">Read</a>
+          <a class="btn btn-download" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/the-languagelab-library-high-school-english-grammar-and-composition-wren-and-martin-ZmlD.pdf" download>Download</a>
+        </div>
+      </article>
 
-<h2 id="reader">Reading library</h2>
-<p class="sec-note">
-  Choose a category to find your books. Every book has one Read button and one Download button.
-</p>
+      <article class="book-card" data-search="oxford guide to english grammar john eastwood grammar">
+        <div class="book-icon" aria-hidden="true">📚</div>
+        <div class="book-category">Grammar · Reference</div>
+        <h3>Oxford Guide to English Grammar</h3>
+        <p>Use a structured reference to understand grammar patterns and how they work in context.</p>
+        <div class="book-actions">
+          <a class="btn btn-primary" href="reader.html?b=oxford">Read</a>
+          <a class="btn btn-download" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/Oxford-Guide-to-English-Grammar.pdf" download>Download</a>
+        </div>
+      </article>
 
-<div class="list">
+      <article class="book-card" data-search="common mistakes in english t j fitikides grammar errors">
+        <div class="book-icon" aria-hidden="true">🔎</div>
+        <div class="book-category">Grammar · Common mistakes</div>
+        <h3>Common Mistakes in English</h3>
+        <p>Identify frequent English errors and learn how to correct them in your own writing.</p>
+        <div class="book-actions">
+          <a class="btn btn-primary" href="reader.html?b=mistakes">Read</a>
+          <a class="btn btn-download" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/common-mistakes-in-english-by-t-j-fitikides.pdf" download>Download</a>
+        </div>
+      </article>
 
-<a class="way" href="#vocabulary">
-  <h3>1. Vocabulary</h3>
-  <p>IELTS vocabulary, GRE words and essential English phrases.</p>
-</a>
+    </div>
+  </section>
 
-<a class="way" href="#grammar-books">
-  <h3>2. Grammar books</h3>
-  <p>Grammar references, explanations and common English mistakes.</p>
-</a>
+  <section class="section" id="english-books">
+    <div class="section-heading">
+      <div>
+        <h2>English books</h2>
+        <p>Improve reading fluency and discover stories through English literature.</p>
+      </div>
+    </div>
 
-<a class="way" href="#english-books">
-  <h3>3. English books</h3>
-  <p>Novels, classic literature and books for reading practice.</p>
-</a>
+    <div class="book-grid">
 
-</div>
+      <article class="book-card" data-search="the curious incident of the dog in the night time mark haddon novel fiction">
+        <div class="book-icon" aria-hidden="true">🐕</div>
+        <div class="book-category">English books · Fiction</div>
+        <h3>The Curious Incident of the Dog in the Night-Time</h3>
+        <p>Read a contemporary novel and practise following a story through English prose.</p>
+        <div class="book-actions">
+          <a class="btn btn-primary" href="reader.html?b=curious">Read</a>
+          <a class="btn btn-download" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/the_curious_incident_of_the_dog_in_the_night_time.pdf" download>Download</a>
+        </div>
+      </article>
 
-<!-- VOCABULARY BOOKS -->
+      <article class="book-card" data-search="the metamorphosis franz kafka classic literature fiction">
+        <div class="book-icon" aria-hidden="true">🪲</div>
+        <div class="book-category">English books · Classic</div>
+        <h3>The Metamorphosis</h3>
+        <p>Explore a well-known work of fiction while developing reading comprehension.</p>
+        <div class="book-actions">
+          <a class="btn btn-primary" href="reader.html?b=metamorphosis">Read</a>
+          <a class="btn btn-download" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/the-metamorphosis.pdf" download>Download</a>
+        </div>
+      </article>
 
-<h2 id="vocabulary">Vocabulary</h2>
-<p class="sec-note">
-  Build your vocabulary for IELTS, academic English and everyday communication.
-</p>
+      <article class="book-card" data-search="the alchemist paulo coelho novel fiction">
+        <div class="book-icon" aria-hidden="true">🌍</div>
+        <div class="book-category">English books · Fiction</div>
+        <h3>The Alchemist</h3>
+        <p>Follow a journey of discovery while practising reading and learning vocabulary from context.</p>
+        <div class="book-actions">
+          <a class="btn btn-primary" href="reader.html?b=alchemist">Read</a>
+          <a class="btn btn-download" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/The-Alchemist-Paulo-Coelho.pdf" download>Download</a>
+        </div>
+      </article>
 
-<div class="book">
-  <h3>IELTS Vocabulary Booster</h3>
-  <p>Topic-based words and phrases for higher IELTS band scores.</p>
-  <a class="btn" href="reader.html?b=vocab">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/IELTS%20Vocabulary%20Booster.pdf" download>Download</a>
-</div>
+      <article class="book-card" data-search="the adventures of tom sawyer mark twain classic novel">
+        <div class="book-icon" aria-hidden="true">🚣</div>
+        <div class="book-category">English books · Classic</div>
+        <h3>The Adventures of Tom Sawyer</h3>
+        <p>Read a classic adventure and build familiarity with narrative English.</p>
+        <div class="book-actions">
+          <a class="btn btn-primary" href="reader.html?b=tom">Read</a>
+          <a class="btn btn-download" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/THE%20ADVENTURES%20OF%20TOM%20SAWYER%20BY%20MARK%20TWAIN.pdf" download>Download</a>
+        </div>
+      </article>
 
-<div class="book">
-  <h3>GRE Word Smart</h3>
-  <p>Advanced vocabulary with meanings and examples.</p>
-  <a class="btn" href="reader.html?b=gre">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/GRE-book-Word-Smart(1).pdf" download>Download</a>
-</div>
+    </div>
+  </section>
 
-<div class="book">
-  <h3>Check Your English Vocabulary for IELTS</h3>
-  <p>Essential words and phrases to help you maximise your IELTS score.</p>
-  <a class="btn" href="reader.html?b=check">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/1.3rawdon-wyatt-check-your-english-vocabulary-for-ielts_-essential-words-and-phrases-to-help-you-maximise-your-ielts-score-bloomsbury-information-ltd-2017.pdf" download>Download</a>
-</div>
+  <div class="empty-state" id="emptyState">
+    No matching resources found. Try another title or keyword.
+  </div>
 
-<!-- GRAMMAR BOOKS -->
+  <section class="section" id="learning">
+    <div class="section-heading">
+      <div>
+        <h2>How to use this library</h2>
+        <p>A simple way to build a consistent English learning routine.</p>
+      </div>
+    </div>
 
-<h2 id="grammar-books">Grammar books</h2>
-<p class="sec-note">
-  Learn English grammar from intermediate foundations to advanced usage.
-</p>
+    <div class="info-grid">
+      <article class="info-card">
+        <h3>1. Choose your level</h3>
+        <p>Start with a resource that matches your current English level. Build a strong foundation before moving to advanced material.</p>
+      </article>
 
-<div class="book">
-  <h3>English Grammar in Use (Intermediate)</h3>
-  <p>Clear explanations and exercises for independent learners.</p>
-  <a class="btn" href="reader.html?b=grammar">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/English-Grammer-In-Use-Intermediatr.pdf" download>Download</a>
-</div>
+      <article class="info-card">
+        <h3>2. Read and practise</h3>
+        <p>Study a short section at a time. Write down unfamiliar words, review grammar examples and make your own sentences.</p>
+      </article>
 
-<div class="book">
-  <h3>Advanced Grammar in Use</h3>
-  <p>Advanced grammar explanations and practice exercises.</p>
-  <a class="btn" href="reader.html?b=adv">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/Advanced%20grammar%20in%20use.pdf" download>Download</a>
-</div>
-
-<div class="book">
-  <h3>High School English Grammar and Composition</h3>
-  <p>Wren and Martin's reference for grammar, sentence construction and writing.</p>
-  <a class="btn" href="reader.html?b=wren">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/the-languagelab-library-high-school-english-grammar-and-composition-wren-and-martin-ZmlD.pdf" download>Download</a>
-</div>
-
-<div class="book">
-  <h3>Oxford Guide to English Grammar</h3>
-  <p>A comprehensive reference for understanding English grammar.</p>
-  <a class="btn" href="reader.html?b=oxford">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/Oxford-Guide-to-English-Grammar.pdf" download>Download</a>
-</div>
-
-<div class="book">
-  <h3>Common Mistakes in English</h3>
-  <p>T. J. Fitikides. Learn to recognise and correct frequent English errors.</p>
-  <a class="btn" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/common-mistakes-in-english-by-t-j-fitikides.pdf" target="_blank" rel="noopener">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/common-mistakes-in-english-by-t-j-fitikides.pdf" download>Download</a>
-</div>
-
-<!-- ENGLISH BOOKS -->
-
-<h2 id="english-books">English books</h2>
-<p class="sec-note">
-  Explore novels and classic literature to develop reading comprehension, vocabulary and fluency.
-</p>
-
-<div class="book">
-  <h3>The Curious Incident of the Dog in the Night-Time</h3>
-  <p>Mark Haddon's novel. Practise reading through a distinctive first-person story.</p>
-  <a class="btn" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/the_curious_incident_of_the_dog_in_the_night_time.pdf" target="_blank" rel="noopener">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/the_curious_incident_of_the_dog_in_the_night_time.pdf" download>Download</a>
-</div>
-
-<div class="book">
-  <h3>The Metamorphosis</h3>
-  <p>Franz Kafka's classic novella, useful for exploring literary English and interpretation.</p>
-  <a class="btn" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/the-metamorphosis.pdf" target="_blank" rel="noopener">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/the-metamorphosis.pdf" download>Download</a>
-</div>
-
-<div class="book">
-  <h3>The Alchemist</h3>
-  <p>Paulo Coelho's novel about a journey, personal dreams and self-discovery.</p>
-  <a class="btn" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/The-Alchemist-Paulo-Coelho.pdf" target="_blank" rel="noopener">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/The-Alchemist-Paulo-Coelho.pdf" download>Download</a>
-</div>
-
-<div class="book">
-  <h3>The Adventures of Tom Sawyer</h3>
-  <p>Mark Twain's classic novel. Explore storytelling, dialogue and traditional English expressions.</p>
-  <a class="btn" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/THE%20ADVENTURES%20OF%20TOM%20SAWYER%20BY%20MARK%20TWAIN.pdf" target="_blank" rel="noopener">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/THE%20ADVENTURES%20OF%20TOM%20SAWYER%20BY%20MARK%20TWAIN.pdf" download>Download</a>
-</div>
-
-<footer class="foot">
-  English Materials. Useful for IELTS, TOEFL, PTE and everyday English.
-  <br>
-  © 2026
-  <a href="https://abubokkorshiddik.github.io/AbuBokkorShiddik.abs798/home" target="_blank" rel="noopener">
-    Abu Bokkor Shiddik
-  </a>. All rights reserved.
-</footer>
+      <article class="info-card">
+        <h3>3. Review regularly</h3>
+        <p>Return to your notes, repeat exercises and read English texts regularly to strengthen long-term learning.</p>
+      </article>
+    </div>
+  </section>
 
 </main>
 
+<footer>
+  <div class="container footer-inner">
+    <div>© <span id="year"></span> English Materials. Learn at your own pace.</div>
+    <div class="footer-links">
+      <a href="#home">Back to top ↑</a>
+      <a href="https://github.com/abubokkorshiddik/Eng-materials" target="_blank" rel="noopener noreferrer">GitHub repository</a>
+    </div>
+  </div>
+</footer>
+
 <script>
-(function () {
+(function(){
   "use strict";
 
-  var SETTINGS_KEY = "ielts-gl-reader";
+  const root = document.documentElement;
+  const themeToggle = document.getElementById("themeToggle");
+  const searchInput = document.getElementById("bookSearch");
+  const cards = Array.from(document.querySelectorAll(".book-card"));
+  const emptyState = document.getElementById("emptyState");
 
-  /* Theme switcher: saved in the same setting the lessons use */
-  function setTheme(theme) {
-    document.documentElement.dataset.theme = theme;
+  document.getElementById("year").textContent = new Date().getFullYear();
+  document.getElementById("resourceCount").textContent = cards.length + " resources";
 
-    try {
-      var settings = JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}");
-      settings.theme = theme;
-      localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
-    } catch (e) {}
+  function getSavedTheme(){
+    try{
+      const saved = localStorage.getItem("ielts-gl-reader");
+      if(saved){
+        const settings = JSON.parse(saved);
+        if(settings && settings.settings && settings.settings.theme){
+          return settings.settings.theme;
+        }
+      }
+    }catch(error){}
 
-    document.querySelectorAll("#th button").forEach(function (button) {
-      button.setAttribute(
-        "aria-pressed",
-        String(button.dataset.t === theme)
-      );
-    });
+    try{
+      const oldTheme = localStorage.getItem("theme");
+      if(oldTheme === "dark" || oldTheme === "light"){
+        return oldTheme;
+      }
+    }catch(error){}
+
+    return "light";
   }
 
-  document.querySelectorAll("#th button").forEach(function (button) {
-    button.addEventListener("click", function () {
-      setTheme(button.dataset.t);
-    });
-  });
+  function applyTheme(theme){
+    const chosenTheme = theme === "dark" ? "dark" : "light";
+    root.setAttribute("data-theme", chosenTheme);
+    themeToggle.textContent = chosenTheme === "dark" ? "☀️ Theme" : "🌙 Theme";
+    themeToggle.setAttribute(
+      "aria-label",
+      chosenTheme === "dark" ? "Switch to light theme" : "Switch to dark theme"
+    );
 
-  setTheme(document.documentElement.dataset.theme || "light");
+    try{
+      localStorage.setItem("theme", chosenTheme);
 
-  /* PWA installation */
-  var installPrompt = null;
-  var installButton = document.getElementById("installApp");
-  var installHelp = document.getElementById("installHelp");
-  var installMessage = document.getElementById("installMessage");
-
-  function isStandalone() {
-    return window.matchMedia("(display-mode: standalone)").matches ||
-      window.navigator.standalone === true;
-  }
-
-  function updateInstallStatus() {
-    if (isStandalone()) {
-      installButton.textContent = "App installed";
-      installButton.disabled = true;
-      installMessage.textContent =
-        "English Materials is running as an installed app on this device.";
-    }
-  }
-
-  window.addEventListener("beforeinstallprompt", function (event) {
-    event.preventDefault();
-    installPrompt = event;
-    installButton.textContent = "Install app";
-    installMessage.textContent =
-      "Your browser supports direct installation. Tap Install app to continue.";
-  });
-
-  installButton.addEventListener("click", async function () {
-    if (isStandalone()) {
-      installMessage.textContent =
-        "English Materials is already installed on this device.";
-      return;
-    }
-
-    if (installPrompt) {
-      installPrompt.prompt();
-
-      var result = await installPrompt.userChoice;
-
-      if (result.outcome === "accepted") {
-        installMessage.textContent =
-          "Installation accepted. Follow any remaining prompts on your device.";
-      } else {
-        installMessage.textContent =
-          "Installation was cancelled. You can try again later.";
+      let saved = {};
+      const existing = localStorage.getItem("ielts-gl-reader");
+      if(existing){
+        try{ saved = JSON.parse(existing) || {}; }catch(error){}
       }
 
-      installPrompt = null;
-      return;
-    }
-
-    var ua = navigator.userAgent || "";
-    var isIOS = /iPhone|iPad|iPod/i.test(ua);
-    var isAndroid = /Android/i.test(ua);
-
-    if (isIOS) {
-      installMessage.textContent =
-        "Open this page in Safari, tap Share, then choose Add to Home Screen.";
-    } else if (isAndroid) {
-      installMessage.textContent =
-        "Open this page in Chrome. Tap the three-dot menu and select Install app or Add to Home screen. The available option depends on your browser and whether the website meets installation requirements.";
-    } else {
-      installMessage.textContent =
-        "Open this website in a supported browser and look for Install app or Add to Home screen in the browser menu.";
-    }
-  });
-
-  installHelp.addEventListener("click", function () {
-    installMessage.textContent =
-      "Android: open this website in Chrome, tap the three-dot menu, then select Install app or Add to Home screen. iPhone or iPad: open the website in Safari, tap Share, then Add to Home Screen.";
-  });
-
-  window.addEventListener("appinstalled", function () {
-    installPrompt = null;
-    installButton.textContent = "App installed";
-    installButton.disabled = true;
-    installMessage.textContent =
-      "English Materials has been installed successfully.";
-  });
-
-  updateInstallStatus();
-
-  /* Service worker: needs service-worker.js in the same folder */
-  if ("serviceWorker" in navigator && location.protocol === "https:") {
-    window.addEventListener("load", function () {
-      navigator.serviceWorker.register("./service-worker.js")
-        .catch(function (error) {
-          console.error("Service worker registration failed:", error);
-        });
-    });
+      if(!saved.settings) saved.settings = {};
+      saved.settings.theme = chosenTheme;
+      localStorage.setItem("ielts-gl-reader", JSON.stringify(saved));
+    }catch(error){}
   }
+
+  applyTheme(getSavedTheme());
+
+  themeToggle.addEventListener("click", function(){
+    const current = root.getAttribute("data-theme");
+    applyTheme(current === "dark" ? "light" : "dark");
+  });
+
+  function filterResources(){
+    const query = searchInput.value.trim().toLowerCase();
+    let visibleCount = 0;
+
+    cards.forEach(function(card){
+      const searchableText = (
+        card.innerText + " " + (card.getAttribute("data-search") || "")
+      ).toLowerCase();
+
+      const matches = !query || searchableText.includes(query);
+      card.style.display = matches ? "" : "none";
+
+      if(matches) visibleCount++;
+    });
+
+    document.querySelectorAll(".section").forEach(function(section){
+      if(!section.querySelector(".book-card")) return;
+
+      const visibleCards = Array.from(section.querySelectorAll(".book-card"))
+        .some(function(card){ return card.style.display !== "none"; });
+
+      section.style.display = visibleCards ? "" : "none";
+    });
+
+    emptyState.style.display = visibleCount === 0 ? "block" : "none";
+  }
+
+  searchInput.addEventListener("input", filterResources);
+
+  document.addEventListener("keydown", function(event){
+    const target = event.target;
+    const isTyping = target && (
+      target.tagName === "INPUT" ||
+      target.tagName === "TEXTAREA" ||
+      target.isContentEditable
+    );
+
+    if(event.key === "/" && !isTyping){
+      event.preventDefault();
+      searchInput.focus();
+    }
+
+    if(event.key === "Escape" && target === searchInput){
+      searchInput.value = "";
+      filterResources();
+      searchInput.blur();
+    }
+  });
 })();
 </script>
 
