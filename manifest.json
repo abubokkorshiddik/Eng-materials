@@ -1,0 +1,26 @@
+
+{
+  "id": "/Eng-materials/",
+  "name": "English Materials",
+  "short_name": "English Materials",
+  "description": "Free grammar lessons, vocabulary and reading resources for English learners.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fbfaf7",
+  "theme_color": "#1f2a44",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/10719400.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/10719400.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
