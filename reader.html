@@ -71,6 +71,7 @@ body {
 .bar {
   position: sticky;
   top: 0;
+  left: 0;
   z-index: 10;
   background: var(--bar);
   border-bottom: 1px solid var(--line);
@@ -108,11 +109,7 @@ body {
   border-color: var(--accent);
 }
 
-.grp {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-}
+.grp { display: flex; gap: 6px; align-items: center; }
 
 .bar input {
   width: 64px;
@@ -126,12 +123,7 @@ body {
   min-height: 34px;
 }
 
-#zl {
-  min-width: 46px;
-  text-align: center;
-  font-size: 12px;
-  opacity: .8;
-}
+#zl { min-width: 50px; font-size: 12px; }
 
 .title {
   flex: 1 1 100%;
@@ -148,7 +140,6 @@ body {
   right: 0;
   bottom: -1px;
   height: 3px;
-  background: transparent;
 }
 
 #progressBar {
@@ -162,15 +153,16 @@ body {
 #pages {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 12px;
   padding: 12px 0 80px;
 }
 
+/* Auto margins centre a page, and let a zoomed page scroll sideways */
 .pg {
+  flex: none;
+  margin: 0 auto;
   background: #fff;
   box-shadow: 0 1px 6px #0003;
-  max-width: 100%;
   overflow: hidden;
 }
 
@@ -191,7 +183,7 @@ body {
 
 #msg a { color: var(--accent); }
 
-/* Floating page indicator (shown when the toolbar is hidden) */
+/* Floating page counter, shown briefly while the toolbar is hidden */
 #pill {
   position: fixed;
   left: 50%;
@@ -221,7 +213,7 @@ body.drive {
   overflow: hidden;
 }
 
-body.drive .bar { position: relative; transform: none; }
+body.drive .bar { position: relative; transform: none; flex: none; }
 body.drive .pdf-only { display: none !important; }
 body.drive #pages,
 body.drive #pill,
@@ -230,6 +222,7 @@ body.drive #progress { display: none; }
 #frame {
   flex: 1;
   width: 100%;
+  min-height: 0;
   border: 0;
   background: var(--bg);
 }
@@ -239,18 +232,16 @@ body.drive #progress { display: none; }
   padding: 6px 12px;
   font-size: 12px;
   font-weight: 500;
-  opacity: .8;
+  opacity: .85;
   background: var(--bar);
   border-bottom: 1px solid var(--line);
   text-align: center;
+  flex: none;
 }
 
 body.drive #note { display: block; }
 
-:focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: 2px;
-}
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 
 @media (max-width: 480px) {
   .bar { gap: 7px; }
@@ -258,11 +249,20 @@ body.drive #note { display: block; }
   .grp { gap: 4px; }
 }
 
-/* Landscape phones: keep the toolbar compact */
-@media (max-height: 480px) and (orientation: landscape) {
-  .bar { padding-top: calc(4px + env(safe-area-inset-top, 0px)); padding-bottom: 4px; gap: 6px; }
-  .title { flex: 1 1 auto; order: 5; }
-  .bar a, .bar button, .bar input { min-height: 30px; padding-top: 4px; padding-bottom: 4px; }
+/* Landscape phones: slim toolbar on one row, title hidden */
+@media (orientation: landscape) and (max-height: 500px) {
+  .bar {
+    padding-top: calc(4px + env(safe-area-inset-top, 0px));
+    padding-bottom: 4px;
+    gap: 6px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .title { display: none; }
+  .bar a, .bar button, .bar input { min-height: 30px; padding-top: 3px; padding-bottom: 3px; }
+  #pages { padding-top: 6px; }
+  #note { display: none !important; }
 }
 </style>
 </head>
@@ -283,8 +283,12 @@ body.drive #note { display: block; }
 
   <div class="grp pdf-only" aria-label="Zoom controls">
     <button id="zo" type="button" aria-label="Zoom out">−</button>
-    <button id="zl" type="button" aria-label="Reset zoom to fit width">100%</button>
+    <button id="zl" type="button" aria-label="Reset zoom">100%</button>
     <button id="zi" type="button" aria-label="Zoom in">+</button>
+  </div>
+
+  <div class="grp pdf-only">
+    <button id="fit" type="button" aria-label="Switch between fit width and fit page">Fit width</button>
   </div>
 
   <div class="grp pdf-only" id="th" aria-label="Reading theme">
@@ -303,7 +307,7 @@ body.drive #note { display: block; }
 </header>
 
 <div id="note">
-  This book opens in Google Drive's viewer. Pinch to zoom and rotate your phone for a wider page.
+  This book opens in Google Drive's viewer. Pinch to zoom, and rotate your phone for a wider page.
 </div>
 
 <div id="msg" role="status" aria-live="polite">Opening book…</div>
@@ -321,11 +325,10 @@ body.drive #note { display: block; }
 
   /*
     All books in the English Materials library.
-
-    The key in each entry must match the b= value in the reader.html link.
-      f = file name in the GitHub repository (opens in the PDF.js reader)
-      d = Google Drive file ID (opens in the Google Drive viewer, because
-          Google Drive does not allow PDF.js to read its files)
+    The key must match the b= value in the reader.html links.
+      f = file name in the GitHub repository (PDF.js reader)
+      d = Google Drive file ID (Google Drive viewer, because Drive does not
+          allow PDF.js to read its files)
   */
   const BOOKS = {
     /* Grammar */
@@ -407,6 +410,11 @@ body.drive #note { display: block; }
     }
   };
 
+  /* Allow both portrait and landscape (works where the browser supports it) */
+  try {
+    if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
+  } catch (e) {}
+
   /* Download link */
   $("dl").href = isDrive
     ? "https://drive.google.com/uc?export=download&id=" + book.d
@@ -462,10 +470,12 @@ body.drive #note { display: block; }
   let ratio = 1.4;
   let zoom = Number(store.get("zoom:" + bookKey) || store.get("zoom") || 1);
   if (!isFinite(zoom) || zoom < 0.6 || zoom > 2.5) zoom = 1;
+  let fit = store.get("fit") === "page" ? "page" : "width";
   let cur = 1;
   let ready = false;
   let pages = [];
-  let lastWidth = 0;
+  let lastW = 0;
+  let lastH = 0;
   let resizeTimer;
 
   const box = $("pages");
@@ -473,16 +483,28 @@ body.drive #note { display: block; }
   const pill = $("pill");
   const busy = Object.create(null);
 
+  /*
+    Page width.
+    Fit width: the page fills the screen width (best in portrait).
+    Fit page: the whole page fits the screen height (best in landscape).
+  */
   function width() {
-    /* Wider cap so landscape phones and tablets use the screen well */
-    return Math.max(200, Math.min(box.clientWidth - 16, 1100) * zoom);
+    let w = Math.min(box.clientWidth - 16, 1100);
+
+    if (fit === "page") {
+      const h = window.innerHeight - 20;
+      w = Math.min(w, h / ratio);
+    }
+
+    return Math.max(200, w * zoom);
   }
 
-  function updateZoomLabel() {
+  function updateLabels() {
     $("zl").textContent = Math.round(zoom * 100) + "%";
+    $("fit").textContent = fit === "page" ? "Fit page" : "Fit width";
   }
 
-  updateZoomLabel();
+  updateLabels();
 
   /* Render nearby pages only, to save memory on mobile devices. */
   const lazy = new IntersectionObserver(entries => {
@@ -531,8 +553,8 @@ body.drive #note { display: block; }
 
       await page.render({ canvasContext: ctx, viewport }).promise;
 
-      /* Skip if the layout was reset while this page rendered. */
-      if (pages[n - 1] === el && Math.abs(el.clientWidth - targetWidth) < 2) {
+      /* Skip if the layout changed while this page was rendering. */
+      if (pages[n - 1] === el && Math.abs(parseFloat(el.style.width) - targetWidth) < 2) {
         el.classList.remove("empty");
         el.replaceChildren(canvas);
       }
@@ -556,7 +578,8 @@ body.drive #note { display: block; }
     mid.disconnect();
 
     const targetWidth = width();
-    lastWidth = box.clientWidth;
+    lastW = box.clientWidth;
+    lastH = window.innerHeight;
 
     pages.forEach(el => {
       el.style.width = targetWidth + "px";
@@ -569,26 +592,39 @@ body.drive #note { display: block; }
     });
   }
 
+  function scrollToPage(n, fraction) {
+    const el = pages[n - 1];
+    if (!el) return;
+
+    const top = el.getBoundingClientRect().top + window.scrollY +
+      (fraction || 0) * el.offsetHeight - 6;
+
+    window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
+  }
+
   function go(n) {
     if (!pdf || !pages.length) return;
 
     n = Math.max(1, Math.min(pdf.numPages, Math.trunc(Number(n) || 1)));
     cur = n;
     $("num").value = n;
-
-    const el = pages[n - 1];
-    if (el) {
-      const top = el.getBoundingClientRect().top + window.scrollY - 6;
-      window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
-    }
+    scrollToPage(n, 0);
   }
 
-  /* Re-layout while keeping the reader on the same page. */
+  /* Re-layout and keep the same spot on the same page (used on rotation and zoom). */
   function relayout() {
     if (!pdf) return;
+
+    const el = pages[cur - 1];
+    let fraction = 0;
+
+    if (el && el.offsetHeight) {
+      fraction = Math.max(0, Math.min(0.95, -el.getBoundingClientRect().top / el.offsetHeight));
+    }
+
     const page = cur;
     layout();
-    go(page);
+    scrollToPage(page, fraction);
   }
 
   /* Load the requested PDF. */
@@ -651,7 +687,7 @@ body.drive #note { display: block; }
 
     store.set("zoom:" + bookKey, String(zoom));
     store.set("zoom", String(zoom));
-    updateZoomLabel();
+    updateLabels();
     relayout();
   }
 
@@ -659,11 +695,18 @@ body.drive #note { display: block; }
   $("zo").addEventListener("click", () => setZoom(zoom - 0.2));
   $("zl").addEventListener("click", () => setZoom(1));
 
+  $("fit").addEventListener("click", () => {
+    fit = fit === "page" ? "width" : "page";
+    store.set("fit", fit);
+    updateLabels();
+    relayout();
+  });
+
   /* Keyboard navigation */
   window.addEventListener("keydown", e => {
     if (e.target.tagName === "INPUT" || e.ctrlKey || e.metaKey || e.altKey) return;
 
-    if (e.key === "ArrowRight" || e.key === "PageDown") { if (e.key === "ArrowRight") go(cur + 1); }
+    if (e.key === "ArrowRight") go(cur + 1);
     if (e.key === "ArrowLeft") go(cur - 1);
   });
 
@@ -700,27 +743,34 @@ body.drive #note { display: block; }
     });
   }, { passive: true });
 
-  /* Tap the page (not a button) to show or hide the toolbar */
+  /* Tap a page to show or hide the toolbar */
   box.addEventListener("click", () => {
     bar.classList.toggle("hide");
     if (bar.classList.contains("hide")) showPill();
   });
 
   /* ---------- Rotation and resizing ----------
-     Re-layout only when the width changes. Mobile browsers also fire
-     resize when the address bar hides, which must not reset the pages. */
+     Mobile browsers also fire resize when the address bar hides, which must
+     not reset the pages. So re-layout only when the width changes, or, in
+     Fit page mode, when the height changes by a lot (a real rotation). */
   function onResize() {
     clearTimeout(resizeTimer);
+
     resizeTimer = setTimeout(() => {
-      if (pdf && Math.abs(box.clientWidth - lastWidth) > 4) relayout();
+      if (!pdf) return;
+
+      const widthChanged = Math.abs(box.clientWidth - lastW) > 4;
+      const heightChanged = fit === "page" && Math.abs(window.innerHeight - lastH) > 100;
+
+      if (widthChanged || heightChanged) relayout();
     }, 200);
   }
 
   window.addEventListener("resize", onResize);
-  window.addEventListener("orientationchange", () => setTimeout(onResize, 300));
+  window.addEventListener("orientationchange", () => setTimeout(onResize, 350));
 
   if (screen.orientation && screen.orientation.addEventListener) {
-    screen.orientation.addEventListener("change", () => setTimeout(onResize, 300));
+    screen.orientation.addEventListener("change", () => setTimeout(onResize, 350));
   }
 
   loadBook();
