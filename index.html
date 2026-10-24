@@ -10,6 +10,7 @@
 <meta name="application-name" content="English Materials">
 
 <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/10719400.png">
+<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/10719400.png">
 <link rel="manifest" href="./manifest.json">
 
 <meta name="mobile-web-app-capable" content="yes">
@@ -80,9 +81,20 @@ body {
 a { color: var(--blue); }
 button { font: inherit; }
 
-.top {
+/* ---------- Layout: fills the screen in portrait and landscape ---------- */
+.top,
+main {
+  width: 100%;
   max-width: 720px;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 700px) {
+  .top, main { max-width: 1100px; }
+}
+
+.top {
   padding: 16px 18px;
   display: flex;
   justify-content: space-between;
@@ -94,22 +106,9 @@ button { font: inherit; }
 
 .top a { color: var(--ink); text-decoration: none; }
 
-.top nav {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
+.top nav { display: flex; gap: 12px; flex-wrap: wrap; }
 
-main {
-  max-width: 720px;
-  margin: auto;
-  padding: 0 18px 70px;
-}
-
-/* A little more room on tablets and landscape screens */
-@media (min-width: 900px) {
-  .top, main { max-width: 860px; }
-}
+main { padding: 0 18px 70px; }
 
 h1, h2, h3 {
   font-family: Fraunces, Georgia, serif;
@@ -117,18 +116,15 @@ h1, h2, h3 {
   line-height: 1.2;
 }
 
-h1 { font-size: clamp(2.2rem, 8vw, 3.3rem); margin: 30px 0 14px; }
+h1 { font-size: clamp(2.2rem, 7vw, 3.3rem); margin: 30px 0 14px; }
 h2 { font-size: 1.6rem; margin: 54px 0 6px; }
 h3 { font-size: 1.1rem; margin: 0 0 2px; }
 
-.lead { font-size: 1.1rem; color: var(--muted); }
+.lead { font-size: 1.1rem; color: var(--muted); max-width: 46em; }
 
-.sec-note {
-  margin: 0 0 14px;
-  color: var(--muted);
-  font-size: .97rem;
-}
+.sec-note { margin: 0 0 14px; color: var(--muted); font-size: .97rem; }
 
+/* ---------- Buttons ---------- */
 .btn {
   display: inline-block;
   background: var(--ink);
@@ -143,15 +139,11 @@ h3 { font-size: 1.1rem; margin: 0 0 2px; }
   text-align: center;
 }
 
-.btn.alt {
-  background: transparent;
-  color: var(--ink);
-  border: 1px solid var(--ink);
-}
-
+.btn.alt { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
 .btn:hover { opacity: .85; }
 .btn:disabled { opacity: .6; cursor: default; }
 
+/* ---------- Install box ---------- */
 .install-area {
   margin: 22px 0 30px;
   padding: 20px;
@@ -160,12 +152,7 @@ h3 { font-size: 1.1rem; margin: 0 0 2px; }
 }
 
 .install-area h3 { margin-bottom: 8px; }
-
-.install-area p {
-  color: var(--muted);
-  font-size: .95rem;
-  margin: 0 0 10px;
-}
+.install-area p { color: var(--muted); font-size: .95rem; margin: 0 0 10px; }
 
 .install-help {
   font: .85rem/1.6 Inter, sans-serif;
@@ -175,6 +162,7 @@ h3 { font-size: 1.1rem; margin: 0 0 2px; }
 
 .install-icon { font-size: 1.4rem; margin-right: 5px; }
 
+/* ---------- Theme switcher ---------- */
 .th { display: flex; gap: 6px; }
 
 .th button {
@@ -187,10 +175,20 @@ h3 { font-size: 1.1rem; margin: 0 0 2px; }
   cursor: pointer;
 }
 
-.th button[aria-pressed="true"] {
-  background: var(--ink);
-  color: var(--paper);
+.th button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+/* ---------- Lists: one column on portrait phones, more columns on wide screens ---------- */
+.list,
+.shelf,
+.series {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  column-gap: 32px;
+  border-bottom: 1px solid var(--line);
 }
+
+.series { margin-bottom: 8px; }
+.shelf { margin-bottom: 0; }
 
 .way {
   display: block;
@@ -203,47 +201,36 @@ h3 { font-size: 1.1rem; margin: 0 0 2px; }
 .way p { margin: 0; color: var(--muted); font-size: .95rem; }
 .way:hover h3 { color: var(--blue); }
 
-.list > :last-child { border-bottom: 1px solid var(--line); }
+details { border-top: 1px solid var(--line); grid-column: 1 / -1; }
 
-details { border-top: 1px solid var(--line); }
-
-summary {
-  cursor: pointer;
-  padding: 14px 0;
-  list-style: none;
-}
-
+summary { cursor: pointer; padding: 14px 0; list-style: none; }
 summary::-webkit-details-marker { display: none; }
-
-summary h3::after {
-  content: " ▾";
-  font-size: .8em;
-  color: var(--muted);
-}
-
+summary h3::after { content: " ▾"; font-size: .8em; color: var(--muted); }
 details[open] summary h3::after { content: " ▴"; }
-
 summary p { margin: 0; color: var(--muted); font-size: .95rem; }
 
 details ol { margin: 0 0 14px; padding-left: 22px; }
-details li { margin: 6px 0; font-size: 1rem; }
+details li { margin: 6px 0; font-size: 1rem; break-inside: avoid; }
 
+@media (min-width: 700px) {
+  details ol { columns: 2; column-gap: 32px; }
+}
+
+/* ---------- Books ---------- */
 .book {
   border-top: 1px solid var(--line);
   padding: 16px 0;
 }
 
 .book p { margin: 2px 0 8px; color: var(--muted); font-size: .95rem; }
-
 .book .btn { padding: 8px 14px; font-size: .85rem; }
 
-/* Compact rows for the Cambridge IELTS series */
-.series {
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  margin-bottom: 8px;
-}
+/* Book titles open the reader */
+.title-link { color: inherit; text-decoration: none; }
+.title-link:hover,
+.title-link:focus-visible { color: var(--blue); text-decoration: underline; }
 
+/* Cambridge IELTS rows */
 .series .row {
   display: flex;
   align-items: center;
@@ -253,20 +240,16 @@ details li { margin: 6px 0; font-size: 1rem; }
   border-top: 1px solid var(--line);
 }
 
-.series .row:first-child { border-top: 0; }
-
-.series .row span {
+.series .row > .title-link {
   font: 600 .95rem Inter, sans-serif;
   color: var(--ink);
 }
 
+.series .row > .title-link:hover { color: var(--blue); }
+
 .series .row .acts { display: flex; gap: 6px; flex-shrink: 0; }
 
-.series .row .btn {
-  margin: 0;
-  padding: 7px 12px;
-  font-size: .82rem;
-}
+.series .row .btn { margin: 0; padding: 7px 12px; font-size: .82rem; }
 
 .foot {
   margin-top: 60px;
@@ -274,15 +257,21 @@ details li { margin: 6px 0; font-size: 1rem; }
   font: .85rem/1.8 Inter, sans-serif;
 }
 
-:focus-visible {
-  outline: 3px solid var(--blue);
-  outline-offset: 3px;
-}
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
 
 @media (max-width: 480px) {
   .top { align-items: flex-start; }
   .top nav { width: 100%; }
   .th { flex-wrap: wrap; }
+}
+
+/* Landscape phones: tighter vertical spacing */
+@media (orientation: landscape) and (max-height: 500px) {
+  body { font-size: 17px; }
+  h1 { margin-top: 10px; }
+  h2 { margin-top: 34px; }
+  .top { padding-top: 8px; padding-bottom: 8px; }
+  .install-area { margin: 14px 0 20px; padding: 14px; }
 }
 </style>
 </head>
@@ -421,7 +410,7 @@ details li { margin: 6px 0; font-size: 1rem; }
 
 <h2 id="reader">Reading library</h2>
 <p class="sec-note">
-  Browse the books by category. Each book has one Read button and one Download button.
+  Browse the books by category. Tap a book title or Read to open it in the reader.
 </p>
 
 <div class="list">
@@ -458,26 +447,27 @@ details li { margin: 6px 0; font-size: 1rem; }
   Build your vocabulary for IELTS, academic English and everyday communication.
 </p>
 
-<div class="book">
-  <h3>IELTS Vocabulary Booster</h3>
-  <p>Topic-based words and phrases for IELTS preparation.</p>
-  <a class="btn" href="reader.html?b=vocab">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/IELTS%20Vocabulary%20Booster.pdf" download>Download</a>
+<div class="shelf">
+  <div class="book">
+    <h3><a class="title-link" href="reader.html?b=vocab">IELTS Vocabulary Booster</a></h3>
+    <p>Topic-based words and phrases for IELTS preparation.</p>
+    <a class="btn" href="reader.html?b=vocab">Read</a>
+    <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/IELTS%20Vocabulary%20Booster.pdf" download>Download</a>
+  </div>
+  <div class="book">
+    <h3><a class="title-link" href="reader.html?b=gre">GRE Word Smart</a></h3>
+    <p>Advanced vocabulary with meanings and examples.</p>
+    <a class="btn" href="reader.html?b=gre">Read</a>
+    <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/GRE-book-Word-Smart(1).pdf" download>Download</a>
+  </div>
+  <div class="book">
+    <h3><a class="title-link" href="reader.html?b=check">Check Your English Vocabulary for IELTS</a></h3>
+    <p>Essential words and phrases to help you maximise your IELTS score.</p>
+    <a class="btn" href="reader.html?b=check">Read</a>
+    <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/1.3rawdon-wyatt-check-your-english-vocabulary-for-ielts_-essential-words-and-phrases-to-help-you-maximise-your-ielts-score-bloomsbury-information-ltd-2017.pdf" download>Download</a>
+  </div>
 </div>
 
-<div class="book">
-  <h3>GRE Word Smart</h3>
-  <p>Advanced vocabulary with meanings and examples.</p>
-  <a class="btn" href="reader.html?b=gre">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/GRE-book-Word-Smart(1).pdf" download>Download</a>
-</div>
-
-<div class="book">
-  <h3>Check Your English Vocabulary for IELTS</h3>
-  <p>Essential words and phrases to help you maximise your IELTS score.</p>
-  <a class="btn" href="reader.html?b=check">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/1.3rawdon-wyatt-check-your-english-vocabulary-for-ielts_-essential-words-and-phrases-to-help-you-maximise-your-ielts-score-bloomsbury-information-ltd-2017.pdf" download>Download</a>
-</div>
 
 <!-- GRAMMAR BOOKS -->
 
@@ -486,40 +476,39 @@ details li { margin: 6px 0; font-size: 1rem; }
   Learn English grammar from intermediate foundations to advanced usage.
 </p>
 
-<div class="book">
-  <h3>English Grammar in Use (Intermediate)</h3>
-  <p>Clear explanations and exercises for independent learners.</p>
-  <a class="btn" href="reader.html?b=grammar">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/English-Grammer-In-Use-Intermediatr.pdf" download>Download</a>
+<div class="shelf">
+  <div class="book">
+    <h3><a class="title-link" href="reader.html?b=grammar">English Grammar in Use (Intermediate)</a></h3>
+    <p>Clear explanations and exercises for independent learners.</p>
+    <a class="btn" href="reader.html?b=grammar">Read</a>
+    <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/English-Grammer-In-Use-Intermediatr.pdf" download>Download</a>
+  </div>
+  <div class="book">
+    <h3><a class="title-link" href="reader.html?b=adv">Advanced Grammar in Use</a></h3>
+    <p>Advanced grammar explanations and practice exercises.</p>
+    <a class="btn" href="reader.html?b=adv">Read</a>
+    <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/Advanced%20grammar%20in%20use.pdf" download>Download</a>
+  </div>
+  <div class="book">
+    <h3><a class="title-link" href="reader.html?b=wren">High School English Grammar and Composition</a></h3>
+    <p>Wren and Martin's reference for grammar, sentence construction and writing.</p>
+    <a class="btn" href="reader.html?b=wren">Read</a>
+    <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/the-languagelab-library-high-school-english-grammar-and-composition-wren-and-martin-ZmlD.pdf" download>Download</a>
+  </div>
+  <div class="book">
+    <h3><a class="title-link" href="reader.html?b=oxford">Oxford Guide to English Grammar</a></h3>
+    <p>A reference for understanding English grammar and usage.</p>
+    <a class="btn" href="reader.html?b=oxford">Read</a>
+    <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/Oxford-Guide-to-English-Grammar.pdf" download>Download</a>
+  </div>
+  <div class="book">
+    <h3><a class="title-link" href="reader.html?b=mistakes">Common Mistakes in English</a></h3>
+    <p>T. J. Fitikides. Learn to recognise and correct frequent English errors.</p>
+    <a class="btn" href="reader.html?b=mistakes">Read</a>
+    <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/common-mistakes-in-english-by-t-j-fitikides.pdf" download>Download</a>
+  </div>
 </div>
 
-<div class="book">
-  <h3>Advanced Grammar in Use</h3>
-  <p>Advanced grammar explanations and practice exercises.</p>
-  <a class="btn" href="reader.html?b=adv">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/Advanced%20grammar%20in%20use.pdf" download>Download</a>
-</div>
-
-<div class="book">
-  <h3>High School English Grammar and Composition</h3>
-  <p>Wren and Martin's reference for grammar, sentence construction and writing.</p>
-  <a class="btn" href="reader.html?b=wren">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/the-languagelab-library-high-school-english-grammar-and-composition-wren-and-martin-ZmlD.pdf" download>Download</a>
-</div>
-
-<div class="book">
-  <h3>Oxford Guide to English Grammar</h3>
-  <p>A reference for understanding English grammar and usage.</p>
-  <a class="btn" href="reader.html?b=oxford">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/Oxford-Guide-to-English-Grammar.pdf" download>Download</a>
-</div>
-
-<div class="book">
-  <h3>Common Mistakes in English</h3>
-  <p>T. J. Fitikides. Learn to recognise and correct frequent English errors.</p>
-  <a class="btn" href="reader.html?b=mistakes">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/common-mistakes-in-english-by-t-j-fitikides.pdf" download>Download</a>
-</div>
 
 <!-- FOR BANGLADESHI STUDENTS -->
 
@@ -528,47 +517,49 @@ details li { margin: 6px 0; font-size: 1rem; }
   English books made for Bangladeshi students, for school, college, admission and job exams.
 </p>
 
-<div class="book">
-  <h3>Master English</h3>
-  <p>A complete English guide for Bangladeshi students.</p>
-  <a class="btn" href="reader.html?b=master">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/Master%20English%20%5Bbdniyog.com%5D.pdf" download>Download</a>
+<div class="shelf">
+  <div class="book">
+    <h3><a class="title-link" href="reader.html?b=master">Master English</a></h3>
+    <p>A complete English guide for Bangladeshi students.</p>
+    <a class="btn" href="reader.html?b=master">Read</a>
+    <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/Master%20English%20%5Bbdniyog.com%5D.pdf" download>Download</a>
+  </div>
+  <div class="book">
+    <h3><a class="title-link" href="reader.html?b=prof">Professors English for Compact and Exam</a></h3>
+    <p>A compact English guide for exam preparation, for Bangladeshi students.</p>
+    <a class="btn" href="reader.html?b=prof">Read</a>
+    <a class="btn alt" href="https://drive.google.com/uc?export=download&id=1FdicA1s7lZwceed9l-4_axl8aY2Hhhp0" target="_blank" rel="noopener">Download</a>
+  </div>
 </div>
 
-<div class="book">
-  <h3>Professors English for Compact and Exam</h3>
-  <p>A compact English guide for exam preparation, for Bangladeshi students.</p>
-  <a class="btn" href="reader.html?b=prof">Read</a>
-  <a class="btn alt" href="https://drive.google.com/uc?export=download&id=1FdicA1s7lZwceed9l-4_axl8aY2Hhhp0" target="_blank" rel="noopener">Download</a>
-</div>
 
 <!-- CAMBRIDGE IELTS -->
 
 <h2 id="ielts-books">Cambridge IELTS 1-19</h2>
 <p class="sec-note">
-  Official practice tests with answer keys. Tap Read to open a book, or Download to save it.
+  Official practice tests with answer keys. Tap a title or Read to open a book, or Download to save it.
 </p>
 
 <div class="series">
-  <div class="row"><span>Cambridge IELTS 1</span><div class="acts"><a class="btn" href="reader.html?b=ielts1">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1_5B82d0NWdK5d-XL46WImC5iRFneuM0F" target="_blank" rel="noopener">Download</a></div></div>
-  <div class="row"><span>Cambridge IELTS 2</span><div class="acts"><a class="btn" href="reader.html?b=ielts2">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1XHyckjrqsQwrIBr7PfCZcMl6P-XBWgkC" target="_blank" rel="noopener">Download</a></div></div>
-  <div class="row"><span>Cambridge IELTS 3</span><div class="acts"><a class="btn" href="reader.html?b=ielts3">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1q0XTaOoYGAMahrXNgukzLID4NVE3zlHV" target="_blank" rel="noopener">Download</a></div></div>
-  <div class="row"><span>Cambridge IELTS 4</span><div class="acts"><a class="btn" href="reader.html?b=ielts4">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1L33JdTi5A_eMMIKTSknsvwD3DtUr9lBE" target="_blank" rel="noopener">Download</a></div></div>
-  <div class="row"><span>Cambridge IELTS 5</span><div class="acts"><a class="btn" href="reader.html?b=ielts5">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1aI9_Wr6KpTLp7CeDf_XPSbNGm9HrzFXm" target="_blank" rel="noopener">Download</a></div></div>
-  <div class="row"><span>Cambridge IELTS 6</span><div class="acts"><a class="btn" href="reader.html?b=ielts6">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1k8KMNx_CCq3IAq99el59pEhMoS1rt5tW" target="_blank" rel="noopener">Download</a></div></div>
-  <div class="row"><span>Cambridge IELTS 7</span><div class="acts"><a class="btn" href="reader.html?b=ielts7">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=14tmtwhCaC2OfDVMtXcBdzQc0HqK6g1HB" target="_blank" rel="noopener">Download</a></div></div>
-  <div class="row"><span>Cambridge IELTS 8</span><div class="acts"><a class="btn" href="reader.html?b=ielts8">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1HJBTWw4KS3m0jpwW_NhHSNt5QLJ5G2P_" target="_blank" rel="noopener">Download</a></div></div>
-  <div class="row"><span>Cambridge IELTS 9</span><div class="acts"><a class="btn" href="reader.html?b=ielts9">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1H26uEWHLmb_0DJ6Kf9WLkKJFSWc9Bt02" target="_blank" rel="noopener">Download</a></div></div>
-  <div class="row"><span>Cambridge IELTS 10</span><div class="acts"><a class="btn" href="reader.html?b=ielts10">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1uzorQFIjiNtB3_oNzj3_gVQu25KS8gpk" target="_blank" rel="noopener">Download</a></div></div>
-  <div class="row"><span>Cambridge IELTS 11</span><div class="acts"><a class="btn" href="reader.html?b=ielts11">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1RECjEHE4AXWHl7ub-xMZc8nDvG7LO_EU" target="_blank" rel="noopener">Download</a></div></div>
-  <div class="row"><span>Cambridge IELTS 12</span><div class="acts"><a class="btn" href="reader.html?b=ielts12">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1L_jHQoqTHe2J4xm4n6Ca23tffI6pjJyv" target="_blank" rel="noopener">Download</a></div></div>
-  <div class="row"><span>Cambridge IELTS 13</span><div class="acts"><a class="btn" href="reader.html?b=ielts13">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1Kq-H3sjXQ2Ph-Lq2sJHIG1C7qgUa6bg9" target="_blank" rel="noopener">Download</a></div></div>
-  <div class="row"><span>Cambridge IELTS 14</span><div class="acts"><a class="btn" href="reader.html?b=ielts14">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1rmrCW6u16_iNDfxAHDTSVn0ecoBDF94L" target="_blank" rel="noopener">Download</a></div></div>
-  <div class="row"><span>Cambridge IELTS 15</span><div class="acts"><a class="btn" href="reader.html?b=ielts15">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=19FrzaAnhZSeL6mwBLoh3AVQEEF2RgMKO" target="_blank" rel="noopener">Download</a></div></div>
-  <div class="row"><span>Cambridge IELTS 16</span><div class="acts"><a class="btn" href="reader.html?b=ielts16">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1JAXqAWSTTUItx500lEHELhxVH2tlVCSQ" target="_blank" rel="noopener">Download</a></div></div>
-  <div class="row"><span>Cambridge IELTS 17</span><div class="acts"><a class="btn" href="reader.html?b=ielts17">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1l6o_9a22XmVFWiqrTFQyh-Fbi4M9Mfgv" target="_blank" rel="noopener">Download</a></div></div>
-  <div class="row"><span>Cambridge IELTS 18</span><div class="acts"><a class="btn" href="reader.html?b=ielts18">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=17Y-bWP2yu5VHYdItmQNQXMzoKk8Dy1nK" target="_blank" rel="noopener">Download</a></div></div>
-  <div class="row"><span>Cambridge IELTS 19</span><div class="acts"><a class="btn" href="reader.html?b=ielts19">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1uQyyxf3FNHo1EHKoWobcDAJBmPVKAxBv" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><a class="title-link" href="reader.html?b=ielts1">Cambridge IELTS 1</a><div class="acts"><a class="btn" href="reader.html?b=ielts1">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1_5B82d0NWdK5d-XL46WImC5iRFneuM0F" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><a class="title-link" href="reader.html?b=ielts2">Cambridge IELTS 2</a><div class="acts"><a class="btn" href="reader.html?b=ielts2">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1XHyckjrqsQwrIBr7PfCZcMl6P-XBWgkC" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><a class="title-link" href="reader.html?b=ielts3">Cambridge IELTS 3</a><div class="acts"><a class="btn" href="reader.html?b=ielts3">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1q0XTaOoYGAMahrXNgukzLID4NVE3zlHV" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><a class="title-link" href="reader.html?b=ielts4">Cambridge IELTS 4</a><div class="acts"><a class="btn" href="reader.html?b=ielts4">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1L33JdTi5A_eMMIKTSknsvwD3DtUr9lBE" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><a class="title-link" href="reader.html?b=ielts5">Cambridge IELTS 5</a><div class="acts"><a class="btn" href="reader.html?b=ielts5">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1aI9_Wr6KpTLp7CeDf_XPSbNGm9HrzFXm" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><a class="title-link" href="reader.html?b=ielts6">Cambridge IELTS 6</a><div class="acts"><a class="btn" href="reader.html?b=ielts6">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1k8KMNx_CCq3IAq99el59pEhMoS1rt5tW" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><a class="title-link" href="reader.html?b=ielts7">Cambridge IELTS 7</a><div class="acts"><a class="btn" href="reader.html?b=ielts7">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=14tmtwhCaC2OfDVMtXcBdzQc0HqK6g1HB" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><a class="title-link" href="reader.html?b=ielts8">Cambridge IELTS 8</a><div class="acts"><a class="btn" href="reader.html?b=ielts8">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1HJBTWw4KS3m0jpwW_NhHSNt5QLJ5G2P_" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><a class="title-link" href="reader.html?b=ielts9">Cambridge IELTS 9</a><div class="acts"><a class="btn" href="reader.html?b=ielts9">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1H26uEWHLmb_0DJ6Kf9WLkKJFSWc9Bt02" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><a class="title-link" href="reader.html?b=ielts10">Cambridge IELTS 10</a><div class="acts"><a class="btn" href="reader.html?b=ielts10">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1uzorQFIjiNtB3_oNzj3_gVQu25KS8gpk" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><a class="title-link" href="reader.html?b=ielts11">Cambridge IELTS 11</a><div class="acts"><a class="btn" href="reader.html?b=ielts11">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1RECjEHE4AXWHl7ub-xMZc8nDvG7LO_EU" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><a class="title-link" href="reader.html?b=ielts12">Cambridge IELTS 12</a><div class="acts"><a class="btn" href="reader.html?b=ielts12">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1L_jHQoqTHe2J4xm4n6Ca23tffI6pjJyv" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><a class="title-link" href="reader.html?b=ielts13">Cambridge IELTS 13</a><div class="acts"><a class="btn" href="reader.html?b=ielts13">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1Kq-H3sjXQ2Ph-Lq2sJHIG1C7qgUa6bg9" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><a class="title-link" href="reader.html?b=ielts14">Cambridge IELTS 14</a><div class="acts"><a class="btn" href="reader.html?b=ielts14">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1rmrCW6u16_iNDfxAHDTSVn0ecoBDF94L" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><a class="title-link" href="reader.html?b=ielts15">Cambridge IELTS 15</a><div class="acts"><a class="btn" href="reader.html?b=ielts15">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=19FrzaAnhZSeL6mwBLoh3AVQEEF2RgMKO" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><a class="title-link" href="reader.html?b=ielts16">Cambridge IELTS 16</a><div class="acts"><a class="btn" href="reader.html?b=ielts16">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1JAXqAWSTTUItx500lEHELhxVH2tlVCSQ" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><a class="title-link" href="reader.html?b=ielts17">Cambridge IELTS 17</a><div class="acts"><a class="btn" href="reader.html?b=ielts17">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1l6o_9a22XmVFWiqrTFQyh-Fbi4M9Mfgv" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><a class="title-link" href="reader.html?b=ielts18">Cambridge IELTS 18</a><div class="acts"><a class="btn" href="reader.html?b=ielts18">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=17Y-bWP2yu5VHYdItmQNQXMzoKk8Dy1nK" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><a class="title-link" href="reader.html?b=ielts19">Cambridge IELTS 19</a><div class="acts"><a class="btn" href="reader.html?b=ielts19">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1uQyyxf3FNHo1EHKoWobcDAJBmPVKAxBv" target="_blank" rel="noopener">Download</a></div></div>
 </div>
 
 <!-- ENGLISH BOOKS -->
@@ -578,54 +569,51 @@ details li { margin: 6px 0; font-size: 1rem; }
   Explore novels and classic literature to develop reading comprehension, vocabulary and fluency.
 </p>
 
-<div class="book">
-  <h3>The Curious Incident of the Dog in the Night-Time</h3>
-  <p>Mark Haddon's novel. Practise reading through a distinctive first-person story.</p>
-  <a class="btn" href="reader.html?b=curious">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/the_curious_incident_of_the_dog_in_the_night_time.pdf" download>Download</a>
+<div class="shelf">
+  <div class="book">
+    <h3><a class="title-link" href="reader.html?b=curious">The Curious Incident of the Dog in the Night-Time</a></h3>
+    <p>Mark Haddon's novel. Practise reading through a distinctive first-person story.</p>
+    <a class="btn" href="reader.html?b=curious">Read</a>
+    <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/the_curious_incident_of_the_dog_in_the_night_time.pdf" download>Download</a>
+  </div>
+  <div class="book">
+    <h3><a class="title-link" href="reader.html?b=metamorphosis">The Metamorphosis</a></h3>
+    <p>Franz Kafka's classic novella, useful for exploring literary English and interpretation.</p>
+    <a class="btn" href="reader.html?b=metamorphosis">Read</a>
+    <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/the-metamorphosis.pdf" download>Download</a>
+  </div>
+  <div class="book">
+    <h3><a class="title-link" href="reader.html?b=alchemist">The Alchemist</a></h3>
+    <p>Paulo Coelho's novel about a journey, personal dreams and self-discovery.</p>
+    <a class="btn" href="reader.html?b=alchemist">Read</a>
+    <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/The-Alchemist-Paulo-Coelho.pdf" download>Download</a>
+  </div>
+  <div class="book">
+    <h3><a class="title-link" href="reader.html?b=tom">The Adventures of Tom Sawyer</a></h3>
+    <p>Mark Twain's classic novel. Explore storytelling, dialogue and traditional English expressions.</p>
+    <a class="btn" href="reader.html?b=tom">Read</a>
+    <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/THE%20ADVENTURES%20OF%20TOM%20SAWYER%20BY%20MARK%20TWAIN.pdf" download>Download</a>
+  </div>
+  <div class="book">
+    <h3><a class="title-link" href="reader.html?b=huck">The Adventures of Huckleberry Finn</a></h3>
+    <p>Mark Twain's classic novel. Read a story told in dialect and rich spoken English.</p>
+    <a class="btn" href="reader.html?b=huck">Read</a>
+    <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/the-adventures-of-huckleberry-finn.pdf" download>Download</a>
+  </div>
+  <div class="book">
+    <h3><a class="title-link" href="reader.html?b=farm">Animal Farm</a></h3>
+    <p>George Orwell's short political fable. Clear, direct English that is a good next step for learners.</p>
+    <a class="btn" href="reader.html?b=farm">Read</a>
+    <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/Animal%20Farm%20by%20George%20Orwell.pdf" download>Download</a>
+  </div>
+  <div class="book">
+    <h3><a class="title-link" href="reader.html?b=n1984">Nineteen Eighty-Four</a></h3>
+    <p>George Orwell's classic dystopian novel. Advanced reading and vocabulary practice.</p>
+    <a class="btn" href="reader.html?b=n1984">Read</a>
+    <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/orwell1984.pdf" download>Download</a>
+  </div>
 </div>
 
-<div class="book">
-  <h3>The Metamorphosis</h3>
-  <p>Franz Kafka's classic novella, useful for exploring literary English and interpretation.</p>
-  <a class="btn" href="reader.html?b=metamorphosis">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/the-metamorphosis.pdf" download>Download</a>
-</div>
-
-<div class="book">
-  <h3>The Alchemist</h3>
-  <p>Paulo Coelho's novel about a journey, personal dreams and self-discovery.</p>
-  <a class="btn" href="reader.html?b=alchemist">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/The-Alchemist-Paulo-Coelho.pdf" download>Download</a>
-</div>
-
-<div class="book">
-  <h3>The Adventures of Tom Sawyer</h3>
-  <p>Mark Twain's classic novel. Explore storytelling, dialogue and traditional English expressions.</p>
-  <a class="btn" href="reader.html?b=tom">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/THE%20ADVENTURES%20OF%20TOM%20SAWYER%20BY%20MARK%20TWAIN.pdf" download>Download</a>
-</div>
-
-<div class="book">
-  <h3>The Adventures of Huckleberry Finn</h3>
-  <p>Mark Twain's classic novel. Read a story told in dialect and rich spoken English.</p>
-  <a class="btn" href="reader.html?b=huck">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/the-adventures-of-huckleberry-finn.pdf" download>Download</a>
-</div>
-
-<div class="book">
-  <h3>Animal Farm</h3>
-  <p>George Orwell's short political fable. Clear, direct English that is a good next step for learners.</p>
-  <a class="btn" href="reader.html?b=farm">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/Animal%20Farm%20by%20George%20Orwell.pdf" download>Download</a>
-</div>
-
-<div class="book">
-  <h3>Nineteen Eighty-Four</h3>
-  <p>George Orwell's classic dystopian novel. Advanced reading and vocabulary practice.</p>
-  <a class="btn" href="reader.html?b=n1984">Read</a>
-  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/orwell1984.pdf" download>Download</a>
-</div>
 
 <footer class="foot">
   English Materials. Useful for IELTS, TOEFL, PTE and everyday English.
@@ -666,6 +654,13 @@ details li { margin: 6px 0; font-size: 1rem; }
   });
 
   setTheme(document.documentElement.dataset.theme || "light");
+
+  /* Allow both portrait and landscape (works where the browser supports it) */
+  try {
+    if (screen.orientation && screen.orientation.unlock) {
+      screen.orientation.unlock();
+    }
+  } catch (e) {}
 
   /* PWA installation */
   var installPrompt = null;
