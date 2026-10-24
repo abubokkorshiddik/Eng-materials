@@ -1,15 +1,18 @@
-
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
 <title>Reader | English Materials</title>
 
 <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/10719400.png">
 <meta name="theme-color" content="#1f2a44">
-<meta name="description" content="Read English grammar books, vocabulary guides and classic literature online with adjustable themes and zoom.">
+<meta name="description" content="Read English grammar books, IELTS practice tests, vocabulary guides and classic literature online with adjustable themes and zoom.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
 
 <script>
 /* Share the same theme setting as the English Materials home page and lessons. */
@@ -48,13 +51,11 @@ html[data-theme="dark"] {
   --filter: invert(1) hue-rotate(180deg) brightness(.92);
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 100px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -62,21 +63,28 @@ body {
   background: var(--bg);
   color: var(--text);
   font: 600 14px Inter, system-ui, sans-serif;
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
 }
 
+/* ---------- Toolbar ---------- */
 .bar {
   position: sticky;
   top: 0;
-  z-index: 5;
+  z-index: 10;
   background: var(--bar);
   border-bottom: 1px solid var(--line);
   padding: 8px 10px;
+  padding-top: calc(8px + env(safe-area-inset-top, 0px));
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
   justify-content: space-between;
+  transition: transform .22s ease;
 }
+
+.bar.hide { transform: translateY(-100%); }
 
 .bar a,
 .bar button {
@@ -88,6 +96,10 @@ body {
   font: inherit;
   text-decoration: none;
   cursor: pointer;
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .bar button[aria-pressed="true"] {
@@ -111,6 +123,14 @@ body {
   color: var(--text);
   font: inherit;
   text-align: center;
+  min-height: 34px;
+}
+
+#zl {
+  min-width: 46px;
+  text-align: center;
+  font-size: 12px;
+  opacity: .8;
 }
 
 .title {
@@ -122,12 +142,29 @@ body {
   text-overflow: ellipsis;
 }
 
+#progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 3px;
+  background: transparent;
+}
+
+#progressBar {
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width .15s;
+}
+
+/* ---------- Pages ---------- */
 #pages {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  padding: 12px 0 60px;
+  padding: 12px 0 80px;
 }
 
 .pg {
@@ -144,9 +181,7 @@ body {
   filter: var(--filter);
 }
 
-.pg.empty {
-  background: var(--bar);
-}
+.pg.empty { background: var(--bar); }
 
 #msg {
   text-align: center;
@@ -154,22 +189,63 @@ body {
   line-height: 1.8;
 }
 
-#msg a {
-  color: var(--accent);
+#msg a { color: var(--accent); }
+
+/* Floating page indicator (shown when the toolbar is hidden) */
+#pill {
+  position: fixed;
+  left: 50%;
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  background: var(--bar);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 12px;
+  box-shadow: 0 2px 8px #0003;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s;
+  z-index: 9;
 }
 
-#progress {
-  height: 3px;
-  background: var(--line);
+#pill.show { opacity: .95; }
+
+/* ---------- Google Drive mode ---------- */
+body.drive {
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+body.drive .bar { position: relative; transform: none; }
+body.drive .pdf-only { display: none !important; }
+body.drive #pages,
+body.drive #pill,
+body.drive #progress { display: none; }
+
+#frame {
+  flex: 1;
   width: 100%;
+  border: 0;
+  background: var(--bg);
 }
 
-#progressBar {
-  height: 100%;
-  width: 0;
-  background: var(--accent);
-  transition: width .15s;
+#note {
+  display: none;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  opacity: .8;
+  background: var(--bar);
+  border-bottom: 1px solid var(--line);
+  text-align: center;
 }
+
+body.drive #note { display: block; }
 
 :focus-visible {
   outline: 3px solid var(--accent);
@@ -177,56 +253,62 @@ body {
 }
 
 @media (max-width: 480px) {
-  .bar {
-    gap: 7px;
-  }
+  .bar { gap: 7px; }
+  .bar a, .bar button { padding: 7px 9px; }
+  .grp { gap: 4px; }
+}
 
-  .bar a,
-  .bar button {
-    padding: 7px 9px;
-  }
-
-  .grp {
-    gap: 4px;
-  }
+/* Landscape phones: keep the toolbar compact */
+@media (max-height: 480px) and (orientation: landscape) {
+  .bar { padding-top: calc(4px + env(safe-area-inset-top, 0px)); padding-bottom: 4px; gap: 6px; }
+  .title { flex: 1 1 auto; order: 5; }
+  .bar a, .bar button, .bar input { min-height: 30px; padding-top: 4px; padding-bottom: 4px; }
 }
 </style>
 </head>
 
 <body>
 
-<header class="bar">
+<header class="bar" id="bar">
   <div class="grp">
-    <a href="./index.html#reader">← Back to library</a>
+    <a href="./index.html#reader">← Library</a>
   </div>
 
-  <div class="grp" aria-label="Page navigation">
+  <div class="grp pdf-only" aria-label="Page navigation">
     <button id="prev" type="button" aria-label="Previous page">‹</button>
-    <input id="num" type="number" min="1" value="1" aria-label="Page number">
+    <input id="num" type="number" min="1" value="1" inputmode="numeric" aria-label="Page number">
     <span id="tot">/ …</span>
     <button id="next" type="button" aria-label="Next page">›</button>
   </div>
 
-  <div class="grp" aria-label="Zoom controls">
+  <div class="grp pdf-only" aria-label="Zoom controls">
     <button id="zo" type="button" aria-label="Zoom out">−</button>
+    <button id="zl" type="button" aria-label="Reset zoom to fit width">100%</button>
     <button id="zi" type="button" aria-label="Zoom in">+</button>
   </div>
 
-  <div class="grp" id="th" aria-label="Reading theme">
+  <div class="grp pdf-only" id="th" aria-label="Reading theme">
     <button type="button" data-t="light">Light</button>
     <button type="button" data-t="sepia">Sepia</button>
     <button type="button" data-t="dark">Dark</button>
   </div>
 
+  <div class="grp">
+    <a id="dl" href="#" target="_blank" rel="noopener">Download</a>
+  </div>
+
   <div class="title" id="title">Loading book…</div>
+
+  <div id="progress" aria-hidden="true"><div id="progressBar"></div></div>
 </header>
 
-<div id="progress" aria-hidden="true">
-  <div id="progressBar"></div>
+<div id="note">
+  This book opens in Google Drive's viewer. Pinch to zoom and rotate your phone for a wider page.
 </div>
 
 <div id="msg" role="status" aria-live="polite">Opening book…</div>
 <div id="pages"></div>
+<div id="pill" aria-hidden="true"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
@@ -240,163 +322,133 @@ body {
   /*
     All books in the English Materials library.
 
-    The key in each entry must match the b= value in the
-    corresponding reader.html link.
+    The key in each entry must match the b= value in the reader.html link.
+      f = file name in the GitHub repository (opens in the PDF.js reader)
+      d = Google Drive file ID (opens in the Google Drive viewer, because
+          Google Drive does not allow PDF.js to read its files)
   */
   const BOOKS = {
-    adv: {
-      t: "Advanced Grammar in Use",
-      f: "Advanced%20grammar%20in%20use.pdf",
-      category: "Grammar"
-    },
+    /* Grammar */
+    adv:      { t: "Advanced Grammar in Use", f: "Advanced%20grammar%20in%20use.pdf" },
+    oxford:   { t: "Oxford Guide to English Grammar", f: "Oxford-Guide-to-English-Grammar.pdf" },
+    grammar:  { t: "English Grammar in Use (Intermediate)", f: "English-Grammer-In-Use-Intermediatr.pdf" },
+    wren:     { t: "High School English Grammar and Composition", f: "the-languagelab-library-high-school-english-grammar-and-composition-wren-and-martin-ZmlD.pdf" },
+    mistakes: { t: "Common Mistakes in English", f: "common-mistakes-in-english-by-t-j-fitikides.pdf" },
 
-    oxford: {
-      t: "Oxford Guide to English Grammar",
-      f: "Oxford-Guide-to-English-Grammar.pdf",
-      category: "Grammar"
-    },
+    /* Vocabulary */
+    gre:      { t: "GRE Word Smart", f: "GRE-book-Word-Smart(1).pdf" },
+    check:    { t: "Check Your English Vocabulary for IELTS", f: "1.3rawdon-wyatt-check-your-english-vocabulary-for-ielts_-essential-words-and-phrases-to-help-you-maximise-your-ielts-score-bloomsbury-information-ltd-2017.pdf" },
+    vocab:    { t: "IELTS Vocabulary Booster", f: "IELTS%20Vocabulary%20Booster.pdf" },
 
-    gre: {
-      t: "GRE Word Smart",
-      f: "GRE-book-Word-Smart(1).pdf",
-      category: "Vocabulary"
-    },
+    /* For Bangladeshi students */
+    master:   { t: "Master English", f: "Master%20English%20%5Bbdniyog.com%5D.pdf" },
+    prof:     { t: "Professors English for Compact and Exam", d: "1FdicA1s7lZwceed9l-4_axl8aY2Hhhp0" },
 
-    check: {
-      t: "Check Your English Vocabulary for IELTS",
-      f: "1.3rawdon-wyatt-check-your-english-vocabulary-for-ielts_-essential-words-and-phrases-to-help-you-maximise-your-ielts-score-bloomsbury-information-ltd-2017.pdf",
-      category: "Vocabulary"
-    },
-
-    grammar: {
-      t: "English Grammar in Use (Intermediate)",
-      f: "English-Grammer-In-Use-Intermediatr.pdf",
-      category: "Grammar"
-    },
-
-    vocab: {
-      t: "IELTS Vocabulary Booster",
-      f: "IELTS%20Vocabulary%20Booster.pdf",
-      category: "Vocabulary"
-    },
-
-    wren: {
-      t: "High School English Grammar and Composition",
-      f: "the-languagelab-library-high-school-english-grammar-and-composition-wren-and-martin-ZmlD.pdf",
-      category: "Grammar"
-    },
-
-    mistakes: {
-      t: "Common Mistakes in English",
-      f: "common-mistakes-in-english-by-t-j-fitikides.pdf",
-      category: "Grammar"
-    },
-
-    curious: {
-      t: "The Curious Incident of the Dog in the Night-Time",
-      f: "the_curious_incident_of_the_dog_in_the_night_time.pdf",
-      category: "English books"
-    },
-
-    metamorphosis: {
-      t: "The Metamorphosis",
-      f: "the-metamorphosis.pdf",
-      category: "English books"
-    },
-
-    alchemist: {
-      t: "The Alchemist",
-      f: "The-Alchemist-Paulo-Coelho.pdf",
-      category: "English books"
-    },
-
-    tom: {
-      t: "The Adventures of Tom Sawyer",
-      f: "THE%20ADVENTURES%20OF%20TOM%20SAWYER%20BY%20MARK%20TWAIN.pdf",
-      category: "English books"
-    }
+    /* English books */
+    curious:       { t: "The Curious Incident of the Dog in the Night-Time", f: "the_curious_incident_of_the_dog_in_the_night_time.pdf" },
+    metamorphosis: { t: "The Metamorphosis", f: "the-metamorphosis.pdf" },
+    alchemist:     { t: "The Alchemist", f: "The-Alchemist-Paulo-Coelho.pdf" },
+    tom:           { t: "The Adventures of Tom Sawyer", f: "THE%20ADVENTURES%20OF%20TOM%20SAWYER%20BY%20MARK%20TWAIN.pdf" },
+    huck:          { t: "The Adventures of Huckleberry Finn", f: "the-adventures-of-huckleberry-finn.pdf" },
+    farm:          { t: "Animal Farm", f: "Animal%20Farm%20by%20George%20Orwell.pdf" },
+    n1984:         { t: "Nineteen Eighty-Four", f: "orwell1984.pdf" }
   };
+
+  /* Cambridge IELTS 1-19 (Google Drive) */
+  const IELTS = {
+    1:  "1_5B82d0NWdK5d-XL46WImC5iRFneuM0F",
+    2:  "1XHyckjrqsQwrIBr7PfCZcMl6P-XBWgkC",
+    3:  "1q0XTaOoYGAMahrXNgukzLID4NVE3zlHV",
+    4:  "1L33JdTi5A_eMMIKTSknsvwD3DtUr9lBE",
+    5:  "1aI9_Wr6KpTLp7CeDf_XPSbNGm9HrzFXm",
+    6:  "1k8KMNx_CCq3IAq99el59pEhMoS1rt5tW",
+    7:  "14tmtwhCaC2OfDVMtXcBdzQc0HqK6g1HB",
+    8:  "1HJBTWw4KS3m0jpwW_NhHSNt5QLJ5G2P_",
+    9:  "1H26uEWHLmb_0DJ6Kf9WLkKJFSWc9Bt02",
+    10: "1uzorQFIjiNtB3_oNzj3_gVQu25KS8gpk",
+    11: "1RECjEHE4AXWHl7ub-xMZc8nDvG7LO_EU",
+    12: "1L_jHQoqTHe2J4xm4n6Ca23tffI6pjJyv",
+    13: "1Kq-H3sjXQ2Ph-Lq2sJHIG1C7qgUa6bg9",
+    14: "1rmrCW6u16_iNDfxAHDTSVn0ecoBDF94L",
+    15: "19FrzaAnhZSeL6mwBLoh3AVQEEF2RgMKO",
+    16: "1JAXqAWSTTUItx500lEHELhxVH2tlVCSQ",
+    17: "1l6o_9a22XmVFWiqrTFQyh-Fbi4M9Mfgv",
+    18: "17Y-bWP2yu5VHYdItmQNQXMzoKk8Dy1nK",
+    19: "1uQyyxf3FNHo1EHKoWobcDAJBmPVKAxBv"
+  };
+
+  Object.keys(IELTS).forEach(n => {
+    BOOKS["ielts" + n] = { t: "Cambridge IELTS " + n, d: IELTS[n] };
+  });
 
   const $ = id => document.getElementById(id);
 
   const params = new URLSearchParams(location.search);
   const requestedBook = params.get("b") || "grammar";
-  const book = BOOKS[requestedBook] || BOOKS.grammar;
   const bookKey = BOOKS[requestedBook] ? requestedBook : "grammar";
+  const book = BOOKS[bookKey];
+  const isDrive = !!book.d;
 
   document.title = book.t + " | English Materials Reader";
   $("title").textContent = book.t;
 
-  /*
-    Reading settings are shared with the home page.
-    Page positions and zoom levels are saved separately for each book.
-  */
+  /* Safe storage helpers. Settings are shared with the home page. */
   const SETTINGS_KEY = "ielts-gl-reader";
 
   const store = {
-    get(key) {
-      try {
-        return localStorage.getItem(key);
-      } catch (e) {
-        return null;
-      }
-    },
-
-    set(key, value) {
-      try {
-        localStorage.setItem(key, value);
-      } catch (e) {}
-    },
-
+    get(key) { try { return localStorage.getItem(key); } catch (e) { return null; } },
+    set(key, value) { try { localStorage.setItem(key, value); } catch (e) {} },
     getSettings() {
-      try {
-        return JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}");
-      } catch (e) {
-        return {};
-      }
+      try { return JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}"); }
+      catch (e) { return {}; }
     },
-
-    setSettings(settings) {
-      try {
-        localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
-      } catch (e) {}
+    setSettings(s) {
+      try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(s)); } catch (e) {}
     }
   };
 
-  /* Theme controls */
+  /* Download link */
+  $("dl").href = isDrive
+    ? "https://drive.google.com/uc?export=download&id=" + book.d
+    : RAW + book.f;
+
+  /* ---------- Theme ---------- */
   function setTheme(theme) {
-    if (!["light", "sepia", "dark"].includes(theme)) {
-      theme = "light";
-    }
+    if (!["light", "sepia", "dark"].includes(theme)) theme = "light";
 
     document.documentElement.dataset.theme = theme;
 
-    const settings = store.getSettings();
-    settings.theme = theme;
-    store.setSettings(settings);
+    const s = store.getSettings();
+    s.theme = theme;
+    store.setSettings(s);
+    store.set("theme", theme); /* older setting, kept for compatibility */
 
-    /* Retain compatibility with the older theme setting. */
-    store.set("theme", theme);
-
-    document.querySelectorAll("#th button").forEach(button => {
-      button.setAttribute(
-        "aria-pressed",
-        String(button.dataset.t === theme)
-      );
+    document.querySelectorAll("#th button").forEach(b => {
+      b.setAttribute("aria-pressed", String(b.dataset.t === theme));
     });
   }
 
-  document.querySelectorAll("#th button").forEach(button => {
-    button.addEventListener("click", () => {
-      setTheme(button.dataset.t);
-    });
+  document.querySelectorAll("#th button").forEach(b => {
+    b.addEventListener("click", () => setTheme(b.dataset.t));
   });
 
-  setTheme(
-    document.documentElement.dataset.theme || "light"
-  );
+  setTheme(document.documentElement.dataset.theme || "light");
 
-  /* PDF.js setup */
+  /* ---------- Google Drive mode ---------- */
+  if (isDrive) {
+    document.body.classList.add("drive");
+    $("msg").remove();
+
+    const frame = document.createElement("iframe");
+    frame.id = "frame";
+    frame.title = book.t;
+    frame.allow = "fullscreen";
+    frame.src = "https://drive.google.com/file/d/" + book.d + "/preview";
+    document.body.appendChild(frame);
+    return;
+  }
+
+  /* ---------- PDF.js mode ---------- */
   if (typeof pdfjsLib === "undefined") {
     $("msg").textContent =
       "The PDF reader could not load. Please check your internet connection and reload the page.";
@@ -409,62 +461,56 @@ body {
   let pdf = null;
   let ratio = 1.4;
   let zoom = Number(store.get("zoom:" + bookKey) || store.get("zoom") || 1);
+  if (!isFinite(zoom) || zoom < 0.6 || zoom > 2.5) zoom = 1;
   let cur = 1;
+  let ready = false;
   let pages = [];
+  let lastWidth = 0;
   let resizeTimer;
 
   const box = $("pages");
+  const bar = $("bar");
+  const pill = $("pill");
   const busy = Object.create(null);
 
   function width() {
-    return Math.max(200, Math.min(box.clientWidth - 16, 900) * zoom);
+    /* Wider cap so landscape phones and tablets use the screen well */
+    return Math.max(200, Math.min(box.clientWidth - 16, 1100) * zoom);
   }
 
-  /*
-    Render nearby pages only, to reduce memory usage on mobile devices.
-  */
+  function updateZoomLabel() {
+    $("zl").textContent = Math.round(zoom * 100) + "%";
+  }
+
+  updateZoomLabel();
+
+  /* Render nearby pages only, to save memory on mobile devices. */
   const lazy = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       const n = Number(entry.target.dataset.n);
-
-      if (entry.isIntersecting) {
-        draw(n);
-      } else {
-        drop(n);
-      }
+      if (entry.isIntersecting) draw(n); else drop(n);
     });
-  }, {
-    rootMargin: "1500px 0px"
-  });
+  }, { rootMargin: "1500px 0px" });
 
-  /*
-    Keep the page number and reading progress in sync with scrolling.
-  */
+  /* Keep page number and progress in sync with scrolling. */
   const mid = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
 
       cur = Number(entry.target.dataset.n);
       $("num").value = cur;
+      pill.textContent = cur + " / " + (pdf ? pdf.numPages : "…");
 
-      store.set("p:" + bookKey, String(cur));
+      if (ready) store.set("p:" + bookKey, String(cur));
 
-      const percent = pdf
-        ? (cur / pdf.numPages) * 100
-        : 0;
-
-      $("progressBar").style.width = percent + "%";
+      $("progressBar").style.width =
+        (pdf ? (cur / pdf.numPages) * 100 : 0) + "%";
     });
-  }, {
-    rootMargin: "-45% 0px -54% 0px"
-  });
+  }, { rootMargin: "-45% 0px -54% 0px" });
 
   async function draw(n) {
     const el = pages[n - 1];
-
-    if (!el || el.querySelector("canvas") || busy[n]) {
-      return;
-    }
+    if (!el || el.querySelector("canvas") || busy[n]) return;
 
     busy[n] = true;
 
@@ -473,31 +519,20 @@ body {
       const targetWidth = width();
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-      const originalViewport = page.getViewport({ scale: 1 });
-      const scale = (targetWidth / originalViewport.width) * dpr;
-      const viewport = page.getViewport({ scale });
+      const base = page.getViewport({ scale: 1 });
+      const viewport = page.getViewport({ scale: (targetWidth / base.width) * dpr });
 
       const canvas = document.createElement("canvas");
       canvas.width = Math.ceil(viewport.width);
       canvas.height = Math.ceil(viewport.height);
 
-      const context = canvas.getContext("2d", {
-        alpha: false
-      });
+      const ctx = canvas.getContext("2d", { alpha: false });
+      if (!ctx) throw new Error("Canvas is unavailable.");
 
-      if (!context) {
-        throw new Error("Canvas is unavailable.");
-      }
+      await page.render({ canvasContext: ctx, viewport }).promise;
 
-      await page.render({
-        canvasContext: context,
-        viewport: viewport
-      }).promise;
-
-      /*
-        Do not replace a page if the layout was reset while it rendered.
-      */
-      if (pages[n - 1] === el) {
+      /* Skip if the layout was reset while this page rendered. */
+      if (pages[n - 1] === el && Math.abs(el.clientWidth - targetWidth) < 2) {
         el.classList.remove("empty");
         el.replaceChildren(canvas);
       }
@@ -510,7 +545,6 @@ body {
 
   function drop(n) {
     const el = pages[n - 1];
-
     if (el && el.firstChild && !busy[n]) {
       el.replaceChildren();
       el.classList.add("empty");
@@ -522,6 +556,7 @@ body {
     mid.disconnect();
 
     const targetWidth = width();
+    lastWidth = box.clientWidth;
 
     pages.forEach(el => {
       el.style.width = targetWidth + "px";
@@ -538,37 +573,38 @@ body {
     if (!pdf || !pages.length) return;
 
     n = Math.max(1, Math.min(pdf.numPages, Math.trunc(Number(n) || 1)));
-
     cur = n;
     $("num").value = n;
 
-    const page = pages[n - 1];
-
-    if (page) {
-      page.scrollIntoView({
-        behavior: "auto",
-        block: "start"
-      });
+    const el = pages[n - 1];
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.scrollY - 6;
+      window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
     }
   }
 
-  /*
-    Load the requested PDF.
-  */
+  /* Re-layout while keeping the reader on the same page. */
+  function relayout() {
+    if (!pdf) return;
+    const page = cur;
+    layout();
+    go(page);
+  }
+
+  /* Load the requested PDF. */
   async function loadBook() {
     try {
-      const loadingTask = pdfjsLib.getDocument({
+      const task = pdfjsLib.getDocument({
         url: RAW + book.f,
         disableAutoFetch: true,
         rangeChunkSize: 262144
       });
 
-      pdf = await loadingTask.promise;
+      pdf = await task.promise;
 
-      const firstPage = await pdf.getPage(1);
-      const firstViewport = firstPage.getViewport({ scale: 1 });
-
-      ratio = firstViewport.height / firstViewport.width;
+      const first = await pdf.getPage(1);
+      const vp = first.getViewport({ scale: 1 });
+      ratio = vp.height / vp.width;
 
       $("msg").remove();
       $("tot").textContent = "/ " + pdf.numPages;
@@ -577,11 +613,9 @@ body {
 
       for (let i = 1; i <= pdf.numPages; i++) {
         const page = document.createElement("div");
-
         page.className = "pg empty";
         page.dataset.n = i;
         page.setAttribute("aria-label", "Page " + i);
-
         box.appendChild(page);
         pages.push(page);
       }
@@ -590,6 +624,9 @@ body {
 
       const lastPage = Number(store.get("p:" + bookKey) || 1);
       go(lastPage);
+
+      /* Start saving positions only after the saved page is restored. */
+      setTimeout(() => { ready = true; }, 600);
 
     } catch (error) {
       console.error("PDF loading failed:", error);
@@ -600,80 +637,91 @@ body {
     }
   }
 
-  /* Page navigation */
-  $("prev").addEventListener("click", () => {
-    go(cur - 1);
+  /* ---------- Controls ---------- */
+  $("prev").addEventListener("click", () => go(cur - 1));
+  $("next").addEventListener("click", () => go(cur + 1));
+
+  $("num").addEventListener("change", e => go(e.target.value));
+  $("num").addEventListener("keydown", e => {
+    if (e.key === "Enter") { go(e.target.value); e.target.blur(); }
   });
 
-  $("next").addEventListener("click", () => {
-    go(cur + 1);
-  });
-
-  $("num").addEventListener("change", event => {
-    go(event.target.value);
-  });
-
-  $("num").addEventListener("keydown", event => {
-    if (event.key === "Enter") {
-      go(event.target.value);
-      event.target.blur();
-    }
-  });
-
-  /* Zoom controls */
   function setZoom(value) {
-    zoom = Math.max(0.6, Math.min(2.5, value));
+    zoom = Math.max(0.6, Math.min(2.5, Math.round(value * 100) / 100));
 
     store.set("zoom:" + bookKey, String(zoom));
     store.set("zoom", String(zoom));
-
-    if (pdf) {
-      const page = cur;
-      layout();
-      go(page);
-    }
+    updateZoomLabel();
+    relayout();
   }
 
-  $("zi").addEventListener("click", () => {
-    setZoom(zoom + 0.2);
-  });
-
-  $("zo").addEventListener("click", () => {
-    setZoom(zoom - 0.2);
-  });
+  $("zi").addEventListener("click", () => setZoom(zoom + 0.2));
+  $("zo").addEventListener("click", () => setZoom(zoom - 0.2));
+  $("zl").addEventListener("click", () => setZoom(1));
 
   /* Keyboard navigation */
-  window.addEventListener("keydown", event => {
-    if (
-      event.target.tagName === "INPUT" ||
-      event.ctrlKey ||
-      event.metaKey ||
-      event.altKey
-    ) {
-      return;
-    }
+  window.addEventListener("keydown", e => {
+    if (e.target.tagName === "INPUT" || e.ctrlKey || e.metaKey || e.altKey) return;
 
-    if (event.key === "ArrowRight") {
-      go(cur + 1);
-    }
-
-    if (event.key === "ArrowLeft") {
-      go(cur - 1);
-    }
+    if (e.key === "ArrowRight" || e.key === "PageDown") { if (e.key === "ArrowRight") go(cur + 1); }
+    if (e.key === "ArrowLeft") go(cur - 1);
   });
 
-  /* Recalculate page sizes when the viewport changes. */
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTimer);
+  /* ---------- Auto-hide toolbar for distraction-free reading ---------- */
+  let lastY = window.scrollY;
+  let ticking = false;
+  let pillTimer;
 
-    resizeTimer = setTimeout(() => {
-      if (pdf) {
-        const page = cur;
-        layout();
-        go(page);
+  function showPill() {
+    pill.classList.add("show");
+    clearTimeout(pillTimer);
+    pillTimer = setTimeout(() => pill.classList.remove("show"), 1200);
+  }
+
+  window.addEventListener("scroll", () => {
+    if (ticking) return;
+    ticking = true;
+
+    requestAnimationFrame(() => {
+      const y = window.scrollY;
+      const delta = y - lastY;
+
+      if (y < 80) {
+        bar.classList.remove("hide");
+      } else if (delta > 8) {
+        bar.classList.add("hide");
+        showPill();
+      } else if (delta < -8) {
+        bar.classList.remove("hide");
       }
-    }, 250);
+
+      lastY = y;
+      ticking = false;
+    });
+  }, { passive: true });
+
+  /* Tap the page (not a button) to show or hide the toolbar */
+  box.addEventListener("click", () => {
+    bar.classList.toggle("hide");
+    if (bar.classList.contains("hide")) showPill();
   });
+
+  /* ---------- Rotation and resizing ----------
+     Re-layout only when the width changes. Mobile browsers also fire
+     resize when the address bar hides, which must not reset the pages. */
+  function onResize() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (pdf && Math.abs(box.clientWidth - lastWidth) > 4) relayout();
+    }, 200);
+  }
+
+  window.addEventListener("resize", onResize);
+  window.addEventListener("orientationchange", () => setTimeout(onResize, 300));
+
+  if (screen.orientation && screen.orientation.addEventListener) {
+    screen.orientation.addEventListener("change", () => setTimeout(onResize, 300));
+  }
 
   loadBook();
 })();
