@@ -2,7 +2,7 @@
   "id": "/Eng-materials/",
   "name": "English Materials",
   "short_name": "English Materials",
-  "description": "Free grammar lessons, vocabulary and reading resources for English learners.",
+  "description": "Free grammar lessons, vocabulary, Cambridge IELTS and reading resources for English learners.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
@@ -14,12 +14,14 @@
     {
       "src": "https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/10719400.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/10719400.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }
