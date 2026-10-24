@@ -1,12 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<title>English Materials | Grammar, Vocabulary and Books</title>
-<meta name="description" content="Free English learning materials, grammar lessons, vocabulary and a reading library for IELTS and everyday English.">
+<title>English Materials | Grammar, Vocabulary, IELTS and Books</title>
+<meta name="description" content="Free English learning materials: grammar lessons, vocabulary, Cambridge IELTS 1-19 and a reading library.">
 <meta name="theme-color" content="#1f2a44">
 <meta name="application-name" content="English Materials">
 
@@ -22,7 +21,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Literata:wght@400;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
 
 <script>
-/* The home page and the lessons share one theme setting (ielts-gl-reader). */
+/* The home page, reader and lessons share one theme setting (ielts-gl-reader). */
 try {
   var saved = JSON.parse(localStorage.getItem("ielts-gl-reader") || "{}");
   document.documentElement.dataset.theme = saved.theme || "light";
@@ -57,13 +56,13 @@ html[data-theme="dark"] {
   --muted: #a9afbd;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 20px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -72,15 +71,14 @@ body {
   color: var(--text);
   font: 18px/1.7 Literata, Georgia, serif;
   overflow-wrap: anywhere;
+  /* keep content clear of notches in landscape */
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-a {
-  color: var(--blue);
-}
-
-button {
-  font: inherit;
-}
+a { color: var(--blue); }
+button { font: inherit; }
 
 .top {
   max-width: 720px;
@@ -94,10 +92,7 @@ button {
   font: 600 .9rem Inter, sans-serif;
 }
 
-.top a {
-  color: var(--ink);
-  text-decoration: none;
-}
+.top a { color: var(--ink); text-decoration: none; }
 
 .top nav {
   display: flex;
@@ -111,31 +106,22 @@ main {
   padding: 0 18px 70px;
 }
 
+/* A little more room on tablets and landscape screens */
+@media (min-width: 900px) {
+  .top, main { max-width: 860px; }
+}
+
 h1, h2, h3 {
   font-family: Fraunces, Georgia, serif;
   color: var(--ink);
   line-height: 1.2;
 }
 
-h1 {
-  font-size: clamp(2.2rem, 8vw, 3.3rem);
-  margin: 30px 0 14px;
-}
+h1 { font-size: clamp(2.2rem, 8vw, 3.3rem); margin: 30px 0 14px; }
+h2 { font-size: 1.6rem; margin: 54px 0 6px; }
+h3 { font-size: 1.1rem; margin: 0 0 2px; }
 
-h2 {
-  font-size: 1.6rem;
-  margin: 54px 0 6px;
-}
-
-h3 {
-  font-size: 1.1rem;
-  margin: 0 0 2px;
-}
-
-.lead {
-  font-size: 1.1rem;
-  color: var(--muted);
-}
+.lead { font-size: 1.1rem; color: var(--muted); }
 
 .sec-note {
   margin: 0 0 14px;
@@ -163,14 +149,8 @@ h3 {
   border: 1px solid var(--ink);
 }
 
-.btn:hover {
-  opacity: .85;
-}
-
-.btn:disabled {
-  opacity: .6;
-  cursor: default;
-}
+.btn:hover { opacity: .85; }
+.btn:disabled { opacity: .6; cursor: default; }
 
 .install-area {
   margin: 22px 0 30px;
@@ -179,9 +159,7 @@ h3 {
   border-radius: 10px;
 }
 
-.install-area h3 {
-  margin-bottom: 8px;
-}
+.install-area h3 { margin-bottom: 8px; }
 
 .install-area p {
   color: var(--muted);
@@ -195,15 +173,9 @@ h3 {
   margin-top: 10px !important;
 }
 
-.install-icon {
-  font-size: 1.4rem;
-  margin-right: 5px;
-}
+.install-icon { font-size: 1.4rem; margin-right: 5px; }
 
-.th {
-  display: flex;
-  gap: 6px;
-}
+.th { display: flex; gap: 6px; }
 
 .th button {
   font: 600 .8rem Inter, sans-serif;
@@ -228,23 +200,12 @@ h3 {
   padding: 14px 0;
 }
 
-.way p {
-  margin: 0;
-  color: var(--muted);
-  font-size: .95rem;
-}
+.way p { margin: 0; color: var(--muted); font-size: .95rem; }
+.way:hover h3 { color: var(--blue); }
 
-.way:hover h3 {
-  color: var(--blue);
-}
+.list > :last-child { border-bottom: 1px solid var(--line); }
 
-.list > :last-child {
-  border-bottom: 1px solid var(--line);
-}
-
-details {
-  border-top: 1px solid var(--line);
-}
+details { border-top: 1px solid var(--line); }
 
 summary {
   cursor: pointer;
@@ -252,9 +213,7 @@ summary {
   list-style: none;
 }
 
-summary::-webkit-details-marker {
-  display: none;
-}
+summary::-webkit-details-marker { display: none; }
 
 summary h3::after {
   content: " ▾";
@@ -262,40 +221,51 @@ summary h3::after {
   color: var(--muted);
 }
 
-details[open] summary h3::after {
-  content: " ▴";
-}
+details[open] summary h3::after { content: " ▴"; }
 
-summary p {
-  margin: 0;
-  color: var(--muted);
-  font-size: .95rem;
-}
+summary p { margin: 0; color: var(--muted); font-size: .95rem; }
 
-details ol {
-  margin: 0 0 14px;
-  padding-left: 22px;
-}
-
-details li {
-  margin: 6px 0;
-  font-size: 1rem;
-}
+details ol { margin: 0 0 14px; padding-left: 22px; }
+details li { margin: 6px 0; font-size: 1rem; }
 
 .book {
   border-top: 1px solid var(--line);
   padding: 16px 0;
 }
 
-.book p {
-  margin: 2px 0 8px;
-  color: var(--muted);
-  font-size: .95rem;
+.book p { margin: 2px 0 8px; color: var(--muted); font-size: .95rem; }
+
+.book .btn { padding: 8px 14px; font-size: .85rem; }
+
+/* Compact rows for the Cambridge IELTS series */
+.series {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 8px;
 }
 
-.book .btn {
-  padding: 8px 14px;
-  font-size: .85rem;
+.series .row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 0;
+  border-top: 1px solid var(--line);
+}
+
+.series .row:first-child { border-top: 0; }
+
+.series .row span {
+  font: 600 .95rem Inter, sans-serif;
+  color: var(--ink);
+}
+
+.series .row .acts { display: flex; gap: 6px; flex-shrink: 0; }
+
+.series .row .btn {
+  margin: 0;
+  padding: 7px 12px;
+  font-size: .82rem;
 }
 
 .foot {
@@ -310,17 +280,9 @@ details li {
 }
 
 @media (max-width: 480px) {
-  .top {
-    align-items: flex-start;
-  }
-
-  .top nav {
-    width: 100%;
-  }
-
-  .th {
-    flex-wrap: wrap;
-  }
+  .top { align-items: flex-start; }
+  .top nav { width: 100%; }
+  .th { flex-wrap: wrap; }
 }
 </style>
 </head>
@@ -333,6 +295,7 @@ details li {
   <nav aria-label="Main navigation">
     <a href="#grammar">Grammar</a>
     <a href="#vocabulary">Vocabulary</a>
+    <a href="#ielts-books">IELTS</a>
     <a href="#reader">Reader</a>
   </nav>
 
@@ -348,13 +311,14 @@ details li {
 <h1>English materials in one place</h1>
 
 <p class="lead">
-  Grammar lessons, vocabulary and a library of books to read,
+  Grammar lessons, vocabulary, Cambridge IELTS 1-19 and a library of books to read,
   for IELTS, TOEFL, PTE and everyday English.
 </p>
 
 <p>
   <a class="btn" href="#grammar">Grammar</a>
   <a class="btn alt" href="#vocabulary">Vocabulary</a>
+  <a class="btn alt" href="#ielts-books">IELTS</a>
   <a class="btn alt" href="#reader">Reader</a>
 </p>
 
@@ -366,16 +330,12 @@ details li {
 
   <p>
     Add this free learning library to your home screen for quick access
-    to grammar lessons, vocabulary and books.
+    to grammar lessons, vocabulary and books. The app works in portrait
+    and landscape.
   </p>
 
-  <button class="btn" id="installApp" type="button">
-    Install app
-  </button>
-
-  <button class="btn alt" id="installHelp" type="button">
-    Installation help
-  </button>
+  <button class="btn" id="installApp" type="button">Install app</button>
+  <button class="btn alt" id="installHelp" type="button">Installation help</button>
 
   <p class="install-help" id="installMessage" aria-live="polite">
     Tap Install app to get started. If direct installation is unavailable,
@@ -475,8 +435,18 @@ details li {
     <p>Grammar references, explanations and common English mistakes.</p>
   </a>
 
+  <a class="way" href="#bd-books">
+    <h3>3. For Bangladeshi students</h3>
+    <p>Master English and Professors English for compact and exam preparation.</p>
+  </a>
+
+  <a class="way" href="#ielts-books">
+    <h3>4. Cambridge IELTS 1-19</h3>
+    <p>Official practice tests, from Cambridge IELTS 1 to 19.</p>
+  </a>
+
   <a class="way" href="#english-books">
-    <h3>3. English books</h3>
+    <h3>5. English books</h3>
     <p>Novels and classic literature for English reading practice.</p>
   </a>
 </div>
@@ -551,6 +521,56 @@ details li {
   <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/common-mistakes-in-english-by-t-j-fitikides.pdf" download>Download</a>
 </div>
 
+<!-- FOR BANGLADESHI STUDENTS -->
+
+<h2 id="bd-books">For Bangladeshi students</h2>
+<p class="sec-note">
+  English books made for Bangladeshi students, for school, college, admission and job exams.
+</p>
+
+<div class="book">
+  <h3>Master English</h3>
+  <p>A complete English guide for Bangladeshi students.</p>
+  <a class="btn" href="reader.html?b=master">Read</a>
+  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/Master%20English%20%5Bbdniyog.com%5D.pdf" download>Download</a>
+</div>
+
+<div class="book">
+  <h3>Professors English for Compact and Exam</h3>
+  <p>A compact English guide for exam preparation, for Bangladeshi students.</p>
+  <a class="btn" href="reader.html?b=prof">Read</a>
+  <a class="btn alt" href="https://drive.google.com/uc?export=download&id=1FdicA1s7lZwceed9l-4_axl8aY2Hhhp0" target="_blank" rel="noopener">Download</a>
+</div>
+
+<!-- CAMBRIDGE IELTS -->
+
+<h2 id="ielts-books">Cambridge IELTS 1-19</h2>
+<p class="sec-note">
+  Official practice tests with answer keys. Tap Read to open a book, or Download to save it.
+</p>
+
+<div class="series">
+  <div class="row"><span>Cambridge IELTS 1</span><div class="acts"><a class="btn" href="reader.html?b=ielts1">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1_5B82d0NWdK5d-XL46WImC5iRFneuM0F" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><span>Cambridge IELTS 2</span><div class="acts"><a class="btn" href="reader.html?b=ielts2">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1XHyckjrqsQwrIBr7PfCZcMl6P-XBWgkC" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><span>Cambridge IELTS 3</span><div class="acts"><a class="btn" href="reader.html?b=ielts3">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1q0XTaOoYGAMahrXNgukzLID4NVE3zlHV" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><span>Cambridge IELTS 4</span><div class="acts"><a class="btn" href="reader.html?b=ielts4">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1L33JdTi5A_eMMIKTSknsvwD3DtUr9lBE" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><span>Cambridge IELTS 5</span><div class="acts"><a class="btn" href="reader.html?b=ielts5">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1aI9_Wr6KpTLp7CeDf_XPSbNGm9HrzFXm" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><span>Cambridge IELTS 6</span><div class="acts"><a class="btn" href="reader.html?b=ielts6">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1k8KMNx_CCq3IAq99el59pEhMoS1rt5tW" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><span>Cambridge IELTS 7</span><div class="acts"><a class="btn" href="reader.html?b=ielts7">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=14tmtwhCaC2OfDVMtXcBdzQc0HqK6g1HB" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><span>Cambridge IELTS 8</span><div class="acts"><a class="btn" href="reader.html?b=ielts8">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1HJBTWw4KS3m0jpwW_NhHSNt5QLJ5G2P_" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><span>Cambridge IELTS 9</span><div class="acts"><a class="btn" href="reader.html?b=ielts9">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1H26uEWHLmb_0DJ6Kf9WLkKJFSWc9Bt02" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><span>Cambridge IELTS 10</span><div class="acts"><a class="btn" href="reader.html?b=ielts10">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1uzorQFIjiNtB3_oNzj3_gVQu25KS8gpk" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><span>Cambridge IELTS 11</span><div class="acts"><a class="btn" href="reader.html?b=ielts11">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1RECjEHE4AXWHl7ub-xMZc8nDvG7LO_EU" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><span>Cambridge IELTS 12</span><div class="acts"><a class="btn" href="reader.html?b=ielts12">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1L_jHQoqTHe2J4xm4n6Ca23tffI6pjJyv" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><span>Cambridge IELTS 13</span><div class="acts"><a class="btn" href="reader.html?b=ielts13">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1Kq-H3sjXQ2Ph-Lq2sJHIG1C7qgUa6bg9" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><span>Cambridge IELTS 14</span><div class="acts"><a class="btn" href="reader.html?b=ielts14">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1rmrCW6u16_iNDfxAHDTSVn0ecoBDF94L" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><span>Cambridge IELTS 15</span><div class="acts"><a class="btn" href="reader.html?b=ielts15">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=19FrzaAnhZSeL6mwBLoh3AVQEEF2RgMKO" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><span>Cambridge IELTS 16</span><div class="acts"><a class="btn" href="reader.html?b=ielts16">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1JAXqAWSTTUItx500lEHELhxVH2tlVCSQ" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><span>Cambridge IELTS 17</span><div class="acts"><a class="btn" href="reader.html?b=ielts17">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1l6o_9a22XmVFWiqrTFQyh-Fbi4M9Mfgv" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><span>Cambridge IELTS 18</span><div class="acts"><a class="btn" href="reader.html?b=ielts18">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=17Y-bWP2yu5VHYdItmQNQXMzoKk8Dy1nK" target="_blank" rel="noopener">Download</a></div></div>
+  <div class="row"><span>Cambridge IELTS 19</span><div class="acts"><a class="btn" href="reader.html?b=ielts19">Read</a><a class="btn alt" href="https://drive.google.com/uc?export=download&id=1uQyyxf3FNHo1EHKoWobcDAJBmPVKAxBv" target="_blank" rel="noopener">Download</a></div></div>
+</div>
+
 <!-- ENGLISH BOOKS -->
 
 <h2 id="english-books">English books</h2>
@@ -586,6 +606,27 @@ details li {
   <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/THE%20ADVENTURES%20OF%20TOM%20SAWYER%20BY%20MARK%20TWAIN.pdf" download>Download</a>
 </div>
 
+<div class="book">
+  <h3>The Adventures of Huckleberry Finn</h3>
+  <p>Mark Twain's classic novel. Read a story told in dialect and rich spoken English.</p>
+  <a class="btn" href="reader.html?b=huck">Read</a>
+  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/the-adventures-of-huckleberry-finn.pdf" download>Download</a>
+</div>
+
+<div class="book">
+  <h3>Animal Farm</h3>
+  <p>George Orwell's short political fable. Clear, direct English that is a good next step for learners.</p>
+  <a class="btn" href="reader.html?b=farm">Read</a>
+  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/Animal%20Farm%20by%20George%20Orwell.pdf" download>Download</a>
+</div>
+
+<div class="book">
+  <h3>Nineteen Eighty-Four</h3>
+  <p>George Orwell's classic dystopian novel. Advanced reading and vocabulary practice.</p>
+  <a class="btn" href="reader.html?b=n1984">Read</a>
+  <a class="btn alt" href="https://github.com/abubokkorshiddik/Eng-materials/raw/main/orwell1984.pdf" download>Download</a>
+</div>
+
 <footer class="foot">
   English Materials. Useful for IELTS, TOEFL, PTE and everyday English.
   <br>
@@ -603,7 +644,7 @@ details li {
 
   var SETTINGS_KEY = "ielts-gl-reader";
 
-  /* Theme switcher: saved in the same setting the lessons use */
+  /* Theme switcher: saved in the same setting the lessons and reader use */
   function setTheme(theme) {
     document.documentElement.dataset.theme = theme;
 
@@ -614,10 +655,7 @@ details li {
     } catch (e) {}
 
     document.querySelectorAll("#th button").forEach(function (button) {
-      button.setAttribute(
-        "aria-pressed",
-        String(button.dataset.t === theme)
-      );
+      button.setAttribute("aria-pressed", String(button.dataset.t === theme));
     });
   }
 
@@ -666,16 +704,11 @@ details li {
 
     if (installPrompt) {
       installPrompt.prompt();
-
       var result = await installPrompt.userChoice;
 
-      if (result.outcome === "accepted") {
-        installMessage.textContent =
-          "Installation accepted. Follow any remaining prompts on your device.";
-      } else {
-        installMessage.textContent =
-          "Installation was cancelled. You can try again later.";
-      }
+      installMessage.textContent = result.outcome === "accepted"
+        ? "Installation accepted. Follow any remaining prompts on your device."
+        : "Installation was cancelled. You can try again later.";
 
       installPrompt = null;
       return;
