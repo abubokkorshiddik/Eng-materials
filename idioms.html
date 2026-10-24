@@ -6,9 +6,9 @@
 .tabs button{flex:none;font:600 .85rem Inter,sans-serif;color:var(--ink);background:none;border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;white-space:nowrap}.tabs button[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 input.s{width:100%;padding:10px 12px;font:1rem Inter,sans-serif;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--text)}
 #cnt{margin:14px 0 4px}h2{margin:10px 0 2px}
-@media(orientation:landscape)and (max-height:500px){.stick{padding-top:calc(4px + env(safe-area-inset-top,0px))}input.s{padding:6px 10px}}</style></head><body>
+@media(orientation:landscape)and (max-height:500px){.stick{padding-top:calc(4px + env(safe-area-inset-top,0px))}input.s{padding:6px 10px}}.sw{position:relative}.sw input.s{padding-right:44px}.sw button{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:34px;height:34px;border:0;border-radius:50%;background:var(--line);color:var(--text);font-size:1rem;cursor:pointer}.sw button[hidden]{display:none}</style></head><body>
 <header class="top"><a href="index.html">← English Materials</a><a href="speaking.html">Speaking</a><a href="vocabulary.html">Vocabulary</a></header>
-<div class="stick"><div class="in"><div class="tabs" id="tabs" role="tablist" aria-label="Sections"></div><input class="s" id="q" placeholder="Search in this section…" aria-label="Search"></div></div>
+<div class="stick"><div class="in"><div class="tabs" id="tabs" role="tablist" aria-label="Sections"></div><div class="sw"><input class="s" id="q" placeholder="Search in this section…" aria-label="Search"><button type="button" id="qclr" aria-label="Clear search" hidden>✕</button></div></div></div>
 <main><h1>Idioms, phrases and everyday words</h1><h2 id="ttl"></h2><p class="m" id="cnt"></p><div class="grid" id="list"></div></main>
 <script>
 (function(){
@@ -17,13 +17,13 @@ Object.keys(P).forEach(function(k){D[k]=P[k]});
 var NOTE={"Idioms":"Meaning, example and when to use it.","Nouns":"Everyday nouns with examples.","Verbs":"Everyday verbs with examples.","Adjectives":"Describing words with examples.","Adverbs":"Words that describe actions.","Connectors":"Link your ideas when speaking."};
 function el(t,x,c,f){var e=document.createElement(t);if(x)e.textContent=x;if(c)e.className=c;if(f)e.onclick=f;return e}
 function say(t){if(!window.speechSynthesis)return;speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang="en-GB";u.rate=.85;speechSynthesis.speak(u)}
-var tabs=document.getElementById("tabs"),list=document.getElementById("list"),q=document.getElementById("q"),cur="Idioms";
+var tabs=document.getElementById("tabs"),list=document.getElementById("list"),q=document.getElementById("q"),cb=document.getElementById("qclr"),cur="Idioms";
 function item(a,isI){var d=el("div","","it"),h=el("h3",a[0]+" ");h.appendChild(el("button","🔊","sp",function(){say((a[4]||a[0])+". "+a[2])}));d.appendChild(h);d.appendChild(el("p",a[1]));d.appendChild(el("p",a[2],"ex"));if(isI)d.appendChild(el("span","Use: "+a[3],"tag"));return d}
-function render(){var f=q.value.toLowerCase(),n=0;list.textContent="";D[cur].forEach(function(a){if(f&&(a[0]+" "+a[1]+" "+a[2]).toLowerCase().indexOf(f)<0)return;n++;list.appendChild(item(a,cur==="Idioms"))});
+function render(){cb.hidden=!q.value;var f=q.value.toLowerCase(),n=0;list.textContent="";D[cur].forEach(function(a){if(f&&(a[0]+" "+a[1]+" "+a[2]).toLowerCase().indexOf(f)<0)return;n++;list.appendChild(item(a,cur==="Idioms"))});
 document.getElementById("ttl").textContent=cur;document.getElementById("cnt").textContent=(f?n+" of ":"")+D[cur].length+" items · "+NOTE[cur]}
 function open(k,noscroll){cur=k;q.value="";[].forEach.call(tabs.children,function(b){b.setAttribute("aria-pressed",String(b.textContent===k));if(b.textContent===k)b.scrollIntoView({inline:"center",block:"nearest"})});render();try{localStorage.setItem("idiom-tab",k)}catch(e){}if(!noscroll)window.scrollTo({top:0,behavior:"smooth"});if(history.replaceState)history.replaceState(null,"","#"+k)}
 Object.keys(D).forEach(function(k){var b=el("button",k,"",function(){open(k)});b.setAttribute("aria-pressed","false");tabs.appendChild(b)});
-q.oninput=render;
+q.oninput=render;cb.onclick=function(){q.value="";render();q.focus()};
 var s=decodeURIComponent(location.hash.slice(1));try{s=s||localStorage.getItem("idiom-tab")||""}catch(e){}
 open(D[s]?s:"Idioms",true);
 })();
