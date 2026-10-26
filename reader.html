@@ -27,7 +27,6 @@ body { margin:0; background:var(--bg); color:var(--text); font:600 14px Inter, s
 :focus-visible { outline:3px solid var(--accent); outline-offset:2px; }
 [hidden] { display:none !important; }
 
-/* ---------- Header ---------- */
 .bar { position:sticky; top:0; z-index:10; background:var(--bar); border-bottom:1px solid var(--line);
   padding:6px 10px; padding-top:calc(6px + env(safe-area-inset-top,0px)); transition:transform .22s ease; }
 .bar.hide { transform:translateY(-100%); }
@@ -46,7 +45,6 @@ body { margin:0; background:var(--bg); color:var(--text); font:600 14px Inter, s
 #progress { position:absolute; left:0; right:0; bottom:-1px; height:3px; }
 #progressBar { height:100%; width:0; background:var(--accent); transition:width .15s; }
 
-/* ---------- Pages ---------- */
 #pages { display:flex; flex-direction:column; gap:12px; padding:12px 0 90px; }
 .pg { position:relative; flex:none; margin:0 auto; background:#fff; box-shadow:0 1px 6px #0003; overflow:hidden; }
 .pg canvas { display:block; width:100%; height:auto; filter:var(--filter); }
@@ -66,7 +64,6 @@ body { margin:0; background:var(--bg); color:var(--text); font:600 14px Inter, s
   box-shadow:0 2px 8px #0003; opacity:0; pointer-events:none; transition:opacity .2s; z-index:9; }
 #pill.show { opacity:.95; }
 
-/* Selection toolbar */
 #sel { position:fixed; left:50%; bottom:calc(14px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%);
   display:none; gap:6px; align-items:center; background:var(--bar); border:1px solid var(--line);
   border-radius:12px; padding:8px; box-shadow:0 4px 16px #0004; z-index:25; max-width:96vw; }
@@ -75,7 +72,6 @@ body { margin:0; background:var(--bg); color:var(--text); font:600 14px Inter, s
 .sw { width:34px; height:34px; border-radius:50% !important; padding:0 !important; border:2px solid var(--line) !important; }
 .sw.on { border-color:var(--text) !important; }
 
-/* ---------- Drawer ---------- */
 #back { position:fixed; inset:0; background:#0006; z-index:30; }
 #drawer { position:fixed; top:0; bottom:0; left:0; width:min(92vw,400px); background:var(--bar); z-index:31;
   display:flex; flex-direction:column; box-shadow:2px 0 16px #0004; padding-top:env(safe-area-inset-top,0px); }
@@ -83,9 +79,17 @@ body { margin:0; background:var(--bg); color:var(--text); font:600 14px Inter, s
 #dHead { display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border-bottom:1px solid var(--line); font-size:16px; }
 #dBody { overflow:auto; padding:12px 14px calc(20px + env(safe-area-inset-bottom,0px)); flex:1; -webkit-overflow-scrolling:touch; }
 #dBody input[type=search] { width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:6px; background:var(--bg); color:var(--text); font:inherit; margin-bottom:10px; }
-.cat { margin:16px 0 4px; font-size:12px; opacity:.7; }
+.cat { margin:16px 0 4px; font-size:12px; opacity:.7; display:flex; justify-content:space-between; align-items:center; }
+.cat button { font:inherit; font-size:12px; color:var(--accent); background:none; border:0; cursor:pointer; padding:2px 4px; }
 .li { display:block; padding:11px 8px; border-radius:6px; color:var(--text); text-decoration:none; font-weight:500; border-top:1px solid var(--line); }
+.li small { display:block; opacity:.7; font-weight:600; font-size:11px; margin-top:3px; }
 .li.on { background:var(--accent); color:var(--bar); }
+.mini { height:3px; background:var(--line); border-radius:2px; margin-top:6px; overflow:hidden; }
+.mini i { display:block; height:100%; background:var(--accent); }
+.li.on .mini i { background:var(--bar); }
+.srow { display:flex; align-items:stretch; border-top:1px solid var(--line); }
+.srow .li { flex:1; border-top:0; min-width:0; }
+.srow .del { color:var(--text); background:none; border:0; padding:0 12px; font-size:16px; cursor:pointer; opacity:.7; }
 .chips { display:flex; flex-wrap:wrap; gap:6px; padding:8px 0; }
 .chip { min-width:40px; text-align:center; padding:8px 10px; border:1px solid var(--line); border-radius:6px; color:var(--text); text-decoration:none; }
 .chip.on { background:var(--accent); color:var(--bar); border-color:var(--accent); }
@@ -95,8 +99,8 @@ body { margin:0; background:var(--bg); color:var(--text); font:600 14px Inter, s
 .ni .n { margin-top:4px; }
 .tools { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px; }
 .hint { font-weight:500; opacity:.8; line-height:1.6; }
+.chk { display:flex; gap:8px; align-items:center; font-weight:500; margin:6px 0 4px; }
 
-/* Editor */
 #ed { position:fixed; inset:0; background:#0006; z-index:40; display:none; align-items:center; justify-content:center; padding:16px; }
 #ed.show { display:flex; }
 #edBox { background:var(--bar); border:1px solid var(--line); border-radius:12px; padding:16px; width:min(100%,460px); max-height:90vh; overflow:auto; }
@@ -107,7 +111,6 @@ body { margin:0; background:var(--bg); color:var(--text); font:600 14px Inter, s
 #edBox button { color:var(--text); background:none; border:1px solid var(--line); border-radius:6px; padding:9px 14px; font:inherit; cursor:pointer; }
 #edBox .primary { background:var(--accent); color:var(--bar); border-color:var(--accent); }
 
-/* ---------- Google Drive mode ---------- */
 body.drive { height:100vh; height:100dvh; display:flex; flex-direction:column; overflow:hidden; }
 body.drive .bar { position:relative; transform:none; flex:none; }
 body.drive .pdf-only { display:none !important; }
@@ -163,7 +166,6 @@ body.drive #note { display:block; }
 <div id="pages"></div>
 <div id="pill" aria-hidden="true"></div>
 
-<!-- Selection toolbar -->
 <div id="sel" role="toolbar" aria-label="Annotate selected text">
   <button class="sw" data-c="#ffe14d" style="background:#ffe14d" aria-label="Highlight yellow"></button>
   <button class="sw" data-c="#7ee08a" style="background:#7ee08a" aria-label="Highlight green"></button>
@@ -173,14 +175,12 @@ body.drive #note { display:block; }
   <button id="selQuote" type="button">❝ Quote</button>
 </div>
 
-<!-- Drawer: library or notes -->
 <div id="back" hidden></div>
 <aside id="drawer" hidden aria-label="Panel">
   <div id="dHead"><strong id="dTitle"></strong><button class="btn" id="dClose" type="button" aria-label="Close panel">✕</button></div>
   <div id="dBody"></div>
 </aside>
 
-<!-- Note editor -->
 <div id="ed" role="dialog" aria-modal="true" aria-label="Edit annotation">
   <div id="edBox">
     <blockquote id="edQ" hidden></blockquote>
@@ -203,7 +203,6 @@ body.drive #note { display:block; }
   const DRIVE_DL = "https://drive.google.com/uc?export=download&id=";
   const COLORS = ["#ffe14d", "#7ee08a", "#8ec5ff", "#ff9ec4"];
 
-  /* f = file in the GitHub repo (PDF reader, can be annotated); d = Google Drive file ID (viewer only) */
   const BOOKS = {
     adv:{t:"Advanced Grammar in Use",f:"Advanced%20grammar%20in%20use.pdf"},
     oxford:{t:"Oxford Guide to English Grammar",f:"Oxford-Guide-to-English-Grammar.pdf"},
@@ -234,15 +233,62 @@ body.drive #note { display:block; }
   ];
 
   const $ = id => document.getElementById(id);
-  const esc = s => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const esc = s => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
-  /* ---------- Storage (this browser only) ---------- */
+  /* ---------- Storage ---------- */
   const SETTINGS_KEY = "ielts-gl-reader";
   const store = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
     settings() { try { return JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}"); } catch (e) { return {}; } }
   };
+
+  /* ---------- Saved device files (IndexedDB) ---------- */
+  const DB = {
+    open() {
+      return new Promise((res, rej) => {
+        if (!window.indexedDB) return rej(new Error("IndexedDB unavailable"));
+        const r = indexedDB.open("reader-files", 1);
+        r.onupgradeneeded = () => r.result.createObjectStore("files", { keyPath: "id" });
+        r.onsuccess = () => res(r.result);
+        r.onerror = () => rej(r.error);
+      });
+    },
+    async run(mode, fn) {
+      const db = await this.open();
+      return new Promise((res, rej) => {
+        const t = db.transaction("files", mode);
+        const req = fn(t.objectStore("files"));
+        t.oncomplete = () => res(req && req.result);
+        t.onerror = () => rej(t.error);
+        t.onabort = () => rej(t.error);
+      });
+    },
+    put(rec) { return this.run("readwrite", s => s.put(rec)); },
+    get(id) { return this.run("readonly", s => s.get(id)); },
+    all() { return this.run("readonly", s => s.getAll()); },
+    del(id) { return this.run("readwrite", s => s.delete(id)); }
+  };
+
+  /* ---------- Recent reading ---------- */
+  function getRecents() { try { const r = JSON.parse(store.get("recent") || "[]"); return Array.isArray(r) ? r : []; } catch (e) { return []; } }
+  let curRec = null;
+  function touchRecent() {
+    if (!curRec) return;
+    const list = getRecents().filter(r => r.k !== curRec.k);
+    list.unshift(Object.assign({}, curRec, { t: Date.now() }));
+    store.set("recent", JSON.stringify(list.slice(0, 12)));
+  }
+  function ago(t) {
+    const m = Math.round((Date.now() - t) / 60000);
+    if (m < 1) return "just now";
+    if (m < 60) return m + " min ago";
+    const h = Math.round(m / 60);
+    if (h < 24) return h + " h ago";
+    const d = Math.round(h / 24);
+    return d + (d === 1 ? " day ago" : " days ago");
+  }
+  function recHref(r) { return r.local ? "reader.html?l=" + encodeURIComponent(r.k.slice(6)) : "reader.html?b=" + encodeURIComponent(r.k); }
 
   try { if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock(); } catch (e) {}
 
@@ -260,7 +306,8 @@ body.drive #note { display:block; }
 
   /* ---------- State ---------- */
   const params = new URLSearchParams(location.search);
-  let bookKey = BOOKS[params.get("b")] ? params.get("b") : "grammar";
+  const localId = params.get("l");
+  let bookKey = localId ? "local:" + localId : (BOOKS[params.get("b")] ? params.get("b") : "grammar");
   let bookTitle = "";
   let driveMode = false;
   let anns = [];
@@ -302,7 +349,6 @@ body.drive #note { display:block; }
     if (old) old.replaceWith(hlLayer(n));
   }
 
-  /* Editor */
   let edA = null, edNew = false, edColor = COLORS[0];
   function openEditor(a, isNew) {
     edA = a; edNew = isNew; edColor = a.c || COLORS[0];
@@ -339,7 +385,6 @@ body.drive #note { display:block; }
     saveAnns(); refreshPage(p); closeEditor(); if (drawerMode === "notes") renderNotes();
   });
 
-  /* Selection toolbar */
   let pend = null, selTimer, lock = 0;
   const sel = $("sel");
   function hideSel() { sel.classList.remove("show"); }
@@ -382,7 +427,7 @@ body.drive #note { display:block; }
   $("selQuote").addEventListener("click", () => addFromSel("quote"));
 
   /* ---------- Drawer: library and notes ---------- */
-  let drawerMode = "";
+  let drawerMode = "", saved = [];
   const drawer = $("drawer"), back = $("back");
   function openDrawer(mode) {
     drawerMode = mode;
@@ -400,21 +445,50 @@ body.drive #note { display:block; }
   function renderLib() {
     $("dBody").innerHTML =
       '<input type="search" id="lq" placeholder="Search books" aria-label="Search books">' +
-      '<label class="btn" style="display:flex;margin-bottom:6px">Open a PDF from this device<input type="file" id="lf" accept="application/pdf,.pdf" hidden></label>' +
+      '<label class="btn" style="display:flex;margin-bottom:2px">Open a PDF from this device<input type="file" id="lf" accept="application/pdf,.pdf" hidden></label>' +
+      '<label class="chk"><input type="checkbox" id="lsave" ' + (store.get("saveLocal") === "0" ? "" : "checked") + '> Save a copy on this device to read later</label>' +
       '<div id="lList"></div>';
     $("lq").addEventListener("input", fillLib);
-    $("lf").addEventListener("change", e => {
+    $("lsave").addEventListener("change", e => store.set("saveLocal", e.target.checked ? "1" : "0"));
+    $("lf").addEventListener("change", async e => {
       const f = e.target.files[0]; if (!f) return;
-      f.arrayBuffer().then(buf => {
-        closeDrawer();
-        startPdf({ data: new Uint8Array(buf) }, "file:" + f.name + ":" + f.size, f.name.replace(/\.pdf$/i, ""), null);
-      });
+      const id = f.name + "|" + f.size;
+      if ($("lsave").checked) {
+        try {
+          await DB.put({ id, name: f.name, size: f.size, blob: f, added: Date.now() });
+          if (navigator.storage && navigator.storage.persist) navigator.storage.persist();
+        } catch (err) { alert("Could not save a copy on this device. You can still read it now."); }
+      }
+      const buf = await f.arrayBuffer();
+      closeDrawer();
+      startPdf({ data: new Uint8Array(buf) }, "local:" + id, f.name.replace(/\.pdf$/i, ""), null, true);
     });
-    fillLib();
+    $("lList").innerHTML = '<p class="hint">Loading…</p>';
+    DB.all().then(r => { saved = (r || []).sort((a, b) => b.added - a.added); }).catch(() => { saved = []; }).then(() => { if (drawerMode === "lib") fillLib(); });
+  }
+
+  function progressOf(r) {
+    const p = Number(store.get("p:" + r.k) || 0);
+    return { p, pct: r.total && p ? Math.min(100, Math.round(p / r.total * 100)) : 0 };
   }
   function fillLib() {
     const q = ($("lq").value || "").toLowerCase().trim();
     let h = "";
+    const rec = getRecents().filter(r => !q || r.title.toLowerCase().includes(q)).slice(0, 6);
+    if (rec.length) {
+      h += '<div class="cat">Continue reading <button type="button" id="clrRec">Clear</button></div>' + rec.map(r => {
+        const pr = progressOf(r);
+        const info = (r.total && pr.p ? "Page " + pr.p + " / " + r.total + " · " : "") + (r.local ? "On device · " : "") + ago(r.t);
+        return '<a class="li' + (r.k === bookKey ? " on" : "") + '" href="' + recHref(r) + '">' + esc(r.title) + '<small>' + esc(info) + '</small>' +
+          (pr.pct ? '<div class="mini"><i style="width:' + pr.pct + '%"></i></div>' : "") + '</a>';
+      }).join("");
+    }
+    const mine = saved.filter(s => !q || s.name.toLowerCase().includes(q));
+    if (mine.length) {
+      h += '<div class="cat">Saved on this device</div>' + mine.map(s =>
+        '<div class="srow"><a class="li' + (bookKey === "local:" + s.id ? " on" : "") + '" href="reader.html?l=' + encodeURIComponent(s.id) + '">' + esc(s.name.replace(/\.pdf$/i, "")) +
+        '<small>' + (s.size / 1048576).toFixed(1) + ' MB</small></a><button class="del" type="button" data-id="' + esc(s.id) + '" aria-label="Remove saved file">✕</button></div>').join("");
+    }
     CATS.forEach(c => {
       const items = c[1].filter(k => !q || BOOKS[k].t.toLowerCase().includes(q));
       if (!items.length) return;
@@ -425,6 +499,15 @@ body.drive #note { display:block; }
     if (nums.length) h += '<div class="cat">Cambridge IELTS</div><div class="chips">' + nums.map(n =>
       '<a class="chip' + (bookKey === "ielts" + n ? " on" : "") + '" href="reader.html?b=ielts' + n + '">' + n + '</a>').join("") + '</div>';
     $("lList").innerHTML = h || '<p class="hint">No books match your search.</p>';
+    const clr = $("clrRec");
+    if (clr) clr.onclick = () => { store.set("recent", "[]"); fillLib(); };
+    $("lList").querySelectorAll(".del").forEach(b => b.onclick = async () => {
+      if (!confirm("Remove this saved file from this device? Your notes stay.")) return;
+      try { await DB.del(b.dataset.id); } catch (e) {}
+      saved = saved.filter(s => s.id !== b.dataset.id);
+      store.set("recent", JSON.stringify(getRecents().filter(r => r.k !== "local:" + b.dataset.id)));
+      fillLib();
+    });
   }
 
   const LABEL = { hl: "Highlight", quote: "Quote", note: "Note" };
@@ -458,12 +541,14 @@ body.drive #note { display:block; }
   }
 
   /* ---------- Book meta ---------- */
-  function setMeta(key, title, dl) {
+  function setMeta(key, title, dl, local) {
     bookKey = key; bookTitle = title;
     document.title = title + " | English Materials Reader";
     $("title").textContent = title;
     $("dl").hidden = !dl;
     if (dl) $("dl").href = dl;
+    curRec = { k: key, title: title, local: !!local, total: (getRecents().find(r => r.k === key) || {}).total || 0 };
+    touchRecent();
     loadAnns();
   }
 
@@ -499,7 +584,7 @@ body.drive #note { display:block; }
     cur = Number(en.target.dataset.n);
     $("num").value = cur;
     pill.textContent = cur + " / " + (pdf ? pdf.numPages : "…");
-    if (ready) store.set("p:" + bookKey, String(cur));
+    if (ready) { store.set("p:" + bookKey, String(cur)); touchRecent(); }
     $("progressBar").style.width = (pdf ? (cur / pdf.numPages) * 100 : 0) + "%";
   }), { rootMargin: "-45% 0px -54% 0px" });
 
@@ -565,7 +650,7 @@ body.drive #note { display:block; }
     const p = cur; layout(); scrollToPage(p, fraction);
   }
 
-  async function startPdf(source, key, title, dl) {
+  async function startPdf(source, key, title, dl, local) {
     const token = ++gen;
     driveMode = false;
     document.body.classList.remove("drive");
@@ -576,7 +661,7 @@ body.drive #note { display:block; }
     window.scrollTo(0, 0);
     $("msg").hidden = false; $("msg").textContent = "Opening book…";
     $("tot").textContent = "/ …"; $("num").value = 1; $("progressBar").style.width = "0";
-    setMeta(key, title, dl);
+    setMeta(key, title, dl, local);
 
     zoom = Number(store.get("zoom:" + key) || store.get("zoom") || 1);
     if (!isFinite(zoom) || zoom < 0.6 || zoom > 2.5) zoom = 1;
@@ -586,6 +671,7 @@ body.drive #note { display:block; }
       const doc = await pdfjsLib.getDocument(Object.assign({ disableAutoFetch: true, rangeChunkSize: 262144 }, source)).promise;
       if (token !== gen) return;
       pdf = doc;
+      curRec.total = pdf.numPages; touchRecent();
       const first = await pdf.getPage(1);
       const vp = first.getViewport({ scale: 1 });
       ratio = vp.height / vp.width;
@@ -635,7 +721,6 @@ body.drive #note { display:block; }
     if (e.key === "ArrowLeft") go(cur - 1);
   });
 
-  /* Auto-hide toolbar while reading */
   let lastY = window.scrollY, ticking = false, pillTimer;
   function showPill() {
     pill.classList.add("show");
@@ -654,7 +739,6 @@ body.drive #note { display:block; }
     });
   }, { passive: true });
 
-  /* Tap a highlight to edit it; tap elsewhere on a page to show or hide the toolbar */
   box.addEventListener("click", e => {
     if (String(getSelection())) return;
     const pg = e.target.closest(".pg");
@@ -668,7 +752,6 @@ body.drive #note { display:block; }
     if (bar.classList.contains("hide")) showPill();
   });
 
-  /* Rotation and resizing: ignore the small resizes caused by the address bar */
   function onResize() {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
@@ -683,19 +766,30 @@ body.drive #note { display:block; }
   if (screen.orientation && screen.orientation.addEventListener) screen.orientation.addEventListener("change", () => setTimeout(onResize, 350));
 
   /* ---------- Start ---------- */
-  const book = BOOKS[bookKey];
   if (typeof pdfjsLib !== "undefined") {
     pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
   }
-  if (book.d) {
-    setMeta(bookKey, book.t, DRIVE_DL + book.d);
-    showDrive(book);
-  } else if (typeof pdfjsLib === "undefined") {
-    setMeta(bookKey, book.t, RAW + book.f);
-    $("msg").textContent = "The PDF reader could not load. Please check your internet connection and reload the page.";
+  if (localId) {
+    if (typeof pdfjsLib === "undefined") {
+      $("msg").textContent = "The PDF reader could not load. Please check your internet connection and reload the page.";
+    } else {
+      DB.get(localId).then(async rec => {
+        if (!rec) { setMeta(bookKey, "Saved file", null, true); $("msg").innerHTML = 'This saved file was not found on this device. <a href="reader.html">Open the library</a> and add it again.'; return; }
+        const buf = await rec.blob.arrayBuffer();
+        startPdf({ data: new Uint8Array(buf) }, "local:" + rec.id, rec.name.replace(/\.pdf$/i, ""), null, true);
+      }).catch(() => { $("msg").textContent = "Could not open the saved file on this device."; });
+    }
   } else {
-    pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-    startPdf({ url: RAW + book.f }, bookKey, book.t, RAW + book.f);
+    const book = BOOKS[bookKey];
+    if (book.d) {
+      setMeta(bookKey, book.t, DRIVE_DL + book.d);
+      showDrive(book);
+    } else if (typeof pdfjsLib === "undefined") {
+      setMeta(bookKey, book.t, RAW + book.f);
+      $("msg").textContent = "The PDF reader could not load. Please check your internet connection and reload the page.";
+    } else {
+      startPdf({ url: RAW + book.f }, bookKey, book.t, RAW + book.f);
+    }
   }
 })();
 </script>
