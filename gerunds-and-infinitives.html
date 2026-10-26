@@ -1,1445 +1,1792 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gerunds and infinitives | IELTS Grammar Lab</title>
-<meta name="description" content="Learn gerunds, infinitives, bare infinitives, verb patterns, meaning differences and advanced grammar for IELTS, with Bangla explanations and interactive practice.">
-<meta name="theme-color" content="#701a75">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Literata:ital,wght@0,400;0,700;1,400&family=Fraunces:wght@400;700&display=swap" rel="stylesheet">
+  <title>Gerunds and infinitives | IELTS Grammar Lab</title>
+  <meta name="description" content="Learn gerunds and infinitives with clear grammar rules, verb patterns, comparison tables, IELTS examples, common mistakes, practice exercises, and an interactive quiz.">
+  <meta name="theme-color" content="#1f2a44">
 
-<link rel="stylesheet" href="lesson.css">
-<script src="reader.js"></script>
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/10719400.png">
+  <link rel="stylesheet" href="lesson.css">
 
-<style>
-:root {
-  --a: #a21caf;
-  --d: #701a75;
-  --l: #f8e4fb;
-  --bg: #fdf7fe;
-}
+  <style>
+    :root {
+      --lesson-accent: #6d28d9;
+      --lesson-accent-light: #ede9fe;
+      --lesson-border: #d9dce5;
+      --lesson-muted: #64748b;
+      --lesson-good: #166534;
+      --lesson-bad: #b91c1c;
+    }
 
-html {
-  scroll-behavior: smooth;
-}
+    .lesson-content {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 24px 18px 60px;
+      line-height: 1.8;
+    }
 
-main {
-  line-height: 1.8;
-}
+    .lesson-hero {
+      padding: 28px 24px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #f5f3ff, #eef2ff);
+      border: 1px solid #ddd6fe;
+      margin-bottom: 28px;
+    }
 
-main h2 {
-  margin-top: 2.2em;
-  scroll-margin-top: 80px;
-}
+    .lesson-hero h1 {
+      margin: 0 0 12px;
+      line-height: 1.25;
+      color: #312e81;
+    }
 
-main h3 {
-  margin-top: 1.4em;
-}
+    .lesson-hero p {
+      margin: 8px 0;
+    }
 
-.say, .form, .pair, .rule-box, .bn-box, .tip-box {
-  border-radius: 12px;
-  padding: 15px 18px;
-  margin: 16px 0;
-}
+    .level-label {
+      display: inline-block;
+      background: var(--lesson-accent-light);
+      color: #5b21b6;
+      padding: 4px 11px;
+      border-radius: 999px;
+      font-size: .82rem;
+      font-weight: 700;
+      margin: 4px 4px 4px 0;
+    }
 
-.say, .form, .rule-box {
-  background: var(--bg);
-  border: 1px solid #ead5ed;
-}
+    .lesson-section {
+      margin: 34px 0;
+      scroll-margin-top: 24px;
+    }
 
-.bn-box {
-  background: #f5efff;
-  border-left: 4px solid var(--a);
-}
+    .lesson-section h2 {
+      padding-bottom: 9px;
+      border-bottom: 2px solid var(--lesson-border);
+      line-height: 1.35;
+    }
 
-.tip-box {
-  background: #f0f5fa;
-  border-left: 4px solid #42617d;
-}
+    .lesson-section h3 {
+      margin-top: 25px;
+    }
 
-.pair {
-  background: #fff;
-  border: 1px solid #ead5ed;
-}
+    .rule-card,
+    .example-card,
+    .note-card,
+    .warning-card,
+    .tip-card {
+      padding: 16px 18px;
+      border-radius: 12px;
+      margin: 16px 0;
+      border: 1px solid var(--lesson-border);
+    }
 
-.pair p:last-child,
-.form p:last-child {
-  margin-bottom: 0;
-}
+    .rule-card {
+      background: #f8fafc;
+      border-left: 4px solid var(--lesson-accent);
+    }
 
-.ex {
-  font-weight: 600;
-  color: var(--d);
-}
+    .example-card {
+      background: #f0fdf4;
+      border-left: 4px solid #16a34a;
+    }
 
-.why {
-  color: #55516a;
-  font-size: .96em;
-}
+    .note-card {
+      background: #eff6ff;
+      border-left: 4px solid #2563eb;
+    }
 
-.small {
-  font-size: .9em;
-  opacity: .85;
-}
+    .warning-card {
+      background: #fef2f2;
+      border-left: 4px solid #dc2626;
+    }
 
-.table-wrap {
-  width: 100%;
-  overflow-x: auto;
-  margin: 16px 0;
-  border-radius: 10px;
-}
+    .tip-card {
+      background: #faf5ff;
+      border-left: 4px solid #9333ea;
+    }
 
-.lesson-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 520px;
-  background: #fff;
-  font-size: .94em;
-}
+    .formula {
+      display: block;
+      padding: 12px 15px;
+      margin: 12px 0;
+      border-radius: 9px;
+      background: #f1f5f9;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
 
-.lesson-table th,
-.lesson-table td {
-  padding: 12px;
-  text-align: left;
-  vertical-align: top;
-  border: 1px solid #e8d8eb;
-}
+    .table-wrap {
+      overflow-x: auto;
+      margin: 18px 0;
+      border: 1px solid var(--lesson-border);
+      border-radius: 10px;
+    }
 
-.lesson-table th {
-  background: #f5e8f8;
-  color: #58145e;
-}
+    .lesson-table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 560px;
+      background: transparent;
+    }
 
-.lesson-table tr:nth-child(even) td {
-  background: #fdf9fe;
-}
+    .lesson-table th,
+    .lesson-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--lesson-border);
+      text-align: left;
+      vertical-align: top;
+    }
 
-.tag {
-  display: inline-block;
-  background: var(--l);
-  color: var(--d);
-  padding: 3px 9px;
-  border-radius: 6px;
-  font-size: .82em;
-  font-weight: 600;
-}
+    .lesson-table th {
+      background: #f1f5f9;
+      color: #1e293b;
+    }
 
-.two {
-  gap: 16px;
-}
+    .lesson-table tr:last-child td {
+      border-bottom: none;
+    }
 
-.two > div {
-  padding: 14px;
-  border: 1px solid #ead5ed;
-  border-radius: 12px;
-}
+    .correct {
+      color: var(--lesson-good);
+      font-weight: 700;
+    }
 
-details {
-  margin: 10px 0;
-  padding: 10px 13px;
-  border: 1px solid #ead5ed;
-  border-radius: 9px;
-  background: #fff;
-}
+    .incorrect {
+      color: var(--lesson-bad);
+      font-weight: 700;
+    }
 
-details summary {
-  cursor: pointer;
-  font-weight: 600;
-  color: var(--d);
-}
+    .grammar-list li,
+    .lesson-section li {
+      margin: 7px 0;
+    }
 
-details[open] summary {
-  margin-bottom: 8px;
-}
+    .quiz-container {
+      border: 1px solid var(--lesson-border);
+      border-radius: 16px;
+      padding: 20px;
+      background: #fff;
+      margin-top: 20px;
+    }
 
-.practice-list li {
-  margin-bottom: 13px;
-}
+    .quiz-progress {
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 12px 0 22px;
+    }
 
-#qf {
-  margin-top: 16px;
-}
+    .quiz-progress-bar {
+      width: 0%;
+      height: 100%;
+      background: var(--lesson-accent);
+      transition: width .25s ease;
+    }
 
-#qs {
-  display: grid;
-  gap: 15px;
-}
+    .quiz-question {
+      padding: 17px 0;
+      border-bottom: 1px solid #e5e7eb;
+    }
 
-.quiz-item {
-  border: 1px solid #ead5ed;
-  background: #fff;
-  border-radius: 12px;
-  padding: 15px;
-}
+    .quiz-question:last-child {
+      border-bottom: none;
+    }
 
-.quiz-item p {
-  margin-top: 0;
-  font-weight: 600;
-}
+    .quiz-question legend {
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
 
-.quiz-item label {
-  display: block;
-  padding: 7px 9px;
-  margin: 5px 0;
-  border-radius: 7px;
-  cursor: pointer;
-}
+    .quiz-option {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px 12px;
+      margin: 7px 0;
+      border: 1px solid #e2e8f0;
+      border-radius: 9px;
+      cursor: pointer;
+      line-height: 1.55;
+    }
 
-.quiz-item label:hover {
-  background: #f8e4fb;
-}
+    .quiz-option:hover {
+      background: #f8fafc;
+    }
 
-.quiz-item input {
-  margin-right: 8px;
-  accent-color: var(--a);
-}
+    .quiz-option input {
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
 
-.quiz-feedback {
-  margin-top: 9px;
-  font-size: .93em;
-}
+    .quiz-option.selected {
+      border-color: var(--lesson-accent);
+      background: #f5f3ff;
+    }
 
-.quiz-feedback.correct {
-  color: #17643b;
-}
+    .quiz-option.correct-answer {
+      border-color: #16a34a;
+      background: #f0fdf4;
+    }
 
-.quiz-feedback.incorrect {
-  color: #a12835;
-}
+    .quiz-option.wrong-answer {
+      border-color: #dc2626;
+      background: #fef2f2;
+    }
 
-#sc {
-  padding: 12px;
-  border-radius: 8px;
-}
+    .quiz-feedback {
+      margin-top: 10px;
+      font-size: .95rem;
+    }
 
-#sc:not(:empty) {
-  background: #f8e4fb;
-}
+    .quiz-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
 
-button, .btn {
-  cursor: pointer;
-}
+    .quiz-btn {
+      border: 0;
+      border-radius: 9px;
+      padding: 11px 17px;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--lesson-accent);
+      color: #fff;
+    }
 
-.progress-track {
-  height: 7px;
-  background: #ead5ed;
-  border-radius: 10px;
-  overflow: hidden;
-  margin: 10px 0 18px;
-}
+    .quiz-btn.secondary {
+      background: #e2e8f0;
+      color: #1e293b;
+    }
 
-#quiz-progress {
-  height: 100%;
-  width: 0;
-  background: var(--a);
-  transition: width .2s ease;
-}
+    .quiz-btn:focus-visible,
+    .quiz-option:focus-within {
+      outline: 3px solid #a78bfa;
+      outline-offset: 2px;
+    }
 
-[id] {
-  scroll-margin-top: 75px;
-}
+    .quiz-result {
+      padding: 18px;
+      margin-top: 20px;
+      border-radius: 12px;
+      background: #f5f3ff;
+      border: 1px solid #ddd6fe;
+    }
 
-@media (max-width: 600px) {
-  .lesson-table th,
-  .lesson-table td {
-    padding: 9px;
-  }
+    .quiz-result h3 {
+      margin-top: 0;
+    }
 
-  .say, .form, .pair, .rule-box, .bn-box, .tip-box {
-    padding: 12px;
-  }
-}
-</style>
+    .score-number {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #5b21b6;
+    }
+
+    .answer-key {
+      margin-top: 24px;
+    }
+
+    .answer-key details {
+      padding: 12px 14px;
+      border: 1px solid var(--lesson-border);
+      border-radius: 9px;
+      margin: 8px 0;
+    }
+
+    .answer-key summary {
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .toc {
+      padding: 18px 20px;
+      border: 1px solid var(--lesson-border);
+      border-radius: 12px;
+      margin: 24px 0;
+    }
+
+    .toc ul {
+      columns: 2;
+      padding-left: 22px;
+    }
+
+    .toc a {
+      color: #5b21b6;
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .completion-check {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin: 10px 0;
+    }
+
+    .completion-check input {
+      margin-top: 7px;
+    }
+
+    @media (max-width: 640px) {
+      .lesson-content {
+        padding: 16px 13px 40px;
+      }
+
+      .lesson-hero {
+        padding: 21px 17px;
+      }
+
+      .toc ul {
+        columns: 1;
+      }
+
+      .quiz-container {
+        padding: 15px;
+      }
+    }
+
+    @media print {
+      .quiz-actions,
+      .quiz-progress,
+      .reader-controls {
+        display: none !important;
+      }
+
+      .lesson-content {
+        max-width: none;
+      }
+
+      .lesson-section {
+        break-inside: avoid;
+      }
+    }
+  </style>
 </head>
 
 <body>
-
-<nav class="top">
-  <a href="index.html">IELTS Grammar Lab</a>
-  <a href="index.html#topics">All topics</a>
-</nav>
-
-<main>
-
-<div class="hd v2">
-  <span class="lvl">Beginner to advanced</span>
-  <h1>Gerunds and infinitives</h1>
-</div>
-
-<p class="sub">Learn when to use verb + -ing, to + verb, and the bare infinitive, with clear rules, examples, Bangla explanations, and IELTS practice.</p>
-
-<div class="bn-box">
-  <b>বাংলায় সহজ ব্যাখ্যা:</b>
-  ইংরেজিতে একটি verb-এর পরে আরেকটি verb এলে সব সময় একই form ব্যবহার করা যায় না। কোথাও <i>reading</i>, কোথাও <i>to read</i>, আবার কোথাও শুধু <i>read</i> ব্যবহার করতে হয়। প্রথম verb, preposition এবং বাক্যের অর্থ দেখে সঠিক form বেছে নিতে হয়।
-</div>
-
-<h2>1. Understand the basics</h2>
-
-<p>There are three important forms to learn first.</p>
-
-<div class="table-wrap">
-<table class="lesson-table">
-<thead>
-<tr>
-<th>Form</th>
-<th>Structure</th>
-<th>Example</th>
-<th>বাংলা অর্থ</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Gerund</td>
-<td>Verb + -ing</td>
-<td>I enjoy <b>reading</b>.</td>
-<td>আমি পড়তে আনন্দ পাই।</td>
-</tr>
-<tr>
-<td>To-infinitive</td>
-<td>to + base verb</td>
-<td>I want <b>to read</b>.</td>
-<td>আমি পড়তে চাই।</td>
-</tr>
-<tr>
-<td>Bare infinitive</td>
-<td>Base verb alone</td>
-<td>I can <b>read</b>.</td>
-<td>আমি পড়তে পারি।</td>
-</tr>
-</tbody>
-</table>
-</div>
-
-<h3>What is a gerund?</h3>
-
-<p>A gerund is the -ing form of a verb used in a noun-like role.</p>
-
-<div class="pair">
-  <p class="ex">Reading improves vocabulary.</p>
-  <p class="why">Reading is the subject of the sentence.</p>
-  <p class="ex">I enjoy reading.</p>
-  <p class="why">Reading is the activity that I enjoy.</p>
-  <p class="ex">Her favourite activity is swimming.</p>
-  <p class="why">Swimming names an activity.</p>
-</div>
-
-<div class="bn-box">
-  <b>বাংলায়:</b> Gerund দেখতে verb-এর -ing form-এর মতো, কিন্তু এটি noun-এর মতো কাজ করে। যেমন, <i>Reading is useful</i> বাক্যে reading একটি কাজ বা কার্যকলাপকে বোঝাচ্ছে।
-</div>
-
-<h3>What is an infinitive?</h3>
-
-<p>An infinitive is the base form of a verb. It can appear with <b>to</b> or without it.</p>
-
-<div class="pair">
-  <p class="ex">I hope to study abroad.</p>
-  <p class="why">To study is a to-infinitive.</p>
-  <p class="ex">You must study regularly.</p>
-  <p class="why">Study is a bare infinitive after the modal must.</p>
-  <p class="ex">She made me laugh.</p>
-  <p class="why">Laugh is a bare infinitive after made + object.</p>
-</div>
-
-<h2>2. How to choose the correct form</h2>
-
-<div class="rule-box">
-  <p><span class="tag">Rule 1</span> Some verbs are followed by -ing.</p>
-  <p class="ex">I avoid wasting time.</p>
-
-  <p><span class="tag">Rule 2</span> Some verbs are followed by to + verb.</p>
-  <p class="ex">I decided to study.</p>
-
-  <p><span class="tag">Rule 3</span> A verb after a preposition takes -ing.</p>
-  <p class="ex">She is interested in learning.</p>
-
-  <p><span class="tag">Rule 4</span> Modal verbs usually take the bare infinitive.</p>
-  <p class="ex">He can swim. You should practise.</p>
-
-  <p><span class="tag">Rule 5</span> To + verb often expresses purpose.</p>
-  <p class="ex">I went to the library to study.</p>
-</div>
-
-<p class="why">Important: these are patterns, not a single universal rule for every verb. Learn the verb together with the structure it requires.</p>
-
-<h2>3. Verbs followed by -ing</h2>
-
-<p>These common verbs are normally followed by a gerund when another verb comes next.</p>
-
-<div class="table-wrap">
-<table class="lesson-table">
-<thead>
-<tr>
-<th>Verb</th>
-<th>Example</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr><td>Enjoy</td><td>I enjoy <b>reading</b>.</td><td>Take pleasure in</td></tr>
-<tr><td>Avoid</td><td>She avoids <b>driving</b> at night.</td><td>Keep away from</td></tr>
-<tr><td>Finish</td><td>He finished <b>writing</b>.</td><td>Complete an activity</td></tr>
-<tr><td>Suggest</td><td>They suggested <b>leaving</b> early.</td><td>Propose an idea</td></tr>
-<tr><td>Consider</td><td>We considered <b>moving</b>.</td><td>Think about</td></tr>
-<tr><td>Keep</td><td>Keep <b>practising</b>.</td><td>Continue</td></tr>
-<tr><td>Mind</td><td>Would you mind <b>waiting</b>?</td><td>Object to or be bothered by</td></tr>
-<tr><td>Admit</td><td>He admitted <b>cheating</b>.</td><td>Accept that something happened</td></tr>
-<tr><td>Practise</td><td>She practises <b>speaking</b>.</td><td>Improve through repetition</td></tr>
-<tr><td>Deny</td><td>He denied <b>taking</b> it.</td><td>Say that something did not happen</td></tr>
-<tr><td>Risk</td><td>They risked <b>losing</b> money.</td><td>Expose themselves to danger</td></tr>
-<tr><td>Imagine</td><td>Imagine <b>living</b> abroad.</td><td>Form a mental picture</td></tr>
-<tr><td>Postpone</td><td>We postponed <b>meeting</b>.</td><td>Delay until later</td></tr>
-<tr><td>Recommend</td><td>I recommend <b>reading</b> this book.</td><td>Advise or suggest</td></tr>
-<tr><td>Appreciate</td><td>I appreciate <b>hearing</b> from you.</td><td>Be grateful for</td></tr>
-</tbody>
-</table>
-</div>
-
-<div class="bn-box">
-  <b>মনে রাখুন:</b> Enjoy, avoid, finish, suggest, consider এবং mind-এর পরে সাধারণত verb-এর -ing form বসে। তাই <i>I enjoy reading</i> সঠিক, কিন্তু <i>I enjoy to read</i> সাধারণত ভুল।
-</div>
-
-<h3>More examples</h3>
-
-<ul>
-  <li>Researchers avoid <b>making</b> unsupported claims.</li>
-  <li>The government considered <b>introducing</b> a new policy.</li>
-  <li>She recommended <b>using</b> reliable sources.</li>
-  <li>He denied <b>having copied</b> the work.</li>
-</ul>
-
-<h2>4. Verbs followed by to + verb</h2>
-
-<div class="table-wrap">
-<table class="lesson-table">
-<thead>
-<tr>
-<th>Verb</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr><td>Want</td><td>I want <b>to improve</b> my English.</td></tr>
-<tr><td>Need</td><td>We need <b>to prepare</b>.</td></tr>
-<tr><td>Hope</td><td>She hopes <b>to succeed</b>.</td></tr>
-<tr><td>Decide</td><td>They decided <b>to leave</b>.</td></tr>
-<tr><td>Plan</td><td>I plan <b>to apply</b>.</td></tr>
-<tr><td>Agree</td><td>He agreed <b>to help</b>.</td></tr>
-<tr><td>Refuse</td><td>She refused <b>to answer</b>.</td></tr>
-<tr><td>Manage</td><td>We managed <b>to finish</b>.</td></tr>
-<tr><td>Afford</td><td>I cannot afford <b>to buy</b> it.</td></tr>
-<tr><td>Promise</td><td>He promised <b>to return</b>.</td></tr>
-<tr><td>Expect</td><td>They expect <b>to arrive</b> soon.</td></tr>
-<tr><td>Learn</td><td>She learned <b>to drive</b>.</td></tr>
-<tr><td>Offer</td><td>He offered <b>to help</b>.</td></tr>
-<tr><td>Appear</td><td>She appears <b>to understand</b>.</td></tr>
-<tr><td>Choose</td><td>They chose <b>to stay</b>.</td></tr>
-</tbody>
-</table>
-</div>
-
-<div class="bn-box">
-  <b>বাংলায়:</b> Want, decide, hope, plan এবং promise-এর পরে আরেকটি verb এলে সাধারণত <i>to + verb</i> ব্যবহার হয়। যেমন, <i>I hope to succeed</i> এবং <i>She decided to study</i>।
-</div>
-
-<h2>5. Verbs followed by an object + to-infinitive</h2>
-
-<p>Some verbs need a person or object before the infinitive. This pattern is especially useful for IELTS Writing and Speaking.</p>
-
-<div class="table-wrap">
-<table class="lesson-table">
-<thead>
-<tr>
-<th>Pattern</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr><td>Want + person + to</td><td>I want <b>you to succeed</b>.</td></tr>
-<tr><td>Ask + person + to</td><td>She asked <b>me to wait</b>.</td></tr>
-<tr><td>Tell + person + to</td><td>He told <b>us to leave</b>.</td></tr>
-<tr><td>Encourage + person + to</td><td>They encouraged <b>me to apply</b>.</td></tr>
-<tr><td>Allow + person + to</td><td>The rules allow <b>students to use</b> dictionaries.</td></tr>
-<tr><td>Advise + person + to</td><td>She advised <b>him to rest</b>.</td></tr>
-<tr><td>Invite + person + to</td><td>They invited <b>us to attend</b>.</td></tr>
-<tr><td>Remind + person + to</td><td>Please remind <b>me to call</b>.</td></tr>
-<tr><td>Persuade + person + to</td><td>He persuaded <b>her to stay</b>.</td></tr>
-</tbody>
-</table>
-</div>
-
-<div class="pair">
-  <p><del>I want that you help me.</del></p>
-  <p><ins>I want you to help me.</ins></p>
-  <p class="why">Use want + person + to-infinitive for this meaning.</p>
-</div>
-
-<p><b>Special case: suggest</b></p>
-
-<ul>
-  <li>Correct: She suggested <b>going</b> early.</li>
-  <li>Correct: She suggested <b>that we go</b> early.</li>
-  <li>Incorrect in standard usage: She suggested us to go early.</li>
-</ul>
-
-<h2>6. The bare infinitive</h2>
-
-<p>The bare infinitive is the base form of a verb without <i>to</i>.</p>
-
-<h3>After modal verbs</h3>
-
-<div class="pair">
-  <p class="ex">I can speak English.</p>
-  <p class="ex">You should practise every day.</p>
-  <p class="ex">We must finish this work.</p>
-  <p class="why">Can, could, may, might, must, shall, should, will and would are followed by the base verb.</p>
-</div>
-
-<h3>After make and let</h3>
-
-<div class="pair">
-  <p class="ex">The teacher made me rewrite the essay.</p>
-  <p class="ex">My parents let me travel alone.</p>
-  <p class="why">Make and let + object + bare infinitive.</p>
-</div>
-
-<p>In the passive form of make, use <i>to</i>.</p>
-
-<div class="pair">
-  <p class="ex">They made me wait.</p>
-  <p class="ex">I was made to wait.</p>
-</div>
-
-<h3>After help</h3>
-
-<p>Both forms are correct in many contexts.</p>
-
-<div class="pair">
-  <p class="ex">She helped me finish the task.</p>
-  <p class="ex">She helped me to finish the task.</p>
-</div>
-
-<h3>After verbs of perception</h3>
-
-<p>With verbs such as see, hear and watch, the bare infinitive can describe the whole action. The -ing form can emphasize an action in progress.</p>
-
-<div class="pair">
-  <p class="ex">I saw him cross the road.</p>
-  <p class="why">I saw the action as a whole.</p>
-  <p class="ex">I saw him crossing the road.</p>
-  <p class="why">I saw him while the action was in progress.</p>
-</div>
-
-<h2>7. Prepositions followed by -ing</h2>
-
-<p>When a preposition is followed by a verb, use the -ing form.</p>
-
-<div class="table-wrap">
-<table class="lesson-table">
-<thead>
-<tr>
-<th>Expression</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr><td>Interested in</td><td>I am interested in <b>learning</b> statistics.</td></tr>
-<tr><td>Good at</td><td>She is good at <b>explaining</b> ideas.</td></tr>
-<tr><td>Thinking of</td><td>He is thinking of <b>changing</b> jobs.</td></tr>
-<tr><td>Instead of</td><td>Try walking instead of <b>driving</b>.</td></tr>
-<tr><td>Before</td><td>Wash your hands before <b>eating</b>.</td></tr>
-<tr><td>After</td><td>After <b>finishing</b> work, I went home.</td></tr>
-<tr><td>By</td><td>You can improve by <b>practising</b>.</td></tr>
-<tr><td>Without</td><td>He left without <b>saying</b> goodbye.</td></tr>
-<tr><td>Despite</td><td>Despite <b>feeling</b> tired, she continued.</td></tr>
-</tbody>
-</table>
-</div>
-
-<h3>Why is "look forward to meeting" correct?</h3>
-
-<p>In this expression, <i>to</i> is a preposition, not an infinitive marker.</p>
-
-<div class="pair">
-  <p class="ex">I look forward to the holiday.</p>
-  <p class="ex">I look forward to meeting you.</p>
-  <p class="why">A noun can follow the preposition to. A verb must take -ing.</p>
-</div>
-
-<p>Other examples include:</p>
-
-<ul>
-  <li>She is used to <b>waking</b> up early.</li>
-  <li>He objected to <b>paying</b> extra fees.</li>
-  <li>They are committed to <b>improving</b> education.</li>
-  <li>In addition to <b>studying</b>, she works part-time.</li>
-</ul>
-
-<div class="tip-box">
-  <b>Exam tip:</b> Do not assume that every occurrence of <i>to</i> introduces an infinitive. First identify the complete expression.
-</div>
-
-<h2>8. To-infinitive for purpose</h2>
-
-<p>Use to + base verb to explain why someone does something.</p>
-
-<div class="pair">
-  <p class="ex">I went to the library to study.</p>
-  <p class="why">Why did I go? To study.</p>
-  <p class="ex">She saves money to buy a laptop.</p>
-  <p class="why">Why does she save money? To buy a laptop.</p>
-  <p class="ex">Governments should invest in transport to reduce congestion.</p>
-</div>
-
-<p>You can also use <i>in order to</i> or <i>so as to</i> for purpose.</p>
-
-<ul>
-  <li>Researchers collected additional data <b>in order to improve</b> accuracy.</li>
-  <li>He left early <b>so as to avoid</b> traffic.</li>
-</ul>
-
-<h2>9. Adjective patterns</h2>
-
-<p>Some adjectives are followed by a to-infinitive. Others are followed by a preposition and -ing.</p>
-
-<div class="table-wrap">
-<table class="lesson-table">
-<thead>
-<tr>
-<th>Pattern</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr><td>Happy + to</td><td>I am happy <b>to help</b>.</td></tr>
-<tr><td>Important + to</td><td>It is important <b>to rest</b>.</td></tr>
-<tr><td>Easy + to</td><td>This book is easy <b>to understand</b>.</td></tr>
-<tr><td>Ready + to</td><td>She is ready <b>to begin</b>.</td></tr>
-<tr><td>Interested + in</td><td>He is interested in <b>researching</b>.</td></tr>
-<tr><td>Good + at</td><td>She is good at <b>writing</b>.</td></tr>
-<tr><td>Afraid + of</td><td>He is afraid of <b>failing</b>.</td></tr>
-<tr><td>Used + to</td><td>I am used to <b>working</b> late.</td></tr>
-</tbody>
-</table>
-</div>
-
-<p>Learn the full expression, not just the adjective. For example, <i>happy to help</i> and <i>interested in helping</i> follow different patterns.</p>
-
-<h2>10. Verbs that accept both forms</h2>
-
-<p>Some verbs can be followed by either -ing or to + verb. Sometimes the meaning changes significantly.</p>
-
-<h3>Stop</h3>
-
-<div class="pair">
-  <p class="ex">I stopped smoking.</p>
-  <p class="why">I gave up the habit.</p>
-  <p class="ex">I stopped to smoke.</p>
-  <p class="why">I paused another activity in order to smoke.</p>
-</div>
-
-<h3>Remember</h3>
-
-<div class="pair">
-  <p class="ex">I remember meeting her.</p>
-  <p class="why">I have a memory of meeting her.</p>
-  <p class="ex">Remember to lock the door.</p>
-  <p class="why">Do not forget to perform the task.</p>
-</div>
-
-<h3>Forget</h3>
-
-<div class="pair">
-  <p class="ex">I forgot to call him.</p>
-  <p class="why">I failed to make the call.</p>
-  <p class="ex">I will never forget meeting him.</p>
-  <p class="why">I will always remember that experience.</p>
-</div>
-
-<h3>Try</h3>
-
-<div class="pair">
-  <p class="ex">Try restarting your phone.</p>
-  <p class="why">Test this as a possible solution.</p>
-  <p class="ex">I tried to restart my phone.</p>
-  <p class="why">I attempted to do it.</p>
-</div>
-
-<h3>Regret</h3>
-
-<div class="pair">
-  <p class="ex">I regret saying that.</p>
-  <p class="why">I am sorry about something I said.</p>
-  <p class="ex">We regret to inform you that your application was unsuccessful.</p>
-  <p class="why">A formal expression used when giving unwelcome news.</p>
-</div>
-
-<h3>Mean</h3>
-
-<div class="pair">
-  <p class="ex">This job means working late.</p>
-  <p class="why">Working late is part of the job.</p>
-  <p class="ex">I meant to call you.</p>
-  <p class="why">I intended to call you.</p>
-</div>
-
-<h3>Go on</h3>
-
-<div class="pair">
-  <p class="ex">She went on talking.</p>
-  <p class="why">She continued talking.</p>
-  <p class="ex">She went on to discuss the results.</p>
-  <p class="why">She moved to the next topic.</p>
-</div>
-
-<h3>Need</h3>
-
-<div class="pair">
-  <p class="ex">I need to clean the room.</p>
-  <p class="why">I must perform the cleaning.</p>
-  <p class="ex">The room needs cleaning.</p>
-  <p class="why">The room needs to be cleaned.</p>
-</div>
-
-<h3>Like, love, hate, start and begin</h3>
-
-<p>These verbs can often take either form with little difference in meaning.</p>
-
-<div class="pair">
-  <p class="ex">I like swimming.</p>
-  <p class="ex">I like to swim in the morning.</p>
-  <p class="why">The -ing form often emphasizes general enjoyment. The infinitive can emphasize a habit, choice or preference. The difference is not absolute.</p>
-</div>
-
-<h2>11. Advanced gerund forms</h2>
-
-<h3>Perfect gerund</h3>
-
-<p>Structure: <b>having + past participle</b>.</p>
-
-<div class="pair">
-  <p class="ex">He admitted having made a mistake.</p>
-  <p class="why">The mistake happened before the admission.</p>
-  <p class="ex">She denied having taken the money.</p>
-</div>
-
-<p>The perfect gerund can emphasize that an action happened before the action of the main verb. In many contexts, the simple gerund is also acceptable.</p>
-
-<h3>Passive gerund</h3>
-
-<p>Structure: <b>being + past participle</b>.</p>
-
-<div class="pair">
-  <p class="ex">He dislikes being criticized.</p>
-  <p class="ex">She is afraid of being misunderstood.</p>
-  <p class="ex">The report needs being checked.</p>
-  <p class="why">The last example is not natural in many varieties of English. Prefer: The report needs checking, or The report needs to be checked.</p>
-</div>
-
-<h3>Perfect passive gerund</h3>
-
-<p>Structure: <b>having been + past participle</b>.</p>
-
-<div class="pair">
-  <p class="ex">He complained about having been treated unfairly.</p>
-  <p class="why">The unfair treatment happened before the complaint.</p>
-</div>
-
-<h2>12. Advanced infinitive forms</h2>
-
-<div class="table-wrap">
-<table class="lesson-table">
-<thead>
-<tr>
-<th>Form</th>
-<th>Structure</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Simple infinitive</td>
-<td>to + base verb</td>
-<td>She hopes <b>to finish</b>.</td>
-</tr>
-<tr>
-<td>Continuous infinitive</td>
-<td>to be + -ing</td>
-<td>He seems <b>to be sleeping</b>.</td>
-</tr>
-<tr>
-<td>Perfect infinitive</td>
-<td>to have + past participle</td>
-<td>She seems <b>to have forgotten</b>.</td>
-</tr>
-<tr>
-<td>Passive infinitive</td>
-<td>to be + past participle</td>
-<td>The work needs <b>to be completed</b>.</td>
-</tr>
-<tr>
-<td>Perfect passive infinitive</td>
-<td>to have been + past participle</td>
-<td>He claims <b>to have been invited</b>.</td>
-</tr>
-</tbody>
-</table>
-</div>
-
-<p>These forms are more common in formal English, academic writing, and complex descriptions.</p>
-
-<h2>13. Gerunds and infinitives in IELTS</h2>
-
-<h3>IELTS Speaking</h3>
-
-<ul>
-  <li>I enjoy <b>reading</b> books in my free time.</li>
-  <li>I hope <b>to pursue</b> higher education abroad.</li>
-  <li>I am interested in <b>learning</b> about different cultures.</li>
-  <li>I would like <b>to improve</b> my communication skills.</li>
-</ul>
-
-<h3>IELTS Writing task 2</h3>
-
-<ul>
-  <li><b>Investing</b> in public transport can reduce traffic congestion.</li>
-  <li>Governments should aim <b>to improve</b> access to healthcare.</li>
-  <li>By <b>promoting</b> physical activity, cities can improve public health.</li>
-  <li>Many people avoid <b>using</b> public transport because of overcrowding.</li>
-  <li>It is essential <b>to address</b> the underlying causes of poverty.</li>
-</ul>
-
-<div class="tip-box">
-  <b>IELTS tip:</b> Accurate verb patterns are more valuable than using complicated structures incorrectly. Prioritize natural, grammatically correct sentences before trying to make every sentence advanced.
-</div>
-
-<h2>14. Common mistakes and corrections</h2>
-
-<div class="pair">
-  <p><del>I enjoy to read.</del></p>
-  <p><ins>I enjoy reading.</ins></p>
-  <p class="why">Enjoy + gerund.</p>
-</div>
-
-<div class="pair">
-  <p><del>She suggested to leave.</del></p>
-  <p><ins>She suggested leaving.</ins></p>
-  <p class="why">Suggest + gerund, or suggest that + clause.</p>
-</div>
-
-<div class="pair">
-  <p><del>I want going abroad.</del></p>
-  <p><ins>I want to go abroad.</ins></p>
-  <p class="why">Want + to-infinitive.</p>
-</div>
-
-<div class="pair">
-  <p><del>He is looking forward to meet you.</del></p>
-  <p><ins>He is looking forward to meeting you.</ins></p>
-  <p class="why">To is a preposition in this expression.</p>
-</div>
-
-<div class="pair">
-  <p><del>I am used to get up early.</del></p>
-  <p><ins>I am used to getting up early.</ins></p>
-  <p class="why">Be used to + noun or gerund.</p>
-</div>
-
-<div class="pair">
-  <p><del>I decided going abroad.</del></p>
-  <p><ins>I decided to go abroad.</ins></p>
-  <p class="why">Decide + to-infinitive.</p>
-</div>
-
-<div class="pair">
-  <p><del>She made me to laugh.</del></p>
-  <p><ins>She made me laugh.</ins></p>
-  <p class="why">Make + object + bare infinitive in active sentences.</p>
-</div>
-
-<div class="pair">
-  <p><del>I want that you help me.</del></p>
-  <p><ins>I want you to help me.</ins></p>
-  <p class="why">Want + person + to-infinitive.</p>
-</div>
-
-<div class="pair">
-  <p><del>He suggested me to apply.</del></p>
-  <p><ins>He suggested that I apply.</ins></p>
-  <p class="why">Suggest does not normally take the pattern suggest + person + to-infinitive.</p>
-</div>
-
-<div class="pair">
-  <p><del>She can to swim.</del></p>
-  <p><ins>She can swim.</ins></p>
-  <p class="why">Modal verbs take the bare infinitive.</p>
-</div>
-
-<h2>15. Used to, be used to and get used to</h2>
-
-<p>These three expressions look similar but have different meanings.</p>
-
-<div class="table-wrap">
-<table class="lesson-table">
-<thead>
-<tr>
-<th>Expression</th>
-<th>Meaning</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Used to + base verb</td>
-<td>A past habit or state</td>
-<td>I used to <b>play</b> cricket.</td>
-</tr>
-<tr>
-<td>Be used to + -ing</td>
-<td>Be accustomed to something</td>
-<td>I am used to <b>working</b> late.</td>
-</tr>
-<tr>
-<td>Get used to + -ing</td>
-<td>Become accustomed to something</td>
-<td>I am getting used to <b>waking</b> early.</td>
-</tr>
-</tbody>
-</table>
-</div>
-
-<div class="bn-box">
-  <b>সহজে মনে রাখুন:</b>
-  <ul>
-    <li><i>I used to wake up late.</i> আগে দেরিতে উঠতাম।</li>
-    <li><i>I am used to waking up early.</i> সকালে ওঠায় আমি অভ্যস্ত।</li>
-    <li><i>I am getting used to waking up early.</i> সকালে ওঠার অভ্যাস তৈরি হচ্ছে।</li>
-  </ul>
-</div>
-
-<h2>16. Quick revision checklist</h2>
-
-<div class="two">
-  <div>
-    <h3>Do</h3>
-    <ul>
-      <li>Learn verbs in patterns.</li>
-      <li>Use -ing after prepositions.</li>
-      <li>Use to-infinitives after verbs such as want and decide.</li>
-      <li>Use the bare infinitive after modals.</li>
-      <li>Check whether the meaning changes.</li>
-    </ul>
-  </div>
-  <div>
-    <h3>Don't</h3>
-    <ul>
-      <li>Write enjoy to read.</li>
-      <li>Write suggest him to go.</li>
-      <li>Write can to swim.</li>
-      <li>Assume every to introduces an infinitive.</li>
-      <li>Memorize rules without examples.</li>
-    </ul>
-  </div>
-</div>
-
-<h2>17. Practice: spot the mistake</h2>
-
-<ol class="practice-list">
-  <li>
-    I enjoy to read books.
-    <details>
-      <summary>Show answer</summary>
-      <p><ins>I enjoy reading books.</ins></p>
-      <p class="why">Enjoy is followed by -ing.</p>
-    </details>
-  </li>
-  <li>
-    She suggested to leave early.
-    <details>
-      <summary>Show answer</summary>
-      <p><ins>She suggested leaving early.</ins></p>
-      <p class="why">Suggest + gerund.</p>
-    </details>
-  </li>
-  <li>
-    I look forward to meet you.
-    <details>
-      <summary>Show answer</summary>
-      <p><ins>I look forward to meeting you.</ins></p>
-      <p class="why">To is a preposition in this expression.</p>
-    </details>
-  </li>
-  <li>
-    He made me to wait.
-    <details>
-      <summary>Show answer</summary>
-      <p><ins>He made me wait.</ins></p>
-      <p class="why">Make + object + bare infinitive.</p>
-    </details>
-  </li>
-  <li>
-    I am used to wake up early.
-    <details>
-      <summary>Show answer</summary>
-      <p><ins>I am used to waking up early.</ins></p>
-      <p class="why">Be used to + gerund or noun.</p>
-    </details>
-  </li>
-  <li>
-    She can to speak English.
-    <details>
-      <summary>Show answer</summary>
-      <p><ins>She can speak English.</ins></p>
-      <p class="why">Can + bare infinitive.</p>
-    </details>
-  </li>
-</ol>
-
-<h2>18. Fill in the gaps</h2>
-
-<ol class="practice-list">
-  <li>
-    I enjoy ___ (read) academic articles.
-    <details><summary>Show answer</summary><p><ins>reading</ins></p><p>Enjoy + -ing.</p></details>
-  </li>
-  <li>
-    She decided ___ (apply) for the scholarship.
-    <details><summary>Show answer</summary><p><ins>to apply</ins></p><p>Decide + to-infinitive.</p></details>
-  </li>
-  <li>
-    He is good at ___ (explain) difficult concepts.
-    <details><summary>Show answer</summary><p><ins>explaining</ins></p><p>At is a preposition.</p></details>
-  </li>
-  <li>
-    We went to the library ___ (study).
-    <details><summary>Show answer</summary><p><ins>to study</ins></p><p>To-infinitive expresses purpose.</p></details>
-  </li>
-  <li>
-    I look forward to ___ (meet) you.
-    <details><summary>Show answer</summary><p><ins>meeting</ins></p><p>To is a preposition.</p></details>
-  </li>
-  <li>
-    The teacher made us ___ (rewrite) the essay.
-    <details><summary>Show answer</summary><p><ins>rewrite</ins></p><p>Make + object + bare infinitive.</p></details>
-  </li>
-  <li>
-    She remembers ___ (visit) the museum as a child.
-    <details><summary>Show answer</summary><p><ins>visiting</ins></p><p>Remember + -ing describes a memory of a past experience.</p></details>
-  </li>
-  <li>
-    Remember ___ (submit) the application tomorrow.
-    <details><summary>Show answer</summary><p><ins>to submit</ins></p><p>Remember + to-infinitive refers to a task that must not be forgotten.</p></details>
-  </li>
-  <li>
-    The report needs ___ (check).
-    <details><summary>Show answer</summary><p><ins>checking</ins> or <ins>to be checked</ins></p><p>Both express that the report requires checking.</p></details>
-  </li>
-  <li>
-    He denied ___ (take) the documents.
-    <details><summary>Show answer</summary><p><ins>taking</ins>, or <ins>having taken</ins> if the earlier action needs emphasis.</p></details>
-  </li>
-</ol>
-
-<h2>19. Interactive quiz</h2>
-
-<p>Choose the best answer for each question. The quiz includes basic patterns, meaning changes, advanced forms, and IELTS-style sentences.</p>
-
-<div class="progress-track" aria-label="Quiz completion">
-  <div id="quiz-progress"></div>
-</div>
-
-<form id="qf">
-  <div id="qs"></div>
-  <p>
-    <button type="submit">Check my answers</button>
-    <button type="button" class="g" id="rs">Start again</button>
-  </p>
-  <p id="sc" aria-live="polite"><b></b></p>
-</form>
-
-<h2>20. Make the lesson stick</h2>
-
-<ul>
-  <li>Learn five to ten verb patterns every week.</li>
-  <li>Write your own sentences with enjoy, avoid, decide, hope and suggest.</li>
-  <li>Practise pairs such as stop smoking and stop to smoke.</li>
-  <li>Read your sentences aloud to build natural speaking habits.</li>
-  <li>Review incorrect quiz answers after one day, three days and one week.</li>
-  <li>Use gerunds and infinitives in short IELTS Speaking answers and Task 2 paragraphs.</li>
-</ul>
-
-<div class="bn-box">
-  <b>শেষ কথা:</b> Gerund এবং infinitive শেখার সবচেয়ে কার্যকর উপায় হলো verb-কে তার pattern-সহ শেখা। শুধু একটি নিয়ম মুখস্থ না করে উদাহরণ পড়ুন, নিজে বাক্য লিখুন এবং ভুলগুলো নিয়মিত সংশোধন করুন।
-</div>
-
-<div class="nav">
-  <a class="btn g" href="index.html#topics">All topics</a>
-  <a class="btn" href="punctuation.html">Next lesson</a>
-</div>
-
-</main>
-
-<script>
-const Q = [
-  [
-    "I enjoy ___.",
-    ["to read", "reading", "read"],
-    1,
-    "Enjoy is followed by a gerund: reading."
-  ],
-  [
-    "She decided ___ abroad.",
-    ["studying", "to study", "study"],
-    1,
-    "Decide is followed by a to-infinitive."
-  ],
-  [
-    "He is good at ___.",
-    ["to cook", "cooking", "cook"],
-    1,
-    "At is a preposition, so use the -ing form."
-  ],
-  [
-    "We went there ___ buy bread.",
-    ["for", "to", "buying"],
-    1,
-    "To buy explains the purpose of going there."
-  ],
-  [
-    "I look forward to ___ you.",
-    ["see", "seeing", "to see"],
-    1,
-    "To is a preposition in look forward to."
-  ],
-  [
-    "He made me ___.",
-    ["to wait", "wait", "waiting"],
-    1,
-    "Make + object + bare infinitive."
-  ],
-  [
-    "I stopped smoking means that I ___.",
-    ["paused to smoke", "gave up smoking", "started smoking"],
-    1,
-    "Stop + -ing means to stop or give up the activity."
-  ],
-  [
-    "She suggested ___ early.",
-    ["to leave", "leaving", "leave"],
-    1,
-    "Suggest is followed by a gerund or a that-clause."
-  ],
-  [
-    "I am used to ___ up early.",
-    ["get", "getting", "to get"],
-    1,
-    "Be used to + gerund means to be accustomed to something."
-  ],
-  [
-    "I want ___ me.",
-    ["that you help", "you to help", "you help"],
-    1,
-    "Want + person + to-infinitive."
-  ],
-  [
-    "Remember ___ the door before you leave.",
-    ["locking", "to lock", "lock"],
-    1,
-    "Remember + to-infinitive refers to a task you must not forget."
-  ],
-  [
-    "I remember ___ her at the conference.",
-    ["to meet", "meet", "meeting"],
-    2,
-    "Remember + -ing describes a memory of a past experience."
-  ],
-  [
-    "Try ___ the computer. It may solve the problem.",
-    ["restarting", "to restarting", "restart to"],
-    0,
-    "Try + -ing means to test a possible solution."
-  ],
-  [
-    "She encouraged me ___ for the scholarship.",
-    ["applying", "apply", "to apply"],
-    2,
-    "Encourage + person + to-infinitive."
-  ],
-  [
-    "The room needs ___.",
-    ["to cleaning", "cleaning", "clean"],
-    1,
-    "Need + -ing can have a passive meaning: the room needs to be cleaned."
-  ],
-  [
-    "He denied ___ the information.",
-    ["to share", "share", "having shared"],
-    2,
-    "Having shared is a perfect gerund that emphasizes an earlier action."
-  ],
-  [
-    "She seems ___ the instructions.",
-    ["to understand", "understanding", "understand"],
-    0,
-    "Seem is followed by a to-infinitive."
-  ],
-  [
-    "The application needs ___ before Friday.",
-    ["to submit", "to be submitted", "being submit"],
-    1,
-    "The passive infinitive is to be + past participle."
-  ],
-  [
-    "By ___ regularly, you can improve your writing.",
-    ["practise", "to practise", "practising"],
-    2,
-    "By is a preposition and is followed by -ing."
-  ],
-  [
-    "I regret ___ such a rude comment yesterday.",
-    ["to make", "making", "make"],
-    1,
-    "Regret + -ing expresses regret about something that happened."
-  ],
-  [
-    "We regret ___ you that the event has been cancelled.",
-    ["informing", "to inform", "inform"],
-    1,
-    "Regret + to-infinitive is used in formal announcements of unwelcome news."
-  ],
-  [
-    "She went on ___ about the same problem.",
-    ["talking", "to talk", "talk"],
-    0,
-    "Go on + -ing means to continue the same activity."
-  ],
-  [
-    "After explaining the method, the lecturer went on ___ the results.",
-    ["discussing", "to discuss", "discuss"],
-    1,
-    "Go on + to-infinitive means to move to a different or next activity."
-  ],
-  [
-    "Which sentence is correct?",
-    [
-      "She suggested him to apply.",
-      "She suggested applying.",
-      "She suggested to applying."
-    ],
-    1,
-    "Suggest + -ing is correct. You can also say she suggested that he apply."
-  ],
-  [
-    "Which sentence uses a passive gerund?",
-    [
-      "He dislikes criticizing.",
-      "He dislikes to criticize.",
-      "He dislikes being criticized."
-    ],
-    2,
-    "Being + past participle forms the passive gerund."
-  ],
-  [
-    "The researchers aim ___ the accuracy of their model.",
-    ["improving", "to improve", "improve"],
-    1,
-    "Aim is followed by a to-infinitive."
-  ],
-  [
-    "Which sentence expresses a past habit?",
-    [
-      "I am used to waking early.",
-      "I used to wake up early.",
-      "I am getting used to waking early."
-    ],
-    1,
-    "Used to + base verb describes a past habit or state."
-  ],
-  [
-    "He appears ___ the results already.",
-    ["to have understood", "understanding", "to understanding"],
-    0,
-    "The perfect infinitive can show that an action happened earlier."
-  ],
-  [
-    "Which sentence is correct?",
-    [
-      "She made me to rewrite the essay.",
-      "She made me rewriting the essay.",
-      "She made me rewrite the essay."
-    ],
-    2,
-    "Make + object + bare infinitive in an active sentence."
-  ],
-  [
-    "___ more exercise can improve public health.",
-    ["Taking", "To taking", "Take"],
-    0,
-    "A gerund can function as the subject of a sentence."
-  ]
-];
-
-const quizContainer = document.getElementById("qs");
-const quizForm = document.getElementById("qf");
-const scoreBox = document.getElementById("sc");
-const resetButton = document.getElementById("rs");
-const progressBar = document.getElementById("quiz-progress");
-
-function renderQuiz() {
-  quizContainer.innerHTML = "";
-
-  Q.forEach((item, index) => {
-    const questionBox = document.createElement("section");
-    questionBox.className = "quiz-item";
-    questionBox.id = "question-" + index;
-
-    const title = document.createElement("p");
-    title.textContent = (index + 1) + ". " + item[0];
-    questionBox.appendChild(title);
-
-    item[1].forEach((option, optionIndex) => {
-      const label = document.createElement("label");
-      const radio = document.createElement("input");
-
-      radio.type = "radio";
-      radio.name = "q" + index;
-      radio.value = optionIndex;
-      radio.addEventListener("change", updateProgress);
-
-      label.appendChild(radio);
-      label.appendChild(document.createTextNode(option));
-      questionBox.appendChild(label);
-    });
-
-    const feedback = document.createElement("div");
-    feedback.className = "quiz-feedback";
-    feedback.id = "feedback-" + index;
-    feedback.setAttribute("aria-live", "polite");
-    questionBox.appendChild(feedback);
-
-    quizContainer.appendChild(questionBox);
-  });
-
-  updateProgress();
-}
-
-function updateProgress() {
-  const answered = Q.reduce((total, item, index) => {
-    return total + (
-      quizForm.querySelector('input[name="q' + index + '"]:checked')
-        ? 1 : 0
-    );
-  }, 0);
-
-  progressBar.style.width = (answered / Q.length * 100) + "%";
-}
-
-quizForm.addEventListener("submit", function(event) {
-  event.preventDefault();
-
-  let score = 0;
-  let answered = 0;
-
-  Q.forEach((item, index) => {
-    const selected = quizForm.querySelector(
-      'input[name="q' + index + '"]:checked'
-    );
-
-    const feedback = document.getElementById("feedback-" + index);
-    const options = quizForm.querySelectorAll(
-      'input[name="q' + index + '"]'
-    );
-
-    feedback.className = "quiz-feedback";
-
-    options.forEach(option => {
-      option.disabled = true;
-    });
-
-    if (!selected) {
-      feedback.classList.add("incorrect");
-      feedback.textContent =
-        "Not answered. Correct answer: " +
-        item[1][item[2]] + ". " + item[3];
-      return;
-    }
-
-    answered++;
-
-    if (Number(selected.value) === item[2]) {
-      score++;
-      feedback.classList.add("correct");
-      feedback.textContent = "Correct. " + item[3];
-    } else {
-      feedback.classList.add("incorrect");
-      feedback.textContent =
-        "Not quite. Correct answer: " +
-        item[1][item[2]] + ". " + item[3];
-    }
-  });
-
-  const percentage = Math.round(score / Q.length * 100);
-
-  let message;
-
-  if (percentage >= 90) {
-    message = "Excellent work! You have a strong understanding of these patterns.";
-  } else if (percentage >= 75) {
-    message = "Very good. Review the explanations for the questions you missed.";
-  } else if (percentage >= 55) {
-    message = "Good progress. Revise the verb patterns and practise again.";
-  } else {
-    message = "Keep practising. Start with the basic patterns before moving to the advanced questions.";
-  }
-
-  scoreBox.innerHTML = "";
-
-  const scoreLine = document.createElement("strong");
-  scoreLine.textContent =
-    "Your score: " + score + "/" + Q.length + " (" + percentage + "%)";
-  scoreBox.appendChild(scoreLine);
-
-  const messageLine = document.createElement("p");
-  messageLine.textContent = message;
-  scoreBox.appendChild(messageLine);
-
-  const answeredLine = document.createElement("p");
-  answeredLine.textContent =
-    "Questions answered: " + answered + "/" + Q.length;
-  scoreBox.appendChild(answeredLine);
-
-  scoreBox.scrollIntoView({behavior: "smooth", block: "center"});
-});
-
-resetButton.addEventListener("click", function() {
-  quizForm.reset();
-
-  quizContainer.querySelectorAll("input").forEach(input => {
-    input.disabled = false;
-  });
-
-  quizContainer.querySelectorAll(".quiz-feedback").forEach(feedback => {
-    feedback.textContent = "";
-    feedback.className = "quiz-feedback";
-  });
-
-  scoreBox.innerHTML = "<b></b>";
-  updateProgress();
-
-  document.getElementById("qf").scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
-});
-
-renderQuiz();
-</script>
-
-<!-- Keep your existing reader.js and lesson.css files in the same folder. -->
-<!-- This page contains its own quiz, so quiz.js is not loaded a second time. -->
-
+  <main class="lesson-content">
+
+    <header class="lesson-hero">
+      <p><strong>IELTS Grammar Lab</strong> / Grammar lessons</p>
+      <h1>Gerunds and infinitives</h1>
+      <p>
+        Learn when to use <strong>verb + -ing</strong>, <strong>to + base verb</strong>,
+        and the <strong>bare infinitive</strong>. This lesson covers essential rules,
+        verb patterns, meaning differences, common mistakes, and IELTS applications.
+      </p>
+      <div>
+        <span class="level-label">Beginner</span>
+        <span class="level-label">Intermediate</span>
+        <span class="level-label">Advanced</span>
+        <span class="level-label">IELTS Academic</span>
+      </div>
+    </header>
+
+    <nav class="toc" aria-label="Table of contents">
+      <h2>Contents</h2>
+      <ul>
+        <li><a href="#basics">1. The basics</a></li>
+        <li><a href="#gerunds">2. Gerunds</a></li>
+        <li><a href="#infinitives">3. Infinitives</a></li>
+        <li><a href="#bare-infinitives">4. Bare infinitives</a></li>
+        <li><a href="#verb-patterns">5. Verb patterns</a></li>
+        <li><a href="#meaning-changes">6. Meaning changes</a></li>
+        <li><a href="#prepositions">7. Prepositions</a></li>
+        <li><a href="#advanced">8. Advanced forms</a></li>
+        <li><a href="#ielts">9. IELTS applications</a></li>
+        <li><a href="#mistakes">10. Common mistakes</a></li>
+        <li><a href="#practice">11. Practice exercises</a></li>
+        <li><a href="#quiz">12. Interactive quiz</a></li>
+        <li><a href="#checklist">13. Review checklist</a></li>
+      </ul>
+    </nav>
+
+    <section class="lesson-section" id="basics">
+      <h2>1. The basics</h2>
+
+      <p>
+        A gerund and an infinitive are two common forms of English verbs.
+        They can both function as subjects, objects, or complements, but
+        the grammatical pattern and meaning determine which form you need.
+      </p>
+
+      <div class="table-wrap">
+        <table class="lesson-table">
+          <thead>
+            <tr>
+              <th>Form</th>
+              <th>Structure</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Gerund</td>
+              <td>verb + -ing</td>
+              <td>Swimming is good exercise.</td>
+            </tr>
+            <tr>
+              <td>To-infinitive</td>
+              <td>to + base verb</td>
+              <td>I want to swim.</td>
+            </tr>
+            <tr>
+              <td>Bare infinitive</td>
+              <td>base verb without to</td>
+              <td>You should swim regularly.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Gerund versus present participle</h3>
+      <p>
+        Both forms end in <strong>-ing</strong>, but their grammatical functions differ.
+      </p>
+
+      <div class="example-card">
+        <p><strong>Gerund:</strong> <em>Reading</em> improves vocabulary.</p>
+        <p>The -ing form acts as a noun and is the subject of the sentence.</p>
+        <p><strong>Present participle:</strong> She is <em>reading</em> a novel.</p>
+        <p>The -ing form helps form the present continuous tense.</p>
+        <p><strong>Present participle as an adjective:</strong> It was an <em>interesting</em> lecture.</p>
+      </div>
+
+      <h3>How to form a gerund</h3>
+      <div class="table-wrap">
+        <table class="lesson-table">
+          <thead>
+            <tr>
+              <th>Rule</th>
+              <th>Base verb</th>
+              <th>-ing form</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Usually add -ing</td>
+              <td>work</td>
+              <td>working</td>
+            </tr>
+            <tr>
+              <td>Drop final silent -e</td>
+              <td>make</td>
+              <td>making</td>
+            </tr>
+            <tr>
+              <td>Double the final consonant in suitable cases</td>
+              <td>run</td>
+              <td>running</td>
+            </tr>
+            <tr>
+              <td>Change -ie to -y</td>
+              <td>lie</td>
+              <td>lying</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note-card">
+        <strong>Important:</strong> Spelling changes depend on the word and its final
+        letters. For example, <em>study → studying</em>, but <em>die → dying</em>.
+      </div>
+    </section>
+
+    <section class="lesson-section" id="gerunds">
+      <h2>2. Gerunds: verb + -ing</h2>
+
+      <h3>Rule 1: A gerund can be the subject of a sentence</h3>
+      <span class="formula">Gerund + verb + rest of sentence</span>
+
+      <div class="example-card">
+        <p><strong>Correct:</strong> Learning a language requires patience.</p>
+        <p><strong>Correct:</strong> Exercising regularly improves physical health.</p>
+        <p><strong>Correct:</strong> Collecting reliable data is essential for research.</p>
+      </div>
+
+      <h3>Rule 2: A gerund can be the object of a verb</h3>
+      <p>Some verbs are normally followed by a gerund rather than a to-infinitive.</p>
+
+      <div class="table-wrap">
+        <table class="lesson-table">
+          <thead>
+            <tr>
+              <th>Verb</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>admit</td><td>He admitted making a mistake.</td></tr>
+            <tr><td>avoid</td><td>Try to avoid making unsupported claims.</td></tr>
+            <tr><td>consider</td><td>The team considered changing the method.</td></tr>
+            <tr><td>deny</td><td>She denied copying the report.</td></tr>
+            <tr><td>enjoy</td><td>I enjoy reading academic articles.</td></tr>
+            <tr><td>finish</td><td>They finished collecting the data.</td></tr>
+            <tr><td>imagine</td><td>Imagine living without internet access.</td></tr>
+            <tr><td>keep</td><td>He kept asking questions.</td></tr>
+            <tr><td>mind</td><td>Would you mind opening the window?</td></tr>
+            <tr><td>miss</td><td>I miss working with that team.</td></tr>
+            <tr><td>postpone</td><td>They postponed publishing the results.</td></tr>
+            <tr><td>practise</td><td>She practises writing essays every day.</td></tr>
+            <tr><td>recommend</td><td>The researcher recommended collecting more data.</td></tr>
+            <tr><td>risk</td><td>We risk losing valuable information.</td></tr>
+            <tr><td>suggest</td><td>He suggested using a larger sample.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="warning-card">
+        <strong>Common error:</strong> Do not automatically use a to-infinitive after
+        every verb that describes an action.
+
+        <p class="incorrect">Incorrect: I enjoy to read.</p>
+        <p class="correct">Correct: I enjoy reading.</p>
+        <p><strong>Why?</strong> The verb <em>enjoy</em> is normally followed by a gerund.</p>
+      </div>
+
+      <h3>Rule 3: A gerund follows a preposition</h3>
+      <p>
+        When a verb comes immediately after a preposition, it normally takes the
+        -ing form.
+      </p>
+
+      <div class="example-card">
+        <ul>
+          <li>She is interested in <strong>learning</strong> statistics.</li>
+          <li>He left without <strong>saying</strong> goodbye.</li>
+          <li>They succeeded in <strong>reducing</strong> the error rate.</li>
+          <li>I am looking forward to <strong>meeting</strong> the team.</li>
+          <li>She apologised for <strong>arriving</strong> late.</li>
+        </ul>
+      </div>
+
+      <h3>Rule 4: A gerund follows a possessive or object in some expressions</h3>
+      <p>
+        A possessive adjective or noun can sometimes indicate who performs the action.
+      </p>
+
+      <div class="example-card">
+        <p>I appreciate <strong>your helping</strong> me.</p>
+        <p>We were surprised by <strong>John's leaving</strong> early.</p>
+        <p>In everyday English, <em>I appreciate you helping me</em> is also common.</p>
+      </div>
+
+      <h3>Rule 5: Gerunds follow common expressions</h3>
+      <div class="table-wrap">
+        <table class="lesson-table">
+          <thead>
+            <tr>
+              <th>Expression</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>It is worth</td><td>It is worth reading the full report.</td></tr>
+            <tr><td>There is no point in</td><td>There is no point in arguing about it.</td></tr>
+            <tr><td>Cannot help</td><td>I cannot help laughing at that joke.</td></tr>
+            <tr><td>Feel like</td><td>I feel like taking a short break.</td></tr>
+            <tr><td>Have difficulty</td><td>She has difficulty understanding the graph.</td></tr>
+            <tr><td>Spend time</td><td>He spends two hours studying every evening.</td></tr>
+            <tr><td>Be busy</td><td>They are busy preparing the presentation.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="infinitives">
+      <h2>3. To-infinitives: to + base verb</h2>
+
+      <h3>Rule 1: Use a to-infinitive to express purpose</h3>
+      <span class="formula">Subject + verb + to + base verb</span>
+
+      <div class="example-card">
+        <p>I study English <strong>to improve</strong> my communication skills.</p>
+        <p>The government introduced the policy <strong>to reduce</strong> pollution.</p>
+        <p>Researchers collected additional data <strong>to validate</strong> the model.</p>
+      </div>
+
+      <p>
+        You can often use <em>in order to</em> or <em>so as to</em> for a more explicit
+        expression of purpose.
+      </p>
+
+      <div class="example-card">
+        <p>They expanded the sample <strong>in order to improve</strong> reliability.</p>
+        <p>She left early <strong>so as to avoid</strong> the traffic.</p>
+      </div>
+
+      <h3>Rule 2: Use a to-infinitive after certain verbs</h3>
+      <div class="table-wrap">
+        <table class="lesson-table">
+          <thead>
+            <tr>
+              <th>Verb</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>agree</td><td>They agreed to cooperate.</td></tr>
+            <tr><td>aim</td><td>The study aims to identify key risk factors.</td></tr>
+            <tr><td>choose</td><td>She chose to study statistics.</td></tr>
+            <tr><td>decide</td><td>We decided to conduct another analysis.</td></tr>
+            <tr><td>expect</td><td>Experts expect temperatures to rise.</td></tr>
+            <tr><td>fail</td><td>He failed to submit the form.</td></tr>
+            <tr><td>hope</td><td>I hope to pursue further research.</td></tr>
+            <tr><td>learn</td><td>She learned to interpret the results.</td></tr>
+            <tr><td>manage</td><td>They managed to complete the project.</td></tr>
+            <tr><td>offer</td><td>He offered to help.</td></tr>
+            <tr><td>plan</td><td>We plan to publish the findings.</td></tr>
+            <tr><td>prepare</td><td>They prepared to present their results.</td></tr>
+            <tr><td>promise</td><td>She promised to send the document.</td></tr>
+            <tr><td>refuse</td><td>He refused to answer.</td></tr>
+            <tr><td>seem</td><td>The findings seem to support the hypothesis.</td></tr>
+            <tr><td>want</td><td>I want to improve my writing.</td></tr>
+            <tr><td>would like</td><td>I would like to discuss the proposal.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Rule 3: Use a to-infinitive after adjectives</h3>
+      <div class="example-card">
+        <ul>
+          <li>It is important <strong>to check</strong> the source.</li>
+          <li>She was delighted <strong>to receive</strong> the offer.</li>
+          <li>The problem is difficult <strong>to solve</strong>.</li>
+          <li>I am pleased <strong>to meet</strong> you.</li>
+          <li>It is essential <strong>to protect</strong> patient confidentiality.</li>
+        </ul>
+      </div>
+
+      <h3>Rule 4: Use a to-infinitive after question words</h3>
+      <p>Common patterns include <em>what to do</em>, <em>how to begin</em>, and <em>where to go</em>.</p>
+
+      <div class="example-card">
+        <p>I do not know <strong>what to write</strong>.</p>
+        <p>She explained <strong>how to use</strong> the software.</p>
+        <p>They could not decide <strong>where to meet</strong>.</p>
+        <p>He showed us <strong>which file to open</strong>.</p>
+      </div>
+
+      <h3>Rule 5: Use a to-infinitive after nouns and pronouns in suitable patterns</h3>
+      <div class="example-card">
+        <p>I need something <strong>to drink</strong>.</p>
+        <p>She was the first person <strong>to arrive</strong>.</p>
+        <p>We have several issues <strong>to discuss</strong>.</p>
+        <p>The team needs a method <strong>to estimate</strong> the missing values.</p>
+      </div>
+
+      <h3>Rule 6: Use too and enough with a to-infinitive</h3>
+      <div class="table-wrap">
+        <table class="lesson-table">
+          <thead>
+            <tr>
+              <th>Pattern</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>too + adjective + to-infinitive</td><td>The box is too heavy to lift.</td></tr>
+            <tr><td>adjective + enough + to-infinitive</td><td>She is confident enough to present.</td></tr>
+            <tr><td>enough + noun + to-infinitive</td><td>We have enough evidence to proceed.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="bare-infinitives">
+      <h2>4. Bare infinitives: the base verb without to</h2>
+
+      <h3>Rule 1: Use a bare infinitive after modal verbs</h3>
+      <p>Modal verbs include can, could, may, might, must, shall, should, will, and would.</p>
+
+      <div class="example-card">
+        <p>You should <strong>revise</strong> your essay.</p>
+        <p>Researchers must <strong>report</strong> their methods clearly.</p>
+        <p>She can <strong>analyse</strong> the data independently.</p>
+        <p>The results may <strong>indicate</strong> a seasonal pattern.</p>
+      </div>
+
+      <p class="incorrect">Incorrect: You should to revise your essay.</p>
+      <p class="correct">Correct: You should revise your essay.</p>
+
+      <h3>Rule 2: Use a bare infinitive after make and let</h3>
+      <div class="example-card">
+        <p>The evidence made us <strong>reconsider</strong> the conclusion.</p>
+        <p>My supervisor let me <strong>choose</strong> the topic.</p>
+      </div>
+
+      <p>
+        In the passive voice, <em>make</em> is followed by a to-infinitive.
+      </p>
+      <div class="example-card">
+        <p>Active: The teacher made him <strong>rewrite</strong> the essay.</p>
+        <p>Passive: He was made <strong>to rewrite</strong> the essay.</p>
+      </div>
+
+      <h3>Rule 3: Use a bare infinitive after certain perception verbs</h3>
+      <p>
+        Verbs such as <em>see</em>, <em>hear</em>, <em>watch</em>, and <em>feel</em>
+        can be followed by an object and a bare infinitive when the whole action is perceived.
+      </p>
+
+      <div class="example-card">
+        <p>I saw him <strong>cross</strong> the road.</p>
+        <p>We heard the audience <strong>applaud</strong>.</p>
+      </div>
+
+      <p>
+        The -ing form can emphasise an action in progress rather than the complete event.
+      </p>
+      <div class="example-card">
+        <p>I saw him <strong>crossing</strong> the road.</p>
+        <p>This focuses on the action as it was happening; it does not necessarily imply
+        that the speaker witnessed the entire crossing.</p>
+      </div>
+
+      <h3>Rule 4: Use a bare infinitive after had better and would rather</h3>
+      <div class="example-card">
+        <p>You had better <strong>leave</strong> now.</p>
+        <p>I would rather <strong>stay</strong> at home.</p>
+        <p>We would rather <strong>analyse</strong> the original data.</p>
+      </div>
+
+      <div class="note-card">
+        <strong>Remember:</strong> <em>Ought to</em> is different. It takes a to-infinitive:
+        <em>You ought to check the results.</em>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="verb-patterns">
+      <h2>5. Verbs followed by a gerund or infinitive</h2>
+
+      <h3>Some verbs allow both forms with little change in meaning</h3>
+      <div class="table-wrap">
+        <table class="lesson-table">
+          <thead>
+            <tr>
+              <th>Verb</th>
+              <th>Gerund</th>
+              <th>To-infinitive</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>begin</td>
+              <td>It began raining.</td>
+              <td>It began to rain.</td>
+            </tr>
+            <tr>
+              <td>continue</td>
+              <td>She continued working.</td>
+              <td>She continued to work.</td>
+            </tr>
+            <tr>
+              <td>hate</td>
+              <td>I hate waiting.</td>
+              <td>I hate to interrupt.</td>
+            </tr>
+            <tr>
+              <td>like</td>
+              <td>I like reading.</td>
+              <td>I like to read before bed.</td>
+            </tr>
+            <tr>
+              <td>love</td>
+              <td>He loves travelling.</td>
+              <td>He loves to travel.</td>
+            </tr>
+            <tr>
+              <td>prefer</td>
+              <td>I prefer walking.</td>
+              <td>I prefer to walk.</td>
+            </tr>
+            <tr>
+              <td>start</td>
+              <td>It started snowing.</td>
+              <td>It started to snow.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        With <em>like</em>, <em>love</em>, <em>hate</em>, and <em>prefer</em>,
+        the gerund often describes enjoyment or general preference. The to-infinitive
+        can describe a habit, choice, or action viewed in a particular situation.
+        The difference is not absolute.
+      </p>
+
+      <h3>Some verbs can take an object before the to-infinitive</h3>
+      <span class="formula">Verb + object + to-infinitive</span>
+
+      <div class="table-wrap">
+        <table class="lesson-table">
+          <thead>
+            <tr>
+              <th>Verb pattern</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>advise someone to do</td><td>The doctor advised him to rest.</td></tr>
+            <tr><td>allow someone to do</td><td>The policy allows students to work part-time.</td></tr>
+            <tr><td>ask someone to do</td><td>She asked me to review the draft.</td></tr>
+            <tr><td>encourage someone to do</td><td>The teacher encouraged us to practise.</td></tr>
+            <tr><td>expect someone to do</td><td>We expect the model to perform well.</td></tr>
+            <tr><td>invite someone to do</td><td>They invited her to present the findings.</td></tr>
+            <tr><td>persuade someone to do</td><td>He persuaded them to reconsider.</td></tr>
+            <tr><td>remind someone to do</td><td>Please remind me to send the email.</td></tr>
+            <tr><td>teach someone to do</td><td>She taught me to use the software.</td></tr>
+            <tr><td>want someone to do</td><td>I want you to check the calculation.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Some verbs take an object followed by a bare infinitive</h3>
+      <div class="example-card">
+        <p>The teacher made the students <strong>rewrite</strong> the paragraph.</p>
+        <p>Let the participants <strong>finish</strong> their answers.</p>
+        <p>We watched the children <strong>play</strong> outside.</p>
+      </div>
+
+      <h3>Some verbs have different patterns depending on their meaning</h3>
+      <p>
+        For example, <em>remember</em>, <em>forget</em>, <em>stop</em>, <em>try</em>,
+        <em>regret</em>, and <em>go on</em> can change meaning depending on the form that follows.
+      </p>
+      <p>Study these contrasts in the next section.</p>
+    </section>
+
+    <section class="lesson-section" id="meaning-changes">
+      <h2>6. Gerunds and infinitives that change meaning</h2>
+
+      <h3>Remember doing versus remember to do</h3>
+      <div class="table-wrap">
+        <table class="lesson-table">
+          <thead>
+            <tr>
+              <th>Pattern</th>
+              <th>Meaning</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>remember + gerund</td>
+              <td>Recall a past action</td>
+              <td>I remember meeting her at the conference.</td>
+            </tr>
+            <tr>
+              <td>remember + to-infinitive</td>
+              <td>Remember that a task must be done</td>
+              <td>Remember to submit the application.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Forget doing versus forget to do</h3>
+      <div class="example-card">
+        <p><strong>Forget + gerund:</strong> I will never forget visiting the museum.</p>
+        <p>This means that the speaker will always remember the experience.</p>
+        <p><strong>Forget + to-infinitive:</strong> I forgot to lock the door.</p>
+        <p>This means that the speaker failed to perform the task.</p>
+      </div>
+
+      <h3>Stop doing versus stop to do</h3>
+      <div class="example-card">
+        <p><strong>Stop + gerund:</strong> He stopped smoking.</p>
+        <p>He quit the habit.</p>
+        <p><strong>Stop + to-infinitive:</strong> He stopped to smoke.</p>
+        <p>He stopped another activity in order to smoke.</p>
+      </div>
+
+      <h3>Try doing versus try to do</h3>
+      <div class="example-card">
+        <p><strong>Try + gerund:</strong> Try restarting the computer.</p>
+        <p>Experiment with this as a possible solution.</p>
+        <p><strong>Try + to-infinitive:</strong> I tried to lift the box.</p>
+        <p>Make an effort to do something, whether or not it succeeds.</p>
+      </div>
+
+      <h3>Regret doing versus regret to do</h3>
+      <div class="example-card">
+        <p><strong>Regret + gerund:</strong> She regrets leaving the job.</p>
+        <p>She feels sorry about a past action.</p>
+        <p><strong>Regret + to-infinitive:</strong> We regret to inform you that your application was unsuccessful.</p>
+        <p>This is a formal expression used when giving unwelcome information.</p>
+      </div>
+
+      <h3>Go on doing versus go on to do</h3>
+      <div class="example-card">
+        <p><strong>Go on + gerund:</strong> He went on talking for another hour.</p>
+        <p>He continued the same activity.</p>
+        <p><strong>Go on + to-infinitive:</strong> After discussing the problem, she went on to explain the solution.</p>
+        <p>She moved to a different activity or stage.</p>
+      </div>
+
+      <h3>Mean doing versus mean to do</h3>
+      <div class="example-card">
+        <p><strong>Mean + gerund:</strong> Taking this job means moving to another city.</p>
+        <p>Moving is a consequence or requirement of taking the job.</p>
+        <p><strong>Mean + to-infinitive:</strong> I meant to call you yesterday.</p>
+        <p>I intended to call, but perhaps I did not.</p>
+      </div>
+
+      <h3>Need doing versus need to do</h3>
+      <div class="example-card">
+        <p><strong>Need + gerund:</strong> The report needs editing.</p>
+        <p>The report needs to be edited.</p>
+        <p><strong>Need + to-infinitive:</strong> I need to edit the report.</p>
+        <p>I must perform the action.</p>
+      </div>
+
+      <h3>Compare the patterns</h3>
+      <div class="table-wrap">
+        <table class="lesson-table">
+          <thead>
+            <tr>
+              <th>Verb</th>
+              <th>Verb + -ing</th>
+              <th>Verb + to-infinitive</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>remember</td>
+              <td>Recall a past event</td>
+              <td>Remember a task</td>
+            </tr>
+            <tr>
+              <td>forget</td>
+              <td>Fail to retain a memory</td>
+              <td>Fail to perform a task</td>
+            </tr>
+            <tr>
+              <td>stop</td>
+              <td>End an activity</td>
+              <td>Pause another activity to do something</td>
+            </tr>
+            <tr>
+              <td>try</td>
+              <td>Experiment with a method</td>
+              <td>Make an effort</td>
+            </tr>
+            <tr>
+              <td>regret</td>
+              <td>Feel sorry about an action</td>
+              <td>Formally introduce unwelcome news or a difficult statement</td>
+            </tr>
+            <tr>
+              <td>go on</td>
+              <td>Continue the same activity</td>
+              <td>Move to another activity or stage</td>
+            </tr>
+            <tr>
+              <td>mean</td>
+              <td>Involve or entail</td>
+              <td>Intend</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="prepositions">
+      <h2>7. Prepositions, fixed expressions, and infinitives</h2>
+
+      <h3>The important difference: preposition to versus infinitive to</h3>
+      <p>
+        The word <em>to</em> does not always introduce an infinitive. Sometimes it is
+        a preposition. When it is a preposition, a following verb normally takes the -ing form.
+      </p>
+
+      <div class="table-wrap">
+        <table class="lesson-table">
+          <thead>
+            <tr>
+              <th>Expression</th>
+              <th>Correct pattern</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>look forward to</td>
+              <td>to + gerund</td>
+              <td>I look forward to hearing from you.</td>
+            </tr>
+            <tr>
+              <td>be used to</td>
+              <td>to + gerund or noun</td>
+              <td>She is used to working under pressure.</td>
+            </tr>
+            <tr>
+              <td>get around to</td>
+              <td>to + gerund</td>
+              <td>I finally got around to writing the report.</td>
+            </tr>
+            <tr>
+              <td>object to</td>
+              <td>to + gerund</td>
+              <td>They objected to changing the schedule.</td>
+            </tr>
+            <tr>
+              <td>devote time to</td>
+              <td>to + gerund or noun</td>
+              <td>She devotes time to learning English.</td>
+            </tr>
+            <tr>
+              <td>in addition to</td>
+              <td>to + gerund or noun</td>
+              <td>In addition to teaching, he conducts research.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="warning-card">
+        <p class="incorrect">Incorrect: I look forward to meet you.</p>
+        <p class="correct">Correct: I look forward to meeting you.</p>
+        <p><strong>Why?</strong> In this expression, <em>to</em> is a preposition.</p>
+      </div>
+
+      <h3>Be used to versus used to</h3>
+      <div class="table-wrap">
+        <table class="lesson-table">
+          <thead>
+            <tr>
+              <th>Structure</th>
+              <th>Meaning</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>used to + base verb</td>
+              <td>A past habit or state that is no longer true</td>
+              <td>I used to walk to school.</td>
+            </tr>
+            <tr>
+              <td>be used to + gerund/noun</td>
+              <td>Be accustomed to something</td>
+              <td>I am used to walking long distances.</td>
+            </tr>
+            <tr>
+              <td>get used to + gerund/noun</td>
+              <td>Become accustomed to something</td>
+              <td>I am getting used to working remotely.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Adjective + preposition + gerund</h3>
+      <div class="example-card">
+        <ul>
+          <li>She is interested in <strong>conducting</strong> research.</li>
+          <li>He is good at <strong>solving</strong> statistical problems.</li>
+          <li>They are responsible for <strong>managing</strong> the project.</li>
+          <li>I am worried about <strong>missing</strong> the deadline.</li>
+          <li>We are committed to <strong>improving</strong> public health.</li>
+          <li>She is capable of <strong>handling</strong> complex datasets.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="advanced">
+      <h2>8. Advanced gerund and infinitive forms</h2>
+
+      <h3>Perfect gerund</h3>
+      <span class="formula">having + past participle</span>
+      <p>
+        A perfect gerund can emphasise that an action happened before the action
+        expressed by the main verb.
+      </p>
+
+      <div class="example-card">
+        <p>He denied <strong>having copied</strong> the material.</p>
+        <p>She regretted <strong>having ignored</strong> the advice.</p>
+        <p>They admitted <strong>having made</strong> an error.</p>
+      </div>
+
+      <h3>Passive gerund</h3>
+      <span class="formula">being + past participle</span>
+      <div class="example-card">
+        <p>He dislikes <strong>being interrupted</strong>.</p>
+        <p>The report needs <strong>being checked</strong> is not the usual standard pattern in most varieties of English. Prefer <strong>checking</strong> or <strong>to be checked</strong>, depending on the intended meaning.</p>
+        <p>She appreciates <strong>being included</strong> in the discussion.</p>
+      </div>
+
+      <h3>Perfect passive gerund</h3>
+      <span class="formula">having been + past participle</span>
+      <div class="example-card">
+        <p>He resented <strong>having been excluded</strong> from the meeting.</p>
+        <p>She denied <strong>having been informed</strong> about the change.</p>
+      </div>
+
+      <h3>Perfect infinitive</h3>
+      <span class="formula">to have + past participle</span>
+      <p>
+        The perfect infinitive can refer to an action that happened before the
+        time expressed by the main verb.
+      </p>
+      <div class="example-card">
+        <p>She seems <strong>to have misunderstood</strong> the instructions.</p>
+        <p>He claims <strong>to have completed</strong> the analysis.</p>
+        <p>The team appears <strong>to have identified</strong> a new risk factor.</p>
+      </div>
+
+      <h3>Passive infinitive</h3>
+      <span class="formula">to be + past participle</span>
+      <div class="example-card">
+        <p>The results need <strong>to be verified</strong>.</p>
+        <p>She hopes <strong>to be selected</strong> for the programme.</p>
+        <p>The paper is expected <strong>to be published</strong> next year.</p>
+      </div>
+
+      <h3>Perfect passive infinitive</h3>
+      <span class="formula">to have been + past participle</span>
+      <div class="example-card">
+        <p>The data appear <strong>to have been collected</strong> incorrectly.</p>
+        <p>The findings are believed <strong>to have been influenced</strong> by seasonal variation.</p>
+      </div>
+
+      <h3>Negative gerunds and infinitives</h3>
+      <p>Place <em>not</em> before the gerund or infinitive phrase.</p>
+      <div class="example-card">
+        <p><strong>Not + gerund:</strong> He admitted not knowing the answer.</p>
+        <p><strong>Not + to-infinitive:</strong> She decided not to participate.</p>
+        <p><strong>Not + perfect gerund:</strong> He denied not having received the email.</p>
+      </div>
+
+      <h3>Split infinitives</h3>
+      <p>
+        A split infinitive occurs when a word, often an adverb, comes between
+        <em>to</em> and the base verb.
+      </p>
+      <div class="example-card">
+        <p>The team hopes <strong>to quickly identify</strong> the source of the problem.</p>
+        <p>This is acceptable in modern English when it sounds natural and keeps the intended meaning clear.</p>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="ielts">
+      <h2>9. Using gerunds and infinitives in IELTS</h2>
+
+      <h3>IELTS Writing Task 1</h3>
+      <div class="example-card">
+        <p>The chart illustrates the proportion of people <strong>using</strong> public transport.</p>
+        <p>The percentage continued <strong>to increase</strong> over the period.</p>
+        <p>The figure began <strong>to decline</strong> after 2015.</p>
+        <p>Collecting accurate data is essential for interpreting the trend.</p>
+      </div>
+
+      <h3>IELTS Writing Task 2</h3>
+      <div class="example-card">
+        <p><strong>Gerund as subject:</strong> Investing in public transport can reduce congestion.</p>
+        <p><strong>Purpose infinitive:</strong> Governments should improve cycling facilities to encourage sustainable travel.</p>
+        <p><strong>Verb pattern:</strong> Many researchers recommend introducing evidence-based policies.</p>
+        <p><strong>Preposition + gerund:</strong> By improving access to education, societies can reduce inequality.</p>
+        <p><strong>Advanced pattern:</strong> Authorities need to consider the long-term consequences of expanding urban areas.</p>
+      </div>
+
+      <h3>IELTS Speaking</h3>
+      <div class="example-card">
+        <p>I enjoy <strong>reading</strong> because it helps me expand my vocabulary.</p>
+        <p>I hope <strong>to pursue</strong> a career in research.</p>
+        <p>I used to <strong>spend</strong> more time watching television, but now I prefer reading.</p>
+        <p>I am interested in <strong>learning</strong> about different cultures.</p>
+      </div>
+
+      <h3>Academic and research writing</h3>
+      <div class="example-card">
+        <p>The study aims <strong>to investigate</strong> the association between climate and disease incidence.</p>
+        <p>Using spatial data can help researchers identify high-risk areas.</p>
+        <p>The authors recommend <strong>conducting</strong> further longitudinal studies.</p>
+        <p>The analysis was designed <strong>to evaluate</strong> the predictive performance of several models.</p>
+        <p>After <strong>adjusting</strong> for potential confounders, the association remained statistically significant.</p>
+      </div>
+
+      <div class="tip-card">
+        <strong>IELTS tip:</strong> Use gerunds and infinitives accurately rather than
+        forcing complicated structures into every sentence. Clear grammar, precise
+        vocabulary, logical development, and appropriate sentence variety are more
+        valuable than unnecessary complexity.
+      </div>
+    </section>
+
+    <section class="lesson-section" id="mistakes">
+      <h2>10. Common mistakes and corrections</h2>
+
+      <div class="table-wrap">
+        <table class="lesson-table">
+          <thead>
+            <tr>
+              <th>Incorrect</th>
+              <th>Correct</th>
+              <th>Explanation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>I enjoy to read.</td>
+              <td>I enjoy reading.</td>
+              <td>Enjoy is followed by a gerund.</td>
+            </tr>
+            <tr>
+              <td>She suggested to go.</td>
+              <td>She suggested going.</td>
+              <td>Suggest is normally followed by a gerund or a that-clause.</td>
+            </tr>
+            <tr>
+              <td>He wants going home.</td>
+              <td>He wants to go home.</td>
+              <td>Want is followed by a to-infinitive.</td>
+            </tr>
+            <tr>
+              <td>I look forward to meet you.</td>
+              <td>I look forward to meeting you.</td>
+              <td>Here, to is a preposition.</td>
+            </tr>
+            <tr>
+              <td>You should to study.</td>
+              <td>You should study.</td>
+              <td>A modal verb takes a bare infinitive.</td>
+            </tr>
+            <tr>
+              <td>She made me to apologise.</td>
+              <td>She made me apologise.</td>
+              <td>Active make + object takes a bare infinitive.</td>
+            </tr>
+            <tr>
+              <td>He avoided to answer.</td>
+              <td>He avoided answering.</td>
+              <td>Avoid is followed by a gerund.</td>
+            </tr>
+            <tr>
+              <td>They decided going home.</td>
+              <td>They decided to go home.</td>
+              <td>Decide is normally followed by a to-infinitive.</td>
+            </tr>
+            <tr>
+              <td>I am used to wake up early.</td>
+              <td>I am used to waking up early.</td>
+              <td>Be used to takes a noun or gerund.</td>
+            </tr>
+            <tr>
+              <td>I stopped to smoke last year.</td>
+              <td>I stopped smoking last year.</td>
+              <td>Stopping smoking means quitting the habit.</td>
+            </tr>
+            <tr>
+              <td>He suggested me to apply.</td>
+              <td>He suggested that I apply.</td>
+              <td>Suggest does not normally use this object + infinitive pattern.</td>
+            </tr>
+            <tr>
+              <td>She is interested to learn English.</td>
+              <td>She is interested in learning English.</td>
+              <td>Interested in is followed by a noun or gerund.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Three questions to ask yourself</h3>
+      <ol>
+        <li>Does the preceding verb require a gerund or an infinitive?</li>
+        <li>Is the word <em>to</em> a preposition or part of an infinitive?</li>
+        <li>Does changing the form change the meaning?</li>
+      </ol>
+    </section>
+
+    <section class="lesson-section" id="practice">
+      <h2>11. Practice exercises</h2>
+      <p>Complete each sentence with the correct form of the verb in brackets.</p>
+
+      <ol class="grammar-list">
+        <li>She enjoys ________ (read) scientific articles.</li>
+        <li>We decided ________ (conduct) another survey.</li>
+        <li>He apologised for ________ (arrive) late.</li>
+        <li>They made us ________ (wait) outside.</li>
+        <li>I look forward to ________ (hear) from you.</li>
+        <li>Remember ________ (lock) the door before leaving.</li>
+        <li>He stopped ________ (smoke) because of health concerns.</li>
+        <li>She tried ________ (restart) the computer to fix the issue.</li>
+        <li>The report needs ________ (revise).</li>
+        <li>It is important ________ (check) the results carefully.</li>
+      </ol>
+
+      <div class="answer-key">
+        <details>
+          <summary>Show answers and explanations</summary>
+          <ol>
+            <li><strong>reading:</strong> Enjoy is followed by a gerund.</li>
+            <li><strong>to conduct:</strong> Decide is followed by a to-infinitive.</li>
+            <li><strong>arriving:</strong> A verb after the preposition for takes the -ing form.</li>
+            <li><strong>wait:</strong> Active make + object takes a bare infinitive.</li>
+            <li><strong>hearing:</strong> To is a preposition in look forward to.</li>
+            <li><strong>to lock:</strong> Remember to do something means remember a task that must be performed.</li>
+            <li><strong>smoking:</strong> Stop smoking means quit the habit.</li>
+            <li><strong>restarting:</strong> Try doing something means test a possible solution.</li>
+            <li><strong>revising / to be revised:</strong> The report needs revising or needs to be revised.</li>
+            <li><strong>to check:</strong> The adjective pattern important + to-infinitive is correct.</li>
+          </ol>
+        </details>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="quiz">
+      <h2>12. Interactive quiz</h2>
+      <p>
+        Choose the best answer for each question. Submit your answers to receive
+        your score and explanations. There are 30 questions covering beginner,
+        intermediate, and advanced grammar.
+      </p>
+
+      <div class="quiz-container">
+        <div id="quiz-status" aria-live="polite">30 questions · One point per question</div>
+        <div class="quiz-progress" aria-hidden="true">
+          <div class="quiz-progress-bar" id="quiz-progress-bar"></div>
+        </div>
+
+        <form id="grammar-quiz">
+          <div id="quiz-questions"></div>
+          <div class="quiz-actions">
+            <button class="quiz-btn" type="submit">Check my answers</button>
+            <button class="quiz-btn secondary" type="button" id="reset-quiz">Try again</button>
+          </div>
+        </form>
+
+        <div id="quiz-result" class="quiz-result" hidden aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="checklist">
+      <h2>13. Review checklist</h2>
+      <p>Use this checklist to track your progress.</p>
+
+      <label class="completion-check">
+        <input type="checkbox">
+        <span>I can identify gerunds, to-infinitives, and bare infinitives.</span>
+      </label>
+
+      <label class="completion-check">
+        <input type="checkbox">
+        <span>I know which common verbs are followed by a gerund.</span>
+      </label>
+
+      <label class="completion-check">
+        <input type="checkbox">
+        <span>I know which common verbs are followed by a to-infinitive.</span>
+      </label>
+
+      <label class="completion-check">
+        <input type="checkbox">
+        <span>I can use a gerund after a preposition.</span>
+      </label>
+
+      <label class="completion-check">
+        <input type="checkbox">
+        <span>I understand the difference between remember doing and remember to do.</span>
+      </label>
+
+      <label class="completion-check">
+        <input type="checkbox">
+        <span>I can distinguish used to, be used to, and get used to.</span>
+      </label>
+
+      <label class="completion-check">
+        <input type="checkbox">
+        <span>I can use gerunds and infinitives accurately in IELTS writing and speaking.</span>
+      </label>
+
+      <div class="tip-card">
+        <strong>Final advice:</strong> Learn verbs together with their patterns.
+        Instead of memorising only <em>enjoy</em>, learn <em>enjoy doing</em>.
+        Instead of memorising only <em>decide</em>, learn <em>decide to do</em>.
+        Practise with complete sentences and review your mistakes regularly.
+      </div>
+    </section>
+
+    <footer style="margin-top: 45px; padding-top: 20px; border-top: 1px solid var(--lesson-border);">
+      <p><strong>IELTS Grammar Lab</strong></p>
+      <p>Build accurate grammar, one lesson at a time.</p>
+    </footer>
+  </main>
+
+  <script src="reader.js"></script>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const questions = [
+        {
+          q: "She enjoys _____ novels in her free time.",
+          options: ["to read", "reading", "read", "to reading"],
+          answer: 1,
+          explanation: "Enjoy is followed by a gerund: enjoys reading."
+        },
+        {
+          q: "They decided _____ the experiment again.",
+          options: ["repeating", "repeat", "to repeat", "to repeating"],
+          answer: 2,
+          explanation: "Decide is normally followed by a to-infinitive."
+        },
+        {
+          q: "He apologised for _____ late.",
+          options: ["arrive", "to arrive", "arriving", "arrived"],
+          answer: 2,
+          explanation: "A verb following the preposition for takes the -ing form."
+        },
+        {
+          q: "You should _____ your answers before submitting the test.",
+          options: ["checking", "check", "to check", "checked"],
+          answer: 1,
+          explanation: "Modal verbs such as should are followed by a bare infinitive."
+        },
+        {
+          q: "I look forward to _____ you again.",
+          options: ["meet", "meeting", "have met", "met"],
+          answer: 1,
+          explanation: "In look forward to, to is a preposition and is followed by a gerund."
+        },
+        {
+          q: "The teacher made the students _____ the paragraph.",
+          options: ["to rewrite", "rewriting", "rewrite", "rewrote"],
+          answer: 2,
+          explanation: "Active make + object takes a bare infinitive."
+        },
+        {
+          q: "It is important _____ the source of the information.",
+          options: ["verify", "verifying", "to verify", "verified"],
+          answer: 2,
+          explanation: "The adjective pattern important + to-infinitive is standard."
+        },
+        {
+          q: "She suggested _____ a larger sample.",
+          options: ["to use", "using", "use", "used"],
+          answer: 1,
+          explanation: "Suggest is normally followed by a gerund or a that-clause."
+        },
+        {
+          q: "I stopped _____ because it was affecting my health.",
+          options: ["to smoke", "smoke", "smoking", "smoked"],
+          answer: 2,
+          explanation: "Stop + gerund means quit the activity."
+        },
+        {
+          q: "He stopped _____ some water on his way home.",
+          options: ["buying", "to buy", "buy", "bought"],
+          answer: 1,
+          explanation: "Stop + to-infinitive means pause another activity in order to do something."
+        },
+        {
+          q: "Remember _____ the application before midnight.",
+          options: ["submitting", "submit", "to submit", "submitted"],
+          answer: 2,
+          explanation: "Remember to do something means remember a task that needs to be done."
+        },
+        {
+          q: "I remember _____ her at a conference several years ago.",
+          options: ["to meet", "meet", "meeting", "met"],
+          answer: 2,
+          explanation: "Remember + gerund refers to recalling a past experience."
+        },
+        {
+          q: "She is used to _____ under pressure.",
+          options: ["work", "to work", "working", "worked"],
+          answer: 2,
+          explanation: "Be used to means be accustomed to; to is a preposition here."
+        },
+        {
+          q: "I used to _____ to school every day.",
+          options: ["walking", "walk", "to walk", "walked"],
+          answer: 1,
+          explanation: "Used to + base verb describes a past habit or state."
+        },
+        {
+          q: "We hope _____ the project next month.",
+          options: ["launching", "launch", "to launch", "launched"],
+          answer: 2,
+          explanation: "Hope is normally followed by a to-infinitive."
+        },
+        {
+          q: "They avoided _____ unsupported conclusions.",
+          options: ["to make", "make", "making", "made"],
+          answer: 2,
+          explanation: "Avoid is followed by a gerund."
+        },
+        {
+          q: "The report needs _____.",
+          options: ["to revise", "revising", "revise", "revised"],
+          answer: 1,
+          explanation: "Need + gerund can express a passive meaning: the report needs revising."
+        },
+        {
+          q: "The researcher claims _____ the error.",
+          options: ["to have identified", "having identify", "to identifying", "identify"],
+          answer: 0,
+          explanation: "The perfect infinitive can refer to an action completed before the claim."
+        },
+        {
+          q: "He denied _____ the confidential information.",
+          options: ["to share", "share", "having shared", "to sharing"],
+          answer: 2,
+          explanation: "Deny takes a gerund. Having shared emphasises an earlier action."
+        },
+        {
+          q: "The results appear _____ influenced by seasonal variation.",
+          options: ["to have been", "having been", "to being", "be"],
+          answer: 0,
+          explanation: "To have been + past participle forms a perfect passive infinitive."
+        },
+        {
+          q: "Which sentence is correct?",
+          options: [
+            "She suggested me to apply.",
+            "She suggested that I apply.",
+            "She suggested me applying.",
+            "She suggested to me apply."
+          ],
+          answer: 1,
+          explanation: "Suggest can be followed by a that-clause. The first option is not the standard pattern."
+        },
+        {
+          q: "Try _____ the software if it does not respond.",
+          options: ["restarting", "to restarting", "restarted", "restart to"],
+          answer: 0,
+          explanation: "Try + gerund suggests experimenting with a possible solution."
+        },
+        {
+          q: "I tried _____ the heavy box, but it was too difficult.",
+          options: ["lifting", "to lift", "lift", "to lifting"],
+          answer: 1,
+          explanation: "Try + to-infinitive means make an effort to do something."
+        },
+        {
+          q: "She was the first person _____ at the venue.",
+          options: ["arriving", "arrive", "to arrive", "arrived"],
+          answer: 2,
+          explanation: "Ordinal expressions such as the first person are commonly followed by a to-infinitive."
+        },
+        {
+          q: "He went on _____ about the same issue for an hour.",
+          options: ["to talk", "talk", "talking", "talked"],
+          answer: 2,
+          explanation: "Go on + gerund means continue the same activity."
+        },
+        {
+          q: "After describing the problem, she went on _____ a solution.",
+          options: ["explaining", "to explain", "explain", "explained"],
+          answer: 1,
+          explanation: "Go on + to-infinitive means move on to another activity or stage."
+        },
+        {
+          q: "Taking this job means _____ to another city.",
+          options: ["to move", "move", "moving", "moved"],
+          answer: 2,
+          explanation: "Mean + gerund means involve or entail."
+        },
+        {
+          q: "I meant _____ you yesterday, but I forgot.",
+          options: ["calling", "call", "to call", "to calling"],
+          answer: 2,
+          explanation: "Mean + to-infinitive expresses intention."
+        },
+        {
+          q: "The participants were encouraged _____ questions.",
+          options: ["asking", "ask", "to ask", "asked"],
+          answer: 2,
+          explanation: "Encourage + object + to-infinitive is common; in the passive, the object becomes the subject."
+        },
+        {
+          q: "Which sentence uses a gerund correctly after a preposition?",
+          options: [
+            "She is interested in to learn statistics.",
+            "She is interested to learning statistics.",
+            "She is interested in learning statistics.",
+            "She is interested learn statistics."
+          ],
+          answer: 2,
+          explanation: "Interested in is followed by a noun or gerund."
+        }
+      ];
+
+      const form = document.getElementById("grammar-quiz");
+      const questionsContainer = document.getElementById("quiz-questions");
+      const result = document.getElementById("quiz-result");
+      const status = document.getElementById("quiz-status");
+      const progressBar = document.getElementById("quiz-progress-bar");
+      const resetButton = document.getElementById("reset-quiz");
+
+      if (!form || !questionsContainer || !result || !status || !progressBar || !resetButton) {
+        return;
+      }
+
+      function renderQuiz() {
+        questionsContainer.innerHTML = "";
+
+        questions.forEach((question, index) => {
+          const fieldset = document.createElement("fieldset");
+          fieldset.className = "quiz-question";
+          fieldset.id = "question-" + index;
+
+          const legend = document.createElement("legend");
+          legend.textContent = (index + 1) + ". " + question.q;
+          fieldset.appendChild(legend);
+
+          question.options.forEach((option, optionIndex) => {
+            const label = document.createElement("label");
+            label.className = "quiz-option";
+
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = "question-" + index;
+            input.value = String(optionIndex);
+            input.addEventListener("change", () => {
+              fieldset.querySelectorAll(".quiz-option").forEach(item => {
+                item.classList.remove("selected");
+              });
+              label.classList.add("selected");
+              updateProgress();
+            });
+
+            const text = document.createElement("span");
+            text.textContent = option;
+
+            label.appendChild(input);
+            label.appendChild(text);
+            fieldset.appendChild(label);
+          });
+
+          const feedback = document.createElement("div");
+          feedback.className = "quiz-feedback";
+          feedback.id = "feedback-" + index;
+          feedback.hidden = true;
+          fieldset.appendChild(feedback);
+
+          questionsContainer.appendChild(fieldset);
+        });
+
+        result.hidden = true;
+        result.innerHTML = "";
+        status.textContent = questions.length + " questions · One point per question";
+        progressBar.style.width = "0%";
+      }
+
+      function updateProgress() {
+        const answered = questions.filter((question, index) => {
+          return form.querySelector('input[name="question-' + index + '"]:checked');
+        }).length;
+
+        const percentage = (answered / questions.length) * 100;
+        progressBar.style.width = percentage + "%";
+        status.textContent = answered + " of " + questions.length + " answered";
+      }
+
+      form.addEventListener("submit", event => {
+        event.preventDefault();
+
+        let score = 0;
+        let unanswered = 0;
+
+        questions.forEach((question, index) => {
+          const fieldset = document.getElementById("question-" + index);
+          const selected = form.querySelector('input[name="question-' + index + '"]:checked');
+          const feedback = document.getElementById("feedback-" + index);
+          const labels = fieldset.querySelectorAll(".quiz-option");
+
+          labels.forEach((label, optionIndex) => {
+            label.classList.remove("correct-answer", "wrong-answer");
+            if (optionIndex === question.answer) {
+              label.classList.add("correct-answer");
+            }
+          });
+
+          feedback.hidden = false;
+
+          if (!selected) {
+            unanswered++;
+            feedback.innerHTML = "<strong>No answer selected.</strong> ";
+          } else if (Number(selected.value) === question.answer) {
+            score++;
+            feedback.innerHTML = "<strong class='correct'>Correct.</strong> ";
+          } else {
+            labels[Number(selected.value)].classList.add("wrong-answer");
+            feedback.innerHTML = "<strong class='incorrect'>Not quite.</strong> ";
+          }
+
+          const explanation = document.createElement("span");
+          explanation.textContent = question.explanation;
+          feedback.appendChild(explanation);
+        });
+
+        const percentage = Math.round((score / questions.length) * 100);
+        let interpretation;
+
+        if (percentage >= 90) {
+          interpretation = "Excellent! You demonstrate strong control of gerund and infinitive patterns.";
+        } else if (percentage >= 75) {
+          interpretation = "Very good! Review the explanations for any questions you missed.";
+        } else if (percentage >= 60) {
+          interpretation = "Good progress. Focus on verb patterns and meaning-changing pairs.";
+        } else {
+          interpretation = "Keep practising. Review the rules above and retake the quiz.";
+        }
+
+        result.hidden = false;
+        result.innerHTML = "";
+
+        const heading = document.createElement("h3");
+        heading.textContent = "Your results";
+        result.appendChild(heading);
+
+        const scoreLine = document.createElement("p");
+        scoreLine.className = "score-number";
+        scoreLine.textContent = score + " / " + questions.length;
+        result.appendChild(scoreLine);
+
+        const percentLine = document.createElement("p");
+        percentLine.textContent = percentage + "% correct";
+        result.appendChild(percentLine);
+
+        const interpretationLine = document.createElement("p");
+        interpretationLine.textContent = interpretation;
+        result.appendChild(interpretationLine);
+
+        if (unanswered > 0) {
+          const unansweredLine = document.createElement("p");
+          unansweredLine.textContent = unanswered + " question(s) were left unanswered.";
+          result.appendChild(unansweredLine);
+        }
+
+        const reviewLine = document.createElement("p");
+        reviewLine.textContent = "Correct answers are highlighted in green. Review the explanations under each question.";
+        result.appendChild(reviewLine);
+
+        result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+
+      resetButton.addEventListener("click", () => {
+        renderQuiz();
+        form.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+
+      renderQuiz();
+    })();
+  </script>
 </body>
 </html>
