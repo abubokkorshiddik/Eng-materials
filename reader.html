@@ -6,7 +6,7 @@
 <title>Reader | English Materials</title>
 <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/10719400.png">
 <meta name="theme-color" content="#1f2a44">
-<meta name="description" content="Read English grammar books, IELTS practice tests, vocabulary guides and classic literature online. Highlight, add notes and save quotes.">
+<meta name="description" content="Read English grammar books, IELTS practice tests, vocabulary guides and classic literature online. Highlight, draw, add comments and flip pages like a real book.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
@@ -26,30 +26,28 @@ body { margin:0; background:var(--bg); color:var(--text); font:600 14px Inter, s
   padding-left:env(safe-area-inset-left,0px); padding-right:env(safe-area-inset-right,0px); }
 :focus-visible { outline:3px solid var(--accent); outline-offset:2px; }
 [hidden] { display:none !important; }
+button { font:inherit; color:var(--text); }
 
-.bar { position:sticky; top:0; z-index:10; background:var(--bar); border-bottom:1px solid var(--line);
-  padding:6px 10px; padding-top:calc(6px + env(safe-area-inset-top,0px)); transition:transform .22s ease; }
-.bar.hide { transform:translateY(-100%); }
-.row { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
-.row + .row { margin-top:6px; }
-.row.main { flex-wrap:nowrap; }
-.bar a, .bar button, .btn { color:var(--text); background:none; border:1px solid var(--line); border-radius:6px;
-  padding:7px 11px; font:inherit; text-decoration:none; cursor:pointer; min-height:34px;
-  display:inline-flex; align-items:center; justify-content:center; gap:5px; white-space:nowrap; }
-.bar button[aria-pressed="true"], .primary { background:var(--accent); color:var(--bar); border-color:var(--accent); }
-.grp { display:flex; gap:5px; align-items:center; }
-.title { flex:1; min-width:0; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-align:center; }
-.bar input { width:60px; padding:7px; border:1px solid var(--line); border-radius:6px; background:var(--bar); color:var(--text); font:inherit; text-align:center; min-height:34px; }
-#zl { min-width:50px; font-size:12px; }
-#cnt { background:var(--accent); color:var(--bar); border-radius:99px; padding:0 7px; font-size:11px; line-height:18px; }
+/* ---------- Slim top bar ---------- */
+.bar { position:fixed; left:0; right:0; top:0; z-index:10; display:flex; align-items:center; gap:2px; background:var(--bar);
+  border-bottom:1px solid var(--line); padding:4px 6px; padding-top:calc(4px + env(safe-area-inset-top,0px)); transition:transform .22s ease; }
+body.chromeOff .bar { transform:translateY(-100%); }
+.ib { position:relative; color:var(--text); background:none; border:0; border-radius:8px; width:40px; height:40px; font-size:19px; text-decoration:none;
+  display:inline-flex; align-items:center; justify-content:center; cursor:pointer; flex:none; }
+.ib:hover { background:var(--line); }
+.title { flex:1; min-width:0; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-align:center; padding:0 4px; }
+#cnt { position:absolute; top:3px; right:1px; background:var(--accent); color:var(--bar); border-radius:99px; padding:0 5px; font-size:10px; line-height:15px; }
 #progress { position:absolute; left:0; right:0; bottom:-1px; height:3px; }
 #progressBar { height:100%; width:0; background:var(--accent); transition:width .15s; }
 
-#pages { display:flex; flex-direction:column; gap:12px; padding:12px 0 90px; }
-.pg { position:relative; flex:none; margin:0 auto; background:#fff; box-shadow:0 1px 6px #0003; overflow:hidden; }
+/* ---------- Scroll mode ---------- */
+#pages { display:flex; flex-direction:column; gap:12px; padding:calc(60px + env(safe-area-inset-top,0px)) 0 140px; }
+#pages.two { display:grid; grid-template-columns:repeat(2,max-content); justify-content:center; }
+.pg { position:relative; flex:none; margin:0 auto; background:#fff; box-shadow:0 1px 6px #0003; overflow:hidden; touch-action:manipulation; }
 .pg canvas { display:block; width:100%; height:auto; filter:var(--filter); }
 .pg.empty { background:var(--bar); }
-#msg { text-align:center; padding:40px 16px; line-height:1.8; }
+.pg.blank { background:transparent; box-shadow:none; }
+#msg { text-align:center; padding:80px 16px 40px; line-height:1.8; }
 #msg a { color:var(--accent); }
 
 .textLayer { position:absolute; inset:0; overflow:hidden; line-height:1; text-size-adjust:none; }
@@ -58,27 +56,70 @@ body { margin:0; background:var(--bg); color:var(--text); font:600 14px Inter, s
 .hl { position:absolute; inset:0; pointer-events:none; }
 .hl i { position:absolute; opacity:.4; border-radius:2px; }
 .hl i.has { box-shadow:inset 0 -2px 0 #0008; }
+.ink { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+.pins { position:absolute; inset:0; pointer-events:none; }
+.pin { position:absolute; transform:translate(-50%,-100%); pointer-events:auto; width:28px; height:28px; border:2px solid #0006; background:#ffd93d;
+  border-radius:50% 50% 50% 4px; font-size:14px; line-height:1; cursor:pointer; padding:0; box-shadow:0 2px 6px #0004; }
+
+body.draw .pg { touch-action:none; cursor:crosshair; }
+body.draw .textLayer { pointer-events:none; user-select:none; -webkit-user-select:none; }
+body.pinmode .pg { cursor:copy; }
 
 #pill { position:fixed; left:50%; bottom:calc(14px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%);
   background:var(--bar); border:1px solid var(--line); border-radius:999px; padding:6px 14px; font-size:12px;
   box-shadow:0 2px 8px #0003; opacity:0; pointer-events:none; transition:opacity .2s; z-index:9; }
 #pill.show { opacity:.95; }
 
-#sel { position:fixed; left:50%; bottom:calc(14px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%);
+/* ---------- Book mode ---------- */
+#book { position:fixed; inset:0; z-index:1; display:flex; align-items:center; justify-content:center; overflow:hidden;
+  padding:calc(52px + env(safe-area-inset-top,0px)) 8px calc(96px + env(safe-area-inset-bottom,0px)); touch-action:pan-y pinch-zoom; }
+body.draw #book { touch-action:none; }
+.holder { position:relative; perspective:2600px; }
+.stage { position:absolute; left:0; top:0; width:100%; height:100%; transform-style:preserve-3d; }
+.slot { position:absolute; top:0; }
+.slot .pg, .face .pg { margin:0; }
+.leaf { position:absolute; top:0; transform-style:preserve-3d; will-change:transform; }
+.face { position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; }
+.face.back { transform:rotateY(180deg); }
+.face::after { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(90deg,rgba(0,0,0,.4),transparent 75%); opacity:var(--s,0); }
+.face.back::after { background:linear-gradient(270deg,rgba(0,0,0,.4),transparent 75%); }
+
+/* ---------- Selection toolbar ---------- */
+#sel { position:fixed; left:50%; bottom:calc(100px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%);
   display:none; gap:6px; align-items:center; background:var(--bar); border:1px solid var(--line);
   border-radius:12px; padding:8px; box-shadow:0 4px 16px #0004; z-index:25; max-width:96vw; }
 #sel.show { display:flex; }
 #sel button { color:var(--text); background:none; border:1px solid var(--line); border-radius:8px; padding:7px 11px; font:inherit; min-height:36px; cursor:pointer; }
-.sw { width:34px; height:34px; border-radius:50% !important; padding:0 !important; border:2px solid var(--line) !important; }
+.sw { width:34px; height:34px; border-radius:50% !important; padding:0 !important; border:2px solid var(--line) !important; cursor:pointer; background-clip:padding-box; }
 .sw.on { border-color:var(--text) !important; }
 
+/* ---------- Bottom dock ---------- */
+.dock { position:fixed; left:50%; bottom:calc(10px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); z-index:12;
+  background:var(--bar); border:1px solid var(--line); border-radius:16px; box-shadow:0 4px 18px #0004; padding:6px;
+  max-width:98vw; display:flex; flex-direction:column; gap:6px; transition:transform .22s ease; }
+body.chromeOff .dock { transform:translate(-50%,170%); }
+.dr { display:flex; gap:6px; align-items:center; justify-content:center; flex-wrap:wrap; }
+.grp { display:flex; gap:3px; align-items:center; }
+.dock button.t, .dock button.n { background:none; border:1px solid transparent; border-radius:10px; width:38px; height:38px; font-size:18px; cursor:pointer; padding:0; }
+.dock button.t[aria-pressed="true"] { background:var(--accent); border-color:var(--accent); }
+.dock input#num { width:48px; padding:6px 2px; border:1px solid var(--line); border-radius:8px; background:var(--bg); color:var(--text); font:inherit; text-align:center; }
+.sep { width:1px; height:24px; background:var(--line); }
+#opts { display:flex; gap:7px; align-items:center; justify-content:center; flex-wrap:wrap; padding:2px 2px 6px; border-bottom:1px solid var(--line); }
+#opts .sw { width:26px; height:26px; }
+#opts input[type=range] { width:90px; }
+#opts button.u { border:1px solid var(--line); background:none; border-radius:8px; padding:5px 10px; cursor:pointer; }
+.hint { font-weight:500; opacity:.8; line-height:1.6; }
+
+/* ---------- Drawer ---------- */
 #back { position:fixed; inset:0; background:#0006; z-index:30; }
 #drawer { position:fixed; top:0; bottom:0; left:0; width:min(92vw,400px); background:var(--bar); z-index:31;
   display:flex; flex-direction:column; box-shadow:2px 0 16px #0004; padding-top:env(safe-area-inset-top,0px); }
 #drawer.right { left:auto; right:0; box-shadow:-2px 0 16px #0004; }
-#dHead { display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border-bottom:1px solid var(--line); font-size:16px; }
+#dHead { display:flex; align-items:center; justify-content:space-between; padding:8px 8px 8px 14px; border-bottom:1px solid var(--line); font-size:16px; }
 #dBody { overflow:auto; padding:12px 14px calc(20px + env(safe-area-inset-bottom,0px)); flex:1; -webkit-overflow-scrolling:touch; }
 #dBody input[type=search] { width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:6px; background:var(--bg); color:var(--text); font:inherit; margin-bottom:10px; }
+.btn { color:var(--text); background:none; border:1px solid var(--line); border-radius:6px; padding:8px 12px; font:inherit; text-decoration:none; cursor:pointer; min-height:36px;
+  display:inline-flex; align-items:center; justify-content:center; gap:5px; }
 .cat { margin:16px 0 4px; font-size:12px; opacity:.7; display:flex; justify-content:space-between; align-items:center; }
 .cat button { font:inherit; font-size:12px; color:var(--accent); background:none; border:0; cursor:pointer; padding:2px 4px; }
 .li { display:block; padding:11px 8px; border-radius:6px; color:var(--text); text-decoration:none; font-weight:500; border-top:1px solid var(--line); }
@@ -89,7 +130,7 @@ body { margin:0; background:var(--bg); color:var(--text); font:600 14px Inter, s
 .li.on .mini i { background:var(--bar); }
 .srow { display:flex; align-items:stretch; border-top:1px solid var(--line); }
 .srow .li { flex:1; border-top:0; min-width:0; }
-.srow .del { color:var(--text); background:none; border:0; padding:0 12px; font-size:16px; cursor:pointer; opacity:.7; }
+.srow .del { background:none; border:0; padding:0 12px; font-size:16px; cursor:pointer; opacity:.7; }
 .chips { display:flex; flex-wrap:wrap; gap:6px; padding:8px 0; }
 .chip { min-width:40px; text-align:center; padding:8px 10px; border:1px solid var(--line); border-radius:6px; color:var(--text); text-decoration:none; }
 .chip.on { background:var(--accent); color:var(--bar); border-color:var(--accent); }
@@ -98,9 +139,16 @@ body { margin:0; background:var(--bg); color:var(--text); font:600 14px Inter, s
 .ni q, .ni .t { display:block; border-left:4px solid var(--c,#ffe14d); padding-left:8px; margin:4px 0; }
 .ni .n { margin-top:4px; }
 .tools { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px; }
-.hint { font-weight:500; opacity:.8; line-height:1.6; }
 .chk { display:flex; gap:8px; align-items:center; font-weight:500; margin:6px 0 4px; }
+.sh { margin:16px 0 6px; font-size:12px; opacity:.7; }
+.seg { display:flex; border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+.seg button { flex:1; background:none; border:0; border-right:1px solid var(--line); padding:10px 4px; cursor:pointer; font-size:13px; }
+.seg button:last-child { border-right:0; }
+.seg button[aria-pressed="true"] { background:var(--accent); color:var(--bar); }
+.zrow { display:flex; gap:6px; align-items:center; }
+.zrow .btn { flex:1; }
 
+/* ---------- Editor ---------- */
 #ed { position:fixed; inset:0; background:#0006; z-index:40; display:none; align-items:center; justify-content:center; padding:16px; }
 #ed.show { display:flex; }
 #edBox { background:var(--bar); border:1px solid var(--line); border-radius:12px; padding:16px; width:min(100%,460px); max-height:90vh; overflow:auto; }
@@ -108,62 +156,39 @@ body { margin:0; background:var(--bg); color:var(--text); font:600 14px Inter, s
 #edT { width:100%; min-height:100px; padding:10px; border:1px solid var(--line); border-radius:6px; background:var(--bg); color:var(--text); font:500 15px/1.5 Inter, sans-serif; resize:vertical; }
 #edC { display:flex; gap:8px; margin:10px 0; }
 .acts { display:flex; gap:8px; justify-content:flex-end; margin-top:12px; }
-#edBox button { color:var(--text); background:none; border:1px solid var(--line); border-radius:6px; padding:9px 14px; font:inherit; cursor:pointer; }
+#edBox button.b { background:none; border:1px solid var(--line); border-radius:6px; padding:9px 14px; font:inherit; cursor:pointer; }
 #edBox .primary { background:var(--accent); color:var(--bar); border-color:var(--accent); }
 
+/* ---------- Google Drive mode ---------- */
 body.drive { height:100vh; height:100dvh; display:flex; flex-direction:column; overflow:hidden; }
 body.drive .bar { position:relative; transform:none; flex:none; }
-body.drive .pdf-only { display:none !important; }
-body.drive #pages, body.drive #pill, body.drive #progress { display:none; }
+body.drive #pages, body.drive #pill, body.drive #progress, body.drive .dock, body.drive #book { display:none; }
 #frame { flex:1; width:100%; min-height:0; border:0; background:var(--bg); }
 #note { display:none; padding:6px 12px; font-size:12px; font-weight:500; background:var(--bar); border-bottom:1px solid var(--line); text-align:center; flex:none; }
 body.drive #note { display:block; }
 
-@media (max-width:480px) { .bar a, .bar button { padding:7px 9px; } .lbl { display:none; } }
 @media (orientation:landscape) and (max-height:500px) {
-  .bar { padding-top:calc(3px + env(safe-area-inset-top,0px)); padding-bottom:3px; display:flex; gap:6px; overflow-x:auto; }
-  .row, .row + .row { margin:0; flex-wrap:nowrap; }
-  .bar a, .bar button, .bar input { min-height:30px; padding-top:3px; padding-bottom:3px; }
   #note { display:none !important; }
+  #book { padding-bottom:calc(84px + env(safe-area-inset-bottom,0px)); }
 }
 </style>
 </head>
 <body>
 
 <header class="bar" id="bar">
-  <div class="row main">
-    <a href="./index.html" aria-label="English Materials home">← <span class="lbl">Home</span></a>
-    <button id="libBtn" type="button">☰ Library</button>
-    <div class="title" id="title">Loading book…</div>
-    <button id="notesBtn" type="button">✎ <span class="lbl">Notes</span> <span id="cnt" hidden>0</span></button>
-    <a id="dl" href="#" target="_blank" rel="noopener" aria-label="Download this book">⬇<span class="lbl"> Download</span></a>
-  </div>
-  <div class="row pdf-only">
-    <div class="grp" aria-label="Page navigation">
-      <button id="prev" type="button" aria-label="Previous page">‹</button>
-      <input id="num" type="number" min="1" value="1" inputmode="numeric" aria-label="Page number">
-      <span id="tot">/ …</span>
-      <button id="next" type="button" aria-label="Next page">›</button>
-    </div>
-    <div class="grp" aria-label="Zoom controls">
-      <button id="zo" type="button" aria-label="Zoom out">−</button>
-      <button id="zl" type="button" aria-label="Reset zoom">100%</button>
-      <button id="zi" type="button" aria-label="Zoom in">+</button>
-    </div>
-    <button id="fit" type="button" aria-label="Switch between fit width and fit page">Fit width</button>
-    <div class="grp" id="th" role="group" aria-label="Reading theme">
-      <button type="button" data-t="light">Light</button>
-      <button type="button" data-t="sepia">Sepia</button>
-      <button type="button" data-t="dark">Dark</button>
-    </div>
-  </div>
+  <a class="ib" href="./index.html" aria-label="Home">⌂</a>
+  <button class="ib" id="libBtn" type="button" aria-label="Library">☰</button>
+  <div class="title" id="title">Loading book…</div>
+  <button class="ib" id="notesBtn" type="button" aria-label="Notes and comments">✎<span id="cnt" hidden>0</span></button>
+  <button class="ib" id="setBtn" type="button" aria-label="Reading settings">⚙</button>
   <div id="progress" aria-hidden="true"><div id="progressBar"></div></div>
 </header>
 
-<div id="note">This book opens in Google Drive's viewer, so highlights are not available here. Download it, then use Library → Open a PDF from this device to highlight and add notes. You can still add page notes.</div>
+<div id="note">This book opens in Google Drive's viewer, so highlights and drawing are not available here. Download it, then use Library → Open a PDF from this device to annotate it. You can still add page notes.</div>
 
 <div id="msg" role="status" aria-live="polite">Opening book…</div>
 <div id="pages"></div>
+<div id="book" hidden></div>
 <div id="pill" aria-hidden="true"></div>
 
 <div id="sel" role="toolbar" aria-label="Annotate selected text">
@@ -175,9 +200,29 @@ body.drive #note { display:block; }
   <button id="selQuote" type="button">❝ Quote</button>
 </div>
 
+<div class="dock" id="dock">
+  <div id="opts" hidden></div>
+  <div class="dr">
+    <div class="grp" aria-label="Page navigation">
+      <button class="n" id="prev" type="button" aria-label="Previous page">‹</button>
+      <input id="num" type="number" min="1" value="1" inputmode="numeric" aria-label="Page number">
+      <span id="tot">/ …</span>
+      <button class="n" id="next" type="button" aria-label="Next page">›</button>
+    </div>
+    <span class="sep"></span>
+    <div class="grp" id="tools" role="toolbar" aria-label="Tools">
+      <button class="t" type="button" data-tool="select" aria-label="Read and select text" title="Read / select text">👆</button>
+      <button class="t" type="button" data-tool="hl" aria-label="Highlighter" title="Highlighter">🖍️</button>
+      <button class="t" type="button" data-tool="pen" aria-label="Pen" title="Pen">✏️</button>
+      <button class="t" type="button" data-tool="erase" aria-label="Eraser" title="Eraser">🧽</button>
+      <button class="t" type="button" data-tool="pin" aria-label="Add comment" title="Comment">💬</button>
+    </div>
+  </div>
+</div>
+
 <div id="back" hidden></div>
 <aside id="drawer" hidden aria-label="Panel">
-  <div id="dHead"><strong id="dTitle"></strong><button class="btn" id="dClose" type="button" aria-label="Close panel">✕</button></div>
+  <div id="dHead"><strong id="dTitle"></strong><button class="ib" id="dClose" type="button" aria-label="Close panel">✕</button></div>
   <div id="dBody"></div>
 </aside>
 
@@ -187,9 +232,9 @@ body.drive #note { display:block; }
     <textarea id="edT" placeholder="Write your note or comment"></textarea>
     <div id="edC"></div>
     <div class="acts">
-      <button id="edDel" type="button">Delete</button>
-      <button id="edCancel" type="button">Cancel</button>
-      <button id="edSave" class="primary" type="button">Save</button>
+      <button class="b" id="edDel" type="button">Delete</button>
+      <button class="b" id="edCancel" type="button">Cancel</button>
+      <button class="b primary" id="edSave" type="button">Save</button>
     </div>
   </div>
 </div>
@@ -202,6 +247,7 @@ body.drive #note { display:block; }
   const RAW = "https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/";
   const DRIVE_DL = "https://drive.google.com/uc?export=download&id=";
   const COLORS = ["#ffe14d", "#7ee08a", "#8ec5ff", "#ff9ec4"];
+  const PAL = ["#ffe14d", "#7ee08a", "#8ec5ff", "#ff9ec4", "#e53935", "#222222"];
 
   const BOOKS = {
     adv:{t:"Advanced Grammar in Use",f:"Advanced%20grammar%20in%20use.pdf"},
@@ -299,22 +345,32 @@ body.drive #note { display:block; }
     const s = store.settings(); s.theme = theme;
     store.set(SETTINGS_KEY, JSON.stringify(s));
     store.set("theme", theme);
-    document.querySelectorAll("#th button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.t === theme)));
   }
-  document.querySelectorAll("#th button").forEach(b => b.addEventListener("click", () => setTheme(b.dataset.t)));
   setTheme(document.documentElement.dataset.theme || "light");
 
   /* ---------- State ---------- */
   const params = new URLSearchParams(location.search);
   const localId = params.get("l");
   let bookKey = localId ? "local:" + localId : (BOOKS[params.get("b")] ? params.get("b") : "grammar");
-  let bookTitle = "";
+  let bookTitle = "", dlUrl = "";
   let driveMode = false;
   let anns = [];
   let pdf = null, ratio = 1.4, zoom = 1, fit = store.get("fit") === "page" ? "page" : "width";
-  let cur = 1, ready = false, pages = [], lastW = 0, lastH = 0, resizeTimer, gen = 0;
-  const busy = Object.create(null);
-  const box = $("pages"), bar = $("bar"), pill = $("pill");
+  let cur = 1, ready = false, pages = [], lastIW = 0, lastIH = 0, resizeTimer, gen = 0;
+  let mode = store.get("mode") === "book" ? "book" : "scroll";
+  let layoutPref = ["1", "2", "auto"].includes(store.get("layout")) ? store.get("layout") : "auto";
+  let anim = ["turn", "slide", "fade", "stack"].includes(store.get("anim")) ? store.get("anim") : "turn";
+  let spd = ["fast", "normal", "slow"].includes(store.get("spd")) ? store.get("spd") : "normal";
+  let tool = "select", bk = null, flipping = false;
+  const sizes = { pen: 3, hl: 4 }, cols = { pen: "#e53935", hl: "#ffe14d" };
+  const box = $("pages"), book = $("book"), pill = $("pill");
+
+  function slots() {
+    if (layoutPref === "1") return 1;
+    if (layoutPref === "2") return 2;
+    return window.innerWidth >= 700 && window.innerWidth > window.innerHeight * 1.15 ? 2 : 1;
+  }
+  const speed = () => ({ fast: 350, normal: 650, slow: 1100 })[spd];
 
   /* ---------- Annotations ---------- */
   function loadAnns() {
@@ -324,31 +380,59 @@ body.drive #note { display:block; }
   }
   function saveAnns() { store.set("ann:" + bookKey, JSON.stringify(anns)); updateCount(); }
   function updateCount() {
-    $("cnt").textContent = anns.length;
-    $("cnt").hidden = !anns.length;
+    const n = anns.filter(a => a.type !== "ink").length;
+    $("cnt").textContent = n;
+    $("cnt").hidden = !n;
   }
   function newId() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 5); }
 
-  function hlLayer(n) {
-    const d = document.createElement("div");
-    d.className = "hl";
+  const NS = "http://www.w3.org/2000/svg";
+  const ptsStr = pts => pts.map(q => (q[0] * 1000).toFixed(1) + "," + (q[1] * 1000 * ratio).toFixed(1)).join(" ");
+  function inkShape(a) {
+    const p = document.createElementNS(NS, "polyline");
+    p.setAttribute("points", ptsStr(a.pts));
+    p.setAttribute("fill", "none");
+    p.setAttribute("stroke", a.c);
+    p.setAttribute("stroke-width", a.w);
+    p.setAttribute("stroke-linecap", a.k === "hl" ? "butt" : "round");
+    p.setAttribute("stroke-linejoin", "round");
+    if (a.k === "hl") p.style.cssText = "opacity:.42;mix-blend-mode:multiply";
+    return p;
+  }
+  function layersFor(n) {
+    const hl = document.createElement("div"); hl.className = "hl";
+    const svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("class", "ink"); svg.setAttribute("viewBox", "0 0 1000 " + Math.round(1000 * ratio)); svg.setAttribute("preserveAspectRatio", "none");
+    const pins = document.createElement("div"); pins.className = "pins";
     anns.forEach(a => {
-      if (a.p !== n || !a.rects) return;
+      if (a.p !== n) return;
+      if (a.type === "ink") { svg.appendChild(inkShape(a)); return; }
+      if (a.type === "pin") {
+        const b = document.createElement("button");
+        b.type = "button"; b.className = "pin"; b.dataset.id = a.id; b.textContent = "💬";
+        b.style.left = a.x * 100 + "%"; b.style.top = a.y * 100 + "%";
+        b.title = a.note || "Comment"; b.setAttribute("aria-label", "Comment: " + (a.note || "empty"));
+        pins.appendChild(b); return;
+      }
+      if (!a.rects) return;
       a.rects.forEach(r => {
         const i = document.createElement("i");
         i.style.cssText = "left:" + r[0] * 100 + "%;top:" + r[1] * 100 + "%;width:" + r[2] * 100 + "%;height:" + r[3] * 100 + "%;background:" + a.c;
         if (a.note) i.className = "has";
-        d.appendChild(i);
+        hl.appendChild(i);
       });
     });
-    return d;
+    return [hl, svg, pins];
   }
   function refreshPage(n) {
-    const el = pages[n - 1];
-    const old = el && el.querySelector(".hl");
-    if (old) old.replaceWith(hlLayer(n));
+    document.querySelectorAll('.pg[data-n="' + n + '"]').forEach(el => {
+      if (!el.querySelector("canvas")) return;
+      el.querySelectorAll(".hl,.ink,.pins").forEach(x => x.remove());
+      el.append(...layersFor(n));
+    });
   }
 
+  /* ---------- Editor ---------- */
   let edA = null, edNew = false, edColor = COLORS[0];
   function openEditor(a, isNew) {
     edA = a; edNew = isNew; edColor = a.c || COLORS[0];
@@ -385,6 +469,7 @@ body.drive #note { display:block; }
     saveAnns(); refreshPage(p); closeEditor(); if (drawerMode === "notes") renderNotes();
   });
 
+  /* ---------- Text selection toolbar ---------- */
   let pend = null, selTimer, lock = 0;
   const sel = $("sel");
   function hideSel() { sel.classList.remove("show"); }
@@ -392,6 +477,7 @@ body.drive #note { display:block; }
   sel.addEventListener("pointerdown", () => { lock = Date.now(); });
 
   function checkSel() {
+    if (tool !== "select") return;
     const s = getSelection();
     if (!s || s.isCollapsed || !s.rangeCount) {
       if (Date.now() - lock > 1500 && !$("ed").classList.contains("show")) hideSel();
@@ -412,7 +498,6 @@ body.drive #note { display:block; }
     pend = { p: +pg.dataset.n, rects, text: text.slice(0, 1500) };
     sel.classList.add("show");
   }
-
   function addFromSel(type, color) {
     if (!pend) return;
     const a = { id: newId(), type, p: pend.p, rects: pend.rects, text: pend.text, c: color || COLORS[0], note: "", t: Date.now() };
@@ -426,22 +511,196 @@ body.drive #note { display:block; }
   $("selNote").addEventListener("click", () => addFromSel("note"));
   $("selQuote").addEventListener("click", () => addFromSel("quote"));
 
-  /* ---------- Drawer: library and notes ---------- */
+  /* ---------- Tools: highlighter, pen, eraser, comment ---------- */
+  function setChrome(show) { document.body.classList.toggle("chromeOff", !show); if (!show) showPill(); }
+  function setTool(t) {
+    tool = t;
+    document.body.classList.toggle("draw", t === "pen" || t === "hl" || t === "erase");
+    document.body.classList.toggle("pinmode", t === "pin");
+    document.querySelectorAll("#tools .t").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.tool === t)));
+    hideSel(); setChrome(true); renderOpts();
+    if (t !== "select") { try { getSelection().removeAllRanges(); } catch (e) {} }
+  }
+  function renderOpts() {
+    const o = $("opts");
+    if (tool === "select") { o.hidden = true; return; }
+    o.hidden = false;
+    let h = "";
+    if (tool === "pen" || tool === "hl") {
+      h = PAL.map(c => '<button type="button" class="sw' + (cols[tool] === c ? " on" : "") + '" data-c="' + c + '" style="background:' + c + '" aria-label="Colour"></button>').join("") +
+        '<input type="range" id="sz" min="1" max="10" value="' + sizes[tool] + '" aria-label="Size">';
+    } else h = '<span class="hint">' + (tool === "erase" ? "Drag over a drawing to erase it" : "Tap the page to add a comment") + '</span>';
+    if (tool !== "pin") h += '<button type="button" class="u" id="undo">↶ Undo</button>';
+    o.innerHTML = h;
+  }
+  $("tools").addEventListener("click", e => { const b = e.target.closest("button"); if (b) setTool(b.dataset.tool); });
+  $("opts").addEventListener("click", e => {
+    const sw = e.target.closest(".sw");
+    if (sw) { cols[tool] = sw.dataset.c; renderOpts(); return; }
+    if (e.target.id === "undo") undo();
+  });
+  $("opts").addEventListener("input", e => { if (e.target.id === "sz") sizes[tool] = +e.target.value; });
+  function undo() {
+    for (let i = anns.length - 1; i >= 0; i--) {
+      if (anns[i].type === "ink") { const p = anns[i].p; anns.splice(i, 1); saveAnns(); refreshPage(p); return; }
+    }
+  }
+
+  const pos = (e, pg) => { const r = pg.getBoundingClientRect(); return [(e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height]; };
+  function segDist(p, a, b) {
+    const R = ratio, px = p[0], py = p[1] * R, ax = a[0], ay = a[1] * R, bx = b[0], by = b[1] * R;
+    const dx = bx - ax, dy = by - ay, l = dx * dx + dy * dy;
+    let t = l ? ((px - ax) * dx + (py - ay) * dy) / l : 0;
+    t = Math.max(0, Math.min(1, t));
+    return Math.hypot(px - (ax + t * dx), py - (ay + t * dy));
+  }
+  function eraseAt(n, p) {
+    let hit = false;
+    anns = anns.filter(a => {
+      if (a.type !== "ink" || a.p !== n) return true;
+      const rad = 0.02 + a.w / 2000;
+      for (let i = 0; i < a.pts.length; i++) {
+        if (segDist(p, a.pts[i], a.pts[i + 1] || a.pts[i]) < rad) { hit = true; return false; }
+      }
+      return true;
+    });
+    if (hit) { saveAnns(); refreshPage(n); }
+  }
+
+  let ptr = null;
+  document.addEventListener("pointerdown", e => {
+    if (tool !== "pen" && tool !== "hl" && tool !== "erase") return;
+    const pg = e.target.closest && e.target.closest(".pg");
+    if (!pg || !pg.dataset.n || (e.pointerType === "mouse" && e.button !== 0)) return;
+    e.preventDefault();
+    try { pg.setPointerCapture(e.pointerId); } catch (x) {}
+    const p0 = pos(e, pg);
+    ptr = { pg, id: e.pointerId, n: +pg.dataset.n, pts: [p0], p0 };
+    if (tool === "erase") { eraseAt(ptr.n, p0); return; }
+    ptr.k = tool; ptr.c = cols[tool]; ptr.w = tool === "hl" ? sizes.hl * 5 : +(sizes.pen * 0.9).toFixed(2);
+    const svg = pg.querySelector(".ink");
+    ptr.el = inkShape({ pts: [p0, p0], c: ptr.c, w: ptr.w, k: ptr.k });
+    if (svg) svg.appendChild(ptr.el);
+  }, { passive: false });
+  document.addEventListener("pointermove", e => {
+    if (!ptr || e.pointerId !== ptr.id) return;
+    e.preventDefault();
+    const p = pos(e, ptr.pg);
+    if (tool === "erase") { eraseAt(ptr.n, p); return; }
+    if (ptr.k === "hl") ptr.pts = [ptr.p0, [p[0], ptr.p0[1]]];
+    else {
+      const l = ptr.pts[ptr.pts.length - 1];
+      if (Math.hypot(p[0] - l[0], (p[1] - l[1]) * ratio) < 0.002) return;
+      ptr.pts.push(p);
+    }
+    ptr.el.setAttribute("points", ptsStr(ptr.pts.length < 2 ? [ptr.pts[0], ptr.pts[0]] : ptr.pts));
+  }, { passive: false });
+  function endPtr(e) {
+    if (!ptr || e.pointerId !== ptr.id) return;
+    const q = ptr; ptr = null;
+    if (tool === "erase") return;
+    if (q.k === "pen" && q.pts.length < 2) q.pts.push([q.pts[0][0] + 0.0005, q.pts[0][1]]);
+    if (q.k === "hl" && (q.pts.length < 2 || Math.abs(q.pts[1][0] - q.pts[0][0]) < 0.01)) { refreshPage(q.n); return; }
+    anns.push({ id: newId(), type: "ink", p: q.n, k: q.k, c: q.c, w: q.w, pts: q.pts.map(a => [+a[0].toFixed(4), +a[1].toFixed(4)]), t: Date.now() });
+    saveAnns(); refreshPage(q.n);
+  }
+  document.addEventListener("pointerup", endPtr);
+  document.addEventListener("pointercancel", endPtr);
+
+  function addPin(pg, e) {
+    const p = pos(e, pg);
+    openEditor({ id: newId(), type: "pin", p: +pg.dataset.n, x: +p[0].toFixed(4), y: +p[1].toFixed(4), rects: null, text: "", c: "#ffd93d", note: "", t: Date.now() }, true);
+  }
+
+  /* Taps: comment pins, double-tap to comment, edit highlights, flip at the book edges, show or hide the controls */
+  let lastTap = { t: 0, x: 0, y: 0 }, tapTimer, suppressUntil = 0;
+  function onTap(e) {
+    if (Date.now() < suppressUntil) return;
+    const pinBtn = e.target.closest(".pin");
+    if (pinBtn) { const a = anns.find(x => x.id === pinBtn.dataset.id); if (a) openEditor(a, false); return; }
+    const pg = e.target.closest(".pg");
+    if (tool === "pin") { if (pg && pg.dataset.n) addPin(pg, e); return; }
+    if (tool !== "select") return;
+    const now = Date.now();
+    const dbl = now - lastTap.t < 320 && Math.hypot(e.clientX - lastTap.x, e.clientY - lastTap.y) < 30;
+    lastTap = { t: now, x: e.clientX, y: e.clientY };
+    if (dbl) {
+      clearTimeout(tapTimer); lastTap.t = 0;
+      try { getSelection().removeAllRanges(); } catch (x) {}
+      hideSel();
+      if (pg && pg.dataset.n) addPin(pg, e);
+      return;
+    }
+    if (String(getSelection())) return;
+    if (mode === "book" && bk) {
+      const r = bk.holder.getBoundingClientRect(), x = (e.clientX - r.left) / r.width;
+      if (x < 0.18 || x > 0.82) { step(x > 0.5 ? 1 : -1); return; }
+    }
+    if (pg && pg.dataset.n) {
+      const pb = pg.getBoundingClientRect(), n = +pg.dataset.n;
+      const x = (e.clientX - pb.left) / pb.width, y = (e.clientY - pb.top) / pb.height;
+      const hit = anns.find(a => a.p === n && a.rects && a.rects.some(r => x >= r[0] && x <= r[0] + r[2] && y >= r[1] && y <= r[1] + r[3]));
+      if (hit) { openEditor(hit, false); return; }
+    }
+    clearTimeout(tapTimer);
+    tapTimer = setTimeout(() => setChrome(document.body.classList.contains("chromeOff")), 300);
+  }
+  box.addEventListener("click", onTap);
+  book.addEventListener("click", onTap);
+
+  /* ---------- Drawer: library, notes, settings ---------- */
   let drawerMode = "", saved = [];
   const drawer = $("drawer"), back = $("back");
-  function openDrawer(mode) {
-    drawerMode = mode;
-    drawer.classList.toggle("right", mode === "notes");
+  function openDrawer(m) {
+    drawerMode = m;
+    drawer.classList.toggle("right", m !== "lib");
     drawer.hidden = back.hidden = false;
-    $("dTitle").textContent = mode === "notes" ? "My notes" : "Library";
-    if (mode === "notes") renderNotes(); else renderLib();
+    $("dTitle").textContent = m === "notes" ? "Notes and comments" : m === "set" ? "Reading settings" : "Library";
+    if (m === "notes") renderNotes(); else if (m === "set") renderSettings(); else renderLib();
   }
   function closeDrawer() { drawer.hidden = back.hidden = true; drawerMode = ""; }
   back.addEventListener("click", closeDrawer);
   $("dClose").addEventListener("click", closeDrawer);
   $("libBtn").addEventListener("click", () => openDrawer("lib"));
   $("notesBtn").addEventListener("click", () => openDrawer("notes"));
+  $("setBtn").addEventListener("click", () => openDrawer("set"));
 
+  /* Settings */
+  const seg = (k, opts, c) => '<div class="seg" data-k="' + k + '">' + opts.map(o => '<button type="button" data-v="' + o[0] + '" aria-pressed="' + (o[0] === c) + '">' + o[1] + '</button>').join("") + '</div>';
+  function renderSettings() {
+    let h = '<div class="sh">Theme</div>' + seg("theme", [["light", "Light"], ["sepia", "Sepia"], ["dark", "Dark"]], document.documentElement.dataset.theme);
+    if (!driveMode) {
+      h += '<div class="sh">Reading mode</div>' + seg("mode", [["scroll", "Scroll"], ["book", "Book"]], mode) +
+        '<div class="sh">Pages in landscape</div>' + seg("layout", [["auto", "Auto"], ["1", "1 page"], ["2", "2 pages"]], layoutPref);
+      if (mode === "book") {
+        h += '<div class="sh">Page turn style</div>' + seg("anim", [["turn", "Page turn"], ["slide", "Slide"], ["fade", "Fade"], ["stack", "Stack"]], anim) +
+          '<div class="sh">Turn speed</div>' + seg("spd", [["fast", "Fast"], ["normal", "Normal"], ["slow", "Slow"]], spd) +
+          '<p class="hint">Drag a page from its outer edge to turn it by hand, or tap the edge.</p>';
+      } else {
+        h += '<div class="sh">Zoom</div><div class="zrow"><button class="btn" data-a="zo" type="button">−</button><button class="btn" data-a="zl" type="button">' + Math.round(zoom * 100) + '%</button><button class="btn" data-a="zi" type="button">+</button></div>' +
+          '<div class="sh">Fit</div>' + seg("fit", [["width", "Fit width"], ["page", "Fit page"]], fit);
+      }
+    }
+    h += '<div class="sh">More</div><a class="btn" href="./index.html" style="display:flex;margin-bottom:6px">⌂ Home</a>' +
+      (dlUrl ? '<a class="btn" href="' + esc(dlUrl) + '" target="_blank" rel="noopener" style="display:flex">⬇ Download this book</a>' : "");
+    $("dBody").innerHTML = h;
+  }
+  $("dBody").addEventListener("click", e => {
+    if (drawerMode !== "set") return;
+    const act = e.target.closest("[data-a]");
+    if (act) { const a = act.dataset.a; setZoom(a === "zi" ? zoom + 0.2 : a === "zo" ? zoom - 0.2 : 1); renderSettings(); return; }
+    const b = e.target.closest(".seg button"); if (!b) return;
+    const k = b.parentElement.dataset.k, v = b.dataset.v;
+    if (k === "theme") setTheme(v);
+    else if (k === "mode") { mode = v; store.set("mode", v); applyView(); }
+    else if (k === "layout") { layoutPref = v; store.set("layout", v); applyView(); }
+    else if (k === "anim") { anim = v; store.set("anim", v); }
+    else if (k === "spd") { spd = v; store.set("spd", v); }
+    else if (k === "fit") { fit = v; store.set("fit", v); relayout(); }
+    renderSettings();
+  });
+
+  /* Library */
   function renderLib() {
     $("dBody").innerHTML =
       '<input type="search" id="lq" placeholder="Search books" aria-label="Search books">' +
@@ -466,7 +725,6 @@ body.drive #note { display:block; }
     $("lList").innerHTML = '<p class="hint">Loading…</p>';
     DB.all().then(r => { saved = (r || []).sort((a, b) => b.added - a.added); }).catch(() => { saved = []; }).then(() => { if (drawerMode === "lib") fillLib(); });
   }
-
   function progressOf(r) {
     const p = Number(store.get("p:" + r.k) || 0);
     return { p, pct: r.total && p ? Math.min(100, Math.round(p / r.total * 100)) : 0 };
@@ -510,28 +768,30 @@ body.drive #note { display:block; }
     });
   }
 
-  const LABEL = { hl: "Highlight", quote: "Quote", note: "Note" };
+  /* Notes */
+  const LABEL = { hl: "Highlight", quote: "Quote", note: "Note", pin: "Comment", ink: "Drawing" };
   function renderNotes() {
     const list = anns.slice().sort((a, b) => a.p - b.p || a.t - b.t);
+    const real = list.filter(a => a.type !== "ink");
     $("dBody").innerHTML =
       '<div class="tools"><button class="btn" id="addNote" type="button">+ Add note</button>' +
-      '<button class="btn" id="exp" type="button"' + (list.length ? "" : " disabled") + '>Export</button></div>' +
+      '<button class="btn" id="exp" type="button"' + (real.length ? "" : " disabled") + '>Export</button></div>' +
       '<p class="hint">' + esc(bookTitle) + '. Saved in this browser on this device.</p>' +
       (list.length ? list.map(a =>
-        '<div class="ni" data-id="' + a.id + '" style="--c:' + a.c + '"><small>' + (a.p ? "Page " + a.p + " · " : "") + LABEL[a.type] + ' · tap to edit</small>' +
+        '<div class="ni" data-id="' + a.id + '" style="--c:' + (a.c || "#ffe14d") + '"><small>' + (a.p ? "Page " + a.p + " · " : "") + LABEL[a.type] + (a.type === "ink" ? ' · tap to go to page' : ' · tap to edit') + '</small>' +
         (a.text ? "<q>" + esc(a.text) + "</q>" : "") + (a.note ? '<div class="n">' + esc(a.note) + "</div>" : "") + "</div>").join("")
-        : '<p class="hint">Nothing yet. Select text in the book to highlight it, add a note or save a quote.</p>');
+        : '<p class="hint">Nothing yet. Select text to highlight it, draw with the pen, or double-tap anywhere on a page to add a comment.</p>');
     $("addNote").onclick = () => { closeDrawer(); openEditor({ id: newId(), type: "note", p: driveMode ? 0 : cur, rects: null, text: "", c: COLORS[0], note: "", t: Date.now() }, true); };
     const ex = $("exp"); if (ex) ex.onclick = exportNotes;
     $("dBody").querySelectorAll(".ni").forEach(el => el.addEventListener("click", () => {
       const a = anns.find(x => x.id === el.dataset.id); if (!a) return;
       closeDrawer();
       if (a.p && pdf && !driveMode) go(a.p);
-      openEditor(a, false);
+      if (a.type !== "ink") openEditor(a, false);
     }));
   }
   function exportNotes() {
-    const list = anns.slice().sort((a, b) => a.p - b.p || a.t - b.t);
+    const list = anns.filter(a => a.type !== "ink").sort((a, b) => a.p - b.p || a.t - b.t);
     const txt = bookTitle + "\nNotes, highlights and quotes\n\n" + list.map(a =>
       (a.p ? "[Page " + a.p + "] " : "") + LABEL[a.type] + (a.text ? ': "' + a.text + '"' : "") + (a.note ? "\n  Note: " + a.note : "")).join("\n\n") + "\n";
     const link = document.createElement("a");
@@ -542,60 +802,47 @@ body.drive #note { display:block; }
 
   /* ---------- Book meta ---------- */
   function setMeta(key, title, dl, local) {
-    bookKey = key; bookTitle = title;
+    bookKey = key; bookTitle = title; dlUrl = dl || "";
     document.title = title + " | English Materials Reader";
     $("title").textContent = title;
-    $("dl").hidden = !dl;
-    if (dl) $("dl").href = dl;
     curRec = { k: key, title: title, local: !!local, total: (getRecents().find(r => r.k === key) || {}).total || 0 };
     touchRecent();
     loadAnns();
   }
 
   /* ---------- Google Drive mode ---------- */
-  function showDrive(book) {
+  function showDrive(book_) {
     driveMode = true;
     document.body.classList.add("drive");
     $("msg").hidden = true;
     const frame = document.createElement("iframe");
-    frame.id = "frame"; frame.title = book.t; frame.allow = "fullscreen";
-    frame.src = "https://drive.google.com/file/d/" + book.d + "/preview";
+    frame.id = "frame"; frame.title = book_.t; frame.allow = "fullscreen";
+    frame.src = "https://drive.google.com/file/d/" + book_.d + "/preview";
     document.body.appendChild(frame);
   }
 
-  /* ---------- PDF.js mode ---------- */
+  /* ---------- Page rendering (shared by scroll and book modes) ---------- */
   function width() {
-    let w = Math.min(box.clientWidth - 16, 1100);
+    const cols_ = mode === "scroll" && slots() === 2 ? 2 : 1;
+    let w = Math.min((box.clientWidth - 16 - (cols_ - 1) * 12) / cols_, 1100);
     if (fit === "page") w = Math.min(w, (window.innerHeight - 20) / ratio);
     return Math.max(200, w * zoom);
   }
-  function updateLabels() {
-    $("zl").textContent = Math.round(zoom * 100) + "%";
-    $("fit").textContent = fit === "page" ? "Fit page" : "Fit width";
+  function setCur(n) {
+    cur = n; $("num").value = n;
+    pill.textContent = n + " / " + (pdf ? pdf.numPages : "…");
+    if (ready) { store.set("p:" + bookKey, String(n)); touchRecent(); }
+    $("progressBar").style.width = (pdf ? (n / pdf.numPages) * 100 : 0) + "%";
   }
 
-  const lazy = new IntersectionObserver(entries => entries.forEach(en => {
-    const n = Number(en.target.dataset.n);
-    if (en.isIntersecting) draw(n); else drop(n);
-  }), { rootMargin: "1500px 0px" });
-
-  const mid = new IntersectionObserver(entries => entries.forEach(en => {
-    if (!en.isIntersecting) return;
-    cur = Number(en.target.dataset.n);
-    $("num").value = cur;
-    pill.textContent = cur + " / " + (pdf ? pdf.numPages : "…");
-    if (ready) { store.set("p:" + bookKey, String(cur)); touchRecent(); }
-    $("progressBar").style.width = (pdf ? (cur / pdf.numPages) * 100 : 0) + "%";
-  }), { rootMargin: "-45% 0px -54% 0px" });
-
-  async function draw(n) {
-    const el = pages[n - 1];
-    if (!el || el.querySelector("canvas") || busy[n]) return;
-    busy[n] = true;
-    const myPdf = pdf;
+  async function drawInto(el) {
+    const n = +el.dataset.n;
+    if (!n || !pdf || el.querySelector("canvas") || el._b) return;
+    el._b = true;
+    const myPdf = pdf, tw = parseFloat(el.style.width);
     try {
       const page = await myPdf.getPage(n);
-      const tw = width(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const base = page.getViewport({ scale: 1 });
       const cssScale = tw / base.width;
       const vp = page.getViewport({ scale: cssScale * dpr });
@@ -604,29 +851,37 @@ body.drive #note { display:block; }
       const ctx = canvas.getContext("2d", { alpha: false });
       if (!ctx) throw new Error("Canvas is unavailable.");
       await page.render({ canvasContext: ctx, viewport: vp }).promise;
-
-      if (myPdf === pdf && pages[n - 1] === el && Math.abs(parseFloat(el.style.width) - tw) < 2) {
+      if (myPdf === pdf && !el.querySelector("canvas") && Math.abs(parseFloat(el.style.width) - tw) < 2) {
         const tl = document.createElement("div");
         tl.className = "textLayer";
         tl.style.setProperty("--scale-factor", cssScale);
         el.classList.remove("empty");
-        el.replaceChildren(canvas, tl, hlLayer(n));
+        el.replaceChildren(canvas, tl, ...layersFor(n));
         try {
           pdfjsLib.renderTextLayer({ textContentSource: page.streamTextContent(), container: tl, viewport: page.getViewport({ scale: cssScale }), textDivs: [] }).promise.catch(() => {});
         } catch (e) {}
       }
     } catch (error) {
       console.error("Could not render PDF page " + n, error);
-    } finally { busy[n] = false; }
+    } finally { el._b = false; }
   }
-  function drop(n) {
-    const el = pages[n - 1];
-    if (el && el.firstChild && !busy[n]) { el.replaceChildren(); el.classList.add("empty"); }
+  function drop(el) {
+    if (el.firstChild && !el._b) { el.replaceChildren(); el.classList.add("empty"); }
   }
-  function layout() {
+
+  /* ---------- Scroll mode ---------- */
+  const lazy = new IntersectionObserver(entries => entries.forEach(en => {
+    if (en.isIntersecting) drawInto(en.target); else drop(en.target);
+  }), { rootMargin: "1500px 0px" });
+  const mid = new IntersectionObserver(entries => entries.forEach(en => {
+    if (en.isIntersecting) setCur(Number(en.target.dataset.n));
+  }), { rootMargin: "-45% 0px -54% 0px" });
+
+  function layoutScroll() {
     lazy.disconnect(); mid.disconnect();
+    box.classList.toggle("two", slots() === 2);
     const tw = width();
-    lastW = box.clientWidth; lastH = window.innerHeight;
+    lastIW = window.innerWidth; lastIH = window.innerHeight;
     pages.forEach(el => {
       el.style.width = tw + "px"; el.style.height = (tw * ratio) + "px";
       el.replaceChildren(); el.classList.add("empty");
@@ -635,19 +890,208 @@ body.drive #note { display:block; }
   }
   function scrollToPage(n, fraction) {
     const el = pages[n - 1]; if (!el) return;
-    window.scrollTo({ top: Math.max(0, el.getBoundingClientRect().top + window.scrollY + (fraction || 0) * el.offsetHeight - 6), behavior: "auto" });
+    window.scrollTo({ top: Math.max(0, el.getBoundingClientRect().top + window.scrollY + (fraction || 0) * el.offsetHeight - 66), behavior: "auto" });
+  }
+
+  /* ---------- Book mode: single page or spread, with real page turns ---------- */
+  function shownPages(p) {
+    if (slots() === 1) return [p];
+    if (p <= 1) return [0, 1];
+    const l = p % 2 === 0 ? p : p - 1;
+    return [l, l + 1];
+  }
+  const validN = n => (n >= 1 && n <= pdf.numPages ? n : 0);
+  const firstValid = pgs => pgs.find(validN) || 1;
+  function bsize() {
+    const s = slots(), aw = window.innerWidth - 16, ah = window.innerHeight - 160;
+    const h = Math.min(ah, (aw / s) * ratio);
+    return { s, w: Math.floor(h / ratio), h: Math.floor(h) };
+  }
+  function mkPage(n, z) {
+    n = validN(n);
+    const el = document.createElement("div");
+    el.className = "pg" + (n ? " empty" : " blank");
+    el.style.cssText = "width:" + z.w + "px;height:" + z.h + "px";
+    if (n) { el.dataset.n = n; el.setAttribute("aria-label", "Page " + n); }
+    return el;
+  }
+  function mkSlot(i, z, pg) {
+    const d = document.createElement("div");
+    d.className = "slot"; d.style.cssText = "left:" + i * z.w + "px;width:" + z.w + "px;height:" + z.h + "px";
+    d.appendChild(pg); return d;
+  }
+  function mkStage(pgs, z) {
+    const st = document.createElement("div"); st.className = "stage";
+    const sl = pgs.map((n, i) => { const pg = mkPage(n, z); const s = mkSlot(i, z, pg); st.appendChild(s); drawInto(pg); return s; });
+    return { st, sl };
+  }
+  function fillStage(els) {
+    const z = bk.z; bk.st.replaceChildren();
+    bk.sl = els.map((pg, i) => { const s = mkSlot(i, z, pg); bk.st.appendChild(s); return s; });
+  }
+  function renderBook(p) {
+    if (!pdf) return;
+    book.replaceChildren();
+    const z = bsize(), pgs = shownPages(p);
+    const holder = document.createElement("div");
+    holder.className = "holder"; holder.style.cssText = "width:" + z.s * z.w + "px;height:" + z.h + "px";
+    const m = mkStage(pgs, z);
+    holder.appendChild(m.st); book.appendChild(holder);
+    bk = { z, holder, st: m.st, sl: m.sl, pgs };
+    lastIW = window.innerWidth; lastIH = window.innerHeight;
+    setCur(firstValid(pgs));
+  }
+  const nextTarget = () => { const m = Math.max(...bk.pgs.filter(validN)); return m + 1 <= pdf.numPages ? m + 1 : 0; };
+  const prevTarget = () => { const m = Math.min(...bk.pgs.filter(validN)); return m - 1 >= 1 ? m - 1 : 0; };
+
+  function face(el, isBack) {
+    const d = document.createElement("div");
+    d.className = "face" + (isBack ? " back" : ""); d.appendChild(el); return d;
+  }
+  /* Page-turn: a leaf that rotates around the spine. T.set(t) takes a progress from 0 to 1. */
+  function prepTurn(dir, target) {
+    const z = bk.z, two = z.s === 2, pgs = shownPages(target), st = bk.st;
+    const oldEls = bk.sl.map(s => s.firstChild), oldPgs = bk.pgs;
+    const mk = n => { const p = mkPage(n, z); drawInto(p); return p; };
+    const leaf = document.createElement("div");
+    leaf.className = "leaf";
+    let finalEls, set;
+    if (two) {
+      const fi = dir > 0 ? 1 : 0;
+      const underPg = mk(pgs[fi]), backPg = mk(pgs[1 - fi]);
+      leaf.style.cssText = "left:" + fi * z.w + "px;width:" + z.w + "px;height:" + z.h + "px;transform-origin:" + (dir > 0 ? "left" : "right") + " center";
+      leaf.append(face(oldEls[fi]), face(backPg, true));
+      finalEls = fi === 1 ? [backPg, underPg] : [underPg, backPg];
+      st.replaceChildren();
+      st.appendChild(mkSlot(1 - fi, z, oldEls[1 - fi]));
+      st.appendChild(mkSlot(fi, z, underPg));
+      st.appendChild(leaf);
+      set = t => { leaf.style.transform = "rotateY(" + (dir > 0 ? -180 * t : 180 * t) + "deg)"; leaf.style.setProperty("--s", Math.sin(Math.PI * t).toFixed(3)); };
+    } else {
+      const np = mk(pgs[0]);
+      leaf.style.cssText = "left:0;width:" + z.w + "px;height:" + z.h + "px;transform-origin:left center";
+      finalEls = [np];
+      st.replaceChildren();
+      if (dir > 0) { leaf.append(face(oldEls[0])); st.appendChild(mkSlot(0, z, np)); }
+      else { leaf.append(face(np)); st.appendChild(mkSlot(0, z, oldEls[0])); }
+      st.appendChild(leaf);
+      set = t => { leaf.style.transform = "rotateY(" + (-100 * (dir > 0 ? t : 1 - t)) + "deg)"; leaf.style.setProperty("--s", Math.sin(Math.PI * t).toFixed(3)); };
+    }
+    set(0);
+    return {
+      set,
+      finish(commit) {
+        fillStage(commit ? finalEls : oldEls);
+        bk.pgs = commit ? pgs : oldPgs; flipping = false;
+        if (commit) setCur(firstValid(pgs));
+      }
+    };
+  }
+  function animateT(T, from, to, ms, done) {
+    const t0 = performance.now();
+    (function f(now) {
+      const k = Math.min(1, (now - t0) / Math.max(1, ms));
+      const e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+      T.set(from + (to - from) * e);
+      if (k < 1) requestAnimationFrame(f); else done();
+    })(t0);
+  }
+  /* Slide, fade and stack styles move the whole spread */
+  function flipSimple(dir, target) {
+    flipping = true;
+    const z = bk.z, old = bk.st, m = mkStage(shownPages(target), z), ns = m.st, pgs = shownPages(target);
+    bk.holder.appendChild(ns);
+    const o = { duration: Math.round(speed() * 0.6), easing: "ease-in-out", fill: "both" };
+    let a;
+    if (anim === "fade") { ns.style.zIndex = 2; a = ns.animate([{ opacity: 0 }, { opacity: 1 }], o); }
+    else if (anim === "slide") {
+      ns.style.zIndex = 2;
+      a = ns.animate([{ transform: "translateX(" + dir * 100 + "%)" }, { transform: "none" }], o);
+      old.animate([{ transform: "none" }, { transform: "translateX(" + -dir * 100 + "%)" }], o);
+    } else if (dir > 0) { old.style.zIndex = 3; a = old.animate([{ transform: "none", opacity: 1 }, { transform: "translateX(-60%)", opacity: 0 }], o); }
+    else { ns.style.zIndex = 3; a = ns.animate([{ transform: "translateX(-60%)", opacity: 0 }, { transform: "none", opacity: 1 }], o); }
+    a.onfinish = () => {
+      old.remove();
+      ns.getAnimations().forEach(x => x.cancel()); ns.style.zIndex = "";
+      bk.st = ns; bk.sl = m.sl; bk.pgs = pgs; flipping = false; setCur(firstValid(pgs));
+    };
+  }
+  function step(dir) {
+    if (!pdf) return;
+    if (mode === "scroll") { go(cur + dir); return; }
+    if (flipping || !bk) return;
+    const target = dir > 0 ? nextTarget() : prevTarget();
+    if (!target) return;
+    if (anim === "turn") {
+      flipping = true;
+      const T = prepTurn(dir, target);
+      animateT(T, 0, 1, speed(), () => T.finish(true));
+    } else flipSimple(dir, target);
+  }
+
+  /* Drag a page by its outer edge to turn it by hand */
+  let drag = null;
+  book.addEventListener("pointerdown", e => {
+    if (tool !== "select" || flipping || !bk || e.target.closest(".pin") || (e.pointerType === "mouse" && e.button !== 0)) return;
+    const r = bk.holder.getBoundingClientRect(), x = (e.clientX - r.left) / r.width;
+    if (x > 0.18 && x < 0.82) return;
+    drag = { id: e.pointerId, x0: e.clientX, y0: e.clientY, dir: x > 0.5 ? 1 : -1, moved: false, T: null, t: 0, dx: 0 };
+  });
+  book.addEventListener("pointermove", e => {
+    if (!drag || e.pointerId !== drag.id) return;
+    const dx = (e.clientX - drag.x0) * -drag.dir;
+    if (!drag.moved) {
+      if (Math.abs(e.clientX - drag.x0) < 10 || Math.abs(e.clientY - drag.y0) > Math.abs(e.clientX - drag.x0) || dx < 0) return;
+      const target = drag.dir > 0 ? nextTarget() : prevTarget();
+      if (!target) { drag = null; return; }
+      drag.moved = true;
+      try { book.setPointerCapture(e.pointerId); } catch (x) {}
+      if (anim === "turn") { flipping = true; drag.T = prepTurn(drag.dir, target); }
+    }
+    drag.dx = dx;
+    if (drag.T) { drag.t = Math.max(0, Math.min(1, dx / (bk.z.w * (bk.z.s === 2 ? 1.3 : 0.9)))); drag.T.set(drag.t); }
+  });
+  function dragEnd(e) {
+    if (!drag || e.pointerId !== drag.id) return;
+    const d = drag; drag = null;
+    if (!d.moved) return;
+    suppressUntil = Date.now() + 400;
+    if (d.T) {
+      const commit = e.type !== "pointercancel" && d.t > 0.3;
+      animateT(d.T, d.t, commit ? 1 : 0, speed() * (commit ? 1 - d.t : d.t) + 80, () => d.T.finish(commit));
+    } else if (d.dx > 50 && e.type !== "pointercancel") step(d.dir);
+  }
+  book.addEventListener("pointerup", dragEnd);
+  book.addEventListener("pointercancel", dragEnd);
+
+  /* ---------- View management ---------- */
+  function applyView(skipRender) {
+    const isBook = mode === "book" && !driveMode;
+    box.hidden = isBook; book.hidden = !isBook;
+    if (!pdf) return;
+    flipping = false; drag = null;
+    if (isBook) {
+      lazy.disconnect(); mid.disconnect();
+      if (!skipRender) renderBook(cur);
+    } else {
+      book.replaceChildren(); bk = null;
+      layoutScroll(); scrollToPage(cur, 0);
+    }
+    setChrome(true);
   }
   function go(n) {
     if (!pdf || !pages.length) return;
     n = Math.max(1, Math.min(pdf.numPages, Math.trunc(Number(n) || 1)));
-    cur = n; $("num").value = n; scrollToPage(n, 0);
+    if (mode === "book") { if (!flipping) renderBook(n); }
+    else { setCur(n); scrollToPage(n, 0); }
   }
   function relayout() {
     if (!pdf) return;
+    if (mode === "book") { if (!flipping) renderBook(cur); return; }
     const el = pages[cur - 1];
     let fraction = 0;
-    if (el && el.offsetHeight) fraction = Math.max(0, Math.min(0.95, -el.getBoundingClientRect().top / el.offsetHeight));
-    const p = cur; layout(); scrollToPage(p, fraction);
+    if (el && el.offsetHeight) fraction = Math.max(0, Math.min(0.95, -(el.getBoundingClientRect().top - 66) / el.offsetHeight));
+    const p = cur; layoutScroll(); scrollToPage(p, fraction);
   }
 
   async function startPdf(source, key, title, dl, local) {
@@ -656,8 +1100,7 @@ body.drive #note { display:block; }
     document.body.classList.remove("drive");
     const fr = $("frame"); if (fr) fr.remove();
     lazy.disconnect(); mid.disconnect();
-    box.replaceChildren(); pages = []; pdf = null; ready = false; cur = 1;
-    Object.keys(busy).forEach(k => delete busy[k]);
+    box.replaceChildren(); book.replaceChildren(); pages = []; pdf = null; ready = false; cur = 1; bk = null; flipping = false;
     window.scrollTo(0, 0);
     $("msg").hidden = false; $("msg").textContent = "Opening book…";
     $("tot").textContent = "/ …"; $("num").value = 1; $("progressBar").style.width = "0";
@@ -665,7 +1108,6 @@ body.drive #note { display:block; }
 
     zoom = Number(store.get("zoom:" + key) || store.get("zoom") || 1);
     if (!isFinite(zoom) || zoom < 0.6 || zoom > 2.5) zoom = 1;
-    updateLabels();
 
     try {
       const doc = await pdfjsLib.getDocument(Object.assign({ disableAutoFetch: true, rangeChunkSize: 262144 }, source)).promise;
@@ -684,8 +1126,8 @@ body.drive #note { display:block; }
         pg.className = "pg empty"; pg.dataset.n = i; pg.setAttribute("aria-label", "Page " + i);
         box.appendChild(pg); pages.push(pg);
       }
-      layout();
-      go(Number(store.get("p:" + key) || 1));
+      cur = Math.max(1, Math.min(pdf.numPages, Number(store.get("p:" + key) || 1)));
+      applyView(false);
       setTimeout(() => { ready = true; }, 600);
     } catch (error) {
       console.error("PDF loading failed:", error);
@@ -696,31 +1138,25 @@ body.drive #note { display:block; }
   }
 
   /* ---------- Controls ---------- */
-  $("prev").addEventListener("click", () => go(cur - 1));
-  $("next").addEventListener("click", () => go(cur + 1));
+  $("prev").addEventListener("click", () => step(-1));
+  $("next").addEventListener("click", () => step(1));
   $("num").addEventListener("change", e => go(e.target.value));
   $("num").addEventListener("keydown", e => { if (e.key === "Enter") { go(e.target.value); e.target.blur(); } });
 
   function setZoom(v) {
     zoom = Math.max(0.6, Math.min(2.5, Math.round(v * 100) / 100));
     store.set("zoom:" + bookKey, String(zoom)); store.set("zoom", String(zoom));
-    updateLabels(); relayout();
+    relayout();
   }
-  $("zi").addEventListener("click", () => setZoom(zoom + 0.2));
-  $("zo").addEventListener("click", () => setZoom(zoom - 0.2));
-  $("zl").addEventListener("click", () => setZoom(1));
-  $("fit").addEventListener("click", () => {
-    fit = fit === "page" ? "width" : "page";
-    store.set("fit", fit); updateLabels(); relayout();
-  });
 
   window.addEventListener("keydown", e => {
     if (e.key === "Escape") { if ($("ed").classList.contains("show")) closeEditor(); else closeDrawer(); return; }
     if (/INPUT|TEXTAREA/.test(e.target.tagName) || e.ctrlKey || e.metaKey || e.altKey || !drawer.hidden) return;
-    if (e.key === "ArrowRight") go(cur + 1);
-    if (e.key === "ArrowLeft") go(cur - 1);
+    if (e.key === "ArrowRight") step(1);
+    if (e.key === "ArrowLeft") step(-1);
   });
 
+  /* Hide the controls while scrolling */
   let lastY = window.scrollY, ticking = false, pillTimer;
   function showPill() {
     pill.classList.add("show");
@@ -728,37 +1164,24 @@ body.drive #note { display:block; }
     pillTimer = setTimeout(() => pill.classList.remove("show"), 1200);
   }
   window.addEventListener("scroll", () => {
-    if (ticking) return;
+    if (ticking || mode !== "scroll" || tool !== "select") return;
     ticking = true;
     requestAnimationFrame(() => {
       const y = window.scrollY, d = y - lastY;
-      if (y < 80) bar.classList.remove("hide");
-      else if (d > 8) { bar.classList.add("hide"); showPill(); }
-      else if (d < -8) bar.classList.remove("hide");
+      if (y < 80) setChrome(true);
+      else if (d > 8) setChrome(false);
+      else if (d < -8) setChrome(true);
       lastY = y; ticking = false;
     });
   }, { passive: true });
-
-  box.addEventListener("click", e => {
-    if (String(getSelection())) return;
-    const pg = e.target.closest(".pg");
-    if (pg) {
-      const pb = pg.getBoundingClientRect(), n = +pg.dataset.n;
-      const x = (e.clientX - pb.left) / pb.width, y = (e.clientY - pb.top) / pb.height;
-      const hit = anns.find(a => a.p === n && a.rects && a.rects.some(r => x >= r[0] && x <= r[0] + r[2] && y >= r[1] && y <= r[1] + r[3]));
-      if (hit) { openEditor(hit, false); return; }
-    }
-    bar.classList.toggle("hide");
-    if (bar.classList.contains("hide")) showPill();
-  });
 
   function onResize() {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
       if (!pdf) return;
-      const w = Math.abs(box.clientWidth - lastW) > 4;
-      const h = fit === "page" && Math.abs(window.innerHeight - lastH) > 100;
-      if (w || h) relayout();
+      const w = Math.abs(window.innerWidth - lastIW) > 4;
+      const h = Math.abs(window.innerHeight - lastIH) > 100;
+      if (w || (h && (fit === "page" || mode === "book"))) relayout();
     }, 200);
   }
   window.addEventListener("resize", onResize);
@@ -766,9 +1189,11 @@ body.drive #note { display:block; }
   if (screen.orientation && screen.orientation.addEventListener) screen.orientation.addEventListener("change", () => setTimeout(onResize, 350));
 
   /* ---------- Start ---------- */
+  setTool("select");
   if (typeof pdfjsLib !== "undefined") {
     pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
   }
+  if (mode === "book") { box.hidden = true; book.hidden = false; }
   if (localId) {
     if (typeof pdfjsLib === "undefined") {
       $("msg").textContent = "The PDF reader could not load. Please check your internet connection and reload the page.";
@@ -780,15 +1205,16 @@ body.drive #note { display:block; }
       }).catch(() => { $("msg").textContent = "Could not open the saved file on this device."; });
     }
   } else {
-    const book = BOOKS[bookKey];
-    if (book.d) {
-      setMeta(bookKey, book.t, DRIVE_DL + book.d);
-      showDrive(book);
+    const bookDef = BOOKS[bookKey];
+    if (bookDef.d) {
+      setMeta(bookKey, bookDef.t, DRIVE_DL + bookDef.d);
+      showDrive(bookDef);
+      box.hidden = true; book.hidden = true;
     } else if (typeof pdfjsLib === "undefined") {
-      setMeta(bookKey, book.t, RAW + book.f);
+      setMeta(bookKey, bookDef.t, RAW + bookDef.f);
       $("msg").textContent = "The PDF reader could not load. Please check your internet connection and reload the page.";
     } else {
-      startPdf({ url: RAW + book.f }, bookKey, book.t, RAW + book.f);
+      startPdf({ url: RAW + bookDef.f }, bookKey, bookDef.t, RAW + bookDef.f);
     }
   }
 })();
