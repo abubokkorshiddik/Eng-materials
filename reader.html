@@ -230,6 +230,11 @@ body.drive #pages, body.drive #pill, body.drive #progress, body.drive .dock, bod
 #note { display:none; padding:6px 12px; font-size:12px; font-weight:500; background:var(--bar); border-bottom:1px solid var(--line); text-align:center; flex:none; }
 body.drive #note { display:block; }
 
+body.penonly .pg{touch-action:pan-y pinch-zoom}
+body.railoff .rail, body.railoff .brk { display:none !important; }
+#railBtn { order:7; }
+@media (max-width:640px) { #railBtn { order:5; } }
+body.annoff .hl, body.annoff .ink, body.annoff .pins { display:none !important; }
 /* Short landscape: the controls float over the page so the book gets the full height */
 @media (orientation:landscape) and (max-height:500px) {
   #note { display:none !important; }
@@ -247,6 +252,7 @@ body.drive #note { display:block; }
   <button class="ib" id="searchBtn" type="button" aria-label="Search in this book" data-i="search"></button>
   <button class="ib" id="notesBtn" type="button" aria-label="Notes, comments and bookmarks" data-i="list"><span id="cnt" hidden>0</span></button>
   <button class="ib" id="setBtn" type="button" aria-label="Reading settings" data-i="sliders"></button>
+  <button class="ib" id="railBtn" type="button" aria-label="Show or hide toolbar icons" title="Show / hide toolbar icons" data-i="grid"></button>
   <span class="brk"></span>
   <div class="rail" id="tools" role="toolbar" aria-label="Annotation tools">
     <button type="button" data-tool="select" aria-label="Read and select text" title="Read / select text (V)" data-i="cursor"></button>
@@ -255,6 +261,9 @@ body.drive #note { display:block; }
     <button type="button" data-tool="pen" aria-label="Pen" title="Pen (P)" data-i="pen"><i class="dot"></i></button>
     <button type="button" data-tool="erase" aria-label="Eraser" title="Eraser (E)" data-i="erase"></button>
     <button type="button" data-tool="pin" aria-label="Add comment" title="Comment (C)" data-i="comment"></button>
+    <span class="rsep"></span>
+    <button type="button" data-act="undo" aria-label="Undo last drawing" title="Undo" data-i="undo"></button>
+    <button type="button" data-act="vis" aria-label="Show or hide all marks" title="Show / hide all highlights, drawings and comments" data-i="eye"></button>
   </div>
   <div id="progress" aria-hidden="true"><div id="progressBar"></div></div>
 </header>
@@ -275,6 +284,8 @@ body.drive #note { display:block; }
   <button class="sw" data-c="#7ee08a" style="background:#7ee08a" aria-label="Highlight green"></button>
   <button class="sw" data-c="#8ec5ff" style="background:#8ec5ff" aria-label="Highlight blue"></button>
   <button class="sw" data-c="#ff9ec4" style="background:#ff9ec4" aria-label="Highlight pink"></button>
+  <button id="selU" type="button" style="text-decoration:underline" aria-label="Underline">U</button>
+  <button id="selS" type="button" style="text-decoration:line-through" aria-label="Strikethrough">S</button>
   <button id="selDef" type="button" data-i="book" data-s="16"> Define</button>
   <button id="selNote" type="button" data-i="pen" data-s="16"> Note</button>
   <button id="selQuote" type="button" data-i="quote" data-s="16"> Quote</button>
@@ -376,6 +387,9 @@ body.drive #note { display:block; }
     search: '<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>',
     speaker: '<path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/>'
   };
+  IC.grid = '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>';
+  IC.eye = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>';
+  IC.eyeoff = '<path d="M17.9 17.9A10.9 10.9 0 0 1 12 20C5 20 1 12 1 12a18.5 18.5 0 0 1 5.1-5.9M9.9 4.2A9.1 9.1 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.2 3.2M1 1l22 22"/>';
   const ico = (n, s) => '<svg viewBox="0 0 24 24" width="' + (s || 20) + '" height="' + (s || 20) + '" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + IC[n] + '</svg>';
   document.querySelectorAll("[data-i]").forEach(el => el.insertAdjacentHTML("afterbegin", ico(el.dataset.i, +el.dataset.s || (el.closest(".rail") ? 22 : 20))));
 
@@ -460,6 +474,8 @@ body.drive #note { display:block; }
   let anim = ["turn", "slide", "fade", "stack"].includes(store.get("anim")) ? store.get("anim") : "turn";
   let spd = ["fast", "normal", "slow"].includes(store.get("spd")) ? store.get("spd") : "normal";
   let tool = "select", bk = null, flipping = false;
+  let optsOpen = false, annOff = store.get("annoff") === "1";
+  let shape = "free", penOnly = false, nf = "all", selC = "#ffe14d"; const redo = [];
   const sizes = { pen: 3, hl: 4 }, cols = { pen: "#e53935", hl: "#ffe14d" };
   try { Object.assign(cols, JSON.parse(store.get("cols") || "{}")); Object.assign(sizes, JSON.parse(store.get("sizes") || "{}")); } catch (e) {}
   const box = $("pages"), book = $("book"), pill = $("pill");
@@ -498,7 +514,8 @@ body.drive #note { display:block; }
     if (!Array.isArray(bms)) bms = [];
     updateCount();
   }
-  function saveAnns() { store.set("ann:" + bookKey, JSON.stringify(anns)); updateCount(); }
+  function saveAnns() {
+    if (annOff) setAnnOff(false); store.set("ann:" + bookKey, JSON.stringify(anns)); updateCount(); }
   function updateCount() {
     const n = anns.filter(a => a.type !== "ink").length + bms.length;
     $("cnt").textContent = n;
@@ -544,14 +561,14 @@ body.drive #note { display:block; }
       if (a.type === "pin") {
         const b = document.createElement("button");
         b.type = "button"; b.className = "pin"; b.dataset.id = a.id; b.textContent = "💬";
-        b.style.left = a.x * 100 + "%"; b.style.top = a.y * 100 + "%";
+        b.style.left = a.x * 100 + "%"; b.style.top = a.y * 100 + "%"; b.style.background = a.c || "#ffd93d";
         b.title = a.note || "Comment"; b.setAttribute("aria-label", "Comment: " + (a.note || "empty"));
         pins.appendChild(b); return;
       }
       if (!a.rects) return;
       a.rects.forEach(r => {
         const i = document.createElement("i");
-        i.style.cssText = "left:" + r[0] * 100 + "%;top:" + r[1] * 100 + "%;width:" + r[2] * 100 + "%;height:" + r[3] * 100 + "%;background:" + a.c;
+        i.style.cssText = "left:" + r[0] * 100 + "%;top:" + r[1] * 100 + "%;width:" + r[2] * 100 + "%;height:" + r[3] * 100 + "%;" + (a.st === "u" ? "background:none;opacity:1;border-bottom:2px solid " + a.c : a.st === "s" ? "background:linear-gradient(" + a.c + "," + a.c + ") center/100% 2px no-repeat;opacity:1" : "background:" + a.c);
         if (a.note) i.className = "has";
         hl.appendChild(i);
       });
@@ -574,7 +591,7 @@ body.drive #note { display:block; }
     $("edQ").hidden = !a.text;
     $("edT").value = a.note || "";
     $("edDel").hidden = isNew;
-    $("edC").hidden = !a.rects;
+    $("edC").hidden = !(a.rects || a.type === "pin");
     $("edC").innerHTML = COLORS.map(c => '<button type="button" class="sw' + (c === edColor ? " on" : "") + '" data-c="' + c + '" style="background:' + c + '" aria-label="Colour"></button>').join("");
     $("ed").classList.add("show");
     setTimeout(() => $("edT").focus(), 50);
@@ -589,12 +606,13 @@ body.drive #note { display:block; }
   $("edSave").addEventListener("click", () => {
     if (!edA) return;
     edA.note = $("edT").value.trim();
-    if (edA.rects) edA.c = edColor;
+    if (edA.rects || edA.type === "pin") edA.c = edColor;
     if (edNew) {
       if (!edA.note && !edA.text) { closeEditor(); return; }
       anns.push(edA);
     }
-    saveAnns(); refreshPage(edA.p); closeEditor(); if (drawerMode === "notes") renderNotes();
+    const wasPin = edNew && edA.type === "pin";
+    saveAnns(); refreshPage(edA.p); closeEditor(); if (wasPin) setTool("select"); if (drawerMode === "notes") renderNotes();
   });
   $("edDel").addEventListener("click", () => {
     if (!edA || !confirm("Delete this item?")) return;
@@ -633,21 +651,38 @@ body.drive #note { display:block; }
     $("selDef").hidden = !cleanWord(text) || cleanWord(text).split(" ").length > 3;
     sel.classList.add("show");
   }
-  function addFromSel(type, color) {
+  function addFromSel(type, color, st) {
     if (!pend) return;
-    const a = { id: newId(), type, p: pend.p, rects: pend.rects, text: pend.text, c: color || COLORS[0], note: "", t: Date.now() };
+    const a = { id: newId(), type, p: pend.p, rects: pend.rects, text: pend.text, c: color || COLORS[0], st: st || "", note: "", t: Date.now() };
     pend = null;
     try { getSelection().removeAllRanges(); } catch (e) {}
     hideSel();
     if (type === "note") { openEditor(a, true); return; }
     anns.push(a); saveAnns(); refreshPage(a.p);
   }
-  sel.querySelectorAll(".sw").forEach(b => b.addEventListener("click", () => addFromSel("hl", b.dataset.c)));
+  sel.querySelectorAll(".sw").forEach(b => b.addEventListener("click", () => { selC = b.dataset.c; addFromSel("hl", selC); }));
+  $("selU").addEventListener("click", () => addFromSel("hl", selC, "u"));
+  $("selS").addEventListener("click", () => addFromSel("hl", selC, "s"));
   $("selNote").addEventListener("click", () => addFromSel("note"));
   $("selQuote").addEventListener("click", () => addFromSel("quote"));
 
   /* ---------- Tools: highlighter, pen, eraser, comment ---------- */
   function setChrome(show) { document.body.classList.toggle("chromeOff", !show); if (!show) showPill(); }
+  function setAnnOff(v) {
+    annOff = v; document.body.classList.toggle("annoff", v); store.set("annoff", v ? "1" : "0");
+    const b = document.querySelector('[data-act="vis"]');
+    if (b) { b.setAttribute("aria-pressed", String(v)); b.innerHTML = ico(v ? "eyeoff" : "eye", 22); }
+  }
+  setAnnOff(annOff);
+  let railOff = store.get("railoff") === "1";
+  function setRail(v) {
+    railOff = v; document.body.classList.toggle("railoff", v); store.set("railoff", v ? "1" : "0");
+    $("railBtn").setAttribute("aria-pressed", String(v));
+    $("railBtn").style.background = v ? "var(--line)" : "";
+    measure();
+  }
+  $("railBtn").addEventListener("click", () => setRail(!railOff));
+  setRail(railOff);
   function updDots() {
     document.querySelectorAll("#tools .t, #tools button[data-tool]").forEach(b => {
       const t = b.dataset.tool, d = b.querySelector(".dot");
@@ -656,6 +691,7 @@ body.drive #note { display:block; }
     });
   }
   function setTool(t) {
+    optsOpen = (t === tool && (t === "pen" || t === "hl")) ? !optsOpen : false;
     tool = t; store.set("tool", t);
     document.body.classList.toggle("draw", t === "pen" || t === "hl" || t === "erase");
     document.body.classList.toggle("pinmode", t === "pin");
@@ -667,23 +703,33 @@ body.drive #note { display:block; }
   function renderOpts() {
     const o = $("opts");
     updDots();
-    if (tool === "select") { o.hidden = true; return; }
+    if (tool === "select" || !optsOpen) { o.hidden = true; return; }
     o.hidden = false;
     let h = "";
     if (tool === "pen" || tool === "hl") {
       h = PAL.map(c => '<button type="button" class="sw' + (cols[tool] === c ? " on" : "") + '" data-c="' + c + '" style="background:' + c + '" aria-label="Colour"></button>').join("") +
         '<span class="sepv"></span><span class="pv"><i style="background:' + cols[tool] + ';width:' + pvSize() + 'px;height:' + pvSize() + 'px"></i></span>' +
-        '<input type="range" id="sz" min="1" max="10" value="' + sizes[tool] + '" aria-label="Size">';
+        '<input type="range" id="sz" min="1" max="10" value="' + sizes[tool] + '" aria-label="Size">' +
+        (tool === "pen" ? '<span class="sepv"></span>' + [["free", "✎"], ["line", "╱"], ["arrow", "→"], ["rect", "▭"], ["oval", "◯"]].map(x => '<button type="button" class="u" data-sh="' + x[0] + '" aria-label="' + x[0] + '"' + (shape === x[0] ? ' style="background:var(--accent);color:var(--onacc)"' : "") + '>' + x[1] + '</button>').join("") +
+          '<button type="button" class="u" data-po="1" title="Pen only: fingers scroll" aria-label="Pen only"' + (penOnly ? ' style="background:var(--accent);color:var(--onacc)"' : "") + '>🖊</button>' : "");
     } else h = '<span class="hint">' + (tool === "erase" ? "Drag over a drawing to erase it" : "Tap the page to place a comment") + '</span>';
     if (tool !== "pin") h += '<span class="sepv"></span><button type="button" class="u" id="undo" aria-label="Undo last drawing" title="Undo">' + ico("undo", 17) + '</button>' +
-      '<button type="button" class="u" id="clr" aria-label="Clear drawings on this page" title="Clear drawings on this page">' + ico("trash", 17) + '</button>';
+      '<button type="button" class="u" id="redo" aria-label="Redo" title="Redo" style="transform:scaleX(-1)">' + ico("undo", 17) + '</button>' + '<button type="button" class="u" id="clr" aria-label="Clear drawings on this page" title="Clear drawings on this page">' + ico("trash", 17) + '</button>';
     o.innerHTML = h;
   }
-  $("tools").addEventListener("click", e => { const b = e.target.closest("button"); if (b) setTool(b.dataset.tool); });
+  $("tools").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    if (b.dataset.act === "undo") { undo(); return; }
+    if (b.dataset.act === "vis") { setAnnOff(!annOff); flash(annOff ? "Marks hidden" : "Marks shown"); return; }
+    setTool(b.dataset.tool);
+  });
   $("opts").addEventListener("click", e => {
     const sw = e.target.closest(".sw");
     if (sw) { cols[tool] = sw.dataset.c; store.set("cols", JSON.stringify(cols)); renderOpts(); return; }
     if (e.target.closest("#undo")) undo();
+    if (e.target.closest("#redo")) redoIt();
+    const sh = e.target.closest("[data-sh]"); if (sh) { shape = sh.dataset.sh; renderOpts(); }
+    if (e.target.closest("[data-po]")) { penOnly = !penOnly; document.body.classList.toggle("penonly", penOnly); renderOpts(); }
     if (e.target.closest("#clr")) clearPage();
   });
   $("opts").addEventListener("input", e => {
@@ -693,8 +739,17 @@ body.drive #note { display:block; }
   });
   function undo() {
     for (let i = anns.length - 1; i >= 0; i--) {
-      if (anns[i].type === "ink") { const p = anns[i].p; anns.splice(i, 1); saveAnns(); refreshPage(p); return; }
+      if (anns[i].type === "ink") { const p = anns[i].p; redo.push(anns.splice(i, 1)[0]); saveAnns(); refreshPage(p); return; }
     }
+  }
+  function redoIt() { const a = redo.pop(); if (!a) return; anns.push(a); saveAnns(); refreshPage(a.p); }
+  function shapePts(a, b, s) {
+    if (s === "line") return [a, b];
+    if (s === "rect") return [a, [b[0], a[1]], b, [a[0], b[1]], a];
+    if (s === "oval") { const cx = (a[0] + b[0]) / 2, cy = (a[1] + b[1]) / 2, rx = Math.abs(b[0] - a[0]) / 2, ry = Math.abs(b[1] - a[1]) / 2, o = []; for (let i = 0; i <= 48; i++) { const t = i / 48 * 2 * Math.PI; o.push([cx + rx * Math.cos(t), cy + ry * Math.sin(t)]); } return o; }
+    const dx = b[0] - a[0], dy = (b[1] - a[1]) * ratio, l = Math.hypot(dx, dy) || 1, h = Math.min(0.04, l * 0.35), g = Math.atan2(dy, dx);
+    const f = d => [b[0] - h * Math.cos(g + d), b[1] - h * Math.sin(g + d) / ratio];
+    return [a, b, f(0.5), b, f(-0.5)];
   }
   function clearPage() {
     const ps = mode === "book" && bk ? bk.pgs.filter(validN) : [cur];
@@ -726,8 +781,32 @@ body.drive #note { display:block; }
   }
 
   let ptr = null;
+  const tps = new Map(); let scrolling = false;
+  const drawTool = () => tool === "pen" || tool === "hl" || tool === "erase";
+  document.addEventListener("pointerdown", e => {
+    if (e.pointerType !== "touch") return;
+    tps.set(e.pointerId, [e.clientX, e.clientY]);
+    if (tps.size >= 2 && drawTool()) {
+      scrolling = true;
+      if (ptr) { if (ptr.el) ptr.el.remove(); ptr = null; }
+    }
+  }, true);
+  document.addEventListener("pointermove", e => {
+    if (e.pointerType !== "touch" || !tps.has(e.pointerId)) return;
+    const o = tps.get(e.pointerId); tps.set(e.pointerId, [e.clientX, e.clientY]);
+    if (!scrolling || tps.size < 2) return;
+    const dx = (e.clientX - o[0]) / tps.size, dy = (e.clientY - o[1]) / tps.size;
+    if (mode === "book") { book.scrollLeft -= dx; book.scrollTop -= dy; } else window.scrollBy(-dx, -dy);
+  }, true);
+  const tpEnd = e => { tps.delete(e.pointerId); if (tps.size < 2) scrolling = false; };
+  document.addEventListener("pointerup", tpEnd, true);
+  document.addEventListener("pointercancel", tpEnd, true);
   document.addEventListener("pointerdown", e => {
     if (tool !== "pen" && tool !== "hl" && tool !== "erase") return;
+    if (penOnly && e.pointerType === "touch") return;
+    if (tps.size > 1) return;
+    if (optsOpen) { optsOpen = false; renderOpts(); }
+    if (annOff) setAnnOff(false);
     const pg = e.target.closest && e.target.closest(".pg");
     if (!pg || !pg.dataset.n || (e.pointerType === "mouse" && e.button !== 0)) return;
     e.preventDefault();
@@ -746,6 +825,7 @@ body.drive #note { display:block; }
     const p = pos(e, ptr.pg);
     if (tool === "erase") { eraseAt(ptr.n, p); return; }
     if (ptr.k === "hl") ptr.pts = [ptr.p0, [p[0], ptr.p0[1]]];
+    else if (ptr.k === "pen" && shape !== "free") ptr.pts = shapePts(ptr.p0, p, shape);
     else {
       const l = ptr.pts[ptr.pts.length - 1];
       if (Math.hypot(p[0] - l[0], (p[1] - l[1]) * ratio) < 0.002) return;
@@ -759,13 +839,14 @@ body.drive #note { display:block; }
     if (tool === "erase") return;
     if (q.k === "pen" && q.pts.length < 2) q.pts.push([q.pts[0][0] + 0.0005, q.pts[0][1]]);
     if (q.k === "hl" && (q.pts.length < 2 || Math.abs(q.pts[1][0] - q.pts[0][0]) < 0.01)) { refreshPage(q.n); return; }
-    anns.push({ id: newId(), type: "ink", p: q.n, k: q.k, c: q.c, w: q.w, pts: q.pts.map(a => [+a[0].toFixed(4), +a[1].toFixed(4)]), t: Date.now() });
+    redo.length = 0; anns.push({ id: newId(), type: "ink", p: q.n, k: q.k, c: q.c, w: q.w, pts: q.pts.map(a => [+a[0].toFixed(4), +a[1].toFixed(4)]), t: Date.now() });
     saveAnns(); refreshPage(q.n);
   }
   document.addEventListener("pointerup", endPtr);
   document.addEventListener("pointercancel", endPtr);
 
   function addPin(pg, e) {
+    if (annOff) setAnnOff(false);
     const p = pos(e, pg);
     openEditor({ id: newId(), type: "pin", p: +pg.dataset.n, x: +p[0].toFixed(4), y: +p[1].toFixed(4), rects: null, text: "", c: "#ffd93d", note: "", t: Date.now() }, true);
   }
@@ -802,7 +883,7 @@ body.drive #note { display:block; }
       const pb = pg.getBoundingClientRect(), n = +pg.dataset.n;
       const x = (e.clientX - pb.left) / pb.width, y = (e.clientY - pb.top) / pb.height;
       const hit = anns.find(a => a.p === n && a.rects && a.rects.some(r => x >= r[0] && x <= r[0] + r[2] && y >= r[1] && y <= r[1] + r[3]));
-      if (hit) { openEditor(hit, false); return; }
+      if (hit && !annOff) { openEditor(hit, false); return; }
     }
     clearTimeout(tapTimer);
     tapTimer = setTimeout(() => setChrome(document.body.classList.contains("chromeOff")), 300);
@@ -858,6 +939,7 @@ body.drive #note { display:block; }
     $("dBody").innerHTML = h;
   }
   $("dBody").addEventListener("click", e => {
+    const nfb = e.target.closest("[data-nf]"); if (nfb) { nf = nfb.dataset.nf; renderNotes(); return; }
     const goBtn = e.target.closest("[data-go]");
     if (goBtn && drawerMode === "notes") { closeDrawer(); go(+goBtn.dataset.go); return; }
     if (drawerMode !== "set") return;
@@ -945,12 +1027,13 @@ body.drive #note { display:block; }
   /* Notes */
   const LABEL = { hl: "Highlight", quote: "Quote", note: "Note", pin: "Comment", ink: "Drawing" };
   function renderNotes() {
-    const list = anns.slice().sort((a, b) => a.p - b.p || a.t - b.t);
+    const list = anns.filter(a => nf === "all" || (nf === "hl" ? a.type === "hl" || a.type === "quote" : nf === "ink" ? a.type === "ink" : a.type === "pin" || a.type === "note")).sort((a, b) => a.p - b.p || a.t - b.t);
     const real = list.filter(a => a.type !== "ink");
     $("dBody").innerHTML =
       '<div class="tools"><button class="btn" id="addNote" type="button">' + ico("plus", 16) + ' Add note</button>' +
       '<button class="btn" id="wl" type="button">Words (' + words.length + ')</button><button class="btn" id="exp" type="button"' + (real.length ? "" : " disabled") + '>Export</button></div>' +
       '<p class="hint">' + esc(bookTitle) + '. Saved in this browser on this device.</p>' +
+      '<div class="chips">' + [["all", "All"], ["hl", "Highlights"], ["pin", "Comments"], ["ink", "Drawings"]].map(c => '<button type="button" class="chip' + (nf === c[0] ? " on" : "") + '" data-nf="' + c[0] + '">' + c[1] + '</button>').join("") + '</div>' +
       (bms.length ? '<div class="sh">Bookmarks</div><div class="chips">' + bms.map(n => '<button type="button" class="chip' + (n === cur ? " on" : "") + '" data-go="' + n + '">p. ' + n + '</button>').join("") + '</div>' : "") +
       (list.length ? list.map(a =>
         '<div class="ni" data-id="' + a.id + '" style="--c:' + (a.c || "#ffe14d") + '"><small>' + (a.p ? "Page " + a.p + " · " : "") + LABEL[a.type] + (a.type === "ink" ? ' · tap to go to page' : ' · tap to edit') + '</small>' +
@@ -1585,93 +1668,4 @@ body.drive #note { display:block; }
   }
   function showResults(n, busy) {
     if (drawerMode !== "search" || !$("sres")) return;
-    const total = pdf ? pdf.numPages : 0, hits = found.reduce((a, r) => a + r.c, 0);
-    $("sst").textContent = busy ? "Searching… page " + n + " / " + total + " · " + found.length + " pages found" :
-      (searchTerm ? (found.length ? "Found " + hits + " matches on " + found.length + " pages. Tap a result to open it." : "No matches found.") : "The first search reads the whole book once, so it can take a little while.");
-    $("sres").innerHTML = found.slice(0, 300).map(r => '<div class="ni" data-n="' + r.n + '"><small>Page ' + r.n + ' · ' + r.c + (r.c === 1 ? " match" : " matches") + '</small>' + r.snip + '</div>').join("");
-  }
-  async function runSearch(q) {
-    q = (q || "").trim().toLowerCase();
-    if (q.length < 2 || !pdf) return;
-    const my = ++searchGen, doc = pdf, total = doc.numPages;
-    searchTerm = q; found = []; markAll(); showResults(0, true);
-    for (let n = 1; n <= total; n++) {
-      if (my !== searchGen || doc !== pdf) return;
-      if (ptext[n] == null) {
-        try { const pg = await doc.getPage(n), tc = await pg.getTextContent(); ptext[n] = tc.items.map(i => i.str).join(" ").replace(/\s+/g, " "); }
-        catch (e) { ptext[n] = ""; }
-      }
-      const t = ptext[n], low = t.toLowerCase();
-      let i = low.indexOf(q), c = 0, first = -1;
-      while (i >= 0) { if (first < 0) first = i; c++; i = low.indexOf(q, i + q.length); }
-      if (c) found.push({ n, c, snip: snippet(t, first, q.length) });
-      if (n % 8 === 0) { showResults(n, true); await new Promise(r => setTimeout(r, 0)); }
-    }
-    if (my === searchGen) { showResults(total, false); markAll(); }
-  }
-  $("searchBtn").addEventListener("click", () => openDrawer("search"));
-
-  /* ---------- Resume where you stopped ---------- */
-  let offerPending = 0, rTimer;
-  function showResume(p) {
-    $("rtxt").textContent = "Resume from page " + p + " of " + pdf.numPages + "?";
-    $("resume").hidden = false;
-    clearTimeout(rTimer); rTimer = setTimeout(hideResume, 15000);
-  }
-  function hideResume() { $("resume").hidden = true; clearTimeout(rTimer); offerPending = 0; }
-  $("rYes").addEventListener("click", () => { const p = offerPending; hideResume(); if (p) go(p); });
-  $("rNo").addEventListener("click", hideResume);
-
-  /* ---------- Two-finger swipe up or down changes brightness ---------- */
-  let g2 = null;
-  document.addEventListener("touchstart", e => {
-    if (e.touches.length === 2) {
-      const a = e.touches[0], b = e.touches[1];
-      g2 = { y: (a.clientY + b.clientY) / 2, d: Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY), b: eye.b, on: false };
-    } else g2 = null;
-  }, { passive: true });
-  document.addEventListener("touchmove", e => {
-    if (!g2 || e.touches.length !== 2) return;
-    const a = e.touches[0], b = e.touches[1];
-    const y = (a.clientY + b.clientY) / 2, d = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY), dy = g2.y - y;
-    if (!g2.on) { if (Math.abs(dy) > 24 && Math.abs(d - g2.d) < 25) g2.on = true; else return; }
-    if (e.cancelable) e.preventDefault();
-    eye.b = Math.round(Math.max(30, Math.min(100, g2.b + dy / (window.innerHeight * 0.5) * 70)));
-    applyEye(); flash("Brightness " + eye.b + "%");
-  }, { passive: false });
-  document.addEventListener("touchend", () => { if (g2 && g2.on) saveEye(); g2 = null; });
-
-  /* ---------- Start ---------- */
-  setTool(["select", "hl", "pen", "erase", "pin"].includes(store.get("tool")) ? store.get("tool") : "select");
-  if (typeof pdfjsLib !== "undefined") {
-    pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-  }
-  if (mode === "book") { box.hidden = true; book.hidden = false; document.body.classList.add("bookmode"); }
-  if (localId) {
-    if (typeof pdfjsLib === "undefined") {
-      $("msg").textContent = "The PDF reader could not load. Please check your internet connection and reload the page.";
-    } else {
-      DB.get(localId).then(async rec => {
-        if (!rec) { setMeta(bookKey, "Saved file", null, true); $("msg").innerHTML = 'This saved file was not found on this device. <a href="reader.html">Open the library</a> and add it again.'; return; }
-        const buf = await rec.blob.arrayBuffer();
-        startPdf({ data: new Uint8Array(buf) }, "local:" + rec.id, rec.name.replace(/\.pdf$/i, ""), null, true);
-      }).catch(() => { $("msg").textContent = "Could not open the saved file on this device."; });
-    }
-  } else {
-    const bookDef = BOOKS[bookKey];
-    if (bookDef.d) {
-      setMeta(bookKey, bookDef.t, DRIVE_DL + bookDef.d);
-      showDrive(bookDef);
-      box.hidden = true; book.hidden = true;
-      document.body.classList.remove("bookmode");
-    } else if (typeof pdfjsLib === "undefined") {
-      setMeta(bookKey, bookDef.t, RAW + bookDef.f);
-      $("msg").textContent = "The PDF reader could not load. Please check your internet connection and reload the page.";
-    } else {
-      startPdf({ url: RAW + bookDef.f }, bookKey, bookDef.t, RAW + bookDef.f);
-    }
-  }
-})();
-</script>
-</body>
-</html>
+    const total = pdf ? pdf.numPages : 0, hits = found.reduce((a
