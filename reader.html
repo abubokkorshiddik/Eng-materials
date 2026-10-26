@@ -149,6 +149,13 @@ body.chromeOff .dock { transform:translateY(200%); opacity:0; }
 .dock .n:hover { opacity:1; }
 #pgn { background:none; border:0; font:inherit; font-size:12px; opacity:.6; cursor:pointer; padding:6px 10px; border-radius:99px; }
 
+/* ---------- Eye comfort overlays ---------- */
+#dim, #warm { position:fixed; inset:0; pointer-events:none; z-index:200; opacity:0; transition:opacity .2s; }
+#dim { background:#000; }
+#warm { background:#ff9a2e; mix-blend-mode:multiply; }
+.eyr { width:100%; accent-color:var(--accent); margin:2px 0 8px; }
+.eyl { display:flex; justify-content:space-between; font-weight:500; font-size:13px; margin-top:6px; }
+
 /* ---------- Drawer ---------- */
 #back { position:fixed; inset:0; background:#0006; z-index:30; }
 #drawer { position:fixed; top:0; bottom:0; left:0; width:min(92vw,400px); background:var(--bar); z-index:31;
@@ -280,6 +287,9 @@ body.drive #note { display:block; }
     </div>
   </div>
 </div>
+
+<div id="dim" aria-hidden="true"></div>
+<div id="warm" aria-hidden="true"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
@@ -798,7 +808,12 @@ body.drive #note { display:block; }
   /* Settings */
   const seg = (k, opts, c) => '<div class="seg" data-k="' + k + '">' + opts.map(o => '<button type="button" data-v="' + o[0] + '" aria-pressed="' + (o[0] === c) + '">' + o[1] + '</button>').join("") + '</div>';
   function renderSettings() {
-    let h = '<div class="sh">Theme</div>' + seg("theme", [["light", "Light"], ["sepia", "Sepia"], ["dark", "Dark"]], document.documentElement.dataset.theme);
+    let h = '<div class="sh">Theme</div>' + seg("theme", [["light", "Light"], ["sepia", "Sepia"], ["dark", "Dark"]], document.documentElement.dataset.theme) +
+      '<div class="sh">Eye comfort</div>' +
+      '<div class="eyl"><span>Brightness</span><span id="ebv">' + eye.b + '%</span></div><input class="eyr" type="range" id="eb" min="30" max="100" value="' + eye.b + '" aria-label="Brightness">' +
+      '<div class="eyl"><span>Warm light (less blue)</span><span id="ewv">' + eye.w + '%</span></div><input class="eyr" type="range" id="ew" min="0" max="100" value="' + eye.w + '" aria-label="Warm light">' +
+      '<label class="chk"><input type="checkbox" id="ea" ' + (eye.auto ? "checked" : "") + '> Auto night mode (sepia from 6 pm, dark and warmer from 10 pm)</label>' +
+      '<label class="chk"><input type="checkbox" id="ek" ' + (eye.wake ? "checked" : "") + '> Keep screen on while reading</label>';
     if (!driveMode) {
       const zv = mode === "book" ? bz : zoom;
       h += '<div class="sh">Reading mode</div>' + seg("mode", [["scroll", "Scroll"], ["book", "Book"]], mode) +
@@ -813,6 +828,8 @@ body.drive #note { display:block; }
       h += '<div class="sh">' + (mode === "book" ? "Book size (zoom to fill the screen)" : "Zoom") + '</div><div class="zrow"><button class="btn" data-a="zo" type="button">' + ico("minus", 16) + '</button><button class="btn" data-a="zl" type="button">' + Math.round(zv * 100) + '%</button><button class="btn" data-a="zi" type="button">' + ico("plus", 16) + '</button></div>';
     }
     h += '<p class="hint">Tap the top corner of any page to bookmark it. Tap again to remove.</p>';
+    h += '<div class="sh">View</div><div class="tools"><button class="btn" data-a="fs" type="button">' + ico("full", 16) + ' Full screen</button><button class="btn" data-a="focus" type="button">Hide controls</button></div>' +
+      (document.fullscreenEnabled ? "" : '<p class="hint">This browser does not allow full screen for web pages. On iPhone, tap Share, then Add to Home Screen, and open the reader from there for a full screen view.</p>');
     h += '<div class="sh">More</div><a class="btn" href="./index.html" style="display:flex;margin-bottom:6px">' + ico("home", 16) + ' Home</a>' +
       (dlUrl ? '<a class="btn" href="' + esc(dlUrl) + '" target="_blank" rel="noopener" style="display:flex">Download this book</a>' : "");
     $("dBody").innerHTML = h;
@@ -822,7 +839,7 @@ body.drive #note { display:block; }
     if (goBtn && drawerMode === "notes") { closeDrawer(); go(+goBtn.dataset.go); return; }
     if (drawerMode !== "set") return;
     const act = e.target.closest("[data-a]");
-    if (act) { const a = act.dataset.a; zoomBy(a === "zi" ? 0.2 : a === "zo" ? -0.2 : 0); renderSettings(); return; }
+    if (act) { const a = act.dataset.a; if (a === "fs") { toggleFs(); return; } if (a === "focus") { closeDrawer(); setChrome(false); return; } zoomBy(a === "zi" ? 0.2 : a === "zo" ? -0.2 : 0); renderSettings(); return; }
     const b = e.target.closest(".seg button"); if (!b) return;
     const k = b.parentElement.dataset.k, v = b.dataset.v;
     if (k === "theme") setTheme(v);
@@ -1359,6 +1376,43 @@ body.drive #note { display:block; }
   window.addEventListener("resize", onResize);
   window.addEventListener("orientationchange", () => setTimeout(onResize, 350));
   if (screen.orientation && screen.orientation.addEventListener) screen.orientation.addEventListener("change", () => setTimeout(onResize, 350));
+
+  /* ---------- Eye comfort: brightness, warm light, auto night, keep awake ---------- */
+  let eye = Object.assign({ b: 100, w: 0, auto: false, wake: false }, (() => { try { return JSON.parse(store.get("eye") || "{}"); } catch (e) { return {}; } })());
+  const isNight = () => { const h = new Date().getHours(); return h >= 22 || h < 6; };
+  function applyEye() {
+    $("dim").style.opacity = String(((100 - eye.b) / 100 * 0.85).toFixed(3));
+    const w = Math.max(eye.w, eye.auto && isNight() ? 30 : 0);
+    $("warm").style.opacity = String((w / 100 * 0.55).toFixed(3));
+  }
+  function saveEye() { store.set("eye", JSON.stringify(eye)); }
+  function autoTheme() {
+    const saved = store.settings().theme || "light";
+    let t = saved;
+    if (eye.auto) { const h = new Date().getHours(); t = (h >= 22 || h < 6) ? "dark" : (h >= 18 ? "sepia" : saved); }
+    document.documentElement.dataset.theme = t;
+    applyEye();
+  }
+  let wl = null;
+  async function wake() {
+    try {
+      if (eye.wake && "wakeLock" in navigator && document.visibilityState === "visible") wl = await navigator.wakeLock.request("screen");
+      else if (wl) { await wl.release(); wl = null; }
+    } catch (e) {}
+  }
+  document.addEventListener("visibilitychange", () => { if (eye.wake) wake(); });
+  $("dBody").addEventListener("input", e => {
+    if (e.target.id === "eb") { eye.b = +e.target.value; $("ebv").textContent = eye.b + "%"; }
+    else if (e.target.id === "ew") { eye.w = +e.target.value; $("ewv").textContent = eye.w + "%"; }
+    else return;
+    applyEye(); saveEye();
+  });
+  $("dBody").addEventListener("change", e => {
+    if (e.target.id === "ea") { eye.auto = e.target.checked; saveEye(); autoTheme(); renderSettings(); }
+    else if (e.target.id === "ek") { eye.wake = e.target.checked; saveEye(); wake(); }
+  });
+  autoTheme(); wake();
+  setInterval(autoTheme, 600000);
 
   /* ---------- Start ---------- */
   setTool("select");
