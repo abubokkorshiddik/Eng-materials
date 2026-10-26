@@ -96,13 +96,13 @@ body.chromeOff #opts { transform:translate(-50%,-220%); opacity:0; pointer-event
 .pins { position:absolute; inset:0; pointer-events:none; }
 .pin { position:absolute; transform:translate(-50%,-100%); pointer-events:auto; width:28px; height:28px; border:2px solid #0006; background:#ffd93d;
   border-radius:50% 50% 50% 4px; font-size:14px; line-height:1; cursor:pointer; padding:0; box-shadow:0 2px 6px #0004; }
-.rib { position:absolute; top:0; right:14px; width:18px; height:34px; background:#d6336c; clip-path:polygon(0 0,100% 0,100% 100%,50% 76%,0 100%); }
+.rib { position:absolute; top:0; right:0; width:0; height:0; border-top:20px solid #d6336c; border-left:20px solid transparent; opacity:.85; }
 
 body.draw .pg { touch-action:none; cursor:crosshair; }
 body.draw .textLayer { pointer-events:none; user-select:none; -webkit-user-select:none; }
 body.pinmode .pg { cursor:copy; }
 
-#pill { position:fixed; left:50%; bottom:calc(14px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%);
+#pill { position:fixed; left:50%; bottom:calc(56px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%);
   background:var(--bar); border:1px solid var(--line); border-radius:999px; padding:6px 14px; font-size:12px;
   box-shadow:0 2px 8px #0003; opacity:0; pointer-events:none; transition:opacity .2s; z-index:13; }
 #pill.show { opacity:.95; }
@@ -118,14 +118,11 @@ body.draw #book { touch-action:none; }
 .stage { position:absolute; left:0; top:0; width:100%; height:100%; transform-style:preserve-3d; }
 .slot { position:absolute; top:0; }
 .slot .pg, .face .pg { margin:0; }
-.leaf { position:absolute; top:0; transform-style:preserve-3d; pointer-events:none; }
-.strip { position:absolute; left:0; transform-style:preserve-3d; will-change:transform; }
+.leaf { position:absolute; top:0; transform-style:preserve-3d; will-change:transform; pointer-events:none; }
 .face { position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; }
 .face.back { transform:rotateY(180deg); }
 .face::after { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(90deg,rgba(0,0,0,.45),transparent 80%); opacity:var(--s,0); }
 .face.back::after { background:linear-gradient(270deg,rgba(0,0,0,.45),transparent 80%); }
-.sc { position:relative; width:100%; height:100%; overflow:hidden; }
-.sc canvas { filter:var(--filter); }
 
 .edge { position:fixed; top:50%; transform:translateY(-50%); z-index:8; width:34px; height:64px; border-radius:12px; border:1px solid var(--line);
   background:var(--glass); display:none; place-items:center; opacity:.65; cursor:pointer; }
@@ -143,19 +140,14 @@ body.bookmode .edge { display:grid; }
   display:inline-flex; align-items:center; gap:6px; }
 #sel .sw { width:32px; height:32px; border-radius:50%; padding:0; border:2px solid var(--line); cursor:pointer; background-clip:padding-box; }
 
-/* ---------- Bottom dock ---------- */
-.dock { position:fixed; left:50%; bottom:calc(10px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); z-index:12;
-  background:var(--glass); border:1px solid var(--line); border-radius:18px; box-shadow:0 6px 22px #0004; padding:8px 10px 6px;
-  width:min(560px,96vw); display:flex; flex-direction:column; gap:2px; transition:transform .25s ease; }
-body.chromeOff .dock { transform:translate(-50%,190%); }
-#slider { width:100%; accent-color:var(--accent); height:20px; margin:0; }
-.dr { display:flex; align-items:center; justify-content:space-between; gap:4px; }
-.grp { display:flex; gap:2px; align-items:center; }
-.dock .n { width:38px; height:38px; border:0; background:none; border-radius:11px; display:grid; place-items:center; cursor:pointer; padding:0; }
-.dock .n:hover { background:var(--line); }
-.dock input#num { width:48px; padding:6px 2px; border:1px solid var(--line); border-radius:8px; background:var(--bg); color:var(--text); font:inherit; text-align:center; }
-#bmBtn.on { color:#d6336c; } #bmBtn.on svg { fill:currentColor; }
-#tot { padding:0 4px; }
+/* ---------- Minimal bottom controls ---------- */
+.dock { position:fixed; left:0; right:0; bottom:calc(8px + env(safe-area-inset-bottom,0px)); z-index:12; height:34px; display:flex; align-items:center;
+  justify-content:space-between; padding:0 12px; pointer-events:none; transition:transform .25s ease, opacity .25s; }
+body.chromeOff .dock { transform:translateY(200%); opacity:0; }
+.dock > * { pointer-events:auto; }
+.dock .n { width:34px; height:34px; border-radius:50%; border:1px solid var(--line); background:var(--glass); display:grid; place-items:center; cursor:pointer; padding:0; opacity:.75; }
+.dock .n:hover { opacity:1; }
+#pgn { background:none; border:0; font:inherit; font-size:12px; opacity:.6; cursor:pointer; padding:6px 10px; border-radius:99px; }
 
 /* ---------- Drawer ---------- */
 #back { position:fixed; inset:0; background:#0006; z-index:30; }
@@ -220,8 +212,6 @@ body.drive #note { display:block; }
 @media (orientation:landscape) and (max-height:500px) {
   #note { display:none !important; }
   #book { padding:6px 8px; }
-  .dock { width:min(520px,70vw); padding:4px 8px 2px; }
-  .dock .n { width:34px; height:34px; }
   .rail button { height:34px; }
 }
 </style>
@@ -267,21 +257,9 @@ body.drive #note { display:block; }
 </div>
 
 <div class="dock" id="dock">
-  <input type="range" id="slider" min="1" max="1" value="1" aria-label="Go to page">
-  <div class="dr">
-    <div class="grp" aria-label="Page navigation">
-      <button class="n" id="prev" type="button" aria-label="Previous page" data-i="chevL"></button>
-      <input id="num" type="number" min="1" value="1" inputmode="numeric" aria-label="Page number">
-      <span id="tot">/ …</span>
-      <button class="n" id="next" type="button" aria-label="Next page" data-i="chevR"></button>
-    </div>
-    <div class="grp">
-      <button class="n" id="zo" type="button" aria-label="Zoom out" title="Zoom out (-)" data-i="minus"></button>
-      <button class="n" id="zi" type="button" aria-label="Zoom in" title="Zoom in (+)" data-i="plus"></button>
-      <button class="n" id="bmBtn" type="button" aria-label="Bookmark this page" title="Bookmark (B)" data-i="bookmark"></button>
-      <button class="n" id="fsBtn" type="button" aria-label="Full screen" title="Full screen (F)" data-i="full"></button>
-    </div>
-  </div>
+  <button class="n" id="zo" type="button" aria-label="Zoom out" title="Zoom out (-)" data-i="minus" data-s="16"></button>
+  <button id="pgn" type="button" aria-label="Go to page">…</button>
+  <button class="n" id="zi" type="button" aria-label="Zoom in" title="Zoom in (+)" data-i="plus" data-s="16"></button>
 </div>
 
 <div id="back" hidden></div>
@@ -461,7 +439,7 @@ body.drive #note { display:block; }
     if (layoutPref === "2") return 2;
     return window.innerWidth >= 700 && window.innerWidth > window.innerHeight * 1.15 ? 2 : 1;
   }
-  const speed = () => ({ fast: 500, normal: 900, slow: 1500 })[spd];
+  const speed = () => ({ fast: 400, normal: 700, slow: 1200 })[spd];
   const isShort = () => window.innerHeight <= 500 && window.innerWidth > window.innerHeight;
 
   /* ---------- Measure floating chrome so pages use the space well ---------- */
@@ -469,7 +447,7 @@ body.drive #note { display:block; }
   let measureTimer;
   function measure() {
     rootS.setProperty("--top", $("bar").offsetHeight + "px");
-    rootS.setProperty("--bot", ($("dock").offsetHeight + 22) + "px");
+    rootS.setProperty("--bot", ($("dock").offsetHeight + 12) + "px");
     clearTimeout(measureTimer);
     measureTimer = setTimeout(() => {
       if (pdf && mode === "book" && bk && !flipping && !driveMode) {
@@ -497,10 +475,10 @@ body.drive #note { display:block; }
   }
   function newId() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 5); }
 
-  function updBm() { $("bmBtn").classList.toggle("on", bms.includes(cur)); }
-  function toggleBm() {
+  function updBm() {}
+  function toggleBm(n) {
     if (!pdf || driveMode) return;
-    const n = cur, i = bms.indexOf(n);
+    n = Number(n) || cur; const i = bms.indexOf(n);
     if (i >= 0) bms.splice(i, 1); else bms.push(n);
     bms.sort((a, b) => a - b);
     store.set("bm:" + bookKey, JSON.stringify(bms));
@@ -769,6 +747,10 @@ body.drive #note { display:block; }
     const pg = e.target.closest(".pg");
     if (tool === "pin") { if (pg && pg.dataset.n) addPin(pg, e); return; }
     if (tool !== "select") return;
+    if (pg && pg.dataset.n) {
+      const cb = pg.getBoundingClientRect(), cx = (e.clientX - cb.left) / cb.width, cy = (e.clientY - cb.top) / cb.height;
+      if (cy < 0.08 && (cx < 0.15 || cx > 0.85)) { toggleBm(+pg.dataset.n); return; }
+    }
     const now = Date.now();
     const dbl = now - lastTap.t < 320 && Math.hypot(e.clientX - lastTap.x, e.clientY - lastTap.y) < 30;
     lastTap = { t: now, x: e.clientX, y: e.clientY };
@@ -824,12 +806,13 @@ body.drive #note { display:block; }
       if (mode === "book") {
         h += '<div class="sh">Page turn style</div>' + seg("anim", [["turn", "Page turn"], ["slide", "Slide"], ["fade", "Fade"], ["stack", "Stack"]], anim) +
           '<div class="sh">Turn speed</div>' + seg("spd", [["fast", "Fast"], ["normal", "Normal"], ["slow", "Slow"]], spd) +
-          '<p class="hint">Drag a page from its outer edge to turn it by hand. Grab the upper half to lift from the top, or the lower half to lift from the bottom. You can also tap the edge.</p>';
+          '<p class="hint">Drag a page from its outer edge to turn it by hand, or tap the edge.</p>';
       } else {
         h += '<div class="sh">Fit</div>' + seg("fit", [["width", "Fit width"], ["page", "Fit page"]], fit);
       }
       h += '<div class="sh">' + (mode === "book" ? "Book size (zoom to fill the screen)" : "Zoom") + '</div><div class="zrow"><button class="btn" data-a="zo" type="button">' + ico("minus", 16) + '</button><button class="btn" data-a="zl" type="button">' + Math.round(zv * 100) + '%</button><button class="btn" data-a="zi" type="button">' + ico("plus", 16) + '</button></div>';
     }
+    h += '<p class="hint">Tap the top corner of any page to bookmark it. Tap again to remove.</p>';
     h += '<div class="sh">More</div><a class="btn" href="./index.html" style="display:flex;margin-bottom:6px">' + ico("home", 16) + ' Home</a>' +
       (dlUrl ? '<a class="btn" href="' + esc(dlUrl) + '" target="_blank" rel="noopener" style="display:flex">Download this book</a>' : "");
     $("dBody").innerHTML = h;
@@ -981,7 +964,7 @@ body.drive #note { display:block; }
     return Math.max(200, w * zoom);
   }
   function setCur(n) {
-    cur = n; $("num").value = n; $("slider").value = n;
+    cur = n; $("pgn").textContent = n + " / " + (pdf ? pdf.numPages : "…");
     pill.textContent = n + " / " + (pdf ? pdf.numPages : "…");
     if (ready) { store.set("p:" + bookKey, String(n)); touchRecent(); }
     $("progressBar").style.width = (pdf ? (n / pdf.numPages) * 100 : 0) + "%";
@@ -1104,94 +1087,43 @@ body.drive #note { display:block; }
   const nextTarget = () => { const m = Math.max(...bk.pgs.filter(validN)); return m + 1 <= pdf.numPages ? m + 1 : 0; };
   const prevTarget = () => { const m = Math.min(...bk.pgs.filter(validN)); return m - 1 >= 1 ? m - 1 : 0; };
 
-  /* ----- Realistic page turn -----
-     The turning leaf is cut into horizontal strips. Each strip hinges on the spine, but they start
-     moving one after another from the top (or from the bottom if you grab the lower half), so the
-     corner lifts first and the rest of the page follows, like a real sheet of paper. */
-  const NSTRIP = 14;
-  function fillStrip(sc, srcPg, y0, y1, z) {
-    sc.replaceChildren();
-    const cv = srcPg && srcPg.querySelector("canvas");
-    if (!cv) { sc.style.background = srcPg && srcPg.classList.contains("blank") ? "transparent" : "var(--bar)"; return; }
-    sc.style.background = "#fff";
-    const k = cv.height / z.h, sy = Math.round(y0 * k), sh = Math.max(1, Math.min(cv.height - sy, Math.round((y1 - y0) * k)));
-    const c = document.createElement("canvas");
-    c.width = cv.width; c.height = sh;
-    c.getContext("2d").drawImage(cv, 0, sy, cv.width, sh, 0, 0, cv.width, sh);
-    c.style.cssText = "display:block;width:100%;height:100%";
-    sc.appendChild(c);
-    const ov = document.createElement("div");
-    ov.style.cssText = "position:absolute;left:0;width:" + z.w + "px;height:" + z.h + "px;top:" + (-y0) + "px;pointer-events:none";
-    srcPg.querySelectorAll(":scope > .hl, :scope > .ink, :scope > .pins").forEach(x => ov.appendChild(x.cloneNode(true)));
-    sc.appendChild(ov);
+  function face(el, isBack) {
+    const d = document.createElement("div");
+    d.className = "face" + (isBack ? " back" : ""); d.appendChild(el); return d;
   }
-  function mkLeaf(frontPg, backPg, z, origin) {
-    const leaf = document.createElement("div");
-    leaf.className = "leaf";
-    leaf.style.cssText = "width:" + z.w + "px;height:" + z.h + "px";
-    const strips = [];
-    for (let i = 0; i < NSTRIP; i++) {
-      const y0 = Math.round(i * z.h / NSTRIP), y1 = Math.min(z.h, Math.round((i + 1) * z.h / NSTRIP) + 1);
-      const s = document.createElement("div");
-      s.className = "strip";
-      s.style.cssText = "top:" + y0 + "px;width:" + z.w + "px;height:" + (y1 - y0) + "px;transform-origin:" + origin + " center";
-      const f = document.createElement("div"); f.className = "face"; const fs = document.createElement("div"); fs.className = "sc"; f.appendChild(fs);
-      s.appendChild(f);
-      let bs = null;
-      if (backPg) { const b = document.createElement("div"); b.className = "face back"; bs = document.createElement("div"); bs.className = "sc"; b.appendChild(bs); s.appendChild(b); }
-      leaf.appendChild(s);
-      strips.push({ el: s, fs, bs, y0, y1 });
-    }
-    const fill = () => strips.forEach(s => { fillStrip(s.fs, frontPg, s.y0, s.y1, z); if (s.bs) fillStrip(s.bs, backPg, s.y0, s.y1, z); });
-    return { leaf, strips, fill };
-  }
-  const SPREAD = 0.45;
-  function stripP(t, i, fromBottom) {
-    const d = (fromBottom ? NSTRIP - 1 - i : i) / (NSTRIP - 1) * SPREAD;
-    const k = Math.max(0, Math.min(1, (t - d) / (1 - SPREAD)));
-    return k * k * (3 - 2 * k);
-  }
-  function prepTurn(dir, target, fromBottom) {
+  /* Page turn: a leaf that rotates around the spine. T.set(t) takes a progress from 0 to 1. */
+  function prepTurn(dir, target) {
     const z = bk.z, two = z.s === 2, pgs = shownPages(target), st = bk.st;
     const oldEls = bk.sl.map(s => s.firstChild), oldPgs = bk.pgs;
-    let finalEls, L, set, alive = true, toRender = [];
+    const mk = n => { const p = mkPage(n, z); drawInto(p); return p; };
+    const leaf = document.createElement("div");
+    leaf.className = "leaf";
+    let finalEls, set;
     if (two) {
       const fi = dir > 0 ? 1 : 0;
-      const underPg = mkPage(pgs[fi], z), backPg = mkPage(pgs[1 - fi], z);
-      L = mkLeaf(oldEls[fi], backPg, z, dir > 0 ? "left" : "right");
-      L.leaf.style.left = fi * z.w + "px";
+      const underPg = mk(pgs[fi]), backPg = mk(pgs[1 - fi]);
+      leaf.style.cssText = "left:" + fi * z.w + "px;width:" + z.w + "px;height:" + z.h + "px;transform-origin:" + (dir > 0 ? "left" : "right") + " center";
+      leaf.append(face(oldEls[fi]), face(backPg, true));
       finalEls = fi === 1 ? [backPg, underPg] : [underPg, backPg];
       st.replaceChildren();
       st.appendChild(mkSlot(1 - fi, z, oldEls[1 - fi]));
       st.appendChild(mkSlot(fi, z, underPg));
-      st.appendChild(L.leaf);
-      toRender = [underPg, backPg];
-      set = t => L.strips.forEach((s, i) => {
-        const p = stripP(t, i, fromBottom);
-        s.el.style.transform = "rotateY(" + (dir > 0 ? -180 * p : 180 * p).toFixed(2) + "deg)";
-        s.el.style.setProperty("--s", Math.sin(Math.PI * p).toFixed(3));
-      });
+      st.appendChild(leaf);
+      set = t => { leaf.style.transform = "rotateY(" + (dir > 0 ? -180 * t : 180 * t) + "deg)"; leaf.style.setProperty("--s", Math.sin(Math.PI * t).toFixed(3)); };
     } else {
-      const np = mkPage(pgs[0], z);
+      const np = mk(pgs[0]);
+      leaf.style.cssText = "left:0;width:" + z.w + "px;height:" + z.h + "px;transform-origin:left center";
       finalEls = [np];
       st.replaceChildren();
-      if (dir > 0) { L = mkLeaf(oldEls[0], null, z, "left"); st.appendChild(mkSlot(0, z, np)); }
-      else { L = mkLeaf(np, null, z, "left"); st.appendChild(mkSlot(0, z, oldEls[0])); }
-      st.appendChild(L.leaf);
-      toRender = [np];
-      set = t => L.strips.forEach((s, i) => {
-        const p = stripP(t, i, fromBottom);
-        s.el.style.transform = "rotateY(" + (-100 * (dir > 0 ? p : 1 - p)).toFixed(2) + "deg)";
-        s.el.style.setProperty("--s", Math.sin(Math.PI * p).toFixed(3));
-      });
+      if (dir > 0) { leaf.append(face(oldEls[0])); st.appendChild(mkSlot(0, z, np)); }
+      else { leaf.append(face(np)); st.appendChild(mkSlot(0, z, oldEls[0])); }
+      st.appendChild(leaf);
+      set = t => { leaf.style.transform = "rotateY(" + (-100 * (dir > 0 ? t : 1 - t)) + "deg)"; leaf.style.setProperty("--s", Math.sin(Math.PI * t).toFixed(3)); };
     }
-    L.fill();
-    toRender.forEach(p => drawInto(p).then(() => { if (alive) L.fill(); }));
     set(0);
     return {
       set,
       finish(commit) {
-        alive = false;
         fillStage(commit ? finalEls : oldEls);
         bk.pgs = commit ? pgs : oldPgs; flipping = false;
         if (commit) setCur(firstValid(pgs));
@@ -1316,7 +1248,7 @@ body.drive #note { display:block; }
     box.replaceChildren(); book.replaceChildren(); pages = []; pdf = null; ready = false; cur = 1; bk = null; flipping = false;
     window.scrollTo(0, 0);
     $("msg").hidden = false; $("msg").textContent = "Opening book…";
-    $("tot").textContent = "/ …"; $("num").value = 1; $("slider").value = 1; $("progressBar").style.width = "0";
+    $("pgn").textContent = "…"; $("progressBar").style.width = "0";
     setMeta(key, title, dl, local);
 
     zoom = Number(store.get("zoom:" + key) || store.get("zoom") || 1);
@@ -1332,9 +1264,7 @@ body.drive #note { display:block; }
       ratio = vp.height / vp.width;
 
       $("msg").hidden = true;
-      $("tot").textContent = "/ " + pdf.numPages;
-      $("num").max = pdf.numPages;
-      $("slider").max = pdf.numPages;
+      $("pgn").textContent = "1 / " + pdf.numPages;
       for (let i = 1; i <= pdf.numPages; i++) {
         const pg = document.createElement("div");
         pg.className = "pg empty"; pg.dataset.n = i; pg.setAttribute("aria-label", "Page " + i);
@@ -1352,22 +1282,18 @@ body.drive #note { display:block; }
   }
 
   /* ---------- Controls ---------- */
-  $("prev").addEventListener("click", () => step(-1));
-  $("next").addEventListener("click", () => step(1));
   $("eL").addEventListener("click", () => step(-1));
   $("eR").addEventListener("click", () => step(1));
-  $("num").addEventListener("change", e => go(e.target.value));
-  $("num").addEventListener("keydown", e => { if (e.key === "Enter") { go(e.target.value); e.target.blur(); } });
-  $("slider").addEventListener("input", e => { $("num").value = e.target.value; pill.textContent = e.target.value + " / " + (pdf ? pdf.numPages : "…"); showPill(); });
-  $("slider").addEventListener("change", e => go(e.target.value));
-  $("bmBtn").addEventListener("click", toggleBm);
+  $("pgn").addEventListener("click", () => {
+    if (!pdf) return;
+    const v = prompt("Go to page (1 to " + pdf.numPages + ")", cur);
+    if (v) go(v);
+  });
   $("zi").addEventListener("click", () => zoomBy(0.2));
   $("zo").addEventListener("click", () => zoomBy(-0.2));
   function toggleFs() {
     try { if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen(); } catch (e) {}
   }
-  if (!document.fullscreenEnabled) $("fsBtn").hidden = true;
-  $("fsBtn").addEventListener("click", toggleFs);
 
   /* Zoom: in scroll mode it scales the page width; in book mode it enlarges the whole book (scroll to pan) */
   function zoomBy(d) {
