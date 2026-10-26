@@ -121,6 +121,16 @@ h3 { font-size: 1.1rem; margin: 0 0 2px; }
 .jump strong { display: block; font: 600 1rem Fraunces, Georgia, serif; }
 .jump span { display: block; font: .82rem/1.4 Inter, sans-serif; color: var(--muted); margin-top: 2px; }
 
+/* ---------- Continue reading ---------- */
+.resume { margin: 20px 0 4px; padding: 16px 18px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; font-family: Inter, sans-serif; }
+.resume small { display: block; font: 600 .78rem Inter, sans-serif; color: var(--muted); }
+.resume h3 { margin: 4px 0 2px; }
+.resume .meta { font-size: .85rem; color: var(--muted); }
+.resume .mini { height: 4px; background: var(--line); border-radius: 2px; margin: 10px 0 6px; overflow: hidden; }
+.resume .mini i { display: block; height: 100%; background: var(--blue); }
+.resume .more { margin-top: 10px; font-size: .85rem; line-height: 1.9; }
+.resume .more a { margin-right: 14px; white-space: nowrap; }
+
 /* ---------- Sections ---------- */
 section { padding-top: 54px; }
 .note { margin: 0 0 14px; color: var(--muted); font-size: .97rem; }
@@ -226,6 +236,8 @@ details li { margin: 6px 0; font-size: 1rem; break-inside: avoid; }
 <div class="hero">
   <h1>English materials in one place</h1>
   <p class="lead">Grammar lessons, vocabulary practice, Cambridge IELTS 1-19 and a library of books to read, for IELTS, TOEFL, PTE and everyday English.</p>
+
+  <div class="resume" id="resume" hidden></div>
 
   <div class="jump">
     <a href="#grammar"><strong>Grammar</strong><span>10 topics and 12 tense lessons</span></a>
@@ -402,7 +414,40 @@ details li { margin: 6px 0; font-size: 1rem; break-inside: avoid; }
     "1uQyyxf3FNHo1EHKoWobcDAJBmPVKAxBv"
   ];
 
-  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;"); }
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+
+  /* ---------- Continue reading (from the reader's "recent" list) ---------- */
+  function ago(t) {
+    var m = Math.round((Date.now() - t) / 60000);
+    if (m < 1) return "just now";
+    if (m < 60) return m + " min ago";
+    var h = Math.round(m / 60);
+    if (h < 24) return h + " h ago";
+    var d = Math.round(h / 24);
+    return d + (d === 1 ? " day ago" : " days ago");
+  }
+  function recHref(r) {
+    return r.local ? "reader.html?l=" + encodeURIComponent(String(r.k).slice(6)) : "reader.html?b=" + encodeURIComponent(r.k);
+  }
+  function renderResume() {
+    var box = document.getElementById("resume"), list = [];
+    try { list = JSON.parse(localStorage.getItem("recent") || "[]"); } catch (e) {}
+    if (!Array.isArray(list) || !list.length) { box.hidden = true; return; }
+    var r = list[0], page = 0;
+    try { page = Number(localStorage.getItem("p:" + r.k)) || 0; } catch (e) {}
+    var pct = r.total && page ? Math.min(100, Math.round(page / r.total * 100)) : 0;
+    var meta = (page && r.total ? "Page " + page + " of " + r.total + " · " : "") + (r.local ? "Saved on this device · " : "") + ago(r.t);
+    var more = list.slice(1, 4).map(function (x) {
+      return '<a href="' + esc(recHref(x)) + '">' + esc(x.title) + '</a>';
+    }).join("");
+    box.innerHTML = '<small>Continue reading</small><h3>' + esc(r.title) + '</h3><div class="meta">' + esc(meta) + '</div>' +
+      (pct ? '<div class="mini"><i style="width:' + pct + '%"></i></div>' : "") +
+      '<a class="btn sm" href="' + esc(recHref(r)) + '">' + (page ? "Continue" : "Open") + '</a>' +
+      (more ? '<div class="more">Also recent: ' + more + '</div>' : "");
+    box.hidden = false;
+  }
+  renderResume();
+  window.addEventListener("pageshow", renderResume);
 
   /* ---------- Cambridge IELTS list ---------- */
   document.getElementById("series").innerHTML = IELTS.map(function (id, i) {
