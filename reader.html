@@ -3,779 +3,701 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-
 <title>Reader | English Materials</title>
-
 <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/10719400.png">
 <meta name="theme-color" content="#1f2a44">
-<meta name="description" content="Read English grammar books, IELTS practice tests, vocabulary guides and classic literature online with adjustable themes and zoom.">
-
+<meta name="description" content="Read English grammar books, IELTS practice tests, vocabulary guides and classic literature online. Highlight, add notes and save quotes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
-
 <script>
-/* Share the same theme setting as the English Materials home page and lessons. */
 try {
   var settings = JSON.parse(localStorage.getItem('ielts-gl-reader') || '{}');
-  document.documentElement.dataset.theme =
-    settings.theme || localStorage.getItem('theme') || 'light';
+  document.documentElement.dataset.theme = settings.theme || localStorage.getItem('theme') || 'light';
 } catch (e) {}
 </script>
-
 <style>
-:root {
-  --bar: #fff;
-  --bg: #e9e7e2;
-  --text: #222;
-  --line: #0002;
-  --accent: #1f4fbf;
-  --filter: none;
-}
+:root { --bar:#fff; --bg:#e9e7e2; --text:#222; --line:#0002; --accent:#1f4fbf; --filter:none; }
+html[data-theme="sepia"] { --bar:#efe5cc; --bg:#e3d6b8; --text:#4a3b26; --line:#4a3b2633; --accent:#8a4b12; --filter:sepia(.5) saturate(.9) brightness(.97); }
+html[data-theme="dark"] { --bar:#1b1f29; --bg:#10131a; --text:#e6e6e6; --line:#fff3; --accent:#8fb0ff; --filter:invert(1) hue-rotate(180deg) brightness(.92); }
+* { box-sizing:border-box; }
+html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+body { margin:0; background:var(--bg); color:var(--text); font:600 14px Inter, system-ui, sans-serif;
+  padding-left:env(safe-area-inset-left,0px); padding-right:env(safe-area-inset-right,0px); }
+:focus-visible { outline:3px solid var(--accent); outline-offset:2px; }
+[hidden] { display:none !important; }
 
-html[data-theme="sepia"] {
-  --bar: #efe5cc;
-  --bg: #e3d6b8;
-  --text: #4a3b26;
-  --line: #4a3b2633;
-  --accent: #8a4b12;
-  --filter: sepia(.5) saturate(.9) brightness(.97);
-}
-
-html[data-theme="dark"] {
-  --bar: #1b1f29;
-  --bg: #10131a;
-  --text: #e6e6e6;
-  --line: #fff3;
-  --accent: #8fb0ff;
-  --filter: invert(1) hue-rotate(180deg) brightness(.92);
-}
-
-* { box-sizing: border-box; }
-
-html {
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-}
-
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font: 600 14px Inter, system-ui, sans-serif;
-  padding-left: env(safe-area-inset-left, 0px);
-  padding-right: env(safe-area-inset-right, 0px);
-}
-
-/* ---------- Toolbar ---------- */
-.bar {
-  position: sticky;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  background: var(--bar);
-  border-bottom: 1px solid var(--line);
-  padding: 8px 10px;
-  padding-top: calc(8px + env(safe-area-inset-top, 0px));
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-  justify-content: space-between;
-  transition: transform .22s ease;
-}
-
-.bar.hide { transform: translateY(-100%); }
-
-.bar a,
-.bar button {
-  color: var(--text);
-  background: none;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 7px 11px;
-  font: inherit;
-  text-decoration: none;
-  cursor: pointer;
-  min-height: 34px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.bar button[aria-pressed="true"] {
-  background: var(--accent);
-  color: var(--bar);
-  border-color: var(--accent);
-}
-
-.grp { display: flex; gap: 6px; align-items: center; }
-
-.bar input {
-  width: 64px;
-  padding: 7px;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: var(--bar);
-  color: var(--text);
-  font: inherit;
-  text-align: center;
-  min-height: 34px;
-}
-
-#zl { min-width: 50px; font-size: 12px; }
-
-.title {
-  flex: 1 1 100%;
-  font-size: 13px;
-  opacity: .8;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-#progress {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -1px;
-  height: 3px;
-}
-
-#progressBar {
-  height: 100%;
-  width: 0;
-  background: var(--accent);
-  transition: width .15s;
-}
+/* ---------- Header ---------- */
+.bar { position:sticky; top:0; z-index:10; background:var(--bar); border-bottom:1px solid var(--line);
+  padding:6px 10px; padding-top:calc(6px + env(safe-area-inset-top,0px)); transition:transform .22s ease; }
+.bar.hide { transform:translateY(-100%); }
+.row { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+.row + .row { margin-top:6px; }
+.row.main { flex-wrap:nowrap; }
+.bar a, .bar button, .btn { color:var(--text); background:none; border:1px solid var(--line); border-radius:6px;
+  padding:7px 11px; font:inherit; text-decoration:none; cursor:pointer; min-height:34px;
+  display:inline-flex; align-items:center; justify-content:center; gap:5px; white-space:nowrap; }
+.bar button[aria-pressed="true"], .primary { background:var(--accent); color:var(--bar); border-color:var(--accent); }
+.grp { display:flex; gap:5px; align-items:center; }
+.title { flex:1; min-width:0; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-align:center; }
+.bar input { width:60px; padding:7px; border:1px solid var(--line); border-radius:6px; background:var(--bar); color:var(--text); font:inherit; text-align:center; min-height:34px; }
+#zl { min-width:50px; font-size:12px; }
+#cnt { background:var(--accent); color:var(--bar); border-radius:99px; padding:0 7px; font-size:11px; line-height:18px; }
+#progress { position:absolute; left:0; right:0; bottom:-1px; height:3px; }
+#progressBar { height:100%; width:0; background:var(--accent); transition:width .15s; }
 
 /* ---------- Pages ---------- */
-#pages {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 12px 0 80px;
-}
+#pages { display:flex; flex-direction:column; gap:12px; padding:12px 0 90px; }
+.pg { position:relative; flex:none; margin:0 auto; background:#fff; box-shadow:0 1px 6px #0003; overflow:hidden; }
+.pg canvas { display:block; width:100%; height:auto; filter:var(--filter); }
+.pg.empty { background:var(--bar); }
+#msg { text-align:center; padding:40px 16px; line-height:1.8; }
+#msg a { color:var(--accent); }
 
-/* Auto margins centre a page, and let a zoomed page scroll sideways */
-.pg {
-  flex: none;
-  margin: 0 auto;
-  background: #fff;
-  box-shadow: 0 1px 6px #0003;
-  overflow: hidden;
-}
+.textLayer { position:absolute; inset:0; overflow:hidden; line-height:1; text-size-adjust:none; }
+.textLayer span, .textLayer br { color:transparent; position:absolute; white-space:pre; cursor:text; transform-origin:0 0; }
+.textLayer ::selection { background:rgba(40,110,255,.35); }
+.hl { position:absolute; inset:0; pointer-events:none; }
+.hl i { position:absolute; opacity:.4; border-radius:2px; }
+.hl i.has { box-shadow:inset 0 -2px 0 #0008; }
 
-.pg canvas {
-  display: block;
-  width: 100%;
-  height: auto;
-  filter: var(--filter);
-}
+#pill { position:fixed; left:50%; bottom:calc(14px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%);
+  background:var(--bar); border:1px solid var(--line); border-radius:999px; padding:6px 14px; font-size:12px;
+  box-shadow:0 2px 8px #0003; opacity:0; pointer-events:none; transition:opacity .2s; z-index:9; }
+#pill.show { opacity:.95; }
 
-.pg.empty { background: var(--bar); }
+/* Selection toolbar */
+#sel { position:fixed; left:50%; bottom:calc(14px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%);
+  display:none; gap:6px; align-items:center; background:var(--bar); border:1px solid var(--line);
+  border-radius:12px; padding:8px; box-shadow:0 4px 16px #0004; z-index:25; max-width:96vw; }
+#sel.show { display:flex; }
+#sel button { color:var(--text); background:none; border:1px solid var(--line); border-radius:8px; padding:7px 11px; font:inherit; min-height:36px; cursor:pointer; }
+.sw { width:34px; height:34px; border-radius:50% !important; padding:0 !important; border:2px solid var(--line) !important; }
+.sw.on { border-color:var(--text) !important; }
 
-#msg {
-  text-align: center;
-  padding: 40px 16px;
-  line-height: 1.8;
-}
+/* ---------- Drawer ---------- */
+#back { position:fixed; inset:0; background:#0006; z-index:30; }
+#drawer { position:fixed; top:0; bottom:0; left:0; width:min(92vw,400px); background:var(--bar); z-index:31;
+  display:flex; flex-direction:column; box-shadow:2px 0 16px #0004; padding-top:env(safe-area-inset-top,0px); }
+#drawer.right { left:auto; right:0; box-shadow:-2px 0 16px #0004; }
+#dHead { display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border-bottom:1px solid var(--line); font-size:16px; }
+#dBody { overflow:auto; padding:12px 14px calc(20px + env(safe-area-inset-bottom,0px)); flex:1; -webkit-overflow-scrolling:touch; }
+#dBody input[type=search] { width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:6px; background:var(--bg); color:var(--text); font:inherit; margin-bottom:10px; }
+.cat { margin:16px 0 4px; font-size:12px; opacity:.7; }
+.li { display:block; padding:11px 8px; border-radius:6px; color:var(--text); text-decoration:none; font-weight:500; border-top:1px solid var(--line); }
+.li.on { background:var(--accent); color:var(--bar); }
+.chips { display:flex; flex-wrap:wrap; gap:6px; padding:8px 0; }
+.chip { min-width:40px; text-align:center; padding:8px 10px; border:1px solid var(--line); border-radius:6px; color:var(--text); text-decoration:none; }
+.chip.on { background:var(--accent); color:var(--bar); border-color:var(--accent); }
+.ni { border:1px solid var(--line); border-radius:8px; padding:10px 12px; margin:8px 0; font-weight:500; cursor:pointer; }
+.ni small { display:block; opacity:.7; font-weight:600; margin-bottom:4px; }
+.ni q, .ni .t { display:block; border-left:4px solid var(--c,#ffe14d); padding-left:8px; margin:4px 0; }
+.ni .n { margin-top:4px; }
+.tools { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px; }
+.hint { font-weight:500; opacity:.8; line-height:1.6; }
 
-#msg a { color: var(--accent); }
-
-/* Floating page counter, shown briefly while the toolbar is hidden */
-#pill {
-  position: fixed;
-  left: 50%;
-  bottom: calc(14px + env(safe-area-inset-bottom, 0px));
-  transform: translateX(-50%);
-  background: var(--bar);
-  color: var(--text);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 6px 14px;
-  font-size: 12px;
-  box-shadow: 0 2px 8px #0003;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .2s;
-  z-index: 9;
-}
-
-#pill.show { opacity: .95; }
+/* Editor */
+#ed { position:fixed; inset:0; background:#0006; z-index:40; display:none; align-items:center; justify-content:center; padding:16px; }
+#ed.show { display:flex; }
+#edBox { background:var(--bar); border:1px solid var(--line); border-radius:12px; padding:16px; width:min(100%,460px); max-height:90vh; overflow:auto; }
+#edQ { margin:0 0 10px; padding-left:10px; border-left:4px solid var(--accent); font-weight:500; max-height:120px; overflow:auto; }
+#edT { width:100%; min-height:100px; padding:10px; border:1px solid var(--line); border-radius:6px; background:var(--bg); color:var(--text); font:500 15px/1.5 Inter, sans-serif; resize:vertical; }
+#edC { display:flex; gap:8px; margin:10px 0; }
+.acts { display:flex; gap:8px; justify-content:flex-end; margin-top:12px; }
+#edBox button { color:var(--text); background:none; border:1px solid var(--line); border-radius:6px; padding:9px 14px; font:inherit; cursor:pointer; }
+#edBox .primary { background:var(--accent); color:var(--bar); border-color:var(--accent); }
 
 /* ---------- Google Drive mode ---------- */
-body.drive {
-  height: 100vh;
-  height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
+body.drive { height:100vh; height:100dvh; display:flex; flex-direction:column; overflow:hidden; }
+body.drive .bar { position:relative; transform:none; flex:none; }
+body.drive .pdf-only { display:none !important; }
+body.drive #pages, body.drive #pill, body.drive #progress { display:none; }
+#frame { flex:1; width:100%; min-height:0; border:0; background:var(--bg); }
+#note { display:none; padding:6px 12px; font-size:12px; font-weight:500; background:var(--bar); border-bottom:1px solid var(--line); text-align:center; flex:none; }
+body.drive #note { display:block; }
 
-body.drive .bar { position: relative; transform: none; flex: none; }
-body.drive .pdf-only { display: none !important; }
-body.drive #pages,
-body.drive #pill,
-body.drive #progress { display: none; }
-
-#frame {
-  flex: 1;
-  width: 100%;
-  min-height: 0;
-  border: 0;
-  background: var(--bg);
-}
-
-#note {
-  display: none;
-  padding: 6px 12px;
-  font-size: 12px;
-  font-weight: 500;
-  opacity: .85;
-  background: var(--bar);
-  border-bottom: 1px solid var(--line);
-  text-align: center;
-  flex: none;
-}
-
-body.drive #note { display: block; }
-
-:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-
-@media (max-width: 480px) {
-  .bar { gap: 7px; }
-  .bar a, .bar button { padding: 7px 9px; }
-  .grp { gap: 4px; }
-}
-
-/* Landscape phones: slim toolbar on one row, title hidden */
-@media (orientation: landscape) and (max-height: 500px) {
-  .bar {
-    padding-top: calc(4px + env(safe-area-inset-top, 0px));
-    padding-bottom: 4px;
-    gap: 6px;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-  }
-
-  .title { display: none; }
-  .bar a, .bar button, .bar input { min-height: 30px; padding-top: 3px; padding-bottom: 3px; }
-  #pages { padding-top: 6px; }
-  #note { display: none !important; }
+@media (max-width:480px) { .bar a, .bar button { padding:7px 9px; } .lbl { display:none; } }
+@media (orientation:landscape) and (max-height:500px) {
+  .bar { padding-top:calc(3px + env(safe-area-inset-top,0px)); padding-bottom:3px; display:flex; gap:6px; overflow-x:auto; }
+  .row, .row + .row { margin:0; flex-wrap:nowrap; }
+  .bar a, .bar button, .bar input { min-height:30px; padding-top:3px; padding-bottom:3px; }
+  #note { display:none !important; }
 }
 </style>
 </head>
-
 <body>
 
 <header class="bar" id="bar">
-  <div class="grp">
-    <a href="./index.html#reader">← Library</a>
+  <div class="row main">
+    <a href="./index.html" aria-label="English Materials home">← <span class="lbl">Home</span></a>
+    <button id="libBtn" type="button">☰ Library</button>
+    <div class="title" id="title">Loading book…</div>
+    <button id="notesBtn" type="button">✎ <span class="lbl">Notes</span> <span id="cnt" hidden>0</span></button>
+    <a id="dl" href="#" target="_blank" rel="noopener" aria-label="Download this book">⬇<span class="lbl"> Download</span></a>
   </div>
-
-  <div class="grp pdf-only" aria-label="Page navigation">
-    <button id="prev" type="button" aria-label="Previous page">‹</button>
-    <input id="num" type="number" min="1" value="1" inputmode="numeric" aria-label="Page number">
-    <span id="tot">/ …</span>
-    <button id="next" type="button" aria-label="Next page">›</button>
-  </div>
-
-  <div class="grp pdf-only" aria-label="Zoom controls">
-    <button id="zo" type="button" aria-label="Zoom out">−</button>
-    <button id="zl" type="button" aria-label="Reset zoom">100%</button>
-    <button id="zi" type="button" aria-label="Zoom in">+</button>
-  </div>
-
-  <div class="grp pdf-only">
+  <div class="row pdf-only">
+    <div class="grp" aria-label="Page navigation">
+      <button id="prev" type="button" aria-label="Previous page">‹</button>
+      <input id="num" type="number" min="1" value="1" inputmode="numeric" aria-label="Page number">
+      <span id="tot">/ …</span>
+      <button id="next" type="button" aria-label="Next page">›</button>
+    </div>
+    <div class="grp" aria-label="Zoom controls">
+      <button id="zo" type="button" aria-label="Zoom out">−</button>
+      <button id="zl" type="button" aria-label="Reset zoom">100%</button>
+      <button id="zi" type="button" aria-label="Zoom in">+</button>
+    </div>
     <button id="fit" type="button" aria-label="Switch between fit width and fit page">Fit width</button>
+    <div class="grp" id="th" role="group" aria-label="Reading theme">
+      <button type="button" data-t="light">Light</button>
+      <button type="button" data-t="sepia">Sepia</button>
+      <button type="button" data-t="dark">Dark</button>
+    </div>
   </div>
-
-  <div class="grp pdf-only" id="th" aria-label="Reading theme">
-    <button type="button" data-t="light">Light</button>
-    <button type="button" data-t="sepia">Sepia</button>
-    <button type="button" data-t="dark">Dark</button>
-  </div>
-
-  <div class="grp">
-    <a id="dl" href="#" target="_blank" rel="noopener">Download</a>
-  </div>
-
-  <div class="title" id="title">Loading book…</div>
-
   <div id="progress" aria-hidden="true"><div id="progressBar"></div></div>
 </header>
 
-<div id="note">
-  This book opens in Google Drive's viewer. Pinch to zoom, and rotate your phone for a wider page.
-</div>
+<div id="note">This book opens in Google Drive's viewer, so highlights are not available here. Download it, then use Library → Open a PDF from this device to highlight and add notes. You can still add page notes.</div>
 
 <div id="msg" role="status" aria-live="polite">Opening book…</div>
 <div id="pages"></div>
 <div id="pill" aria-hidden="true"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<!-- Selection toolbar -->
+<div id="sel" role="toolbar" aria-label="Annotate selected text">
+  <button class="sw" data-c="#ffe14d" style="background:#ffe14d" aria-label="Highlight yellow"></button>
+  <button class="sw" data-c="#7ee08a" style="background:#7ee08a" aria-label="Highlight green"></button>
+  <button class="sw" data-c="#8ec5ff" style="background:#8ec5ff" aria-label="Highlight blue"></button>
+  <button class="sw" data-c="#ff9ec4" style="background:#ff9ec4" aria-label="Highlight pink"></button>
+  <button id="selNote" type="button">✎ Note</button>
+  <button id="selQuote" type="button">❝ Quote</button>
+</div>
 
+<!-- Drawer: library or notes -->
+<div id="back" hidden></div>
+<aside id="drawer" hidden aria-label="Panel">
+  <div id="dHead"><strong id="dTitle"></strong><button class="btn" id="dClose" type="button" aria-label="Close panel">✕</button></div>
+  <div id="dBody"></div>
+</aside>
+
+<!-- Note editor -->
+<div id="ed" role="dialog" aria-modal="true" aria-label="Edit annotation">
+  <div id="edBox">
+    <blockquote id="edQ" hidden></blockquote>
+    <textarea id="edT" placeholder="Write your note or comment"></textarea>
+    <div id="edC"></div>
+    <div class="acts">
+      <button id="edDel" type="button">Delete</button>
+      <button id="edCancel" type="button">Cancel</button>
+      <button id="edSave" class="primary" type="button">Save</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
 (function () {
   "use strict";
 
-  const RAW =
-    "https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/";
+  const RAW = "https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/";
+  const DRIVE_DL = "https://drive.google.com/uc?export=download&id=";
+  const COLORS = ["#ffe14d", "#7ee08a", "#8ec5ff", "#ff9ec4"];
 
-  /*
-    All books in the English Materials library.
-    The key must match the b= value in the reader.html links.
-      f = file name in the GitHub repository (PDF.js reader)
-      d = Google Drive file ID (Google Drive viewer, because Drive does not
-          allow PDF.js to read its files)
-  */
+  /* f = file in the GitHub repo (PDF reader, can be annotated); d = Google Drive file ID (viewer only) */
   const BOOKS = {
-    /* Grammar */
-    adv:      { t: "Advanced Grammar in Use", f: "Advanced%20grammar%20in%20use.pdf" },
-    oxford:   { t: "Oxford Guide to English Grammar", f: "Oxford-Guide-to-English-Grammar.pdf" },
-    grammar:  { t: "English Grammar in Use (Intermediate)", f: "English-Grammer-In-Use-Intermediatr.pdf" },
-    wren:     { t: "High School English Grammar and Composition", f: "the-languagelab-library-high-school-english-grammar-and-composition-wren-and-martin-ZmlD.pdf" },
-    mistakes: { t: "Common Mistakes in English", f: "common-mistakes-in-english-by-t-j-fitikides.pdf" },
-
-    /* Vocabulary */
-    gre:      { t: "GRE Word Smart", f: "GRE-book-Word-Smart(1).pdf" },
-    check:    { t: "Check Your English Vocabulary for IELTS", f: "1.3rawdon-wyatt-check-your-english-vocabulary-for-ielts_-essential-words-and-phrases-to-help-you-maximise-your-ielts-score-bloomsbury-information-ltd-2017.pdf" },
-    vocab:    { t: "IELTS Vocabulary Booster", f: "IELTS%20Vocabulary%20Booster.pdf" },
-
-    /* For Bangladeshi students */
-    master:   { t: "Master English", f: "Master%20English%20%5Bbdniyog.com%5D.pdf" },
-    prof:     { t: "Professors English for Compact and Exam", d: "1FdicA1s7lZwceed9l-4_axl8aY2Hhhp0" },
-
-    /* English books */
-    curious:       { t: "The Curious Incident of the Dog in the Night-Time", f: "the_curious_incident_of_the_dog_in_the_night_time.pdf" },
-    metamorphosis: { t: "The Metamorphosis", f: "the-metamorphosis.pdf" },
-    alchemist:     { t: "The Alchemist", f: "The-Alchemist-Paulo-Coelho.pdf" },
-    tom:           { t: "The Adventures of Tom Sawyer", f: "THE%20ADVENTURES%20OF%20TOM%20SAWYER%20BY%20MARK%20TWAIN.pdf" },
-    huck:          { t: "The Adventures of Huckleberry Finn", f: "the-adventures-of-huckleberry-finn.pdf" },
-    farm:          { t: "Animal Farm", f: "Animal%20Farm%20by%20George%20Orwell.pdf" },
-    n1984:         { t: "Nineteen Eighty-Four", f: "orwell1984.pdf" }
+    adv:{t:"Advanced Grammar in Use",f:"Advanced%20grammar%20in%20use.pdf"},
+    oxford:{t:"Oxford Guide to English Grammar",f:"Oxford-Guide-to-English-Grammar.pdf"},
+    grammar:{t:"English Grammar in Use (Intermediate)",f:"English-Grammer-In-Use-Intermediatr.pdf"},
+    wren:{t:"High School English Grammar and Composition",f:"the-languagelab-library-high-school-english-grammar-and-composition-wren-and-martin-ZmlD.pdf"},
+    mistakes:{t:"Common Mistakes in English",f:"common-mistakes-in-english-by-t-j-fitikides.pdf"},
+    gre:{t:"GRE Word Smart",f:"GRE-book-Word-Smart(1).pdf"},
+    check:{t:"Check Your English Vocabulary for IELTS",f:"1.3rawdon-wyatt-check-your-english-vocabulary-for-ielts_-essential-words-and-phrases-to-help-you-maximise-your-ielts-score-bloomsbury-information-ltd-2017.pdf"},
+    vocab:{t:"IELTS Vocabulary Booster",f:"IELTS%20Vocabulary%20Booster.pdf"},
+    master:{t:"Master English",f:"Master%20English%20%5Bbdniyog.com%5D.pdf"},
+    prof:{t:"Professors English for Compact and Exam",d:"1FdicA1s7lZwceed9l-4_axl8aY2Hhhp0"},
+    curious:{t:"The Curious Incident of the Dog in the Night-Time",f:"the_curious_incident_of_the_dog_in_the_night_time.pdf"},
+    metamorphosis:{t:"The Metamorphosis",f:"the-metamorphosis.pdf"},
+    alchemist:{t:"The Alchemist",f:"The-Alchemist-Paulo-Coelho.pdf"},
+    tom:{t:"The Adventures of Tom Sawyer",f:"THE%20ADVENTURES%20OF%20TOM%20SAWYER%20BY%20MARK%20TWAIN.pdf"},
+    huck:{t:"The Adventures of Huckleberry Finn",f:"the-adventures-of-huckleberry-finn.pdf"},
+    farm:{t:"Animal Farm",f:"Animal%20Farm%20by%20George%20Orwell.pdf"},
+    n1984:{t:"Nineteen Eighty-Four",f:"orwell1984.pdf"}
   };
+  const IELTS = ["1_5B82d0NWdK5d-XL46WImC5iRFneuM0F","1XHyckjrqsQwrIBr7PfCZcMl6P-XBWgkC","1q0XTaOoYGAMahrXNgukzLID4NVE3zlHV","1L33JdTi5A_eMMIKTSknsvwD3DtUr9lBE","1aI9_Wr6KpTLp7CeDf_XPSbNGm9HrzFXm","1k8KMNx_CCq3IAq99el59pEhMoS1rt5tW","14tmtwhCaC2OfDVMtXcBdzQc0HqK6g1HB","1HJBTWw4KS3m0jpwW_NhHSNt5QLJ5G2P_","1H26uEWHLmb_0DJ6Kf9WLkKJFSWc9Bt02","1uzorQFIjiNtB3_oNzj3_gVQu25KS8gpk","1RECjEHE4AXWHl7ub-xMZc8nDvG7LO_EU","1L_jHQoqTHe2J4xm4n6Ca23tffI6pjJyv","1Kq-H3sjXQ2Ph-Lq2sJHIG1C7qgUa6bg9","1rmrCW6u16_iNDfxAHDTSVn0ecoBDF94L","19FrzaAnhZSeL6mwBLoh3AVQEEF2RgMKO","1JAXqAWSTTUItx500lEHELhxVH2tlVCSQ","1l6o_9a22XmVFWiqrTFQyh-Fbi4M9Mfgv","17Y-bWP2yu5VHYdItmQNQXMzoKk8Dy1nK","1uQyyxf3FNHo1EHKoWobcDAJBmPVKAxBv"];
+  IELTS.forEach((id, i) => { BOOKS["ielts" + (i + 1)] = { t: "Cambridge IELTS " + (i + 1), d: id }; });
 
-  /* Cambridge IELTS 1-19 (Google Drive) */
-  const IELTS = {
-    1:  "1_5B82d0NWdK5d-XL46WImC5iRFneuM0F",
-    2:  "1XHyckjrqsQwrIBr7PfCZcMl6P-XBWgkC",
-    3:  "1q0XTaOoYGAMahrXNgukzLID4NVE3zlHV",
-    4:  "1L33JdTi5A_eMMIKTSknsvwD3DtUr9lBE",
-    5:  "1aI9_Wr6KpTLp7CeDf_XPSbNGm9HrzFXm",
-    6:  "1k8KMNx_CCq3IAq99el59pEhMoS1rt5tW",
-    7:  "14tmtwhCaC2OfDVMtXcBdzQc0HqK6g1HB",
-    8:  "1HJBTWw4KS3m0jpwW_NhHSNt5QLJ5G2P_",
-    9:  "1H26uEWHLmb_0DJ6Kf9WLkKJFSWc9Bt02",
-    10: "1uzorQFIjiNtB3_oNzj3_gVQu25KS8gpk",
-    11: "1RECjEHE4AXWHl7ub-xMZc8nDvG7LO_EU",
-    12: "1L_jHQoqTHe2J4xm4n6Ca23tffI6pjJyv",
-    13: "1Kq-H3sjXQ2Ph-Lq2sJHIG1C7qgUa6bg9",
-    14: "1rmrCW6u16_iNDfxAHDTSVn0ecoBDF94L",
-    15: "19FrzaAnhZSeL6mwBLoh3AVQEEF2RgMKO",
-    16: "1JAXqAWSTTUItx500lEHELhxVH2tlVCSQ",
-    17: "1l6o_9a22XmVFWiqrTFQyh-Fbi4M9Mfgv",
-    18: "17Y-bWP2yu5VHYdItmQNQXMzoKk8Dy1nK",
-    19: "1uQyyxf3FNHo1EHKoWobcDAJBmPVKAxBv"
-  };
-
-  Object.keys(IELTS).forEach(n => {
-    BOOKS["ielts" + n] = { t: "Cambridge IELTS " + n, d: IELTS[n] };
-  });
+  const CATS = [
+    ["Vocabulary", ["vocab", "gre", "check"]],
+    ["Grammar books", ["grammar", "adv", "wren", "oxford", "mistakes"]],
+    ["For Bangladeshi students", ["master", "prof"]],
+    ["English books", ["curious", "metamorphosis", "alchemist", "tom", "huck", "farm", "n1984"]]
+  ];
 
   const $ = id => document.getElementById(id);
+  const esc = s => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-  const params = new URLSearchParams(location.search);
-  const requestedBook = params.get("b") || "grammar";
-  const bookKey = BOOKS[requestedBook] ? requestedBook : "grammar";
-  const book = BOOKS[bookKey];
-  const isDrive = !!book.d;
-
-  document.title = book.t + " | English Materials Reader";
-  $("title").textContent = book.t;
-
-  /* Safe storage helpers. Settings are shared with the home page. */
+  /* ---------- Storage (this browser only) ---------- */
   const SETTINGS_KEY = "ielts-gl-reader";
-
   const store = {
-    get(key) { try { return localStorage.getItem(key); } catch (e) { return null; } },
-    set(key, value) { try { localStorage.setItem(key, value); } catch (e) {} },
-    getSettings() {
-      try { return JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}"); }
-      catch (e) { return {}; }
-    },
-    setSettings(s) {
-      try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(s)); } catch (e) {}
-    }
+    get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
+    settings() { try { return JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}"); } catch (e) { return {}; } }
   };
 
-  /* Allow both portrait and landscape (works where the browser supports it) */
-  try {
-    if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
-  } catch (e) {}
-
-  /* Download link */
-  $("dl").href = isDrive
-    ? "https://drive.google.com/uc?export=download&id=" + book.d
-    : RAW + book.f;
+  try { if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock(); } catch (e) {}
 
   /* ---------- Theme ---------- */
   function setTheme(theme) {
     if (!["light", "sepia", "dark"].includes(theme)) theme = "light";
-
     document.documentElement.dataset.theme = theme;
-
-    const s = store.getSettings();
-    s.theme = theme;
-    store.setSettings(s);
-    store.set("theme", theme); /* older setting, kept for compatibility */
-
-    document.querySelectorAll("#th button").forEach(b => {
-      b.setAttribute("aria-pressed", String(b.dataset.t === theme));
-    });
+    const s = store.settings(); s.theme = theme;
+    store.set(SETTINGS_KEY, JSON.stringify(s));
+    store.set("theme", theme);
+    document.querySelectorAll("#th button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.t === theme)));
   }
-
-  document.querySelectorAll("#th button").forEach(b => {
-    b.addEventListener("click", () => setTheme(b.dataset.t));
-  });
-
+  document.querySelectorAll("#th button").forEach(b => b.addEventListener("click", () => setTheme(b.dataset.t)));
   setTheme(document.documentElement.dataset.theme || "light");
 
-  /* ---------- Google Drive mode ---------- */
-  if (isDrive) {
-    document.body.classList.add("drive");
-    $("msg").remove();
+  /* ---------- State ---------- */
+  const params = new URLSearchParams(location.search);
+  let bookKey = BOOKS[params.get("b")] ? params.get("b") : "grammar";
+  let bookTitle = "";
+  let driveMode = false;
+  let anns = [];
+  let pdf = null, ratio = 1.4, zoom = 1, fit = store.get("fit") === "page" ? "page" : "width";
+  let cur = 1, ready = false, pages = [], lastW = 0, lastH = 0, resizeTimer, gen = 0;
+  const busy = Object.create(null);
+  const box = $("pages"), bar = $("bar"), pill = $("pill");
 
+  /* ---------- Annotations ---------- */
+  function loadAnns() {
+    try { anns = JSON.parse(store.get("ann:" + bookKey) || "[]"); } catch (e) { anns = []; }
+    if (!Array.isArray(anns)) anns = [];
+    updateCount();
+  }
+  function saveAnns() { store.set("ann:" + bookKey, JSON.stringify(anns)); updateCount(); }
+  function updateCount() {
+    $("cnt").textContent = anns.length;
+    $("cnt").hidden = !anns.length;
+  }
+  function newId() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 5); }
+
+  function hlLayer(n) {
+    const d = document.createElement("div");
+    d.className = "hl";
+    anns.forEach(a => {
+      if (a.p !== n || !a.rects) return;
+      a.rects.forEach(r => {
+        const i = document.createElement("i");
+        i.style.cssText = "left:" + r[0] * 100 + "%;top:" + r[1] * 100 + "%;width:" + r[2] * 100 + "%;height:" + r[3] * 100 + "%;background:" + a.c;
+        if (a.note) i.className = "has";
+        d.appendChild(i);
+      });
+    });
+    return d;
+  }
+  function refreshPage(n) {
+    const el = pages[n - 1];
+    const old = el && el.querySelector(".hl");
+    if (old) old.replaceWith(hlLayer(n));
+  }
+
+  /* Editor */
+  let edA = null, edNew = false, edColor = COLORS[0];
+  function openEditor(a, isNew) {
+    edA = a; edNew = isNew; edColor = a.c || COLORS[0];
+    $("edQ").textContent = a.text || "";
+    $("edQ").hidden = !a.text;
+    $("edT").value = a.note || "";
+    $("edDel").hidden = isNew;
+    $("edC").hidden = !a.rects;
+    $("edC").innerHTML = COLORS.map(c => '<button type="button" class="sw' + (c === edColor ? " on" : "") + '" data-c="' + c + '" style="background:' + c + '" aria-label="Colour"></button>').join("");
+    $("ed").classList.add("show");
+    setTimeout(() => $("edT").focus(), 50);
+  }
+  function closeEditor() { $("ed").classList.remove("show"); edA = null; }
+  $("edC").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    edColor = b.dataset.c;
+    $("edC").querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b));
+  });
+  $("edCancel").addEventListener("click", closeEditor);
+  $("edSave").addEventListener("click", () => {
+    if (!edA) return;
+    edA.note = $("edT").value.trim();
+    if (edA.rects) edA.c = edColor;
+    if (edNew) {
+      if (!edA.note && !edA.text) { closeEditor(); return; }
+      anns.push(edA);
+    }
+    saveAnns(); refreshPage(edA.p); closeEditor(); if (drawerMode === "notes") renderNotes();
+  });
+  $("edDel").addEventListener("click", () => {
+    if (!edA || !confirm("Delete this item?")) return;
+    const p = edA.p;
+    anns = anns.filter(a => a.id !== edA.id);
+    saveAnns(); refreshPage(p); closeEditor(); if (drawerMode === "notes") renderNotes();
+  });
+
+  /* Selection toolbar */
+  let pend = null, selTimer, lock = 0;
+  const sel = $("sel");
+  function hideSel() { sel.classList.remove("show"); }
+  document.addEventListener("selectionchange", () => { clearTimeout(selTimer); selTimer = setTimeout(checkSel, 250); });
+  sel.addEventListener("pointerdown", () => { lock = Date.now(); });
+
+  function checkSel() {
+    const s = getSelection();
+    if (!s || s.isCollapsed || !s.rangeCount) {
+      if (Date.now() - lock > 1500 && !$("ed").classList.contains("show")) hideSel();
+      return;
+    }
+    const r = s.getRangeAt(0);
+    let n = r.startContainer; n = n.nodeType === 1 ? n : n.parentElement;
+    const pg = n && n.closest && n.closest(".pg");
+    if (!pg || !pg.querySelector(".textLayer")) { hideSel(); return; }
+    const pb = pg.getBoundingClientRect(), rects = [];
+    for (const c of r.getClientRects()) {
+      const cx = c.left + c.width / 2, cy = c.top + c.height / 2;
+      if (c.width < 2 || c.height < 2 || cx < pb.left || cx > pb.right || cy < pb.top || cy > pb.bottom) continue;
+      rects.push([+((c.left - pb.left) / pb.width).toFixed(4), +((c.top - pb.top) / pb.height).toFixed(4), +(c.width / pb.width).toFixed(4), +(c.height / pb.height).toFixed(4)]);
+    }
+    const text = s.toString().replace(/\s+/g, " ").trim();
+    if (!rects.length || !text) { hideSel(); return; }
+    pend = { p: +pg.dataset.n, rects, text: text.slice(0, 1500) };
+    sel.classList.add("show");
+  }
+
+  function addFromSel(type, color) {
+    if (!pend) return;
+    const a = { id: newId(), type, p: pend.p, rects: pend.rects, text: pend.text, c: color || COLORS[0], note: "", t: Date.now() };
+    pend = null;
+    try { getSelection().removeAllRanges(); } catch (e) {}
+    hideSel();
+    if (type === "note") { openEditor(a, true); return; }
+    anns.push(a); saveAnns(); refreshPage(a.p);
+  }
+  sel.querySelectorAll(".sw").forEach(b => b.addEventListener("click", () => addFromSel("hl", b.dataset.c)));
+  $("selNote").addEventListener("click", () => addFromSel("note"));
+  $("selQuote").addEventListener("click", () => addFromSel("quote"));
+
+  /* ---------- Drawer: library and notes ---------- */
+  let drawerMode = "";
+  const drawer = $("drawer"), back = $("back");
+  function openDrawer(mode) {
+    drawerMode = mode;
+    drawer.classList.toggle("right", mode === "notes");
+    drawer.hidden = back.hidden = false;
+    $("dTitle").textContent = mode === "notes" ? "My notes" : "Library";
+    if (mode === "notes") renderNotes(); else renderLib();
+  }
+  function closeDrawer() { drawer.hidden = back.hidden = true; drawerMode = ""; }
+  back.addEventListener("click", closeDrawer);
+  $("dClose").addEventListener("click", closeDrawer);
+  $("libBtn").addEventListener("click", () => openDrawer("lib"));
+  $("notesBtn").addEventListener("click", () => openDrawer("notes"));
+
+  function renderLib() {
+    $("dBody").innerHTML =
+      '<input type="search" id="lq" placeholder="Search books" aria-label="Search books">' +
+      '<label class="btn" style="display:flex;margin-bottom:6px">Open a PDF from this device<input type="file" id="lf" accept="application/pdf,.pdf" hidden></label>' +
+      '<div id="lList"></div>';
+    $("lq").addEventListener("input", fillLib);
+    $("lf").addEventListener("change", e => {
+      const f = e.target.files[0]; if (!f) return;
+      f.arrayBuffer().then(buf => {
+        closeDrawer();
+        startPdf({ data: new Uint8Array(buf) }, "file:" + f.name + ":" + f.size, f.name.replace(/\.pdf$/i, ""), null);
+      });
+    });
+    fillLib();
+  }
+  function fillLib() {
+    const q = ($("lq").value || "").toLowerCase().trim();
+    let h = "";
+    CATS.forEach(c => {
+      const items = c[1].filter(k => !q || BOOKS[k].t.toLowerCase().includes(q));
+      if (!items.length) return;
+      h += '<div class="cat">' + c[0] + '</div>' + items.map(k =>
+        '<a class="li' + (k === bookKey ? " on" : "") + '" href="reader.html?b=' + k + '">' + esc(BOOKS[k].t) + '</a>').join("");
+    });
+    const nums = IELTS.map((_, i) => i + 1).filter(n => !q || ("cambridge ielts " + n).includes(q));
+    if (nums.length) h += '<div class="cat">Cambridge IELTS</div><div class="chips">' + nums.map(n =>
+      '<a class="chip' + (bookKey === "ielts" + n ? " on" : "") + '" href="reader.html?b=ielts' + n + '">' + n + '</a>').join("") + '</div>';
+    $("lList").innerHTML = h || '<p class="hint">No books match your search.</p>';
+  }
+
+  const LABEL = { hl: "Highlight", quote: "Quote", note: "Note" };
+  function renderNotes() {
+    const list = anns.slice().sort((a, b) => a.p - b.p || a.t - b.t);
+    $("dBody").innerHTML =
+      '<div class="tools"><button class="btn" id="addNote" type="button">+ Add note</button>' +
+      '<button class="btn" id="exp" type="button"' + (list.length ? "" : " disabled") + '>Export</button></div>' +
+      '<p class="hint">' + esc(bookTitle) + '. Saved in this browser on this device.</p>' +
+      (list.length ? list.map(a =>
+        '<div class="ni" data-id="' + a.id + '" style="--c:' + a.c + '"><small>' + (a.p ? "Page " + a.p + " · " : "") + LABEL[a.type] + ' · tap to edit</small>' +
+        (a.text ? "<q>" + esc(a.text) + "</q>" : "") + (a.note ? '<div class="n">' + esc(a.note) + "</div>" : "") + "</div>").join("")
+        : '<p class="hint">Nothing yet. Select text in the book to highlight it, add a note or save a quote.</p>');
+    $("addNote").onclick = () => { closeDrawer(); openEditor({ id: newId(), type: "note", p: driveMode ? 0 : cur, rects: null, text: "", c: COLORS[0], note: "", t: Date.now() }, true); };
+    const ex = $("exp"); if (ex) ex.onclick = exportNotes;
+    $("dBody").querySelectorAll(".ni").forEach(el => el.addEventListener("click", () => {
+      const a = anns.find(x => x.id === el.dataset.id); if (!a) return;
+      closeDrawer();
+      if (a.p && pdf && !driveMode) go(a.p);
+      openEditor(a, false);
+    }));
+  }
+  function exportNotes() {
+    const list = anns.slice().sort((a, b) => a.p - b.p || a.t - b.t);
+    const txt = bookTitle + "\nNotes, highlights and quotes\n\n" + list.map(a =>
+      (a.p ? "[Page " + a.p + "] " : "") + LABEL[a.type] + (a.text ? ': "' + a.text + '"' : "") + (a.note ? "\n  Note: " + a.note : "")).join("\n\n") + "\n";
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(new Blob([txt], { type: "text/plain" }));
+    link.download = bookTitle.replace(/[^\w\- ]+/g, "") + " - notes.txt";
+    document.body.appendChild(link); link.click(); link.remove();
+  }
+
+  /* ---------- Book meta ---------- */
+  function setMeta(key, title, dl) {
+    bookKey = key; bookTitle = title;
+    document.title = title + " | English Materials Reader";
+    $("title").textContent = title;
+    $("dl").hidden = !dl;
+    if (dl) $("dl").href = dl;
+    loadAnns();
+  }
+
+  /* ---------- Google Drive mode ---------- */
+  function showDrive(book) {
+    driveMode = true;
+    document.body.classList.add("drive");
+    $("msg").hidden = true;
     const frame = document.createElement("iframe");
-    frame.id = "frame";
-    frame.title = book.t;
-    frame.allow = "fullscreen";
+    frame.id = "frame"; frame.title = book.t; frame.allow = "fullscreen";
     frame.src = "https://drive.google.com/file/d/" + book.d + "/preview";
     document.body.appendChild(frame);
-    return;
   }
 
   /* ---------- PDF.js mode ---------- */
-  if (typeof pdfjsLib === "undefined") {
-    $("msg").textContent =
-      "The PDF reader could not load. Please check your internet connection and reload the page.";
-    return;
-  }
-
-  pdfjsLib.GlobalWorkerOptions.workerSrc =
-    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-
-  let pdf = null;
-  let ratio = 1.4;
-  let zoom = Number(store.get("zoom:" + bookKey) || store.get("zoom") || 1);
-  if (!isFinite(zoom) || zoom < 0.6 || zoom > 2.5) zoom = 1;
-  let fit = store.get("fit") === "page" ? "page" : "width";
-  let cur = 1;
-  let ready = false;
-  let pages = [];
-  let lastW = 0;
-  let lastH = 0;
-  let resizeTimer;
-
-  const box = $("pages");
-  const bar = $("bar");
-  const pill = $("pill");
-  const busy = Object.create(null);
-
-  /*
-    Page width.
-    Fit width: the page fills the screen width (best in portrait).
-    Fit page: the whole page fits the screen height (best in landscape).
-  */
   function width() {
     let w = Math.min(box.clientWidth - 16, 1100);
-
-    if (fit === "page") {
-      const h = window.innerHeight - 20;
-      w = Math.min(w, h / ratio);
-    }
-
+    if (fit === "page") w = Math.min(w, (window.innerHeight - 20) / ratio);
     return Math.max(200, w * zoom);
   }
-
   function updateLabels() {
     $("zl").textContent = Math.round(zoom * 100) + "%";
     $("fit").textContent = fit === "page" ? "Fit page" : "Fit width";
   }
 
-  updateLabels();
+  const lazy = new IntersectionObserver(entries => entries.forEach(en => {
+    const n = Number(en.target.dataset.n);
+    if (en.isIntersecting) draw(n); else drop(n);
+  }), { rootMargin: "1500px 0px" });
 
-  /* Render nearby pages only, to save memory on mobile devices. */
-  const lazy = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      const n = Number(entry.target.dataset.n);
-      if (entry.isIntersecting) draw(n); else drop(n);
-    });
-  }, { rootMargin: "1500px 0px" });
-
-  /* Keep page number and progress in sync with scrolling. */
-  const mid = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-
-      cur = Number(entry.target.dataset.n);
-      $("num").value = cur;
-      pill.textContent = cur + " / " + (pdf ? pdf.numPages : "…");
-
-      if (ready) store.set("p:" + bookKey, String(cur));
-
-      $("progressBar").style.width =
-        (pdf ? (cur / pdf.numPages) * 100 : 0) + "%";
-    });
-  }, { rootMargin: "-45% 0px -54% 0px" });
+  const mid = new IntersectionObserver(entries => entries.forEach(en => {
+    if (!en.isIntersecting) return;
+    cur = Number(en.target.dataset.n);
+    $("num").value = cur;
+    pill.textContent = cur + " / " + (pdf ? pdf.numPages : "…");
+    if (ready) store.set("p:" + bookKey, String(cur));
+    $("progressBar").style.width = (pdf ? (cur / pdf.numPages) * 100 : 0) + "%";
+  }), { rootMargin: "-45% 0px -54% 0px" });
 
   async function draw(n) {
     const el = pages[n - 1];
     if (!el || el.querySelector("canvas") || busy[n]) return;
-
     busy[n] = true;
-
+    const myPdf = pdf;
     try {
-      const page = await pdf.getPage(n);
-      const targetWidth = width();
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-
+      const page = await myPdf.getPage(n);
+      const tw = width(), dpr = Math.min(window.devicePixelRatio || 1, 2);
       const base = page.getViewport({ scale: 1 });
-      const viewport = page.getViewport({ scale: (targetWidth / base.width) * dpr });
-
+      const cssScale = tw / base.width;
+      const vp = page.getViewport({ scale: cssScale * dpr });
       const canvas = document.createElement("canvas");
-      canvas.width = Math.ceil(viewport.width);
-      canvas.height = Math.ceil(viewport.height);
-
+      canvas.width = Math.ceil(vp.width); canvas.height = Math.ceil(vp.height);
       const ctx = canvas.getContext("2d", { alpha: false });
       if (!ctx) throw new Error("Canvas is unavailable.");
+      await page.render({ canvasContext: ctx, viewport: vp }).promise;
 
-      await page.render({ canvasContext: ctx, viewport }).promise;
-
-      /* Skip if the layout changed while this page was rendering. */
-      if (pages[n - 1] === el && Math.abs(parseFloat(el.style.width) - targetWidth) < 2) {
+      if (myPdf === pdf && pages[n - 1] === el && Math.abs(parseFloat(el.style.width) - tw) < 2) {
+        const tl = document.createElement("div");
+        tl.className = "textLayer";
+        tl.style.setProperty("--scale-factor", cssScale);
         el.classList.remove("empty");
-        el.replaceChildren(canvas);
+        el.replaceChildren(canvas, tl, hlLayer(n));
+        try {
+          pdfjsLib.renderTextLayer({ textContentSource: page.streamTextContent(), container: tl, viewport: page.getViewport({ scale: cssScale }), textDivs: [] }).promise.catch(() => {});
+        } catch (e) {}
       }
     } catch (error) {
       console.error("Could not render PDF page " + n, error);
-    } finally {
-      busy[n] = false;
-    }
+    } finally { busy[n] = false; }
   }
-
   function drop(n) {
     const el = pages[n - 1];
-    if (el && el.firstChild && !busy[n]) {
-      el.replaceChildren();
-      el.classList.add("empty");
-    }
+    if (el && el.firstChild && !busy[n]) { el.replaceChildren(); el.classList.add("empty"); }
   }
-
   function layout() {
-    lazy.disconnect();
-    mid.disconnect();
-
-    const targetWidth = width();
-    lastW = box.clientWidth;
-    lastH = window.innerHeight;
-
+    lazy.disconnect(); mid.disconnect();
+    const tw = width();
+    lastW = box.clientWidth; lastH = window.innerHeight;
     pages.forEach(el => {
-      el.style.width = targetWidth + "px";
-      el.style.height = (targetWidth * ratio) + "px";
-      el.replaceChildren();
-      el.classList.add("empty");
-
-      lazy.observe(el);
-      mid.observe(el);
+      el.style.width = tw + "px"; el.style.height = (tw * ratio) + "px";
+      el.replaceChildren(); el.classList.add("empty");
+      lazy.observe(el); mid.observe(el);
     });
   }
-
   function scrollToPage(n, fraction) {
-    const el = pages[n - 1];
-    if (!el) return;
-
-    const top = el.getBoundingClientRect().top + window.scrollY +
-      (fraction || 0) * el.offsetHeight - 6;
-
-    window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
+    const el = pages[n - 1]; if (!el) return;
+    window.scrollTo({ top: Math.max(0, el.getBoundingClientRect().top + window.scrollY + (fraction || 0) * el.offsetHeight - 6), behavior: "auto" });
   }
-
   function go(n) {
     if (!pdf || !pages.length) return;
-
     n = Math.max(1, Math.min(pdf.numPages, Math.trunc(Number(n) || 1)));
-    cur = n;
-    $("num").value = n;
-    scrollToPage(n, 0);
+    cur = n; $("num").value = n; scrollToPage(n, 0);
   }
-
-  /* Re-layout and keep the same spot on the same page (used on rotation and zoom). */
   function relayout() {
     if (!pdf) return;
-
     const el = pages[cur - 1];
     let fraction = 0;
-
-    if (el && el.offsetHeight) {
-      fraction = Math.max(0, Math.min(0.95, -el.getBoundingClientRect().top / el.offsetHeight));
-    }
-
-    const page = cur;
-    layout();
-    scrollToPage(page, fraction);
+    if (el && el.offsetHeight) fraction = Math.max(0, Math.min(0.95, -el.getBoundingClientRect().top / el.offsetHeight));
+    const p = cur; layout(); scrollToPage(p, fraction);
   }
 
-  /* Load the requested PDF. */
-  async function loadBook() {
+  async function startPdf(source, key, title, dl) {
+    const token = ++gen;
+    driveMode = false;
+    document.body.classList.remove("drive");
+    const fr = $("frame"); if (fr) fr.remove();
+    lazy.disconnect(); mid.disconnect();
+    box.replaceChildren(); pages = []; pdf = null; ready = false; cur = 1;
+    Object.keys(busy).forEach(k => delete busy[k]);
+    window.scrollTo(0, 0);
+    $("msg").hidden = false; $("msg").textContent = "Opening book…";
+    $("tot").textContent = "/ …"; $("num").value = 1; $("progressBar").style.width = "0";
+    setMeta(key, title, dl);
+
+    zoom = Number(store.get("zoom:" + key) || store.get("zoom") || 1);
+    if (!isFinite(zoom) || zoom < 0.6 || zoom > 2.5) zoom = 1;
+    updateLabels();
+
     try {
-      const task = pdfjsLib.getDocument({
-        url: RAW + book.f,
-        disableAutoFetch: true,
-        rangeChunkSize: 262144
-      });
-
-      pdf = await task.promise;
-
+      const doc = await pdfjsLib.getDocument(Object.assign({ disableAutoFetch: true, rangeChunkSize: 262144 }, source)).promise;
+      if (token !== gen) return;
+      pdf = doc;
       const first = await pdf.getPage(1);
       const vp = first.getViewport({ scale: 1 });
       ratio = vp.height / vp.width;
 
-      $("msg").remove();
+      $("msg").hidden = true;
       $("tot").textContent = "/ " + pdf.numPages;
       $("num").max = pdf.numPages;
-      $("num").min = 1;
-
       for (let i = 1; i <= pdf.numPages; i++) {
-        const page = document.createElement("div");
-        page.className = "pg empty";
-        page.dataset.n = i;
-        page.setAttribute("aria-label", "Page " + i);
-        box.appendChild(page);
-        pages.push(page);
+        const pg = document.createElement("div");
+        pg.className = "pg empty"; pg.dataset.n = i; pg.setAttribute("aria-label", "Page " + i);
+        box.appendChild(pg); pages.push(pg);
       }
-
       layout();
-
-      const lastPage = Number(store.get("p:" + bookKey) || 1);
-      go(lastPage);
-
-      /* Start saving positions only after the saved page is restored. */
+      go(Number(store.get("p:" + key) || 1));
       setTimeout(() => { ready = true; }, 600);
-
     } catch (error) {
       console.error("PDF loading failed:", error);
-
-      $("msg").innerHTML =
-        "Could not load this book. Check your internet connection or open the PDF directly.<br><br>" +
-        '<a href="' + RAW + book.f + '" target="_blank" rel="noopener">Open the PDF directly</a>';
+      if (token !== gen) return;
+      $("msg").innerHTML = "Could not load this book. Check your internet connection and try again." +
+        (source.url ? '<br><br><a href="' + source.url + '" target="_blank" rel="noopener">Open the PDF directly</a>' : "");
     }
   }
 
   /* ---------- Controls ---------- */
   $("prev").addEventListener("click", () => go(cur - 1));
   $("next").addEventListener("click", () => go(cur + 1));
-
   $("num").addEventListener("change", e => go(e.target.value));
-  $("num").addEventListener("keydown", e => {
-    if (e.key === "Enter") { go(e.target.value); e.target.blur(); }
-  });
+  $("num").addEventListener("keydown", e => { if (e.key === "Enter") { go(e.target.value); e.target.blur(); } });
 
-  function setZoom(value) {
-    zoom = Math.max(0.6, Math.min(2.5, Math.round(value * 100) / 100));
-
-    store.set("zoom:" + bookKey, String(zoom));
-    store.set("zoom", String(zoom));
-    updateLabels();
-    relayout();
+  function setZoom(v) {
+    zoom = Math.max(0.6, Math.min(2.5, Math.round(v * 100) / 100));
+    store.set("zoom:" + bookKey, String(zoom)); store.set("zoom", String(zoom));
+    updateLabels(); relayout();
   }
-
   $("zi").addEventListener("click", () => setZoom(zoom + 0.2));
   $("zo").addEventListener("click", () => setZoom(zoom - 0.2));
   $("zl").addEventListener("click", () => setZoom(1));
-
   $("fit").addEventListener("click", () => {
     fit = fit === "page" ? "width" : "page";
-    store.set("fit", fit);
-    updateLabels();
-    relayout();
+    store.set("fit", fit); updateLabels(); relayout();
   });
 
-  /* Keyboard navigation */
   window.addEventListener("keydown", e => {
-    if (e.target.tagName === "INPUT" || e.ctrlKey || e.metaKey || e.altKey) return;
-
+    if (e.key === "Escape") { if ($("ed").classList.contains("show")) closeEditor(); else closeDrawer(); return; }
+    if (/INPUT|TEXTAREA/.test(e.target.tagName) || e.ctrlKey || e.metaKey || e.altKey || !drawer.hidden) return;
     if (e.key === "ArrowRight") go(cur + 1);
     if (e.key === "ArrowLeft") go(cur - 1);
   });
 
-  /* ---------- Auto-hide toolbar for distraction-free reading ---------- */
-  let lastY = window.scrollY;
-  let ticking = false;
-  let pillTimer;
-
+  /* Auto-hide toolbar while reading */
+  let lastY = window.scrollY, ticking = false, pillTimer;
   function showPill() {
     pill.classList.add("show");
     clearTimeout(pillTimer);
     pillTimer = setTimeout(() => pill.classList.remove("show"), 1200);
   }
-
   window.addEventListener("scroll", () => {
     if (ticking) return;
     ticking = true;
-
     requestAnimationFrame(() => {
-      const y = window.scrollY;
-      const delta = y - lastY;
-
-      if (y < 80) {
-        bar.classList.remove("hide");
-      } else if (delta > 8) {
-        bar.classList.add("hide");
-        showPill();
-      } else if (delta < -8) {
-        bar.classList.remove("hide");
-      }
-
-      lastY = y;
-      ticking = false;
+      const y = window.scrollY, d = y - lastY;
+      if (y < 80) bar.classList.remove("hide");
+      else if (d > 8) { bar.classList.add("hide"); showPill(); }
+      else if (d < -8) bar.classList.remove("hide");
+      lastY = y; ticking = false;
     });
   }, { passive: true });
 
-  /* Tap a page to show or hide the toolbar */
-  box.addEventListener("click", () => {
+  /* Tap a highlight to edit it; tap elsewhere on a page to show or hide the toolbar */
+  box.addEventListener("click", e => {
+    if (String(getSelection())) return;
+    const pg = e.target.closest(".pg");
+    if (pg) {
+      const pb = pg.getBoundingClientRect(), n = +pg.dataset.n;
+      const x = (e.clientX - pb.left) / pb.width, y = (e.clientY - pb.top) / pb.height;
+      const hit = anns.find(a => a.p === n && a.rects && a.rects.some(r => x >= r[0] && x <= r[0] + r[2] && y >= r[1] && y <= r[1] + r[3]));
+      if (hit) { openEditor(hit, false); return; }
+    }
     bar.classList.toggle("hide");
     if (bar.classList.contains("hide")) showPill();
   });
 
-  /* ---------- Rotation and resizing ----------
-     Mobile browsers also fire resize when the address bar hides, which must
-     not reset the pages. So re-layout only when the width changes, or, in
-     Fit page mode, when the height changes by a lot (a real rotation). */
+  /* Rotation and resizing: ignore the small resizes caused by the address bar */
   function onResize() {
     clearTimeout(resizeTimer);
-
     resizeTimer = setTimeout(() => {
       if (!pdf) return;
-
-      const widthChanged = Math.abs(box.clientWidth - lastW) > 4;
-      const heightChanged = fit === "page" && Math.abs(window.innerHeight - lastH) > 100;
-
-      if (widthChanged || heightChanged) relayout();
+      const w = Math.abs(box.clientWidth - lastW) > 4;
+      const h = fit === "page" && Math.abs(window.innerHeight - lastH) > 100;
+      if (w || h) relayout();
     }, 200);
   }
-
   window.addEventListener("resize", onResize);
   window.addEventListener("orientationchange", () => setTimeout(onResize, 350));
+  if (screen.orientation && screen.orientation.addEventListener) screen.orientation.addEventListener("change", () => setTimeout(onResize, 350));
 
-  if (screen.orientation && screen.orientation.addEventListener) {
-    screen.orientation.addEventListener("change", () => setTimeout(onResize, 350));
+  /* ---------- Start ---------- */
+  const book = BOOKS[bookKey];
+  if (typeof pdfjsLib !== "undefined") {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
   }
-
-  loadBook();
+  if (book.d) {
+    setMeta(bookKey, book.t, DRIVE_DL + book.d);
+    showDrive(book);
+  } else if (typeof pdfjsLib === "undefined") {
+    setMeta(bookKey, book.t, RAW + book.f);
+    $("msg").textContent = "The PDF reader could not load. Please check your internet connection and reload the page.";
+  } else {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+    startPdf({ url: RAW + book.f }, bookKey, book.t, RAW + book.f);
+  }
 })();
 </script>
-
 </body>
 </html>
