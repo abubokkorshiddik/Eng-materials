@@ -54,12 +54,12 @@ body.chromeOff .bar { transform:translateY(-110%); }
 .rail .dot { position:absolute; bottom:3px; left:50%; width:16px; height:3px; margin-left:-8px; border-radius:2px; display:none; box-shadow:0 0 0 1px #0003; }
 .rail button.hasdot .dot { display:block; }
 .rsep { width:1px; margin:6px 2px; background:var(--line); }
-.title { order:3; } #notesBtn { order:6; } #setBtn { order:7; }
+.title { order:3; } #searchBtn { order:5; } #notesBtn { order:6; } #setBtn { order:7; }
 @media (max-width:640px) {
   .brk { display:block; }
   .title { order:3; }
   .rail { order:10; margin:2px auto 4px; }
-  #notesBtn { order:4; } #setBtn { order:5; }
+  #searchBtn { order:4; } #notesBtn { order:4; } #setBtn { order:5; }
 }
 
 /* ---------- Tool options popover (below top bar) ---------- */
@@ -149,6 +149,21 @@ body.chromeOff .dock { transform:translateY(200%); opacity:0; }
 .dock .n:hover { opacity:1; }
 #pgn { background:none; border:0; font:inherit; font-size:12px; opacity:.6; cursor:pointer; padding:6px 10px; border-radius:99px; }
 
+/* ---------- Dictionary card, resume banner, search ---------- */
+#dict { position:fixed; left:50%; transform:translateX(-50%); bottom:calc(52px + env(safe-area-inset-bottom,0px)); width:min(460px,94vw); max-height:55vh; overflow:auto;
+  z-index:26; background:var(--bar); border:1px solid var(--line); border-radius:16px; box-shadow:0 10px 30px #0005; padding:10px 14px 12px; font-weight:500; }
+#dict .dh { display:flex; align-items:center; gap:6px; }
+#dict .dw { font-size:19px; } #dict .dph { opacity:.7; flex:1; }
+#dict .dm { margin-top:8px; } #dict .dm i { opacity:.65; font-size:12px; }
+#dict .dd { margin:3px 0 0; line-height:1.5; } #dict .dex { opacity:.7; font-size:13px; margin-top:2px; }
+#dict .dfoot { display:flex; gap:6px; margin-top:12px; flex-wrap:wrap; }
+#resume { position:fixed; left:50%; top:calc(var(--top,96px) + 8px); transform:translateX(-50%); z-index:11; display:flex; align-items:center; gap:8px; background:var(--glass);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid var(--line); border-radius:999px; padding:6px 8px 6px 14px; box-shadow:0 6px 20px #0003; font-weight:500; font-size:13px; max-width:94vw; }
+#resume button { border:1px solid var(--line); background:none; border-radius:999px; padding:6px 12px; cursor:pointer; font:inherit; font-size:13px; }
+#resume #rYes { background:var(--accent); color:var(--onacc); border-color:var(--accent); }
+#dBody mark { background:#ffd54a; color:#000; border-radius:2px; padding:0 1px; }
+.textLayer span.sm { background:rgba(255,160,0,.5); border-radius:2px; }
+
 /* ---------- Eye comfort overlays ---------- */
 #dim, #warm { position:fixed; inset:0; pointer-events:none; z-index:200; opacity:0; transition:opacity .2s; }
 #dim { background:#000; }
@@ -229,6 +244,7 @@ body.drive #note { display:block; }
   <a class="ib" href="./index.html" aria-label="Home" data-i="home"></a>
   <button class="ib" id="libBtn" type="button" aria-label="Library" data-i="book"></button>
   <div class="title" id="title">Loading book…</div>
+  <button class="ib" id="searchBtn" type="button" aria-label="Search in this book" data-i="search"></button>
   <button class="ib" id="notesBtn" type="button" aria-label="Notes, comments and bookmarks" data-i="list"><span id="cnt" hidden>0</span></button>
   <button class="ib" id="setBtn" type="button" aria-label="Reading settings" data-i="sliders"></button>
   <span class="brk"></span>
@@ -259,6 +275,7 @@ body.drive #note { display:block; }
   <button class="sw" data-c="#7ee08a" style="background:#7ee08a" aria-label="Highlight green"></button>
   <button class="sw" data-c="#8ec5ff" style="background:#8ec5ff" aria-label="Highlight blue"></button>
   <button class="sw" data-c="#ff9ec4" style="background:#ff9ec4" aria-label="Highlight pink"></button>
+  <button id="selDef" type="button" data-i="book" data-s="16"> Define</button>
   <button id="selNote" type="button" data-i="pen" data-s="16"> Note</button>
   <button id="selQuote" type="button" data-i="quote" data-s="16"> Quote</button>
 </div>
@@ -288,6 +305,8 @@ body.drive #note { display:block; }
   </div>
 </div>
 
+<div id="dict" hidden role="dialog" aria-label="Word meaning"></div>
+<div id="resume" hidden><span id="rtxt"></span><button id="rYes" type="button">Resume</button><button id="rNo" type="button">Page 1</button></div>
 <div id="dim" aria-hidden="true"></div>
 <div id="warm" aria-hidden="true"></div>
 
@@ -354,7 +373,8 @@ body.drive #note { display:block; }
     bookmark: '<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>',
     full: '<path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/>',
     quote: '<path d="M3 21c4 0 7-2 7-8V5H3v8h4c0 3-1 4-4 4zM14 21c4 0 7-2 7-8V5h-7v8h4c0 3-1 4-4 4z"/>',
-    home2: ''
+    search: '<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>',
+    speaker: '<path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/>'
   };
   const ico = (n, s) => '<svg viewBox="0 0 24 24" width="' + (s || 20) + '" height="' + (s || 20) + '" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + IC[n] + '</svg>';
   document.querySelectorAll("[data-i]").forEach(el => el.insertAdjacentHTML("afterbegin", ico(el.dataset.i, +el.dataset.s || (el.closest(".rail") ? 22 : 20))));
@@ -441,6 +461,7 @@ body.drive #note { display:block; }
   let spd = ["fast", "normal", "slow"].includes(store.get("spd")) ? store.get("spd") : "normal";
   let tool = "select", bk = null, flipping = false;
   const sizes = { pen: 3, hl: 4 }, cols = { pen: "#e53935", hl: "#ffe14d" };
+  try { Object.assign(cols, JSON.parse(store.get("cols") || "{}")); Object.assign(sizes, JSON.parse(store.get("sizes") || "{}")); } catch (e) {}
   const box = $("pages"), book = $("book"), pill = $("pill");
   bz = Number(store.get("bz") || 1); if (!isFinite(bz) || bz < 0.6 || bz > 3) bz = 1;
 
@@ -609,6 +630,7 @@ body.drive #note { display:block; }
     const text = s.toString().replace(/\s+/g, " ").trim();
     if (!rects.length || !text) { hideSel(); return; }
     pend = { p: +pg.dataset.n, rects, text: text.slice(0, 1500) };
+    $("selDef").hidden = !cleanWord(text) || cleanWord(text).split(" ").length > 3;
     sel.classList.add("show");
   }
   function addFromSel(type, color) {
@@ -634,7 +656,7 @@ body.drive #note { display:block; }
     });
   }
   function setTool(t) {
-    tool = t;
+    tool = t; store.set("tool", t);
     document.body.classList.toggle("draw", t === "pen" || t === "hl" || t === "erase");
     document.body.classList.toggle("pinmode", t === "pin");
     document.querySelectorAll("#tools button[data-tool]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.tool === t)));
@@ -660,13 +682,13 @@ body.drive #note { display:block; }
   $("tools").addEventListener("click", e => { const b = e.target.closest("button"); if (b) setTool(b.dataset.tool); });
   $("opts").addEventListener("click", e => {
     const sw = e.target.closest(".sw");
-    if (sw) { cols[tool] = sw.dataset.c; renderOpts(); return; }
+    if (sw) { cols[tool] = sw.dataset.c; store.set("cols", JSON.stringify(cols)); renderOpts(); return; }
     if (e.target.closest("#undo")) undo();
     if (e.target.closest("#clr")) clearPage();
   });
   $("opts").addEventListener("input", e => {
     if (e.target.id !== "sz") return;
-    sizes[tool] = +e.target.value;
+    sizes[tool] = +e.target.value; store.set("sizes", JSON.stringify(sizes));
     const i = $("opts").querySelector(".pv i"); if (i) { i.style.width = i.style.height = pvSize() + "px"; }
   });
   function undo() {
@@ -795,8 +817,8 @@ body.drive #note { display:block; }
     drawerMode = m;
     drawer.classList.toggle("right", m !== "lib");
     drawer.hidden = back.hidden = false;
-    $("dTitle").textContent = m === "notes" ? "Notes, comments and bookmarks" : m === "set" ? "Reading settings" : "Library";
-    if (m === "notes") renderNotes(); else if (m === "set") renderSettings(); else renderLib();
+    $("dTitle").textContent = ({ notes: "Notes, comments and bookmarks", set: "Reading settings", words: "My words", search: "Search in this book" })[m] || "Library";
+    if (m === "notes") renderNotes(); else if (m === "set") renderSettings(); else if (m === "words") renderWords(); else if (m === "search") renderSearch(); else renderLib();
   }
   function closeDrawer() { drawer.hidden = back.hidden = true; drawerMode = ""; }
   back.addEventListener("click", closeDrawer);
@@ -821,6 +843,7 @@ body.drive #note { display:block; }
       if (mode === "book") {
         h += '<div class="sh">Page turn style</div>' + seg("anim", [["turn", "Page turn"], ["slide", "Slide"], ["fade", "Fade"], ["stack", "Stack"]], anim) +
           '<div class="sh">Turn speed</div>' + seg("spd", [["fast", "Fast"], ["normal", "Normal"], ["slow", "Slow"]], spd) +
+          '<label class="chk"><input type="checkbox" id="snd" ' + (store.get("snd") === "1" ? "checked" : "") + '> Page-turn sound</label>' +
           '<p class="hint">Drag a page from its outer edge to turn it by hand, or tap the edge.</p>';
       } else {
         h += '<div class="sh">Fit</div>' + seg("fit", [["width", "Fit width"], ["page", "Fit page"]], fit);
@@ -926,7 +949,7 @@ body.drive #note { display:block; }
     const real = list.filter(a => a.type !== "ink");
     $("dBody").innerHTML =
       '<div class="tools"><button class="btn" id="addNote" type="button">' + ico("plus", 16) + ' Add note</button>' +
-      '<button class="btn" id="exp" type="button"' + (real.length ? "" : " disabled") + '>Export</button></div>' +
+      '<button class="btn" id="wl" type="button">Words (' + words.length + ')</button><button class="btn" id="exp" type="button"' + (real.length ? "" : " disabled") + '>Export</button></div>' +
       '<p class="hint">' + esc(bookTitle) + '. Saved in this browser on this device.</p>' +
       (bms.length ? '<div class="sh">Bookmarks</div><div class="chips">' + bms.map(n => '<button type="button" class="chip' + (n === cur ? " on" : "") + '" data-go="' + n + '">p. ' + n + '</button>').join("") + '</div>' : "") +
       (list.length ? list.map(a =>
@@ -934,6 +957,7 @@ body.drive #note { display:block; }
         (a.text ? "<q>" + esc(a.text) + "</q>" : "") + (a.note ? '<div class="n">' + esc(a.note) + "</div>" : "") + "</div>").join("")
         : '<p class="hint">Nothing yet. Select text to highlight it, draw with the pen, or double-tap anywhere on a page to add a comment.</p>');
     $("addNote").onclick = () => { closeDrawer(); openEditor({ id: newId(), type: "note", p: driveMode ? 0 : cur, rects: null, text: "", c: COLORS[0], note: "", t: Date.now() }, true); };
+    $("wl").onclick = () => openDrawer("words");
     const ex = $("exp"); if (ex) ex.onclick = exportNotes;
     $("dBody").querySelectorAll(".ni").forEach(el => el.addEventListener("click", () => {
       const a = anns.find(x => x.id === el.dataset.id); if (!a) return;
@@ -983,7 +1007,7 @@ body.drive #note { display:block; }
   function setCur(n) {
     cur = n; $("pgn").textContent = n + " / " + (pdf ? pdf.numPages : "…");
     pill.textContent = n + " / " + (pdf ? pdf.numPages : "…");
-    if (ready) { store.set("p:" + bookKey, String(n)); touchRecent(); }
+    if (ready && !offerPending) { store.set("p:" + bookKey, String(n)); touchRecent(); }
     $("progressBar").style.width = (pdf ? (n / pdf.numPages) * 100 : 0) + "%";
     updBm();
   }
@@ -1012,7 +1036,7 @@ body.drive #note { display:block; }
           el.classList.remove("empty");
           el.replaceChildren(canvas, tl, ...layersFor(n));
           try {
-            pdfjsLib.renderTextLayer({ textContentSource: page.streamTextContent(), container: tl, viewport: page.getViewport({ scale: cssScale }), textDivs: [] }).promise.catch(() => {});
+            pdfjsLib.renderTextLayer({ textContentSource: page.streamTextContent(), container: tl, viewport: page.getViewport({ scale: cssScale }), textDivs: [] }).promise.then(() => markSearch(tl)).catch(() => {});
           } catch (e) {}
         }
       } catch (error) {
@@ -1182,6 +1206,7 @@ body.drive #note { display:block; }
     if (flipping || !bk) return;
     const target = dir > 0 ? nextTarget() : prevTarget();
     if (!target) return;
+    flipSound();
     if (anim === "turn") {
       flipping = true;
       const T = prepTurn(dir, target, !!fromBottom);
@@ -1218,6 +1243,7 @@ body.drive #note { display:block; }
     suppressUntil = Date.now() + 400;
     if (d.T) {
       const commit = e.type !== "pointercancel" && d.t > 0.3;
+      if (commit) flipSound();
       animateT(d.T, d.t, commit ? 1 : 0, speed() * (commit ? 1 - d.t : d.t) + 80, () => d.T.finish(commit));
     } else if (d.dx > 50 && e.type !== "pointercancel") step(d.dir, d.bottom);
   }
@@ -1262,6 +1288,7 @@ body.drive #note { display:block; }
     document.body.classList.remove("drive");
     const fr = $("frame"); if (fr) fr.remove();
     lazy.disconnect(); mid.disconnect();
+    searchTerm = ""; searchGen++; ptext = []; found = []; hideResume();
     box.replaceChildren(); book.replaceChildren(); pages = []; pdf = null; ready = false; cur = 1; bk = null; flipping = false;
     window.scrollTo(0, 0);
     $("msg").hidden = false; $("msg").textContent = "Opening book…";
@@ -1270,6 +1297,7 @@ body.drive #note { display:block; }
 
     zoom = Number(store.get("zoom:" + key) || store.get("zoom") || 1);
     if (!isFinite(zoom) || zoom < 0.6 || zoom > 2.5) zoom = 1;
+    bz = Number(store.get("bz:" + key) || store.get("bz") || 1); if (!isFinite(bz) || bz < 0.6 || bz > 3) bz = 1;
 
     try {
       const doc = await pdfjsLib.getDocument(Object.assign({ disableAutoFetch: true, rangeChunkSize: 262144 }, source)).promise;
@@ -1287,8 +1315,10 @@ body.drive #note { display:block; }
         pg.className = "pg empty"; pg.dataset.n = i; pg.setAttribute("aria-label", "Page " + i);
         box.appendChild(pg); pages.push(pg);
       }
-      cur = Math.max(1, Math.min(pdf.numPages, Number(store.get("p:" + key) || 1)));
+      const savedP = Math.max(1, Math.min(pdf.numPages, Number(store.get("p:" + key) || 1)));
+      cur = savedP > 2 ? 1 : savedP; offerPending = savedP > 2 ? savedP : 0;
       applyView(false);
+      if (offerPending) showResume(offerPending);
       setTimeout(() => { ready = true; }, 600);
     } catch (error) {
       console.error("PDF loading failed:", error);
@@ -1317,7 +1347,7 @@ body.drive #note { display:block; }
     if (!pdf || driveMode) return;
     if (mode === "book") {
       bz = Math.max(0.6, Math.min(3, Math.round((d ? bz + d : 1) * 100) / 100));
-      store.set("bz", String(bz));
+      store.set("bz", String(bz)); store.set("bz:" + bookKey, String(bz));
       if (!flipping) renderBook(cur);
     } else {
       zoom = Math.max(0.6, Math.min(2.5, Math.round((d ? zoom + d : 1) * 100) / 100));
@@ -1414,8 +1444,205 @@ body.drive #note { display:block; }
   autoTheme(); wake();
   setInterval(autoTheme, 600000);
 
+  /* ---------- Word meaning + word list ---------- */
+  let words = [];
+  try { words = JSON.parse(store.get("words") || "[]"); } catch (e) { words = []; }
+  if (!Array.isArray(words)) words = [];
+  const saveWords = () => store.set("words", JSON.stringify(words));
+  const dict = $("dict");
+  let dcur = null, dtok = 0;
+  function cleanWord(t) { return String(t || "").replace(/[‘’]/g, "'").replace(/^[^A-Za-z]+|[^A-Za-z]+$/g, "").replace(/\s+/g, " ").trim(); }
+  function speak(w) {
+    try { const u = new SpeechSynthesisUtterance(w); u.lang = "en-US"; u.rate = 0.9; speechSynthesis.cancel(); speechSynthesis.speak(u); } catch (e) {}
+  }
+  function playWord(w, audio) {
+    if (audio) { const a = new Audio(audio); a.play().catch(() => speak(w)); } else speak(w);
+  }
+  async function openDict(raw, page) {
+    const w = cleanWord(raw).toLowerCase();
+    if (!w) return;
+    const my = ++dtok;
+    dcur = { w, page, ph: "", audio: "", meanings: [] };
+    dict.hidden = false; renderDict("loading");
+    try {
+      const r = await fetch("https://api.dictionaryapi.dev/api/v2/entries/en/" + encodeURIComponent(w));
+      if (!r.ok) throw new Error("not found");
+      const j = await r.json(), e = j[0];
+      if (my !== dtok) return;
+      const phs = e.phonetics || [];
+      dcur.ph = e.phonetic || (phs.find(x => x.text) || {}).text || "";
+      dcur.audio = (phs.find(x => x.audio) || {}).audio || "";
+      dcur.meanings = (e.meanings || []).slice(0, 3).map(m => ({ pos: m.partOfSpeech, defs: (m.definitions || []).slice(0, 2) }));
+      renderDict("ok");
+    } catch (err) {
+      if (my === dtok) renderDict("none");
+    }
+  }
+  function renderDict(state) {
+    const d = dcur; if (!d) return;
+    const saved = words.some(x => x.w === d.w);
+    let h = '<div class="dh"><b class="dw">' + esc(d.w) + '</b><span class="dph">' + esc(d.ph) + '</span><button class="ib" id="dPlay" type="button" aria-label="Pronounce">' + ico("speaker", 18) +
+      '</button><button class="ib" id="dX" type="button" aria-label="Close">' + ico("close", 18) + '</button></div>';
+    if (state === "loading") h += '<p class="hint">Looking up…</p>';
+    else if (state === "none") h += '<p class="hint">No definition found, or you are offline. <a href="https://www.google.com/search?q=' + encodeURIComponent("define " + d.w) + '" target="_blank" rel="noopener" style="color:var(--accent)">Search online</a></p>';
+    else h += d.meanings.map(m => '<div class="dm"><i>' + esc(m.pos) + '</i>' + m.defs.map(x => '<div class="dd">' + esc(x.definition) + (x.example ? '<div class="dex">“' + esc(x.example) + '”</div>' : "") + '</div>').join("") + '</div>').join("");
+    h += '<div class="dfoot"><button class="btn" id="dSave" type="button">' + (saved ? "Saved · tap to remove" : "Save word") + '</button><button class="btn" id="dList" type="button">My words (' + words.length + ')</button></div>';
+    dict.innerHTML = h;
+  }
+  dict.addEventListener("click", e => {
+    if (!dcur) return;
+    if (e.target.closest("#dX")) { dict.hidden = true; return; }
+    if (e.target.closest("#dPlay")) { playWord(dcur.w, dcur.audio); return; }
+    if (e.target.closest("#dList")) { openDrawer("words"); return; }
+    if (e.target.closest("#dSave")) {
+      const i = words.findIndex(x => x.w === dcur.w);
+      if (i >= 0) words.splice(i, 1);
+      else {
+        const m = dcur.meanings[0], d0 = m && m.defs[0];
+        const ex = (dcur.meanings.flatMap(x => x.defs).find(x => x.example) || {}).example || "";
+        words.unshift({ w: dcur.w, ph: dcur.ph, pos: m ? m.pos : "", def: d0 ? d0.definition : "", ex, audio: dcur.audio, book: bookTitle, p: dcur.page, t: Date.now() });
+      }
+      saveWords(); renderDict(dcur.meanings.length ? "ok" : "none");
+    }
+  });
+  $("selDef").addEventListener("click", () => {
+    if (!pend) return;
+    const t = pend.text, pg = pend.p; pend = null;
+    try { getSelection().removeAllRanges(); } catch (e) {}
+    hideSel(); openDict(t, pg);
+  });
+  function renderWords() {
+    $("dBody").innerHTML =
+      '<div class="tools"><button class="btn" id="wExp" type="button"' + (words.length ? "" : " disabled") + '>Export CSV</button><button class="btn" id="wClr" type="button"' + (words.length ? "" : " disabled") + '>Clear all</button></div>' +
+      (words.length ? words.map((x, i) => '<div class="ni" data-i="' + i + '" style="cursor:default"><div style="display:flex;align-items:center;gap:6px"><b style="flex:1">' + esc(x.w) + ' <span style="opacity:.65;font-weight:500">' + esc(x.ph) + '</span></b>' +
+        '<button class="ib" data-play="' + i + '" type="button" aria-label="Pronounce" style="width:34px;height:34px">' + ico("speaker", 16) + '</button><button class="ib" data-del="' + i + '" type="button" aria-label="Remove" style="width:34px;height:34px">' + ico("close", 16) + '</button></div>' +
+        (x.def ? '<div>' + (x.pos ? '<i style="opacity:.65">' + esc(x.pos) + '</i> ' : "") + esc(x.def) + '</div>' : "") +
+        (x.ex ? '<div style="opacity:.7;font-size:13px">“' + esc(x.ex) + '”</div>' : "") +
+        '<small style="margin:6px 0 0">' + esc(x.book || "") + (x.p ? " · page " + x.p : "") + '</small></div>').join("")
+        : '<p class="hint">No saved words yet. Select a word in the book, tap Define, then Save word.</p>');
+    $("wExp").onclick = exportWords;
+    $("wClr").onclick = () => { if (confirm("Remove all saved words?")) { words = []; saveWords(); renderWords(); } };
+  }
+  $("dBody").addEventListener("click", e => {
+    if (drawerMode !== "words") return;
+    const pl = e.target.closest("[data-play]"), dl = e.target.closest("[data-del]");
+    if (pl) { const x = words[+pl.dataset.play]; if (x) playWord(x.w, x.audio); }
+    if (dl) { words.splice(+dl.dataset.del, 1); saveWords(); renderWords(); }
+  });
+  function exportWords() {
+    const q = v => '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"';
+    const rows = [["Word", "Phonetic", "Part of speech", "Meaning", "Example", "Book", "Page"]].concat(words.map(x => [x.w, x.ph, x.pos, x.def, x.ex, x.book, x.p]));
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(new Blob(["﻿" + rows.map(r => r.map(q).join(",")).join("\r\n")], { type: "text/csv" }));
+    link.download = "my-words.csv";
+    document.body.appendChild(link); link.click(); link.remove();
+  }
+
+  /* ---------- Page-turn sound (soft paper swish, off by default) ---------- */
+  let actx = null;
+  function flipSound() {
+    if (store.get("snd") !== "1") return;
+    try {
+      actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+      if (actx.state === "suspended") actx.resume();
+      const len = Math.floor(actx.sampleRate * 0.28), buf = actx.createBuffer(1, len, actx.sampleRate), d = buf.getChannelData(0);
+      for (let i = 0; i < len; i++) { const k = i / len; d[i] = (Math.random() * 2 - 1) * Math.sin(Math.PI * k) * Math.pow(1 - k, 0.8); }
+      const src = actx.createBufferSource(); src.buffer = buf;
+      const f = actx.createBiquadFilter(); f.type = "bandpass"; f.frequency.value = 2600; f.Q.value = 0.7;
+      const g = actx.createGain(); g.gain.value = 0.09;
+      src.connect(f); f.connect(g); g.connect(actx.destination); src.start();
+    } catch (e) {}
+  }
+  $("dBody").addEventListener("change", e => { if (e.target.id === "snd") store.set("snd", e.target.checked ? "1" : "0"); });
+
+  /* ---------- Search inside the book ---------- */
+  let searchTerm = "", searchGen = 0, ptext = [], found = [];
+  function markSearch(tl) {
+    tl.querySelectorAll("span.sm").forEach(x => x.classList.remove("sm"));
+    if (!searchTerm) return;
+    tl.querySelectorAll("span").forEach(sp => { if (sp.textContent.toLowerCase().includes(searchTerm)) sp.classList.add("sm"); });
+  }
+  const markAll = () => document.querySelectorAll(".textLayer").forEach(markSearch);
+  function snippet(t, i, len) {
+    const a = Math.max(0, i - 45), b = Math.min(t.length, i + len + 65);
+    return (a > 0 ? "…" : "") + esc(t.slice(a, i)) + "<mark>" + esc(t.slice(i, i + len)) + "</mark>" + esc(t.slice(i + len, b)) + (b < t.length ? "…" : "");
+  }
+  function renderSearch() {
+    $("dBody").innerHTML = '<input type="search" id="sq" placeholder="Type a word, then press Search" aria-label="Search this book" value="' + esc(searchTerm) + '">' +
+      '<div class="tools"><button class="btn" id="sGo" type="button">' + ico("search", 16) + ' Search</button><button class="btn" id="sClr" type="button">Clear highlights</button></div>' +
+      '<p class="hint" id="sst"></p><div id="sres"></div>';
+    const inp = $("sq");
+    if (!pdf || driveMode) { $("sst").textContent = "Search works for books opened in the reader, not for books shown in the Google Drive viewer."; inp.disabled = true; return; }
+    inp.addEventListener("keydown", e => { if (e.key === "Enter") runSearch(inp.value); });
+    $("sGo").onclick = () => runSearch(inp.value);
+    $("sClr").onclick = () => { searchTerm = ""; found = []; searchGen++; markAll(); renderSearch(); };
+    $("sres").addEventListener("click", e => {
+      const it = e.target.closest("[data-n]"); if (!it) return;
+      closeDrawer(); go(+it.dataset.n); setTimeout(markAll, 700);
+    });
+    showResults(0, false);
+    setTimeout(() => inp.focus(), 60);
+  }
+  function showResults(n, busy) {
+    if (drawerMode !== "search" || !$("sres")) return;
+    const total = pdf ? pdf.numPages : 0, hits = found.reduce((a, r) => a + r.c, 0);
+    $("sst").textContent = busy ? "Searching… page " + n + " / " + total + " · " + found.length + " pages found" :
+      (searchTerm ? (found.length ? "Found " + hits + " matches on " + found.length + " pages. Tap a result to open it." : "No matches found.") : "The first search reads the whole book once, so it can take a little while.");
+    $("sres").innerHTML = found.slice(0, 300).map(r => '<div class="ni" data-n="' + r.n + '"><small>Page ' + r.n + ' · ' + r.c + (r.c === 1 ? " match" : " matches") + '</small>' + r.snip + '</div>').join("");
+  }
+  async function runSearch(q) {
+    q = (q || "").trim().toLowerCase();
+    if (q.length < 2 || !pdf) return;
+    const my = ++searchGen, doc = pdf, total = doc.numPages;
+    searchTerm = q; found = []; markAll(); showResults(0, true);
+    for (let n = 1; n <= total; n++) {
+      if (my !== searchGen || doc !== pdf) return;
+      if (ptext[n] == null) {
+        try { const pg = await doc.getPage(n), tc = await pg.getTextContent(); ptext[n] = tc.items.map(i => i.str).join(" ").replace(/\s+/g, " "); }
+        catch (e) { ptext[n] = ""; }
+      }
+      const t = ptext[n], low = t.toLowerCase();
+      let i = low.indexOf(q), c = 0, first = -1;
+      while (i >= 0) { if (first < 0) first = i; c++; i = low.indexOf(q, i + q.length); }
+      if (c) found.push({ n, c, snip: snippet(t, first, q.length) });
+      if (n % 8 === 0) { showResults(n, true); await new Promise(r => setTimeout(r, 0)); }
+    }
+    if (my === searchGen) { showResults(total, false); markAll(); }
+  }
+  $("searchBtn").addEventListener("click", () => openDrawer("search"));
+
+  /* ---------- Resume where you stopped ---------- */
+  let offerPending = 0, rTimer;
+  function showResume(p) {
+    $("rtxt").textContent = "Resume from page " + p + " of " + pdf.numPages + "?";
+    $("resume").hidden = false;
+    clearTimeout(rTimer); rTimer = setTimeout(hideResume, 15000);
+  }
+  function hideResume() { $("resume").hidden = true; clearTimeout(rTimer); offerPending = 0; }
+  $("rYes").addEventListener("click", () => { const p = offerPending; hideResume(); if (p) go(p); });
+  $("rNo").addEventListener("click", hideResume);
+
+  /* ---------- Two-finger swipe up or down changes brightness ---------- */
+  let g2 = null;
+  document.addEventListener("touchstart", e => {
+    if (e.touches.length === 2) {
+      const a = e.touches[0], b = e.touches[1];
+      g2 = { y: (a.clientY + b.clientY) / 2, d: Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY), b: eye.b, on: false };
+    } else g2 = null;
+  }, { passive: true });
+  document.addEventListener("touchmove", e => {
+    if (!g2 || e.touches.length !== 2) return;
+    const a = e.touches[0], b = e.touches[1];
+    const y = (a.clientY + b.clientY) / 2, d = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY), dy = g2.y - y;
+    if (!g2.on) { if (Math.abs(dy) > 24 && Math.abs(d - g2.d) < 25) g2.on = true; else return; }
+    if (e.cancelable) e.preventDefault();
+    eye.b = Math.round(Math.max(30, Math.min(100, g2.b + dy / (window.innerHeight * 0.5) * 70)));
+    applyEye(); flash("Brightness " + eye.b + "%");
+  }, { passive: false });
+  document.addEventListener("touchend", () => { if (g2 && g2.on) saveEye(); g2 = null; });
+
   /* ---------- Start ---------- */
-  setTool("select");
+  setTool(["select", "hl", "pen", "erase", "pin"].includes(store.get("tool")) ? store.get("tool") : "select");
   if (typeof pdfjsLib !== "undefined") {
     pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
   }
