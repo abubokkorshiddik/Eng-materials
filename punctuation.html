@@ -4,130 +4,1196 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Punctuation | IELTS Grammar Lab</title>
-<meta name="description" content="Punctuation shows where an idea ends and how the parts of a sentence connect.">
+<meta name="description" content="Learn English punctuation with clear rules, examples, common mistakes and interactive IELTS quizzes.">
 <meta name="theme-color" content="#1f2a44">
 <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/10719400.png">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Literata:wght@400;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<script>try{document.documentElement.dataset.theme=JSON.parse(localStorage.getItem("ielts-gl-reader")||"{}").theme||"light"}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Literata:wght@400;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+<script>
+(function () {
+  try {
+    var settings = JSON.parse(localStorage.getItem("ielts-gl-reader") || "{}");
+    document.documentElement.dataset.theme =
+      ["light", "sepia", "dark"].indexOf(settings.theme) !== -1
+        ? settings.theme
+        : "light";
+  } catch (e) {
+    document.documentElement.dataset.theme = "light";
+  }
+})();
+</script>
+
 <style>
-:root{--ink:#1f2a44;--blue:#1f4fbf;--text:#222;--muted:#555;--ok:#1d7a46;--bad:#b3261e;--sheet:#fffdf8;--desk:#d9d3c4;--rule:#cfc6ad;--line:#0002;font-size:var(--fs,16px)}
-html[data-theme=sepia]{--ink:#3b2f1e;--blue:#8a4b12;--text:#4a3b26;--muted:#7a6a52;--sheet:#f4ecd8;--desk:#d6c8a2;--rule:#cdbb91;--line:#4a3b2633}
-html[data-theme=dark]{--ink:#e8ecf7;--blue:#8fb0ff;--text:#e6e6e6;--muted:#a9afbd;--ok:#6fd49a;--bad:#ff8a80;--sheet:#181c26;--desk:#0b0d12;--rule:#2e3548;--line:#fff3;color-scheme:dark}
-*{box-sizing:border-box}[hidden]{display:none!important}
-body{margin:0;background:var(--desk);color:var(--text);font:1.125rem/1.7 Literata,Georgia,serif;overflow-wrap:anywhere;padding:var(--top,60px) env(safe-area-inset-right,0) 0 env(safe-area-inset-left,0)}
-h1,h2,h3{font-family:Fraunces,Georgia,serif;color:var(--ink);line-height:1.2}h2{margin:6px 0 8px;text-align:center}h3{font-size:1.15rem;margin:22px 0 8px}
-a{color:var(--blue)}.m{color:var(--muted);font-size:.95rem}.hint{font-size:.82rem}
-main{background:var(--sheet);max-width:860px;margin:14px auto 40px;padding:26px 28px 40px 34px;border-radius:3px 8px 8px 3px;box-shadow:3px 3px 0 var(--rule),0 18px 40px rgba(0,0,0,.3)}
-@media(max-width:700px){main{margin:0;border-radius:0;box-shadow:none;padding:20px 16px 34px 20px}}
-#bar{position:fixed;left:0;right:0;top:0;z-index:30;display:flex;flex-wrap:wrap;align-items:center;gap:2px;padding:4px 8px;padding-top:calc(4px + env(safe-area-inset-top,0px));background:color-mix(in srgb,var(--sheet) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--rule)}
-.tabs{order:10;flex:0 0 100%;display:flex;gap:6px;overflow-x:auto;padding:2px 2px 6px;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tabs button{flex:none;font:600 .85rem Inter,sans-serif;color:var(--ink);background:none;border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;white-space:nowrap}.tabs button[aria-pressed=true]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
-.pane h2{font-size:1.7rem;font-weight:700;margin:14px 0 4px}.pane h2::before{content:attr(data-ch);display:block;font:600 .72rem Inter,sans-serif;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}.pane h2::after{content:"\2766";display:block;font-size:1.1rem;color:var(--blue);margin-top:6px}
-.gt::first-letter{font:700 2.8em/.85 Fraunces,serif;float:left;padding:6px 8px 0 0;color:var(--blue)}.gt{text-align:left}
-.ib{width:40px;height:40px;border:0;border-radius:10px;background:none;color:var(--ink);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none;font-size:1.2rem}.ib:hover{background:var(--line)}
-#bt{flex:1;min-width:0;text-align:center;font:600 .9rem Inter,sans-serif;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.btn{display:inline-block;background:var(--ink);color:var(--sheet);padding:10px 16px;border:1px solid var(--ink);border-radius:6px;font:600 .9rem Inter,sans-serif;cursor:pointer;text-decoration:none}.btn.alt{background:none;color:var(--ink)}
-.sp{border:1px solid var(--line);background:none;color:var(--text);border-radius:6px;cursor:pointer;padding:3px 9px;font-size:1rem}
-.chap{text-align:center;font:600 .72rem Inter,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-.sym{display:block;text-align:center;font:600 1.6rem/1.2 Fraunces,serif;color:var(--muted);letter-spacing:.3em;margin:0 0 10px}
-.card{border:1px solid var(--rule);border-radius:12px;padding:12px 14px;margin:10px 0}.card b{font:700 1.15rem Fraunces,serif;color:var(--ink)}.card p{margin:6px 0}
-.ex{display:flex;gap:6px;align-items:flex-start;font-style:italic;color:var(--muted);font-size:.98rem}.ex span{flex:1}
-.pair{border:1px solid var(--rule);border-radius:12px;padding:10px 14px;margin:10px 0}.pair del{color:var(--bad)}.pair ins{color:var(--ok);text-decoration:none;font-weight:700}.pair p{margin:4px 0}
-.tip::before{content:"Tip: ";font:700 .8rem Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}.tip{border-left:4px solid var(--blue);background:color-mix(in srgb,var(--blue) 8%,transparent);padding:10px 14px;border-radius:0 10px 10px 0;margin:16px 0}
-.qc{border:3px double var(--rule);border-radius:12px;padding:14px}.qd{font:700 1.05rem Fraunces,serif;color:var(--ink);margin:12px 0 6px}
-.opt{display:block;width:100%;text-align:left;margin:6px 0;background:none;color:var(--text);padding:11px;border:1px solid var(--line);border-radius:8px;font:600 1rem Inter,sans-serif;cursor:pointer}.opt.g{border-color:var(--ok);color:var(--ok)}.opt.r{border-color:var(--bad);color:var(--bad)}
-.why{font:.9rem Inter,sans-serif;color:var(--muted);margin:2px 0 8px}
-.pn{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:28px;border-top:1px solid var(--rule);padding-top:14px}
-#bg{position:fixed;inset:0;background:#0006;z-index:39;display:none}#bg.on{display:block}
-.dr{position:fixed;top:0;bottom:0;width:min(88vw,330px);background:var(--sheet);color:var(--text);z-index:40;padding:calc(14px + env(safe-area-inset-top,0px)) 16px 24px;overflow:auto;transition:transform .25s;box-shadow:0 0 20px rgba(0,0,0,.4);font-family:Inter,sans-serif}
-#toc{left:0;transform:translateX(-102%)}#set{right:0;transform:translateX(102%)}.dr.on{transform:none}
-.te{display:flex;gap:8px;width:100%;background:none;border:0;border-top:1px solid var(--rule);padding:10px 2px;text-align:left;cursor:pointer;color:var(--text);font:500 .95rem Inter,sans-serif}.te i{font:700 1.1rem Fraunces,serif;color:var(--blue);width:2em;font-style:normal}.te.on{color:var(--blue);font-weight:700}
-.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}.seg button{flex:1;background:none;border:0;border-right:1px solid var(--line);padding:10px 4px;font:600 .8rem Inter,sans-serif;color:var(--text);cursor:pointer}.seg button[aria-pressed=true]{background:var(--blue);color:var(--sheet)}
-.sh{margin:16px 0 6px;font:600 .72rem Inter,sans-serif;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}input[type=range]{width:100%;accent-color:var(--blue)}
-:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+:root {
+  --ink:#1f2a44;
+  --blue:#1f4fbf;
+  --text:#222;
+  --muted:#555;
+  --ok:#1d7a46;
+  --bad:#b3261e;
+  --sheet:#fffdf8;
+  --desk:#d9d3c4;
+  --rule:#cfc6ad;
+  --line:#0002;
+  --fs:16px;
+  font-size:var(--fs);
+}
+html[data-theme="sepia"] {
+  --ink:#3b2f1e;
+  --blue:#8a4b12;
+  --text:#4a3b26;
+  --muted:#7a6a52;
+  --sheet:#f4ecd8;
+  --desk:#d6c8a2;
+  --rule:#cdbb91;
+  --line:#4a3b2633;
+}
+html[data-theme="dark"] {
+  --ink:#e8ecf7;
+  --blue:#8fb0ff;
+  --text:#e6e6e6;
+  --muted:#a9afbd;
+  --ok:#6fd49a;
+  --bad:#ff8a80;
+  --sheet:#181c26;
+  --desk:#0b0d12;
+  --rule:#2e3548;
+  --line:#fff3;
+  color-scheme:dark;
+}
+* { box-sizing:border-box; }
+[hidden] { display:none!important; }
+html { scroll-behavior:smooth; }
+body {
+  margin:0;
+  background:var(--desk);
+  color:var(--text);
+  font:1.125rem/1.7 Literata,Georgia,serif;
+  overflow-wrap:anywhere;
+  padding:var(--top,60px) env(safe-area-inset-right,0px) 0 env(safe-area-inset-left,0px);
+}
+h1,h2,h3 {
+  font-family:Fraunces,Georgia,serif;
+  color:var(--ink);
+  line-height:1.2;
+}
+h2 { margin:6px 0 8px; text-align:center; }
+h3 { font-size:1.15rem; margin:22px 0 8px; }
+a { color:var(--blue); }
+button,input { font:inherit; }
+button { -webkit-tap-highlight-color:transparent; }
+.m { color:var(--muted); font-size:.95rem; }
+.hint { font-size:.82rem; }
+main {
+  background:var(--sheet);
+  max-width:860px;
+  margin:14px auto 40px;
+  padding:26px 28px 40px 34px;
+  border-radius:3px 8px 8px 3px;
+  box-shadow:3px 3px 0 var(--rule),0 18px 40px rgba(0,0,0,.3);
+}
+@media(max-width:700px) {
+  main {
+    margin:0;
+    border-radius:0;
+    box-shadow:none;
+    padding:20px 16px 34px 20px;
+  }
+}
+#bar {
+  position:fixed;
+  left:0;
+  right:0;
+  top:0;
+  z-index:30;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:2px;
+  padding:4px 8px;
+  padding-top:calc(4px + env(safe-area-inset-top,0px));
+  background:color-mix(in srgb,var(--sheet) 88%,transparent);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--rule);
+}
+.tabs {
+  order:10;
+  flex:0 0 100%;
+  display:flex;
+  gap:6px;
+  overflow-x:auto;
+  padding:2px 2px 6px;
+  scrollbar-width:none;
+}
+.tabs::-webkit-scrollbar { display:none; }
+.tabs button {
+  flex:none;
+  font:600 .85rem Inter,sans-serif;
+  color:var(--ink);
+  background:none;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:7px 14px;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.tabs button[aria-pressed="true"] {
+  background:var(--ink);
+  color:var(--sheet);
+  border-color:var(--ink);
+}
+.pane h2 {
+  font-size:1.7rem;
+  font-weight:700;
+  margin:14px 0 4px;
+}
+.pane h2::before {
+  content:attr(data-ch);
+  display:block;
+  font:600 .72rem Inter,sans-serif;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:4px;
+}
+.pane h2::after {
+  content:"\2766";
+  display:block;
+  font-size:1.1rem;
+  color:var(--blue);
+  margin-top:6px;
+}
+.gt::first-letter {
+  font:700 2.8em/.85 Fraunces,serif;
+  float:left;
+  padding:6px 8px 0 0;
+  color:var(--blue);
+}
+.gt { text-align:left; }
+.ib {
+  width:40px;
+  height:40px;
+  border:0;
+  border-radius:10px;
+  background:none;
+  color:var(--ink);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  text-decoration:none;
+  font-size:1.2rem;
+  flex-shrink:0;
+}
+.ib:hover { background:var(--line); }
+#bt {
+  flex:1;
+  min-width:0;
+  text-align:center;
+  font:600 .9rem Inter,sans-serif;
+  color:var(--ink);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  cursor:pointer;
+}
+.btn {
+  display:inline-block;
+  background:var(--ink);
+  color:var(--sheet);
+  padding:10px 16px;
+  border:1px solid var(--ink);
+  border-radius:6px;
+  font:600 .9rem Inter,sans-serif;
+  cursor:pointer;
+  text-decoration:none;
+  text-align:center;
+}
+.btn.alt { background:none; color:var(--ink); }
+.sp {
+  border:1px solid var(--line);
+  background:none;
+  color:var(--text);
+  border-radius:6px;
+  cursor:pointer;
+  padding:3px 9px;
+  font-size:1rem;
+}
+.chap {
+  text-align:center;
+  font:600 .72rem Inter,sans-serif;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.sym {
+  display:block;
+  text-align:center;
+  font:600 1.6rem/1.2 Fraunces,serif;
+  color:var(--muted);
+  letter-spacing:.3em;
+  margin:0 0 10px;
+}
+.card {
+  border:1px solid var(--rule);
+  border-radius:12px;
+  padding:12px 14px;
+  margin:10px 0;
+}
+.card b {
+  font:700 1.15rem Fraunces,serif;
+  color:var(--ink);
+}
+.card p { margin:6px 0; }
+.ex {
+  display:flex;
+  gap:6px;
+  align-items:flex-start;
+  font-style:italic;
+  color:var(--muted);
+  font-size:.98rem;
+}
+.ex span { flex:1; }
+.pair {
+  border:1px solid var(--rule);
+  border-radius:12px;
+  padding:10px 14px;
+  margin:10px 0;
+}
+.pair del { color:var(--bad); }
+.pair ins {
+  color:var(--ok);
+  text-decoration:none;
+  font-weight:700;
+}
+.pair p { margin:4px 0; }
+.tip::before {
+  content:"Tip: ";
+  font:700 .8rem Inter,sans-serif;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--blue);
+}
+.tip {
+  border-left:4px solid var(--blue);
+  background:color-mix(in srgb,var(--blue) 8%,transparent);
+  padding:10px 14px;
+  border-radius:0 10px 10px 0;
+  margin:16px 0;
+}
+.qc {
+  border:3px double var(--rule);
+  border-radius:12px;
+  padding:14px;
+}
+.qd {
+  font:700 1.05rem Fraunces,serif;
+  color:var(--ink);
+  margin:12px 0 6px;
+}
+.opt {
+  display:block;
+  width:100%;
+  text-align:left;
+  margin:6px 0;
+  background:none;
+  color:var(--text);
+  padding:11px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  font:600 1rem Inter,sans-serif;
+  cursor:pointer;
+}
+.opt.g { border-color:var(--ok); color:var(--ok); }
+.opt.r { border-color:var(--bad); color:var(--bad); }
+.opt:disabled { cursor:default; opacity:1; }
+.why {
+  font:.9rem Inter,sans-serif;
+  color:var(--muted);
+  margin:2px 0 8px;
+}
+.pn {
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:28px;
+  border-top:1px solid var(--rule);
+  padding-top:14px;
+}
+#bg {
+  position:fixed;
+  inset:0;
+  background:#0006;
+  z-index:39;
+  display:none;
+}
+#bg.on { display:block; }
+.dr {
+  position:fixed;
+  top:0;
+  bottom:0;
+  width:min(88vw,330px);
+  background:var(--sheet);
+  color:var(--text);
+  z-index:40;
+  padding:calc(14px + env(safe-area-inset-top,0px)) 16px 24px;
+  overflow:auto;
+  transition:transform .25s;
+  box-shadow:0 0 20px rgba(0,0,0,.4);
+  font-family:Inter,sans-serif;
+}
+#toc { left:0; transform:translateX(-102%); }
+#set { right:0; transform:translateX(102%); }
+.dr.on { transform:none; }
+.te {
+  display:flex;
+  gap:8px;
+  width:100%;
+  background:none;
+  border:0;
+  border-top:1px solid var(--rule);
+  padding:10px 2px;
+  text-align:left;
+  cursor:pointer;
+  color:var(--text);
+  font:500 .95rem Inter,sans-serif;
+}
+.te i {
+  font:700 1.1rem Fraunces,serif;
+  color:var(--blue);
+  width:2em;
+  font-style:normal;
+  flex-shrink:0;
+}
+.te.on { color:var(--blue); font-weight:700; }
+.seg {
+  display:flex;
+  border:1px solid var(--line);
+  border-radius:8px;
+  overflow:hidden;
+}
+.seg button {
+  flex:1;
+  background:none;
+  border:0;
+  border-right:1px solid var(--line);
+  padding:10px 4px;
+  font:600 .8rem Inter,sans-serif;
+  color:var(--text);
+  cursor:pointer;
+}
+.seg button:last-child { border-right:0; }
+.seg button[aria-pressed="true"] {
+  background:var(--blue);
+  color:var(--sheet);
+}
+.sh {
+  margin:16px 0 6px;
+  font:600 .72rem Inter,sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:var(--muted);
+}
+input[type="range"] { width:100%; accent-color:var(--blue); }
+:focus-visible {
+  outline:3px solid var(--blue);
+  outline-offset:3px;
+}
+@media(prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto; }
+  *,*::before,*::after { transition:none!important; }
+}
 </style>
 </head>
+
 <body>
-<header id="bar"><a class="ib" href="index.html#topics" aria-label="All topics" data-i="home"></a><button class="ib" id="bT" type="button" aria-label="Contents" data-i="list"></button><div id="bt" role="button" tabindex="0">Punctuation</div><button class="ib" id="bS" type="button" aria-label="Reading settings" data-i="sliders"></button><div class="tabs" id="tabs" role="tablist" aria-label="Chapters"></div></header>
-<aside class="dr" id="toc" aria-label="Contents"></aside><aside class="dr" id="set" aria-label="Settings"></aside><div id="bg"></div>
-<main id="book"></main>
+<header id="bar">
+  <a class="ib" href="index.html#topics" aria-label="All topics" data-i="home"></a>
+  <button class="ib" id="bT" type="button" aria-label="Contents" aria-controls="toc" aria-expanded="false" data-i="list"></button>
+  <button class="ib" id="bt" type="button" aria-label="Open chapter contents">Punctuation</button>
+  <button class="ib" id="bS" type="button" aria-label="Reading settings" aria-controls="set" aria-expanded="false" data-i="sliders"></button>
+  <nav class="tabs" id="tabs" role="tablist" aria-label="Chapters"></nav>
+</header>
+
+<aside class="dr" id="toc" aria-label="Chapter contents" aria-hidden="true"></aside>
+<aside class="dr" id="set" aria-label="Reading settings" aria-hidden="true"></aside>
+<div id="bg" aria-hidden="true"></div>
+<main id="book" aria-live="off"></main>
+
 <script>
-var D=[
-{s:". ? !",t:"Full stop, ? and !",i:"A full stop means stop. It ends one complete idea. If you can end ideas clearly, your writing is already easier to read.",
-r:[["Full stop","Ends a statement. Short sentences are fine and often better.","The test was hard."],["Question mark","Ends a direct question only.","Where do you live?"],["Reported questions","A reported question is a statement, so it ends with a full stop.","She asked where I lived."],["Exclamation mark","Rare in academic writing. Use it in messages and speech.","What a surprise!"],["Abbreviations","British English usually leaves out stops in short forms.","Mr Khan, Dr Rahman, the UK"]],
-m:[["She asked where I lived?","She asked where I lived.","Reported question."],["It was late I was tired.","It was late. I was tired.","Two ideas need a stop."],["The results were amazing!!!","The results were striking.","Avoid ! in Task 2."]],
+(function () {
+"use strict";
+
+/* Safe element and storage helpers */
+var $ = function (id) {
+  return document.getElementById(id);
+};
+
+function el(tag, text, className, onClick) {
+  var node = document.createElement(tag);
+  if (text !== undefined && text !== null) {
+    node.textContent = text;
+  }
+  if (className) node.className = className;
+  if (typeof onClick === "function") {
+    node.addEventListener("click", onClick);
+  }
+  return node;
+}
+
+function readJSON(key, fallback) {
+  try {
+    var value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : fallback;
+  } catch (error) {
+    return fallback;
+  }
+}
+
+function getItem(key) {
+  try {
+    return localStorage.getItem(key);
+  } catch (error) {
+    return null;
+  }
+}
+
+function setItem(key, value) {
+  try {
+    localStorage.setItem(key, value);
+  } catch (error) {
+    /* The page continues working if storage is unavailable. */
+  }
+}
+
+function validTheme(value) {
+  return ["light", "sepia", "dark"].indexOf(value) !== -1;
+}
+
+/* Chapter content */
+var D = [
+{
+s:". ? !",
+t:"Full stop, ? and !",
+i:"A full stop means stop. It ends one complete idea. If you can end ideas clearly, your writing is already easier to read.",
+r:[
+["Full stop","Ends a statement. Short sentences are fine and often better.","The test was hard."],
+["Question mark","Ends a direct question only.","Where do you live?"],
+["Reported questions","A reported question is a statement, so it ends with a full stop.","She asked where I lived."],
+["Exclamation mark","Rare in academic writing. Use it in messages and speech.","What a surprise!"],
+["Abbreviations","British English usually leaves out stops in short forms.","Mr Khan, Dr Rahman, the UK"]
+],
+m:[
+["She asked where I lived?","She asked where I lived.","Reported question."],
+["It was late I was tired.","It was late. I was tired.","Two ideas need a stop."],
+["The results were amazing!!!","The results were striking.","Avoid ! in Task 2."]
+],
 k:"Say each sentence in your head. If you hear the idea finish, put a full stop.",
-q:[["Which is correct?",["He asked where I live?","He asked where I live.","He asked, where I live!"],1,"A reported question is a statement."],["Which suits an IELTS essay?",["Prices rose sharply!","Prices rose sharply.","Prices rose sharply!!"],1,"Exclamation marks are rare in academic writing."]]},
-{s:",",t:"The comma",i:"A comma means slow down. It separates parts of a sentence. Learn its four jobs and you will use it with confidence.",
-r:[["1. Lists","Put commas between items. A comma before and is optional, but be consistent.","I bought apples, oranges and bananas."],["2. After an opening","Opening words and clauses get a comma.","However, prices rose. Although it rained, we went out."],["3. Extra information","Put a comma on both sides of extra information.","My brother, who lives in Dubai, is a doctor."],["4. Comma + joiner","Use a comma before and, but, so or or when they join two full sentences.","It rained, so we stayed home."],["Meaning changes","Commas can change the meaning.","My brother, who lives in Dubai, is a doctor (one brother). My brother who lives in Dubai is a doctor (more than one)."]],
-m:[["I bought apples oranges and bananas.","I bought apples, oranges and bananas.","Separate list items."],["The students, are tired.","The students are tired.","Never put a comma between subject and verb."],["For example I like tea.","For example, I like tea.","Comma after the opening phrase."],["The man, who called, is my uncle.","The man who called is my uncle.","No commas for essential information."]],
+q:[
+["Which is correct?",["He asked where I live?","He asked where I live.","He asked, where I live!"],1,"A reported question is a statement."],
+["Which suits an IELTS essay?",["Prices rose sharply!","Prices rose sharply.","Prices rose sharply!!"],1,"Exclamation marks are rare in academic writing."]
+]
+},
+{
+s:",",
+t:"The comma",
+i:"A comma means slow down. It separates parts of a sentence. Learn its four jobs and you will use it with confidence.",
+r:[
+["1. Lists","Put commas between items. A comma before and is optional, but be consistent.","I bought apples, oranges and bananas."],
+["2. After an opening","Opening words and clauses get a comma.","However, prices rose. Although it rained, we went out."],
+["3. Extra information","Put a comma on both sides of extra information.","My brother, who lives in Dubai, is a doctor."],
+["4. Comma + joiner","Use a comma before and, but, so or or when they join two full sentences.","It rained, so we stayed home."],
+["Meaning changes","Commas can change the meaning.","My brother, who lives in Dubai, is a doctor (one brother). My brother who lives in Dubai is a doctor (more than one)."]
+],
+m:[
+["I bought apples oranges and bananas.","I bought apples, oranges and bananas.","Separate list items."],
+["The students, are tired.","The students are tired.","Never put a comma between subject and verb."],
+["For example I like tea.","For example, I like tea.","Comma after the opening phrase."],
+["The man, who called, is my uncle.","The man who called is my uncle.","No commas for essential information."]
+],
 k:"Label every comma in a paragraph: list, opening, extra information or joiner. If it has no label, remove it.",
-q:[["Which is correct?",["First, we left.","First we, left.","First we left,"],0,"An opening word gets a comma."],["Which is correct?",["The students, are tired.","The students are tired.","The, students are tired."],1,"No comma between subject and verb."],["I live in Dhaka which is the capital. Best fix:",["I live in Dhaka, which is the capital.","I live in, Dhaka which is the capital.","I live in Dhaka which, is the capital."],0,"Extra information needs a comma."]]},
-{s:",⚠",t:"The comma splice",i:"The biggest punctuation mistake in IELTS is the comma splice: joining two full sentences with only a comma. Fix this and you fix most of your punctuation.",
-r:[["The test","Split the sentence at the comma. Can both halves stand alone? Then it is a splice.","It was late, we went home. (both halves are full sentences)"],["Fix 1: full stop","Make two sentences.","It was late. We went home."],["Fix 2: semicolon","Join two related sentences.","It was late; we went home."],["Fix 3: comma + joiner","Add and, but, so or or.","It was late, so we went home."],["Fix 4: supporting clause","Make one half depend on the other.","Because it was late, we went home."],["However, therefore, moreover","These are not joiners. Use a stop or semicolon before and a comma after.","It rained; however, we went out."]],
-m:[["It was late, we went home.","It was late, so we went home.","Comma splice."],["I like tea, I don’t like coffee.","I like tea, but I don’t like coffee.","Comma splice."],["However it was late, we stayed.","It was late; however, we stayed.","However is not a joiner."],["It rained, however we went out.","It rained; however, we went out.","Needs a semicolon or full stop."]],
+q:[
+["Which is correct?",["First, we left.","First we, left.","First we left,"],0,"An opening word gets a comma."],
+["Which is correct?",["The students, are tired.","The students are tired.","The, students are tired."],1,"No comma between subject and verb."],
+["I live in Dhaka which is the capital. Best fix:",["I live in Dhaka, which is the capital.","I live in, Dhaka which is the capital.","I live in Dhaka which, is the capital."],0,"Extra information needs a comma."]
+]
+},
+{
+s:",⚠",
+t:"The comma splice",
+i:"The biggest punctuation mistake in IELTS is the comma splice: joining two full sentences with only a comma. Fix this and you fix most of your punctuation.",
+r:[
+["The test","Split the sentence at the comma. Can both halves stand alone? Then it is a splice.","It was late, we went home. (both halves are full sentences)"],
+["Fix 1: full stop","Make two sentences.","It was late. We went home."],
+["Fix 2: semicolon","Join two related sentences.","It was late; we went home."],
+["Fix 3: comma + joiner","Add and, but, so or or.","It was late, so we went home."],
+["Fix 4: supporting clause","Make one half depend on the other.","Because it was late, we went home."],
+["However, therefore, moreover","These are not joiners. Use a stop or semicolon before and a comma after.","It rained; however, we went out."]
+],
+m:[
+["It was late, we went home.","It was late, so we went home.","Comma splice."],
+["I like tea, I don’t like coffee.","I like tea, but I don’t like coffee.","Comma splice."],
+["However it was late, we stayed.","It was late; however, we stayed.","However is not a joiner."],
+["It rained, however we went out.","It rained; however, we went out.","Needs a semicolon or full stop."]
+],
 k:"Reread every long Task 2 sentence and look for a hidden full stop. Long sentences hide most splices.",
-q:[["Which fixes the splice? “It rained, we left.”",["It rained, so we left.","It rained we, left.","It rained; so, we left."],0,"A comma plus so joins two full sentences."],["Which is correct?",["It rained, however we went.","It rained; however, we went.","It rained however, we went."],1,"Semicolon before, comma after."],["A comma splice is…",["two full sentences joined by only a comma","a missing capital","a misplaced apostrophe"],0,"It is the most common punctuation error."]]},
-{s:"; :",t:"Semicolon and colon",i:"A semicolon links two closely related complete ideas. A colon introduces a list or an explanation after a complete sentence.",
-r:[["Semicolon","Joins two related full sentences.","Some prefer cities; others prefer villages."],["Semicolon + however","Also goes before words like however and therefore.","It was late; therefore, we left."],["Colon: list","Use after a complete sentence.","I need three things: time, money and focus."],["Colon: explanation","Introduces a reason or result.","There is one problem: nobody agrees."],["No colon","Do not put a colon after a verb or after such as or including.","I need time, money and focus. Fruits such as apples are cheap."]],
-m:[["There are three reasons, money, time and health.","There are three reasons: money, time and health.","Colon introduces the list."],["I need: time and money.","I need time and money.","No colon after a verb."],["Fruits such as: apples, pears.","Fruits such as apples and pears.","No colon after such as."]],
+q:[
+["Which fixes the splice? “It rained, we left.”",["It rained, so we left.","It rained we, left.","It rained; so, we left."],0,"A comma plus so joins two full sentences."],
+["Which is correct?",["It rained, however we went.","It rained; however, we went.","It rained however, we went."],1,"Semicolon before, comma after."],
+["A comma splice is…",["two full sentences joined by only a comma","a missing capital","a misplaced apostrophe"],0,"It is the most common punctuation error."]
+]
+},
+{
+s:"; :",
+t:"Semicolon and colon",
+i:"A semicolon links two closely related complete ideas. A colon introduces a list or an explanation after a complete sentence.",
+r:[
+["Semicolon","Joins two related full sentences.","Some prefer cities; others prefer villages."],
+["Semicolon + however","Also goes before words like however and therefore.","It was late; therefore, we left."],
+["Colon: list","Use after a complete sentence.","I need three things: time, money and focus."],
+["Colon: explanation","Introduces a reason or result.","There is one problem: nobody agrees."],
+["No colon","Do not put a colon after a verb or after such as or including.","I need time, money and focus. Fruits such as apples are cheap."]
+],
+m:[
+["There are three reasons, money, time and health.","There are three reasons: money, time and health.","Colon introduces the list."],
+["I need: time and money.","I need time and money.","No colon after a verb."],
+["Fruits such as: apples, pears.","Fruits such as apples and pears.","No colon after such as."]
+],
 k:"Semicolon: both sides must be full sentences. Colon: the part before it must be a full sentence.",
-q:[["Some like cities___ others like villages.",[",",";",":"],1,"A semicolon joins two related sentences."],["I need three things___ time, money and focus.",[";",":",","],1,"A colon introduces the list."],["After “such as” use…",["a colon","no colon","a semicolon"],1,"A colon would break the sentence."]]},
-{s:"’",t:"The apostrophe",i:"The apostrophe does only two jobs: it shows who owns something, and it shows missing letters. It never makes a plural.",
-r:[["Missing letters","Contractions: don’t (do not), it’s (it is).","I don’t know. It’s raining."],["One owner","Add ’s.","the boy’s book, Ali’s bag"],["Several owners","Add ’ after the s.","the boys’ books, the students’ room"],["Irregular plurals","Add ’s.","the children’s toys, women’s rights"],["It’s or its?","it’s = it is. its = belonging to it. No apostrophe in its.","Its colour is red."],["No apostrophe","Plain plurals and dates never take one.","CDs, 1990s, two doctors"]],
-m:[["The students book is old.","The student’s book is old.","Apostrophe shows the owner."],["Its raining.","It’s raining.","It’s means it is."],["I dont know.","I don’t know.","Contractions need one."],["The CD’s are cheap.","The CDs are cheap.","No apostrophe in plurals."]],
+q:[
+["Some like cities___ others like villages.",[",",";",":"],1,"A semicolon joins two related sentences."],
+["I need three things___ time, money and focus.",[";",":",","],1,"A colon introduces the list."],
+["After “such as” use…",["a colon","no colon","a semicolon"],1,"A colon would break the sentence."]
+]
+},
+{
+s:"’",
+t:"The apostrophe",
+i:"The apostrophe does only two jobs: it shows who owns something, and it shows missing letters. It never makes a plural.",
+r:[
+["Missing letters","Contractions: don’t (do not), it’s (it is).","I don’t know. It’s raining."],
+["One owner","Add ’s.","the boy’s book, Ali’s bag"],
+["Several owners","Add ’ after the s.","the boys’ books, the students’ room"],
+["Irregular plurals","Add ’s.","the children’s toys, women’s rights"],
+["It’s or its?","it’s = it is. its = belonging to it. No apostrophe in its.","Its colour is red."],
+["No apostrophe","Plain plurals and dates never take one.","CDs, 1990s, two doctors"]
+],
+m:[
+["The students book is old.","The student’s book is old.","Apostrophe shows the owner."],
+["Its raining.","It’s raining.","It’s means it is."],
+["I dont know.","I don’t know.","Contractions need one."],
+["The CD’s are cheap.","The CDs are cheap.","No apostrophe in plurals."]
+],
 k:"Can you say “it is”? Then write it’s. If not, write its.",
-q:[["___ raining outside.",["Its","It’s","Its’"],1,"It’s means it is."],["Many students own books. Write: the ___ books.",["student’s","students’","students"],1,"Plural owners: students’."],["Which is correct?",["CD’s are cheap.","CDs are cheap.","CD’s’ are cheap."],1,"No apostrophe in plurals."]]},
-{s:"-",t:"Hyphens and dashes",i:"A hyphen joins words so they work as one idea. It is small, but it can change meaning.",
-r:[["Compound adjectives","Hyphenate before a noun.","a well-known author, a long-term plan"],["No hyphen after the noun","When the phrase follows the noun, drop it.","The author is well known."],["Numbers and ages","Hyphens in two-word numbers and ages.","twenty-five, a ten-year-old boy"],["Prefixes","Some prefixes need one.","self-confident, ex-president, re-sign (sign again)"],["Dash","A dash adds an extra thought or a break. Keep it rare in formal writing.","The result – to my surprise – was positive."]],
-m:[["a well known author","a well-known author","Hyphen before a noun."],["The plan is long-term.","The plan is long term.","No hyphen after the verb."],["a ten years old boy","a ten-year-old boy","Singular year in compounds."]],
+q:[
+["___ raining outside.",["Its","It’s","Its’"],1,"It’s means it is."],
+["Many students own books. Write: the ___ books.",["student’s","students’","students"],1,"Plural owners: students’."],
+["Which is correct?",["CD’s are cheap.","CDs are cheap.","CD’s’ are cheap."],1,"No apostrophe in plurals."]
+]
+},
+{
+s:"-",
+t:"Hyphens and dashes",
+i:"A hyphen joins words so they work as one idea. It is small, but it can change meaning.",
+r:[
+["Compound adjectives","Hyphenate before a noun.","a well-known author, a long-term plan"],
+["No hyphen after the noun","When the phrase follows the noun, drop it.","The author is well known."],
+["Numbers and ages","Hyphens in two-word numbers and ages.","twenty-five, a ten-year-old boy"],
+["Prefixes","Some prefixes need one.","self-confident, ex-president, re-sign (sign again)"],
+["Dash","A dash adds an extra thought or a break. Keep it rare in formal writing.","The result – to my surprise – was positive."]
+],
+m:[
+["a well known author","a well-known author","Hyphen before a noun."],
+["The plan is long-term.","The plan is long term.","No hyphen after the verb."],
+["a ten years old boy","a ten-year-old boy","Singular year in compounds."]
+],
 k:"Hyphen before the noun, no hyphen after the verb: a well-known actor, but the actor is well known.",
-q:[["Which is correct?",["a well known writer","a well-known writer","a well-known-writer"],1,"Hyphen joins the adjective before the noun."],["Which is correct?",["He is ten-years-old.","He is a ten-year-old.","He is a ten years old."],1,"Use singular year in a compound before a noun."]]},
-{s:"Aa",t:"Capital letters",i:"Capital letters mark the start of a sentence and the names of special things. Use them carefully but never for emphasis.",
-r:[["Sentence start","Every sentence begins with a capital.","The test was hard."],["Names","People, places, days, months.","Ali, Dhaka, Monday, March"],["Nationalities, languages","Always a capital.","Bangladeshi, English, French"],["Titles","With names only.","Dr Rahman, but my doctor"],["No capital","Seasons, directions, school subjects (except languages).","summer, north, maths, history"]],
-m:[["i went to dhaka.","I went to Dhaka.","Start, I and place names."],["We study History and English.","We study history and English.","Subjects are lower case, languages are not."],["I love Summer.","I love summer.","Seasons are lower case."]],
+q:[
+["Which is correct?",["a well known writer","a well-known writer","a well-known-writer"],1,"Hyphen joins the adjective before the noun."],
+["Which is correct?",["He is ten-years-old.","He is a ten-year-old.","He is a ten years old."],1,"Use singular year in a compound before a noun."]
+]
+},
+{
+s:"Aa",
+t:"Capital letters",
+i:"Capital letters mark the start of a sentence and the names of special things. Use them carefully but never for emphasis.",
+r:[
+["Sentence start","Every sentence begins with a capital.","The test was hard."],
+["Names","People, places, days, months.","Ali, Dhaka, Monday, March"],
+["Nationalities, languages","Always a capital.","Bangladeshi, English, French"],
+["Titles","With names only.","Dr Rahman, but my doctor"],
+["No capital","Seasons, directions, school subjects (except languages).","summer, north, maths, history"]
+],
+m:[
+["i went to dhaka.","I went to Dhaka.","Start, I and place names."],
+["We study History and English.","We study history and English.","Subjects are lower case, languages are not."],
+["I love Summer.","I love summer.","Seasons are lower case."]
+],
 k:"A capital shows a name or a start. If it is neither, use a small letter.",
-q:[["Which is correct?",["I study Maths in summer.","I study maths in summer.","I study maths in Summer."],1,"Subjects and seasons are lower case."],["Which is correct?",["She speaks french.","She speaks French.","she speaks French."],1,"Languages take a capital."]]},
-{s:"“ ”",t:"Quotes and numbers",i:"Quotation marks show someone’s exact words. Numbers follow simple rules in formal writing.",
-r:[["Direct speech","Quote exact words and put punctuation inside.","“I am late,” she said."],["Reported speech","No quotation marks.","She said that she was late."],["Titles","Short titles go in quotes; long works are in italics.","the poem “Ozymandias”"],["Words under ten","Spell out in formal writing.","three reasons, nine students"],["Task 1 data","Use numerals for figures and percentages.","12%, 45 million, 2019"]],
-m:[["She said, “that she was late.”","She said that she was late.","No quotes in reported speech."],["There are 3 reasons.","There are three reasons.","Spell out under ten in essays."],["Sales rose by twelve per cent in two thousand nineteen.","Sales rose by 12% in 2019.","Use numerals for Task 1 data."]],
+q:[
+["Which is correct?",["I study Maths in summer.","I study maths in summer.","I study maths in Summer."],1,"Subjects and seasons are lower case."],
+["Which is correct?",["She speaks french.","She speaks French.","she speaks French."],1,"Languages take a capital."]
+]
+},
+{
+s:"“ ”",
+t:"Quotes and numbers",
+i:"Quotation marks show someone’s exact words. Numbers follow simple rules in formal writing.",
+r:[
+["Direct speech","Quote exact words and put punctuation inside.","“I am late,” she said."],
+["Reported speech","No quotation marks.","She said that she was late."],
+["Titles","Short titles go in quotes; long works are in italics.","the poem “Ozymandias”"],
+["Words under ten","Spell out in formal writing.","three reasons, nine students"],
+["Task 1 data","Use numerals for figures and percentages.","12%, 45 million, 2019"]
+],
+m:[
+["She said, “that she was late.”","She said that she was late.","No quotes in reported speech."],
+["There are 3 reasons.","There are three reasons.","Spell out under ten in essays."],
+["Sales rose by twelve per cent in two thousand nineteen.","Sales rose by 12% in 2019.","Use numerals for Task 1 data."]
+],
 k:"Exact words get quotation marks. Reported words do not.",
-q:[["Which is correct?",["She said that “she was tired”.","She said that she was tired.","She said “that she was tired”."],1,"Reported speech has no quotation marks."],["In an essay write…",["There are 3 reasons.","There are three reasons.","There are 3 reason."],1,"Spell out numbers under ten."]]}
+q:[
+["Which is correct?",["She said that “she was tired”.","She said that she was tired.","She said “that she was tired”."],1,"Reported speech has no quotation marks."],
+["In an essay write…",["There are 3 reasons.","There are three reasons.","There are 3 reason."],1,"Spell out numbers under ten."]
+]
+}
 ];
-(function(){"use strict";
-var $=function(i){return document.getElementById(i)};
-function el(t,x,c,f){var e=document.createElement(t);if(x)e.textContent=x;if(c)e.className=c;if(f)e.onclick=f;return e}
-function ls(k){try{return localStorage.getItem(k)}catch(e){return null}}function lw(k,v){try{localStorage.setItem(k,v)}catch(e){}}
-var C=Object.assign({acc:"en-GB",fs:16},JSON.parse(ls("punct-cfg")||"{}")),cur=0,main=$("book");
-function save(){lw("punct-cfg",JSON.stringify(C));document.documentElement.style.setProperty("--fs",C.fs+"px")}save();
-function say(t){if(!window.speechSynthesis)return;speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang=C.acc;u.rate=.85;speechSynthesis.speak(u)}
-function mk(d,n){var p=el("section","","pane");p.hidden=true;
- var h2=el("h2",d.t);h2.dataset.ch="Chapter "+(n+1);p.appendChild(h2);p.appendChild(el("span",d.s,"sym"));p.appendChild(el("p",d.i,"m gt"));
- p.appendChild(el("h3","The rules"));d.r.forEach(function(r){var c=el("div","","card");c.appendChild(el("b",r[0]));c.appendChild(el("p",r[1]));var x=el("p","","ex");x.appendChild(el("span",r[2]));x.appendChild(el("button","🔊","sp",function(){say(r[2])}));c.appendChild(x);p.appendChild(c)});
- p.appendChild(el("h3","Common mistakes"));d.m.forEach(function(m){var c=el("div","","pair"),a=el("p"),w=el("del",m[0]),g=el("ins",m[1]);a.appendChild(w);a.appendChild(document.createTextNode(" → "));a.appendChild(g);c.appendChild(a);c.appendChild(el("p",m[2],"why"));p.appendChild(c)});
- p.appendChild(el("div",d.k,"tip"));
- p.appendChild(el("h3","Quick quiz"));var qc=el("div","","qc"),sc=el("p","","qd"),hit=0,done=0;
- d.q.forEach(function(q,qi){qc.appendChild(el("p",(qi+1)+". "+q[0],"qd"));var bs=[],why=el("p","","why");
-  q[1].forEach(function(o,k){var b=el("button",o,"opt",function(){bs.forEach(function(y){y.disabled=true});if(k===q[2]){hit++;b.classList.add("g")}else{b.classList.add("r");bs[q[2]].classList.add("g")}why.textContent=q[3];done++;if(done===d.q.length)sc.textContent="Score: "+hit+" / "+d.q.length});bs.push(b);qc.appendChild(b)});qc.appendChild(why)});
- qc.appendChild(sc);p.appendChild(qc);main.appendChild(p)}
-D.forEach(mk);var pn=el("div","","pn");main.appendChild(pn);
-function toc(){var t=$("toc");t.textContent="";t.appendChild(el("h2","Contents"));D.forEach(function(d,i){var b=el("button","","te"+(i===cur?" on":""),function(){go(i)});b.appendChild(el("i",d.s));b.appendChild(el("span",d.t));t.appendChild(b)})}
-function panel(id,on){$(id).classList.toggle("on",on);$("bg").classList.toggle("on",on)}
-function go(n){if(window.speechSynthesis)speechSynthesis.cancel();cur=n;[].forEach.call(main.querySelectorAll(".pane"),function(p,i){p.hidden=i!==n});
- pn.textContent="";if(n>0)pn.appendChild(el("button","← "+D[n-1].t,"btn alt",function(){go(n-1)}));
- if(n<D.length-1)pn.appendChild(el("button",D[n+1].t+" →","btn",function(){go(n+1)}));else pn.appendChild(el("a","All topics","btn")).href="index.html#topics";
- $("bt").textContent="Ch. "+(n+1)+" · "+D[n].t;[].forEach.call($("tabs").children,function(b,i){b.setAttribute("aria-pressed",String(i===n));if(i===n)b.scrollIntoView({inline:"center",block:"nearest"})});lw("punct-ch",n);toc();panel("toc",false);window.scrollTo(0,0)}
-var IC={home:'<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v12h5v-6h4v6h5V9"/>',list:'<path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/>',sliders:'<path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/>'};
-[].forEach.call(document.querySelectorAll("[data-i]"),function(b){b.insertAdjacentHTML("afterbegin",'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+IC[b.dataset.i]+'</svg>')});
-D.forEach(function(d,i){var b=el("button",(i+1)+". "+d.t,"",function(){go(i)});b.setAttribute("aria-pressed","false");$("tabs").appendChild(b)});
-function seg(o,c,f){var d=el("div","","seg");o.forEach(function(x){var b=el("button",x[1],"",function(){f(x[0])});b.setAttribute("aria-pressed",String(x[0]===c));d.appendChild(b)});return d}
-function sets(){var s=$("set");s.textContent="";s.appendChild(el("h2","Settings"));
- s.appendChild(el("div","Theme","sh"));s.appendChild(seg([["light","Light"],["sepia","Sepia"],["dark","Night"]],document.documentElement.dataset.theme,function(v){document.documentElement.dataset.theme=v;var q={};try{q=JSON.parse(ls("ielts-gl-reader")||"{}")}catch(e){}q.theme=v;lw("ielts-gl-reader",JSON.stringify(q));sets()}));
- s.appendChild(el("div","Text size","sh"));var r=document.createElement("input");r.type="range";r.min=13;r.max=26;r.value=C.fs;r.oninput=function(){C.fs=+r.value;save()};s.appendChild(r);
- s.appendChild(el("div","Voice accent","sh"));s.appendChild(seg([["en-GB","British"],["en-US","American"]],C.acc,function(v){C.acc=v;save();sets()}))}
-$("bT").onclick=function(){panel("toc",true)};$("bS").onclick=function(){sets();panel("set",true)};$("bg").onclick=function(){panel("toc",false);panel("set",false)};
-addEventListener("keydown",function(e){if(e.key==="Escape"){panel("toc",false);panel("set",false)}});
-function top(){document.documentElement.style.setProperty("--top",$("bar").offsetHeight+"px")}top();addEventListener("resize",top);if(window.ResizeObserver)new ResizeObserver(top).observe($("bar"));$("bt").onclick=function(){panel("toc",true)};
-var n=parseInt(ls("punct-ch")||"0",10);go(isNaN(n)||n<0||n>=D.length?0:n);
+
+/* Reader settings */
+var storedConfig = readJSON("punct-cfg", {});
+if (!storedConfig || typeof storedConfig !== "object" || Array.isArray(storedConfig)) {
+  storedConfig = {};
+}
+
+var C = {
+  acc: storedConfig.acc === "en-US" ? "en-US" : "en-GB",
+  fs: Number(storedConfig.fs) >= 13 && Number(storedConfig.fs) <= 26
+    ? Number(storedConfig.fs)
+    : 16
+};
+
+var cur = 0;
+var main = $("book");
+var speech = window.speechSynthesis || null;
+
+function saveConfig() {
+  setItem("punct-cfg", JSON.stringify(C));
+  document.documentElement.style.setProperty("--fs", C.fs + "px");
+}
+
+saveConfig();
+
+function say(text) {
+  if (!speech || typeof SpeechSynthesisUtterance === "undefined") return;
+
+  speech.cancel();
+
+  var utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = C.acc;
+  utterance.rate = 0.85;
+
+  speech.speak(utterance);
+}
+
+/* Build the lesson chapters */
+function buildChapter(d, n) {
+  var pane = el("section", null, "pane");
+  pane.id = "chapter-" + n;
+  pane.setAttribute("role", "tabpanel");
+  pane.setAttribute("aria-label", d.t);
+  pane.setAttribute("aria-labelledby", "tab-" + n);
+  pane.hidden = true;
+
+  var heading = el("h2", d.t);
+  heading.dataset.ch = "Chapter " + (n + 1);
+  pane.appendChild(heading);
+
+  pane.appendChild(el("span", d.s, "sym"));
+  pane.appendChild(el("p", d.i, "m gt"));
+
+  pane.appendChild(el("h3", "The rules"));
+
+  d.r.forEach(function (rule) {
+    var card = el("div", null, "card");
+    card.appendChild(el("b", rule[0]));
+    card.appendChild(el("p", rule[1]));
+
+    var example = el("p", null, "ex");
+    example.appendChild(el("span", rule[2]));
+
+    var speakButton = el("button", "🔊", "sp", function () {
+      say(rule[2]);
+    });
+    speakButton.type = "button";
+    speakButton.setAttribute("aria-label", "Read example aloud: " + rule[2]);
+
+    example.appendChild(speakButton);
+    card.appendChild(example);
+    pane.appendChild(card);
+  });
+
+  pane.appendChild(el("h3", "Common mistakes"));
+
+  d.m.forEach(function (mistake) {
+    var card = el("div", null, "pair");
+    var line = el("p");
+
+    line.appendChild(el("del", mistake[0]));
+    line.appendChild(document.createTextNode(" → "));
+    line.appendChild(el("ins", mistake[1]));
+
+    card.appendChild(line);
+    card.appendChild(el("p", mistake[2], "why"));
+    pane.appendChild(card);
+  });
+
+  pane.appendChild(el("div", d.k, "tip"));
+  pane.appendChild(el("h3", "Quick quiz"));
+
+  var quiz = el("div", null, "qc");
+  var scoreLine = el("p", "Answer all questions to see your score.", "qd");
+  scoreLine.setAttribute("aria-live", "polite");
+
+  var totalCorrect = 0;
+  var answered = 0;
+  var questionCount = d.q.length;
+
+  d.q.forEach(function (question, questionIndex) {
+    var questionId = "q-" + n + "-" + questionIndex;
+
+    quiz.appendChild(
+      el("p", (questionIndex + 1) + ". " + question[0], "qd")
+    );
+
+    var options = [];
+    var explanation = el("p", "", "why");
+    explanation.setAttribute("aria-live", "polite");
+
+    question[1].forEach(function (option, optionIndex) {
+      var button = el("button", option, "opt");
+      button.type = "button";
+      button.dataset.question = questionId;
+
+      button.addEventListener("click", function () {
+        /* Prevent a second answer from changing the score. */
+        if (button.disabled) return;
+
+        options.forEach(function (item) {
+          item.disabled = true;
+          item.setAttribute("aria-pressed", "false");
+        });
+
+        button.setAttribute("aria-pressed", "true");
+
+        var correctIndex = question[2];
+        var correctButton = options[correctIndex];
+
+        if (optionIndex === correctIndex) {
+          totalCorrect++;
+          button.classList.add("g");
+          explanation.textContent = "Correct. " + question[3];
+        } else {
+          button.classList.add("r");
+
+          if (correctButton) {
+            correctButton.classList.add("g");
+          }
+
+          explanation.textContent = "Not quite. The correct answer is “" +
+            question[1][correctIndex] + "”. " + question[3];
+        }
+
+        answered++;
+
+        if (answered === questionCount) {
+          scoreLine.textContent = "Your score: " + totalCorrect +
+            " / " + questionCount + " (" +
+            Math.round((totalCorrect / questionCount) * 100) + "%)";
+
+          quiz.appendChild(el("p",
+            totalCorrect === questionCount
+              ? "Excellent work! You answered every question correctly."
+              : totalCorrect >= Math.ceil(questionCount * 0.7)
+                ? "Good work! Review any mistakes and try the next chapter."
+                : "Keep practising. Review the rules above and try again.",
+            "why"
+          ));
+
+          var retry = el("button", "Try this quiz again", "btn alt", function () {
+            buildChapterAndRestoreQuiz(n, quiz, scoreLine);
+          });
+          retry.type = "button";
+          quiz.appendChild(retry);
+        }
+      });
+
+      options.push(button);
+      quiz.appendChild(button);
+    });
+
+    quiz.appendChild(explanation);
+  });
+
+  quiz.appendChild(scoreLine);
+  pane.appendChild(quiz);
+  main.appendChild(pane);
+
+  return pane;
+}
+
+/*
+ * Rebuild only the current chapter to reset the quiz.
+ * This keeps navigation and the user's selected chapter intact.
+ */
+function buildChapterAndRestoreQuiz(chapterIndex, oldQuiz, oldScoreLine) {
+  var oldPane = $("chapter-" + chapterIndex);
+  var wasCurrent = chapterIndex === cur;
+
+  if (oldPane) oldPane.remove();
+
+  var children = Array.from(main.children);
+  var newPane = buildChapter(D[chapterIndex], chapterIndex);
+  var nav = main.querySelector(".pn");
+
+  if (nav) {
+    main.insertBefore(newPane, nav);
+  }
+
+  if (wasCurrent) {
+    newPane.hidden = false;
+  }
+
+  go(cur, false);
+}
+
+/* Table of contents */
+function buildContents() {
+  var contents = $("toc");
+  contents.textContent = "";
+  contents.appendChild(el("h2", "Contents"));
+
+  D.forEach(function (chapter, index) {
+    var button = el("button", null, "te" + (index === cur ? " on" : ""), function () {
+      go(index);
+    });
+
+    button.type = "button";
+    button.appendChild(el("i", chapter.s));
+    button.appendChild(el("span", chapter.t));
+    contents.appendChild(button);
+  });
+}
+
+/* Drawers and backdrop */
+function updateDrawerState() {
+  var contentsOpen = $("toc").classList.contains("on");
+  var settingsOpen = $("set").classList.contains("on");
+  var anyOpen = contentsOpen || settingsOpen;
+
+  $("bg").classList.toggle("on", anyOpen);
+  $("bg").setAttribute("aria-hidden", String(!anyOpen));
+
+  $("toc").setAttribute("aria-hidden", String(!contentsOpen));
+  $("set").setAttribute("aria-hidden", String(!settingsOpen));
+
+  $("bT").setAttribute("aria-expanded", String(contentsOpen));
+  $("bS").setAttribute("aria-expanded", String(settingsOpen));
+}
+
+function panel(id, open) {
+  var drawer = $(id);
+  drawer.classList.toggle("on", open);
+
+  if (open) {
+    var other = id === "toc" ? "set" : "toc";
+    $(other).classList.remove("on");
+  }
+
+  updateDrawerState();
+}
+
+function closePanels() {
+  $("toc").classList.remove("on");
+  $("set").classList.remove("on");
+  updateDrawerState();
+}
+
+/* Chapter navigation */
+function go(index, scrollToTop) {
+  if (index < 0 || index >= D.length) return;
+
+  if (speech) speech.cancel();
+
+  cur = index;
+
+  var panes = main.querySelectorAll(".pane");
+
+  panes.forEach(function (pane) {
+    pane.hidden = pane.id !== "chapter-" + index;
+  });
+
+  var nav = main.querySelector(".pn");
+
+  if (nav) nav.remove();
+
+  nav = el("div", null, "pn");
+
+  if (index > 0) {
+    var previous = el("button", "← " + D[index - 1].t, "btn alt", function () {
+      go(index - 1);
+    });
+    previous.type = "button";
+    nav.appendChild(previous);
+  } else {
+    nav.appendChild(el("span", ""));
+  }
+
+  if (index < D.length - 1) {
+    var next = el("button", D[index + 1].t + " →", "btn", function () {
+      go(index + 1);
+    });
+    next.type = "button";
+    nav.appendChild(next);
+  } else {
+    var allTopics = el("a", "All topics", "btn");
+    allTopics.href = "index.html#topics";
+    nav.appendChild(allTopics);
+  }
+
+  main.appendChild(nav);
+
+  $("bt").textContent = "Ch. " + (index + 1) + " · " + D[index].t;
+  $("bt").setAttribute("aria-label", "Chapter " + (index + 1) + ": " + D[index].t + ". Open contents.");
+
+  Array.from($("tabs").children).forEach(function (button, i) {
+    var active = i === index;
+
+    button.setAttribute("aria-selected", String(active));
+    button.setAttribute("aria-pressed", String(active));
+    button.tabIndex = active ? 0 : -1;
+
+    if (active) {
+      button.scrollIntoView({
+        behavior:"auto",
+        block:"nearest",
+        inline:"center"
+      });
+    }
+  });
+
+  setItem("punct-ch", String(index));
+  buildContents();
+  closePanels();
+
+  if (scrollToTop !== false) {
+    window.scrollTo({ top:0, behavior:"auto" });
+  }
+}
+
+/* Header icons */
+var icons = {
+  home:'<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v12h5v-6h4v6h5V9"/>',
+  list:'<path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/>',
+  sliders:'<path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/>'
+};
+
+document.querySelectorAll("[data-i]").forEach(function (button) {
+  var name = button.dataset.i;
+
+  if (!icons[name]) return;
+
+  var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("viewBox", "0 0 24 24");
+  svg.setAttribute("width", "20");
+  svg.setAttribute("height", "20");
+  svg.setAttribute("fill", "none");
+  svg.setAttribute("stroke", "currentColor");
+  svg.setAttribute("stroke-width", "1.8");
+  svg.setAttribute("stroke-linecap", "round");
+  svg.setAttribute("stroke-linejoin", "round");
+  svg.setAttribute("aria-hidden", "true");
+  svg.innerHTML = icons[name];
+
+  button.insertBefore(svg, button.firstChild);
+});
+
+/* Chapter tabs */
+D.forEach(function (chapter, index) {
+  var button = el("button", (index + 1) + ". " + chapter.t, null, function () {
+    go(index);
+  });
+
+  button.type = "button";
+  button.id = "tab-" + index;
+  button.setAttribute("role", "tab");
+  button.setAttribute("aria-controls", "chapter-" + index);
+  button.setAttribute("aria-selected", "false");
+  button.setAttribute("aria-pressed", "false");
+  button.tabIndex = -1;
+
+  $("tabs").appendChild(button);
+});
+
+/* Theme and reader controls */
+function segmented(options, current, callback) {
+  var group = el("div", null, "seg");
+
+  options.forEach(function (option) {
+    var button = el("button", option[1], null, function () {
+      callback(option[0]);
+    });
+
+    button.type = "button";
+    button.setAttribute("aria-pressed", String(option[0] === current));
+    group.appendChild(button);
+  });
+
+  return group;
+}
+
+function saveReaderTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+
+  var readerSettings = readJSON("ielts-gl-reader", {});
+
+  if (!readerSettings || typeof readerSettings !== "object" ||
+      Array.isArray(readerSettings)) {
+    readerSettings = {};
+  }
+
+  readerSettings.theme = theme;
+  setItem("ielts-gl-reader", JSON.stringify(readerSettings));
+}
+
+function buildSettings() {
+  var settings = $("set");
+  settings.textContent = "";
+
+  settings.appendChild(el("h2", "Reading settings"));
+
+  settings.appendChild(el("div", "Theme", "sh"));
+
+  settings.appendChild(segmented([
+    ["light", "Light"],
+    ["sepia", "Sepia"],
+    ["dark", "Night"]
+  ], document.documentElement.dataset.theme, function (value) {
+    saveReaderTheme(value);
+    buildSettings();
+  }));
+
+  settings.appendChild(el("div", "Text size", "sh"));
+
+  var range = document.createElement("input");
+  range.type = "range";
+  range.min = "13";
+  range.max = "26";
+  range.step = "1";
+  range.value = String(C.fs);
+  range.setAttribute("aria-label", "Reading text size");
+
+  var sizeLabel = el("p", C.fs + " px", "why");
+
+  range.addEventListener("input", function () {
+    C.fs = Number(range.value);
+    document.documentElement.style.setProperty("--fs", C.fs + "px");
+    sizeLabel.textContent = C.fs + " px";
+    setItem("punct-cfg", JSON.stringify(C));
+  });
+
+  settings.appendChild(range);
+  settings.appendChild(sizeLabel);
+
+  settings.appendChild(el("div", "Voice accent", "sh"));
+
+  settings.appendChild(segmented([
+    ["en-GB", "British"],
+    ["en-US", "American"]
+  ], C.acc, function (value) {
+    C.acc = value;
+    saveConfig();
+    buildSettings();
+  }));
+
+  settings.appendChild(el("p",
+    "Use the speaker buttons beside examples to hear them aloud.",
+    "why"
+  ));
+
+  var close = el("button", "Close settings", "btn alt", function () {
+    panel("set", false);
+  });
+
+  close.type = "button";
+  settings.appendChild(close);
+}
+
+/* Drawer controls */
+$("bT").addEventListener("click", function () {
+  panel("toc", !$("toc").classList.contains("on"));
+});
+
+$("bS").addEventListener("click", function () {
+  buildSettings();
+  panel("set", !$("set").classList.contains("on"));
+});
+
+$("bt").addEventListener("click", function () {
+  panel("toc", !$("toc").classList.contains("on"));
+});
+
+$("bg").addEventListener("click", closePanels);
+
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") {
+    closePanels();
+  }
+
+  if (event.altKey && event.key === "ArrowLeft") {
+    event.preventDefault();
+    go(Math.max(0, cur - 1));
+  }
+
+  if (event.altKey && event.key === "ArrowRight") {
+    event.preventDefault();
+    go(Math.min(D.length - 1, cur + 1));
+  }
+});
+
+/* Keep the page content below the responsive fixed toolbar. */
+function updateTopSpacing() {
+  document.documentElement.style.setProperty(
+    "--top",
+    $("bar").offsetHeight + "px"
+  );
+}
+
+updateTopSpacing();
+window.addEventListener("resize", updateTopSpacing);
+
+if ("ResizeObserver" in window) {
+  var toolbarObserver = new ResizeObserver(updateTopSpacing);
+  toolbarObserver.observe($("bar"));
+}
+
+/* Render all chapters and restore the last saved position. */
+D.forEach(function (chapter, index) {
+  buildChapter(chapter, index);
+});
+
+var savedChapter = parseInt(getItem("punct-ch") || "0", 10);
+
+if (!Number.isInteger(savedChapter) ||
+    savedChapter < 0 ||
+    savedChapter >= D.length) {
+  savedChapter = 0;
+}
+
+go(savedChapter, false);
+
 })();
 </script>
 </body>
