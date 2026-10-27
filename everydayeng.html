@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Everyday English by situation | English Materials</title>
+<meta name="theme-color" content="#1f2a44">
+<link rel="icon" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/10719400.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Literata:wght@400;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<script>try{var s=JSON.parse(localStorage.getItem("ielts-gl-reader")||"{}");document.documentElement.dataset.theme=s.theme||"light"}catch(e){}</script>
+<style>
+:root{--ink:#1f2a44;--blue:#1f4fbf;--paper:#fbfaf7;--line:#0002;--text:#222;--muted:#555;--ok:#1d7a46;--bad:#b3261e}
+html[data-theme=sepia]{--ink:#3b2f1e;--blue:#8a4b12;--paper:#f4ecd8;--line:#4a3b2633;--text:#4a3b26;--muted:#7a6a52}
+html[data-theme=dark]{--ink:#e8ecf7;--blue:#8fb0ff;--paper:#14171f;--line:#fff3;--text:#e6e6e6;--muted:#a9afbd;--ok:#6fd49a;--bad:#ff8a80;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--text);font:18px/1.7 Literata,Georgia,serif;overflow-wrap:anywhere;padding-left:env(safe-area-inset-left,0);padding-right:env(safe-area-inset-right,0)}
+a{color:var(--blue)}h1,h2,h3{font-family:Fraunces,Georgia,serif;color:var(--ink);line-height:1.2}h1{font-size:clamp(2rem,7vw,3rem);margin:14px 0}h2{margin:12px 0 8px}h3{font-size:1.1rem;margin:0 0 4px}
+.m{color:var(--muted);font-size:.95rem}.btn{display:inline-block;background:var(--ink);color:var(--paper);padding:10px 16px;border:1px solid var(--ink);border-radius:6px;font:600 .9rem Inter,sans-serif;margin:4px 6px 4px 0;cursor:pointer;text-decoration:none}.btn.alt{background:none;color:var(--ink)}
+.ok{color:var(--ok)}.no{color:var(--bad)}:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+html{--sheet:#fffdf8;--desk:#d9d3c4;--rule:#cfc6ad;font-size:var(--fs,16px)}
+html[data-theme=sepia]{--sheet:#f4ecd8;--desk:#d6c8a2;--rule:#cdbb91}
+html[data-theme=dark]{--sheet:#181c26;--desk:#0b0d12;--rule:#2e3548}
+html[data-font=sans] body{font-family:Inter,system-ui,sans-serif}
+[hidden]{display:none!important}
+body{background:var(--desk);font-size:1.125rem;padding-top:var(--top,100px)}
+main{position:relative;background:var(--sheet);max-width:860px;margin:14px auto 40px;padding:26px 28px 40px 34px;border-radius:3px 8px 8px 3px;box-shadow:2px 2px 0 var(--sheet),3px 3px 0 var(--rule),5px 5px 0 var(--sheet),6px 6px 0 var(--rule),0 18px 40px rgba(0,0,0,.3)}
+main::before{content:"";position:absolute;left:0;top:0;bottom:0;width:24px;border-radius:3px 0 0 3px;background:linear-gradient(90deg,rgba(0,0,0,.14),transparent);pointer-events:none}
+@media(max-width:700px){main{margin:0;border-radius:0;box-shadow:none;padding:20px 16px 34px 22px}}
+.pane h2{margin:6px 0 10px;text-align:center}.pane>p.m{text-align:center}
+#bar{position:fixed;left:0;right:0;top:0;z-index:30;display:flex;flex-wrap:wrap;align-items:center;gap:2px;padding:4px 8px;padding-top:calc(4px + env(safe-area-inset-top,0px));background:color-mix(in srgb,var(--sheet) 88%,transparent);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);border-bottom:1px solid var(--rule);transition:transform .25s}
+body.off #bar{transform:translateY(-110%)}
+.ib{width:40px;height:40px;border:0;border-radius:10px;background:none;color:var(--ink);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none;position:relative;flex:none}.ib:hover{background:var(--line)}.ib svg{pointer-events:none}
+#bt{flex:1;min-width:0;text-align:center;font:600 .9rem Inter,sans-serif;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
+#cnt2{position:absolute;top:2px;right:0;background:var(--blue);color:var(--paper);border-radius:99px;padding:0 5px;font:600 10px/15px Inter,sans-serif}
+#bg{position:fixed;inset:0;background:#0006;z-index:39;display:none}#bg.on{display:block}
+#dr2{position:fixed;top:0;bottom:0;right:0;width:min(92vw,400px);background:var(--sheet);color:var(--text);z-index:40;padding:calc(14px + env(safe-area-inset-top,0px)) 16px 24px;overflow:auto;transform:translateX(102%);transition:transform .25s;box-shadow:-2px 0 20px rgba(0,0,0,.4);font-family:Inter,sans-serif}#dr2.on{transform:none}#dr2 h2{margin:6px 0 10px}
+.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}.seg button{flex:1;background:none;border:0;border-right:1px solid var(--line);padding:10px 4px;font:600 .8rem Inter,sans-serif;color:var(--text);cursor:pointer}.seg button:last-child{border-right:0}.seg button[aria-pressed=true]{background:var(--blue);color:var(--paper)}
+.sh{margin:16px 0 6px;font:600 .72rem Inter,sans-serif;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+#dr2 input[type=range]{width:100%;accent-color:var(--blue)}.chk{display:flex;gap:8px;align-items:center;font:500 .9rem Inter,sans-serif;margin:8px 0}
+.toc{display:block;width:100%;text-align:left;background:none;color:var(--text);border:0;border-top:1px solid var(--rule);padding:10px 4px;font:500 .95rem Inter,sans-serif;cursor:pointer}.toc small{display:block;color:var(--muted);margin-top:2px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.chip{font:600 .8rem Inter,sans-serif;border:1px solid var(--line);background:none;color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}.chip.on{background:var(--ink);color:var(--paper)}
+.sp{border:1px solid var(--line);background:none;color:var(--text);border-radius:6px;cursor:pointer;padding:3px 9px;font-size:1rem;margin-left:4px}.sp.on{color:var(--blue)}
+.flash{background:color-mix(in srgb,var(--blue) 18%,transparent)}
+#dim,#warm{position:fixed;inset:0;pointer-events:none;z-index:200;opacity:0;transition:opacity .2s}#dim{background:#000}#warm{background:#ff9a2e;mix-blend-mode:multiply}
+.chap{text-align:center;font:600 .72rem Inter,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.pane h3{margin:22px 0 8px;font-size:1.15rem}.hint{font-size:.82rem;margin:6px 0}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}
+.tile{border:1px solid var(--rule);border-radius:12px;background:none;padding:10px 4px 8px;cursor:pointer;color:var(--text);text-align:center;font:inherit;transition:transform .1s,border-color .15s}
+.tile:hover{border-color:var(--blue);transform:translateY(-2px)}.tile:active{transform:scale(.96)}.tile .big{display:block;font-size:2.2rem;line-height:1.2}.tile small{display:block;font:600 .74rem Inter,sans-serif;margin-top:4px;color:var(--ink)}
+.wc{border:1px solid var(--rule);border-radius:12px;padding:12px 14px;margin:10px 0}.wc.flash{background:color-mix(in srgb,var(--blue) 18%,transparent)}
+.wh{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.wh .em{font-size:1.5rem}.wh b{font:700 1.2rem Fraunces,serif;color:var(--ink)}.wh .pos{font:500 .8rem Inter,sans-serif;color:var(--muted)}.wh .sp:nth-last-child(2){margin-left:auto}
+.bdg{font-size:.85rem;opacity:.85}.mean{margin:6px 0 4px}.exs{margin:0;display:flex;gap:6px;align-items:flex-start;font-style:italic;color:var(--muted);font-size:.95rem}.exs span{flex:1}
+.cv{margin:12px 0}.bub{max-width:88%;padding:8px 12px;border-radius:14px;margin:8px 0;display:flex;gap:6px;align-items:flex-start;flex-wrap:wrap;border:1px solid var(--rule)}.bub b{font:700 .75rem Inter,sans-serif;width:100%;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}.bub span{flex:1}
+.b1{background:color-mix(in srgb,var(--blue) 8%,transparent)}.b2{margin-left:auto;background:color-mix(in srgb,var(--ink) 6%,transparent)}.bub.hot{outline:2px solid var(--blue)}
+.modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}.mode{border:1px solid var(--rule);border-radius:12px;padding:12px 14px}.mode b{display:block;margin-bottom:4px;color:var(--ink)}.mode p{margin:6px 0;font-size:.92rem}.mode .lk{cursor:pointer;text-decoration:underline dotted}
+.qc{border:3px double var(--rule);border-radius:12px;padding:16px;text-align:center}.qd{font:700 1.15rem Fraunces,serif;color:var(--ink);margin:8px 0 12px}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;background:none;color:var(--text);padding:12px;border:1px solid var(--line);border-radius:8px;font:600 1rem Inter,sans-serif;cursor:pointer}.opt.g{border-color:var(--ok);color:var(--ok)}.opt.r{border-color:var(--bad);color:var(--bad)}
+.si{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--text);font:1rem Inter,sans-serif}
+.pn{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:28px;border-top:1px solid var(--rule);padding-top:14px}.pn .btn{margin:0}
+#toc{position:fixed;left:0;top:var(--top,60px);bottom:0;width:min(88vw,300px);background:var(--sheet);color:var(--text);border-right:1px solid var(--rule);z-index:41;overflow:auto;transform:translateX(-102%);transition:transform .25s;padding:12px 16px 24px;box-shadow:2px 0 20px rgba(0,0,0,.35);font-family:Inter,sans-serif}
+body.tocOpen #toc{transform:none}#toc h2{margin:4px 0 6px;text-align:center}
+.tp{font:700 .95rem Fraunces,serif;color:var(--ink);margin:16px 0 2px;padding-bottom:4px;border-bottom:1px solid var(--rule)}
+.te{display:flex;align-items:baseline;gap:6px;width:100%;background:none;border:0;padding:8px 2px;text-align:left;cursor:pointer;color:var(--text);font:500 .92rem Inter,sans-serif}.te .n{width:1.5em;flex:none;color:var(--muted)}.te .t{flex:none;max-width:75%}.te .l{flex:1;min-width:10px;border-bottom:1px dotted var(--muted);transform:translateY(-3px)}.te small{flex:none;color:var(--muted);font:500 .72rem Inter,sans-serif}.te.on .t{color:var(--blue);font-weight:700}.te:hover .t{text-decoration:underline}
+@media(min-width:1000px){#toc{box-shadow:none;z-index:25;width:290px}body{transition:padding-left .25s}body.tocOpen{padding-left:290px}}
+</style>
+</head>
+<body>
+<header id="bar"><a class="ib" href="index.html" aria-label="Home" data-i="home"></a><button class="ib" id="bToc" type="button" aria-label="Show or hide contents" data-i="list"></button><div id="bt" role="button" tabindex="0">Everyday English</div><button class="ib" id="bSe" type="button" aria-label="Search words" data-i="search"></button><button class="ib" id="bSv" type="button" aria-label="Saved words" data-i="star"><span id="cnt2" hidden>0</span></button><button class="ib" id="bSt" type="button" aria-label="Settings" data-i="sliders"></button></header>
+<aside id="toc" aria-label="Contents"></aside><div id="bg"></div><aside id="dr2" aria-label="Panel"></aside><div id="dim" aria-hidden="true"></div><div id="warm" aria-hidden="true"></div>
+<main id="book"></main>
+<script>
+var G=["Daily life","Travel","Health and money","Study and work","Outside","Food, people and things","Time and technology","Fun and work"];
+var S=[
+{g:0,id:"home",e:"🏠",t:"At home",intro:"Words for the rooms and things you use every day at home.",
+w:[["🛋️","sofa","noun","a long soft seat for two or three people","We watch TV on the sofa.","SWR"],
+["🪟","curtain","noun","cloth that hangs over a window","Please close the curtains; the sun is strong.","SWR"],
+["🚪","wardrobe","noun","a tall cupboard for clothes","My shirts are in the wardrobe.","SWR"],
+["🌀","ceiling fan","noun","a fan fixed to the ceiling that cools a room","Turn on the ceiling fan; it is hot.","SR"],
+["💡","switch","noun / verb","a button that turns a light on or off; to change something on or off","Where is the light switch?","SWR"],
+["🔌","socket","noun","a hole in the wall where you put a plug","There is no socket near my bed.","SR"],
+["🛏️","mattress","noun","the soft part of a bed you sleep on","This mattress is too hard.","SW"],
+["🔔","doorbell","noun","a bell or button at the door that visitors press","Someone is ringing the doorbell.","S"],
+["🗄️","cupboard","noun","a piece of furniture with doors for keeping things","The plates are in the cupboard.","SWR"],
+["🌇","balcony","noun","a small platform with a rail outside an upper window","We drink tea on the balcony.","SWR"]],
+c:["Fixing a hot room",[["Mum","It is so hot in here. Can you turn on the fan?"],["Sam","Sure. Where is the switch?"],["Mum","It is next to the door, behind the curtain."],["Sam","Found it. Oh, nothing happens."],["Mum","Check the socket. Maybe the plug is loose."],["Sam","You are right! It works now."]]],
+m:{s:["Can you turn on / off the …?","Where is the …?","Could you pass me the …?"],w:["For rent: two-room flat with balcony and wardrobe.","Please keep the curtains closed during the day."],r:["Sign: Switch off the fan when leaving.","Label: Do not touch the socket with wet hands."]}},
+{g:0,id:"kitchen",e:"🍳",t:"In the kitchen",intro:"Tools and words you need for cooking and cleaning.",
+w:[["🔥","stove","noun","a cooker with burners for heating food","Put the pot on the stove.","SWR"],
+["🧊","fridge","noun","a machine that keeps food cold","The milk is in the fridge.","SWR"],
+["🍲","saucepan","noun","a deep pot with a handle for boiling","Boil the rice in a saucepan.","SWR"],
+["🍳","frying pan","noun","a flat pan for frying food","Heat oil in the frying pan.","SWR"],
+["🥄","ladle","noun","a large deep spoon for serving soup","Serve the soup with a ladle.","SR"],
+["🔪","chopping board","noun","a flat board for cutting food on","Cut the onions on the chopping board.","SWR"],
+["☕","kettle","noun","a container for boiling water","Switch on the kettle for tea.","SWR"],
+["🚰","tap","noun","a handle that lets water out of a pipe","Turn off the tap, please.","SWR"],
+["🧽","sink","noun","a basin in the kitchen for washing dishes","The dishes are in the sink.","SWR"],
+["🧻","dishcloth","noun","a cloth for washing or drying dishes","Wipe the table with a dishcloth.","SW"]],
+c:["Making tea",[["Rina","Could you fill the kettle with water?"],["Tom","Sure. Is the tap working? It is very slow."],["Rina","Yes, turn it fully. Then put the kettle on the stove."],["Tom","Done. Where are the cups?"],["Rina","In the cupboard above the sink. And the milk is in the fridge."]]],
+m:{s:["Could you pass me the …?","Be careful, the … is hot.","Put it in the …"],w:["Recipe: Heat oil in a frying pan. Add chopped onions.","Note: Clean the stove after use."],r:["Label: Keep in a cool, dry place.","Warning: Hot surface. Do not touch."]}},
+{g:0,id:"market",e:"🛒",t:"At the market",intro:"Buying fresh food and bargaining politely.",
+w:[["🧑‍🌾","vendor","noun","a person who sells things, often outside","The vendor sells fresh vegetables.","SWR"],
+["🤝","bargain","verb / noun","to discuss a lower price; a thing bought cheaply","He bargained for a lower price. It was a real bargain.","SWR"],
+["🏷️","discount","noun","a reduction in price","There is a 10% discount today.","SWR"],
+["⚖️","scale","noun","a machine for weighing things","Please weigh it on the scale.","SR"],
+["🥬","fresh","adjective","new, not old or kept for long","These tomatoes are very fresh.","SWR"],
+["🍌","ripe","adjective","ready to eat (fruit)","Are the mangoes ripe?","SWR"],
+["🍌","bunch","noun","a group of things growing or tied together","I'll take a bunch of bananas.","SWR"],
+["⚖️","kilo","noun","short for kilogram (1000 grams)","Two kilos of rice, please.","SW"],
+["🪙","change","noun","the money you get back after paying","You gave me the wrong change.","SWR"],
+["🧾","receipt","noun","a paper that shows what you paid for","Keep the receipt in case you return it.","SWR"]],
+c:["Buying mangoes",[["Buyer","How much are these mangoes?"],["Vendor","Eighty taka a kilo, madam. Very fresh."],["Buyer","That's a bit expensive. Can you give me a discount?"],["Vendor","For two kilos, seventy taka a kilo."],["Buyer","Okay. Are they ripe?"],["Vendor","Yes, ripe and sweet. Here is your change and receipt."]]],
+m:{s:["How much is / are …?","Can you give me a discount?","Could I have two kilos of …?"],w:["Shopping list: 2 kilos of rice, a bunch of bananas, fresh fish.","Message: Please keep the receipt for the refund."],r:["Sign: Fresh fish today – 20% discount.","Label: Best before 12 May."]}},
+{g:0,id:"restaurant",e:"🍽️",t:"At a restaurant",intro:"Ordering food, asking for the bill and being polite.",
+w:[["📖","menu","noun","a list of food and drinks you can order","Can I see the menu, please?","SWR"],
+["🧑‍🍳","waiter","noun","a person who serves food in a restaurant","The waiter brought our drinks.","SWR"],
+["📝","order","verb / noun","to ask for food; the food you ask for","We would like to order now.","SWR"],
+["🧾","bill","noun","the paper that shows how much to pay","Could we have the bill, please?","SWR"],
+["💵","tip","noun","extra money you give for good service","We left a small tip.","SW"],
+["🥗","starter","noun","a small dish before the main meal","I'll have soup as a starter.","SWR"],
+["🍛","main course","noun","the biggest dish of a meal","For the main course, I'll have chicken biryani.","SWR"],
+["🍨","dessert","noun","a sweet dish at the end of a meal","Do you have any dessert?","SWR"],
+["📅","reservation","noun","a table you book in advance","I have a reservation for four at 8.","SWR"],
+["🥡","takeaway","noun","food you take home to eat","Two chicken rolls for takeaway, please.","SWR"]],
+c:["Ordering dinner",[["Waiter","Good evening. Do you have a reservation?"],["Guest","Yes, a table for two under Rahman."],["Waiter","This way, please. Are you ready to order?"],["Guest","Yes. I'll have the soup as a starter and the fish as the main course."],["Waiter","Anything to drink?"],["Guest","Just water. And could we have the bill later, please?"]]],
+m:{s:["I'd like to order …","Could we have the bill, please?","Is this dish spicy?"],w:["Email: I would like to make a reservation for six people at 7 pm on Friday.","Review: The service was excellent and the dessert was delicious."],r:["Menu: Starters · Main courses · Desserts.","Notice: Service charge is included."]}},
+{g:1,id:"station",e:"🚉",t:"Bus and train station",intro:"Tickets, platforms, delays and announcements.",
+w:[["🛤️","platform","noun","the raised area where you wait for a train","The train leaves from platform 3.","SWR"],
+["🎫","ticket counter","noun","the place where you buy tickets","Where is the ticket counter?","SR"],
+["🗓️","timetable","noun","a list of departure and arrival times","Check the timetable for the next bus.","SWR"],
+["🚀","departure","noun","the act of leaving; the time a vehicle leaves","The departure time is 9:15.","SWR"],
+["⏳","delay","noun / verb","a late start; to make something late","The train is delayed by 30 minutes.","SWR"],
+["🚃","carriage","noun","one section of a train for passengers","Our seats are in carriage B.","SWR"],
+["💺","compartment","noun","a separate section in a train carriage","The ladies' compartment is at the front.","SR"],
+["💰","fare","noun","the money you pay for a journey","The bus fare is 40 taka.","SWR"],
+["📢","announcement","noun","a public message, often spoken","Listen to the announcement for platform changes.","SR"],
+["🧳","luggage","noun","bags and suitcases you travel with","Please keep your luggage with you.","SWR"]],
+c:["Asking about the train",[["Passenger","Excuse me, which platform does the Sylhet train leave from?"],["Officer","Platform 4. But the train is delayed by twenty minutes."],["Passenger","Thank you. How much is the fare to Sylhet?"],["Officer","Five hundred taka for a seat. You can buy a ticket at the counter."],["Passenger","Great. Where is the counter?"],["Officer","Over there, next to the timetable."]]],
+m:{s:["Which platform does … leave from?","Is the … delayed?","One ticket to …, please."],w:["Email: Please book two seats for the 9:15 train on Friday.","Message: My train is delayed; I will arrive late."],r:["Board: Departure 09:15 · Platform 4 · On time.","Sign: Keep your luggage with you at all times."]}},
+{g:1,id:"airport",e:"✈️",t:"At the airport",intro:"Check-in, security, boarding and arriving in another country.",
+w:[["🎟️","boarding pass","noun","a paper or phone ticket you show to board the plane","Show your boarding pass at the gate.","SWR"],
+["🛄","check-in","noun / verb","the place or act of registering for a flight","Check-in opens two hours before departure.","SWR"],
+["🚪","gate","noun","the door where you board the plane","Your flight leaves from gate 12.","SWR"],
+["🛂","passport control","noun","the place where officers check passports","We queued at passport control.","SR"],
+["📦","customs","noun","the place where bags are checked when entering a country","Nothing to declare at customs.","SR"],
+["🎒","carry-on","noun","a small bag you take into the plane cabin","My carry-on is under the seat.","SWR"],
+["🛫","flight","noun","a journey by plane","The flight takes three hours.","SWR"],
+["🔍","security check","noun","the screening of people and bags before boarding","The security check was quick.","SR"],
+["🧳","baggage claim","noun","the area where you collect your bags","Our bags are at baggage claim 5.","SR"],
+["⏱️","layover","noun","a short stop between two flights","We have a three-hour layover in Dubai.","SW"]],
+c:["At check-in",[["Staff","Good morning. May I see your passport and ticket?"],["Traveller","Here you are."],["Staff","Do you have any luggage to check in?"],["Traveller","One suitcase. And this carry-on bag."],["Staff","Here is your boarding pass. Your flight leaves from gate 12 at 10:30."],["Traveller","Thank you. Where is the security check?"]]],
+m:{s:["Where is the … ?","I'd like a window seat.","Is the flight on time?"],w:["Email: My flight BG 123 has a three-hour layover in Dubai.","Form: Nothing to declare at customs."],r:["Screen: Gate 12 · Boarding · 10:30.","Sign: No liquids over 100 ml in carry-on bags."]}},
+{g:1,id:"hotel",e:"🏨",t:"At a hotel",intro:"Booking a room, asking for services and checking out.",
+w:[["🛎️","reception","noun","the desk where guests check in","Please wait at reception.","SWR"],
+["📅","booking","noun","a reservation for a room or ticket","I have a booking for two nights.","SWR"],
+["🛏️","single room","noun","a room for one person","Do you have a single room available?","SWR"],
+["🔑","key card","noun","a plastic card used instead of a key","Your key card opens room 305.","SR"],
+["🚶","checkout","noun","the time or act of leaving the hotel","Checkout time is 12 noon.","SWR"],
+["🧹","housekeeping","noun","the staff who clean the rooms","Please call housekeeping for extra towels.","SR"],
+["🎁","complimentary","adjective","given free of charge","Breakfast is complimentary.","SWR"],
+["🛋️","lobby","noun","the large entrance area of a hotel","Let's meet in the lobby.","SWR"],
+["🛗","lift","noun","a machine that carries people between floors","The lift is out of order.","SWR"],
+["🏊","amenities","noun","useful facilities such as a pool or Wi-Fi","The hotel has great amenities.","WR"]],
+c:["Checking in",[["Guest","Good evening. I have a booking under the name Karim."],["Clerk","Yes, a single room for two nights. May I see your ID?"],["Guest","Here you are. Is breakfast included?"],["Clerk","Yes, it is complimentary. Here is your key card for room 305."],["Guest","What time is checkout?"],["Clerk","Twelve noon. Enjoy your stay."]]],
+m:{s:["I'd like to check in / out.","Could I have an extra towel?","What time is breakfast?"],w:["Email: I would like to book a single room from 3 to 5 May.","Review: The room was clean and the staff were friendly."],r:["Card: Checkout time 12:00 noon.","Sign: Lift out of order. Please use the stairs."]}},
+{g:2,id:"hospital",e:"🏥",t:"Hospital and pharmacy",intro:"Talking to doctors, describing problems and buying medicine.",
+w:[["📅","appointment","noun","a planned time to see a doctor","I have an appointment at 4 pm.","SWR"],
+["📄","prescription","noun","a paper from a doctor for medicine","The doctor wrote a prescription.","SWR"],
+["🤒","symptom","noun","a sign of illness, such as fever","What are your symptoms?","SWR"],
+["💊","pharmacy","noun","a shop where you buy medicine","Take this to the pharmacy.","SWR"],
+["💉","injection","noun","medicine put into the body with a needle","The nurse gave him an injection.","SWR"],
+["🛌","ward","noun","a room in a hospital with beds for patients","He is in the children's ward.","SR"],
+["🚑","ambulance","noun","a vehicle that takes people to hospital","Call an ambulance!","SWR"],
+["🌡️","temperature","noun","how hot your body is","Your temperature is a little high.","SWR"],
+["💊","dose","noun","the amount of medicine to take at one time","Take one dose after meals.","SWR"],
+["🩹","recovery","noun","getting well again after illness","I wish you a quick recovery.","SWR"]],
+c:["At the doctor",[["Doctor","What seems to be the problem?"],["Patient","I have a fever and a sore throat since yesterday."],["Doctor","Your temperature is a bit high. I will write a prescription."],["Patient","How often should I take the medicine?"],["Doctor","One dose after meals, three times a day. Rest and drink water."],["Patient","Thank you, doctor. I'll go to the pharmacy now."]]],
+m:{s:["I have a … (fever / headache).","How often should I take this?","I'd like to make an appointment."],w:["Message: I need to cancel my appointment on Monday.","Note: Take one dose after meals for five days."],r:["Label: Take twice a day after food.","Sign: Emergency · Ward 3 · Pharmacy."]}},
+{g:2,id:"bank",e:"🏦",t:"At the bank",intro:"Opening accounts, sending money and understanding bank words.",
+w:[["📒","account","noun","an arrangement to keep money in a bank","I want to open a savings account.","SWR"],
+["⬇️","deposit","verb / noun","to put money into an account; money put in","I'd like to deposit 5,000 taka.","SWR"],
+["⬆️","withdraw","verb","to take money out of an account","How much would you like to withdraw?","SWR"],
+["⚖️","balance","noun","the amount of money in an account","Please check my balance.","SWR"],
+["➡️","transfer","verb / noun","to move money from one account to another","I want to transfer money to my brother.","SWR"],
+["🏠","loan","noun","money you borrow and pay back later","He took a loan to buy a house.","SWR"],
+["📈","interest","noun","extra money you earn or pay on savings or loans","The bank pays 5% interest.","SWR"],
+["🏧","ATM","noun","a machine that gives cash","The ATM is out of order.","SWR"],
+["📃","statement","noun","a paper listing your account activity","Can I get a bank statement?","SWR"],
+["✍️","signature","noun","your name written in your own style","Please sign here. I need your signature.","SWR"]],
+c:["Opening an account",[["Clerk","How can I help you?"],["Customer","I'd like to open a savings account."],["Clerk","Sure. Please fill in this form and sign here."],["Customer","Is there any interest on this account?"],["Clerk","Yes, 5% a year. You will also get an ATM card."],["Customer","Great. I'd like to deposit 5,000 taka today."]]],
+m:{s:["I'd like to deposit / withdraw …","What is my balance?","Can I get a statement?"],w:["Application: I would like to open a savings account with your bank.","Email: Please transfer 10,000 taka to the account below."],r:["Screen: Available balance: 12,500 taka.","Notice: Never share your PIN with anyone."]}},
+{g:2,id:"body",e:"🧍",t:"Body and health",intro:"Parts of the body and how to say what hurts.",
+w:[["🧠","head","noun","the top part of the body with the face","I have a pain in my head.","SWR"],
+["👁️","eye","noun","the part of the face you see with","She has big brown eyes.","SWR"],
+["👂","ear","noun","the part of the head you hear with","My left ear hurts.","SWR"],
+["👃","nose","noun","the part of the face you smell with","I have a runny nose.","SWR"],
+["👄","mouth","noun","the part of the face you eat and speak with","Open your mouth, please.","SWR"],
+["🦷","tooth","noun","a hard white thing in the mouth (plural: teeth)","I have a pain in my tooth.","SWR"],
+["✋","hand","noun","the part at the end of your arm","Wash your hands before eating.","SWR"],
+["🦵","leg","noun","the part of the body you walk with","He broke his leg.","SWR"],
+["🫃","stomach","noun","the part of the body where food goes","I have a stomach ache.","SWR"],
+["🔙","back","noun","the rear part of the body","My back hurts when I sit too long.","SWR"]],
+c:["Telling the doctor",[["Doctor","What is the problem?"],["Patient","I have a pain in my stomach and a headache."],["Doctor","Since when?"],["Patient","Since last night. My back hurts too."],["Doctor","Please lie down. I will check your stomach."]]],
+m:{s:["My … hurts.","I have a headache / stomach ache.","Since yesterday."],w:["Message: I have a fever, so I cannot come to class.","Note: Wash your hands often."],r:["Sign: Dental clinic · Eye clinic.","Label: Keep away from eyes."]}},
+{g:3,id:"classroom",e:"🏫",t:"In the classroom",intro:"School and university words for studying and talking to teachers.",
+w:[["📋","syllabus","noun","a list of topics in a course","The syllabus is on the notice board.","SWR"],
+["📝","assignment","noun","work given by a teacher","Submit the assignment by Friday.","SWR"],
+["⏰","deadline","noun","the last time to finish something","The deadline is tomorrow noon.","SWR"],
+["🎤","lecture","noun","a long talk to a class","I attended a lecture on history.","SWR"],
+["🧑‍🏫","whiteboard","noun","a board you write on with markers","The teacher wrote it on the whiteboard.","SR"],
+["✅","attendance","noun","being present in class","Attendance is compulsory.","SWR"],
+["📄","handout","noun","a printed paper given to students","The teacher gave us a handout.","SWR"],
+["🗓️","semester","noun","half of an academic year","This is my second semester.","SWR"],
+["📚","revise","verb","to study again before an exam","I need to revise for the test.","SWR"],
+["🏅","grade","noun","a mark for your work","She got a high grade in maths.","SWR"]],
+c:["Asking the teacher",[["Student","Excuse me, sir. When is the assignment deadline?"],["Teacher","It is due next Monday. Please check the handout."],["Student","Is attendance counted for marks?"],["Teacher","Yes, ten percent. Don't miss the lectures."],["Student","Thank you. I'll revise before the test."]]],
+m:{s:["Excuse me, could you repeat that?","When is the deadline?","Could you explain … again?"],w:["Email: Dear Sir, I could not attend the lecture because I was ill.","Note: Revise chapters 3–5 for the test."],r:["Syllabus: Week 3 – Reading and Writing.","Notice: Attendance is compulsory."]}},
+{g:3,id:"lab",e:"🔬",t:"In the laboratory",intro:"Science words for experiments, tools and safety.",
+w:[["🧪","experiment","noun / verb","a test to find out something","We did an experiment on plants.","SWR"],
+["🥛","beaker","noun","a glass container for liquids in a lab","Pour the liquid into the beaker.","SR"],
+["🧪","test tube","noun","a thin glass tube for small samples","Heat the test tube gently.","SWR"],
+["🔬","microscope","noun","a tool that makes tiny things look bigger","Look at the cell under the microscope.","SWR"],
+["🧫","sample","noun","a small part used for testing","Take a blood sample.","SWR"],
+["🥽","goggles","noun","glasses that protect your eyes","Always wear goggles in the lab.","SR"],
+["📊","result","noun","what you find out at the end","The results show a clear pattern.","SWR"],
+["⚗️","chemical","noun","a substance used in chemistry","Do not mix these chemicals.","SWR"],
+["📜","procedure","noun","the steps you follow","Follow the procedure carefully.","SWR"],
+["💭","hypothesis","noun","an idea you test in an experiment","Our hypothesis was wrong.","WR"]],
+c:["Lab safety",[["Teacher","Everyone, put on your goggles before we start."],["Student","Sir, where should I pour the chemical?"],["Teacher","Use the beaker. Follow the procedure on the sheet."],["Student","And after heating, should I touch the test tube?"],["Teacher","No! Let it cool first. Then record your results."]]],
+m:{s:["Could you show me how to use the …?","Is it safe to …?","I think the result is …"],w:["Report: The results show that plants grow faster with more light.","Aim: To test the hypothesis that heat speeds up reactions."],r:["Sign: Wear goggles at all times.","Label: Danger – flammable chemical."]}},
+{g:3,id:"office",e:"💼",t:"At the office",intro:"Everyday words for meetings, emails and teamwork.",
+w:[["🧑‍💼","colleague","noun","a person you work with","My colleague helped me with the report.","SWR"],
+["📋","agenda","noun","a list of things to discuss at a meeting","What's on the agenda today?","SWR"],
+["🗓️","schedule","noun / verb","a plan of times; to plan a time","Let's schedule a meeting for Monday.","SWR"],
+["🧾","invoice","noun","a bill sent for goods or work","Please send the invoice by email.","WR"],
+["📎","attachment","noun","a file sent with an email","I have attached the document.","WR"],
+["🖨️","photocopy","noun / verb","a copy made by a machine","Can you photocopy this page?","SWR"],
+["📽️","presentation","noun","a talk with slides","I'm preparing a presentation for Friday.","SWR"],
+["🌙","overtime","noun","extra hours worked","We worked overtime to finish the project.","SWR"],
+["🧑‍💼","supervisor","noun","a person who manages workers","Please ask your supervisor.","SWR"],
+["📝","minutes","noun","a written record of a meeting","Who will take the minutes?","WR"]],
+c:["Planning a meeting",[["Anna","Can we schedule a meeting for tomorrow?"],["Ben","Sure. What's on the agenda?"],["Anna","The new project and the budget. I'll send the details by email."],["Ben","Please attach the invoice too. And who will take the minutes?"],["Anna","I will. See you at ten."]]],
+m:{s:["Could we schedule a meeting?","Sorry, could you repeat that?","I'll get back to you by …"],w:["Email: Dear Mr Khan, please find the invoice attached. Kind regards.","Note: Agenda – 1. Budget 2. New project."],r:["Email subject: Meeting rescheduled to 10 am.","Notice: Photocopier out of paper."]}},
+{g:4,id:"road",e:"🛣️",t:"Roads and traffic",intro:"Words for walking, crossing and moving on the road.",
+w:[["🛣️","road","noun","a hard path for vehicles","The road is wide and busy.","SWR"],
+["🚦","traffic light","noun","red, yellow and green lights that control cars","Stop at the red traffic light.","SWR"],
+["🚸","zebra crossing","noun","black and white lines where people cross","Cross at the zebra crossing.","SR"],
+["🚶","footpath","noun","a path for people who walk","Walk on the footpath, not the road.","SWR"],
+["➕","junction","noun","a place where roads meet","Turn left at the junction.","SWR"],
+["🌉","bridge","noun","a structure that carries a road over water","The bridge is over the river.","SWR"],
+["🚗","traffic jam","noun","many vehicles stuck and not moving","I was late because of a traffic jam.","SWR"],
+["⛔","stop sign","noun","a sign that tells drivers to stop","Always stop at the stop sign.","SR"],
+["🅿️","parking","noun","a place to leave a vehicle","Is there parking near here?","SWR"],
+["⛽","petrol station","noun","a place to buy fuel","Let's fill the tank at the petrol station.","SWR"]],
+c:["Asking the way",[["Visitor","Excuse me, how do I get to the bank?"],["Local","Go straight to the junction, then turn left."],["Visitor","Is it far?"],["Local","No, just five minutes on the footpath. Use the zebra crossing."],["Visitor","Thank you very much!"]]],
+m:{s:["Turn left / right at the …","Go straight ahead.","How far is it?"],w:["Note: There is heavy traffic on the main road.","Message: I will be late because of a traffic jam."],r:["Sign: Stop · Slow down · No parking.","Sign: Pedestrians only."]}},
+{g:4,id:"vehicle",e:"🚌",t:"Vehicles",intro:"Cars, buses, rickshaws and other things we travel in.",
+w:[["🚗","car","noun","a small vehicle with four wheels","My father drives a car.","SWR"],
+["🚌","bus","noun","a big vehicle that carries many people","I go to school by bus.","SWR"],
+["🚚","truck","noun","a big vehicle for carrying goods","The truck is full of rice.","SWR"],
+["🏍️","motorbike","noun","a two-wheeled vehicle with an engine","He rides a motorbike.","SWR"],
+["🚲","bicycle","noun","a two-wheeled vehicle you pedal","I ride my bicycle to work.","SWR"],
+["🛺","rickshaw","noun","a small vehicle with three wheels","Let's take a rickshaw.","SW"],
+["🚐","van","noun","a medium vehicle for goods or people","The van brought the furniture.","SWR"],
+["⛵","boat","noun","a small vehicle that moves on water","We crossed the river by boat.","SWR"],
+["🧑‍✈️","driver","noun","a person who drives a vehicle","The bus driver is very kind.","SWR"],
+["🛞","tyre","noun","the rubber ring around a wheel","The front tyre is flat.","SWR"]],
+c:["Choosing transport",[["Ali","How will you go to the station?"],["Sara","By rickshaw. The bus is too crowded."],["Ali","Take a bicycle. It is faster in a traffic jam."],["Sara","Good idea, but my tyre is flat!"],["Ali","Then take the rickshaw."]]],
+m:{s:["I go by bus / car / bicycle.","Could you stop here, please?","How long does it take?"],w:["Email: I will come by bus and arrive at 9 am.","Note: The truck driver delivers goods on Monday."],r:["Sign: Bus stop.","Notice: Bicycles not allowed."]}},
+{g:4,id:"nature",e:"🌳",t:"Trees and plants",intro:"Words for gardens, parks and nature.",
+w:[["🌳","tree","noun","a tall plant with a trunk and branches","We sat under a big tree.","SWR"],
+["🍃","leaf","noun","the flat green part of a plant","A leaf fell from the tree.","SWR"],
+["🌿","branch","noun","an arm of a tree","A bird sat on the branch.","SWR"],
+["🪵","root","noun","the part of a plant under the ground","The roots drink water.","SWR"],
+["🌸","flower","noun","the coloured part of a plant","She gave me a red flower.","SWR"],
+["🌱","grass","noun","short green plants that cover the ground","The children play on the grass.","SWR"],
+["🌻","garden","noun","a place to grow plants near a house","We grow herbs in the garden.","SWR"],
+["🌰","seed","noun","a small thing a new plant grows from","Plant the seed in the soil.","SWR"],
+["🌲","forest","noun","a large area full of trees","Tigers live in the forest.","SWR"],
+["💧","water (a plant)","verb","to give water to plants","Please water the plants every day.","SW"]],
+c:["In the garden",[["Dad","Can you water the flowers?"],["Mia","Sure. Is the grass wet too?"],["Dad","No, only the plants. Look, a new leaf!"],["Mia","Nice. When will the seeds grow?"],["Dad","In about two weeks."]]],
+m:{s:["It is a beautiful tree.","Please water the plants.","What is this flower called?"],w:["Note: Trees give us shade and clean air.","Message: Plant a tree today."],r:["Sign: Keep off the grass.","Notice: Do not pick the flowers."]}},
+{g:4,id:"weather",e:"⛅",t:"Weather",intro:"Talk about the sky, seasons and temperature.",
+w:[["☀️","sunny","adjective","with bright sun","It is sunny today.","SWR"],
+["☁️","cloudy","adjective","with many clouds","The sky is cloudy.","SWR"],
+["🌧️","rain","noun / verb","water falling from the sky","It will rain this evening.","SWR"],
+["⛈️","storm","noun","very bad weather with strong wind","A storm is coming tonight.","SWR"],
+["💨","wind","noun","moving air","The wind is very strong.","SWR"],
+["🥵","hot","adjective","with a high temperature","It is very hot in June.","SWR"],
+["🥶","cold","adjective","with a low temperature","The winter mornings are cold.","SWR"],
+["💦","humid","adjective","wet and warm in the air","It is humid in summer.","SWR"],
+["🌫️","fog","noun","thick cloud near the ground","There is thick fog this morning.","SWR"],
+["☂️","umbrella","noun","a cover you hold to keep off rain","Take an umbrella; it may rain.","SWR"]],
+c:["Talking about weather",[["Tina","It's so hot and humid today!"],["Raj","Yes, but the forecast says rain this evening."],["Tina","Then I will take an umbrella."],["Raj","Good. A storm may come with strong wind."],["Tina","I hope it gets cooler."]]],
+m:{s:["What's the weather like?","It's hot / cold / rainy.","Will it rain today?"],w:["Message: It is raining, so I will be late.","Note: Winter is cold and foggy."],r:["Forecast: Cloudy with light rain.","Warning: Storm signal 3."]}},
+{g:4,id:"animals",e:"🐄",t:"Animals and birds",intro:"Pets, farm animals, birds and wild animals.",
+w:[["🐱","cat","noun","a small pet animal that says meow","The cat is sleeping on the sofa.","SWR"],
+["🐶","dog","noun","a pet animal that barks","The dog barks at strangers.","SWR"],
+["🐄","cow","noun","a big farm animal that gives milk","The cow gives us milk.","SWR"],
+["🐐","goat","noun","a farm animal with horns","The goat eats grass.","SWR"],
+["🐔","hen","noun","a female bird kept for eggs","The hen laid an egg.","SWR"],
+["🦆","duck","noun","a water bird","Ducks swim in the pond.","SWR"],
+["🐦","bird","noun","an animal with wings and feathers","A bird is singing in the tree.","SWR"],
+["🐟","fish","noun","an animal that lives in water","We bought fresh fish.","SWR"],
+["🐅","tiger","noun","a big wild cat with stripes","The tiger lives in the forest.","SWR"],
+["🐘","elephant","noun","a very big animal with a long nose","The elephant is the biggest land animal.","SWR"]],
+c:["At the village",[["Child","Look! A cow and some goats!"],["Uncle","Yes, and the hens are in the yard."],["Child","What is that bird on the tree?"],["Uncle","It is a crow. Ducks are in the pond."],["Child","I love the village!"]]],
+m:{s:["Do you have a pet?","I like … because it is cute.","It lives in the forest."],w:["Note: Cows give us milk and hens give us eggs.","Story: A tiger lived in a big forest."],r:["Sign: Beware of the dog.","Notice: Do not feed the animals."]}},
+{g:5,id:"vegetables",e:"🥕",t:"Vegetables",intro:"Common vegetables you buy, cook and eat.",
+w:[["🥔","potato","noun","a round vegetable that grows under the ground","Boil the potato for ten minutes.","SWR"],
+["🧅","onion","noun","a round vegetable with a strong smell","Chop the onion finely.","SWR"],
+["🍅","tomato","noun","a soft red vegetable","Add two tomatoes to the curry.","SWR"],
+["🥕","carrot","noun","a long orange vegetable","Rabbits like carrots.","SWR"],
+["🥬","cabbage","noun","a big round vegetable with green leaves","The cabbage is very fresh.","SWR"],
+["🥒","cucumber","noun","a long green vegetable eaten raw","Put cucumber in the salad.","SWR"],
+["🍆","eggplant","noun","a dark purple vegetable (also brinjal)","I fried the eggplant.","SWR"],
+["🧄","garlic","noun","a small white vegetable with a strong taste","Add some garlic to the oil.","SWR"],
+["🌶️","chilli","noun","a small hot vegetable","This chilli is very hot.","SWR"],
+["🥬","spinach","noun","a vegetable with soft green leaves","Spinach is good for health.","SWR"]],
+c:["Buying vegetables",[["Buyer","I need a kilo of potatoes and some tomatoes."],["Vendor","Here you are. Anything else?"],["Buyer","Two onions and a bunch of spinach, please."],["Vendor","That's sixty taka. Fresh and cheap!"],["Buyer","Thank you."]]],
+m:{s:["A kilo of …, please.","Are these fresh?","How much for … ?"],w:["List: potato, onion, tomato, carrot.","Recipe: Cut the onion and add garlic."],r:["Sign: Fresh vegetables today.","Label: Wash before eating."]}},
+{g:5,id:"fruits",e:"🍎",t:"Fruits",intro:"Sweet and sour fruits for daily talk.",
+w:[["🥭","mango","noun","a sweet yellow tropical fruit","Mangoes are sweet in summer.","SWR"],
+["🍌","banana","noun","a long yellow fruit","I eat a banana every morning.","SWR"],
+["🍎","apple","noun","a round red or green fruit","An apple a day is good for you.","SWR"],
+["🍊","orange","noun","a round orange fruit with juice","Fresh orange juice, please.","SWR"],
+["🍇","grapes","noun","small round fruits that grow in bunches","These grapes are sour.","SWR"],
+["🍉","watermelon","noun","a big green fruit, red inside","Watermelon is cool in summer.","SWR"],
+["🍈","papaya","noun","a soft orange fruit","Papaya is good for digestion.","SW"],
+["🍍","pineapple","noun","a fruit with a rough skin and sweet inside","Cut the pineapple into pieces.","SWR"],
+["🍐","guava","noun","a green fruit with small seeds","I picked a guava from the tree.","SW"],
+["🍋","lemon","noun","a sour yellow fruit","Add lemon to the water.","SWR"]],
+c:["Fruit shop",[["Customer","Do you have fresh apples?"],["Seller","Yes, red and green. Also sweet oranges."],["Customer","Half a kilo of apples and one dozen bananas, please."],["Seller","Anything else? The mangoes are ripe today."],["Customer","No, thank you."]]],
+m:{s:["I like … because it is sweet.","Is it ripe?","I'd like a dozen …"],w:["Note: Fruits give us vitamins.","List: apple, banana, grapes."],r:["Sign: Fresh fruit juice.","Label: Wash fruit before eating."]}},
+{g:5,id:"family",e:"👨‍👩‍👧",t:"Family and people",intro:"Words for relatives, friends and neighbours.",
+w:[["👩","mother","noun","your female parent","My mother cooks well.","SWR"],
+["👨","father","noun","your male parent","My father works in a bank.","SWR"],
+["👦","brother","noun","a boy with the same parents","My brother is younger than me.","SWR"],
+["👧","sister","noun","a girl with the same parents","My sister is a teacher.","SWR"],
+["👵","grandmother","noun","your parent's mother","My grandmother tells good stories.","SWR"],
+["👴","grandfather","noun","your parent's father","My grandfather lives in the village.","SWR"],
+["🧔","uncle","noun","the brother of your parent","My uncle visits us on Fridays.","SWR"],
+["👩‍🦰","aunt","noun","the sister of your parent","My aunt lives in Dhaka.","SWR"],
+["🧒","cousin","noun","the child of your uncle or aunt","My cousin is my best friend.","SWR"],
+["🏘️","neighbour","noun","a person who lives near you","Our neighbour is very friendly.","SWR"]],
+c:["Meeting a friend",[["Ben","Who is that boy with you?"],["Nila","He is my cousin. He is visiting my aunt."],["Ben","Does your grandmother live with you?"],["Nila","Yes, with my parents and my brother."],["Ben","What a big family!"]]],
+m:{s:["This is my …","Do you have any brothers or sisters?","How is your family?"],w:["Email: Dear Uncle, thank you for your gift.","Note: My family has five members."],r:["Form: Father's name · Mother's name.","Card: Happy birthday, sister!"]}},
+{g:5,id:"clothes",e:"👕",t:"Clothes",intro:"What we wear and how to buy it.",
+w:[["👕","shirt","noun","clothing for the top half of the body","He wore a white shirt.","SWR"],
+["👖","trousers","noun","clothing that covers both legs","These trousers are too long.","SWR"],
+["👗","dress","noun","a one-piece piece of clothing for women","She wore a blue dress.","SWR"],
+["👟","shoes","noun","things you wear on your feet outdoors","I need new shoes.","SWR"],
+["🧦","socks","noun","soft covers for your feet inside shoes","Put on warm socks.","SWR"],
+["🧥","jacket","noun","a short coat","Take a jacket; it's cold.","SWR"],
+["🧢","cap","noun","a soft hat with a front peak","He wears a cap in the sun.","SWR"],
+["🧣","scarf","noun","cloth worn around the neck","She wore a woollen scarf.","SWR"],
+["📏","size","noun","how big or small something is","What size do you wear?","SWR"],
+["🎽","uniform","noun","special clothes for school or work","Students wear a uniform.","SWR"]],
+c:["Buying a shirt",[["Shopkeeper","Can I help you?"],["Customer","I want a blue shirt, please."],["Shopkeeper","What size do you wear?"],["Customer","Medium. Can I try it on?"],["Shopkeeper","Of course. The fitting room is there."]]],
+m:{s:["Do you have this in a larger size?","Can I try it on?","How much is this?"],w:["List: shirt, trousers, socks, jacket.","Review: The shirt was the wrong size."],r:["Sign: Fitting room.","Label: Machine wash cold."]}},
+{g:5,id:"colours",e:"🎨",t:"Colours and shapes",intro:"Say what colour and shape things are.",
+w:[["🔴","red","adjective","the colour of blood or a tomato","She wore a red dress.","SWR"],
+["🔵","blue","adjective","the colour of the sky on a clear day","The sky is blue.","SWR"],
+["🟢","green","adjective","the colour of grass","Green leaves cover the tree.","SWR"],
+["🟡","yellow","adjective","the colour of a banana","The sun looks yellow.","SWR"],
+["⚫","black","adjective","the darkest colour","He has black hair.","SWR"],
+["⚪","white","adjective","the colour of milk","The walls are white.","SWR"],
+["🟠","orange","adjective / noun","the colour between red and yellow","I like the orange shirt.","SWR"],
+["⭕","circle","noun","a perfectly round shape","Draw a circle on the paper.","SWR"],
+["🟦","square","noun","a shape with four equal sides","The table is a square.","SWR"],
+["🔺","triangle","noun","a shape with three sides","A triangle has three corners.","SWR"]],
+c:["Choosing a colour",[["Mum","Which colour do you want for your room?"],["Kid","Blue, like the sky."],["Mum","The walls are white now. We can paint them."],["Kid","And a green curtain, please!"],["Mum","Okay, blue and green."]]],
+m:{s:["What colour is it?","I prefer the … one.","It is round / square."],w:["Note: The flag is green and red.","Description: A red circle on a green square."],r:["Sign: Red light means stop.","Label: Available in blue, black and white."]}},
+{g:5,id:"feelings",e:"😊",t:"Feelings",intro:"Say how you feel, in a simple way.",
+w:[["😀","happy","adjective","feeling joy","I am happy today.","SWR"],
+["😢","sad","adjective","feeling unhappy","She was sad to leave.","SWR"],
+["😠","angry","adjective","feeling very cross","He is angry about the delay.","SWR"],
+["😴","tired","adjective","needing rest or sleep","I am very tired after work.","SWR"],
+["🍽️","hungry","adjective","wanting to eat","I am hungry. Let's have lunch.","SWR"],
+["🥤","thirsty","adjective","wanting to drink","I am thirsty. Can I have water?","SWR"],
+["😨","afraid","adjective","feeling fear","She is afraid of dogs.","SWR"],
+["🤩","excited","adjective","very happy and full of energy","We are excited about the trip.","SWR"],
+["🥱","bored","adjective","not interested; with nothing to do","I am bored. Let's go out.","SWR"],
+["😟","worried","adjective","thinking something bad may happen","I am worried about the exam.","SWR"]],
+c:["How are you?",[["Rafi","Hi Nila, how are you?"],["Nila","I'm tired but happy. I finished my project."],["Rafi","Great! Are you hungry? Let's eat."],["Nila","Yes, and I'm thirsty too."],["Rafi","Come on, my treat."]]],
+m:{s:["How are you feeling?","I am a bit tired.","Don't worry."],w:["Message: I am excited to see you soon.","Note: Don't be afraid to ask questions."],r:["Card: Get well soon!","Message: Congratulations! We are so happy for you."]}},
+{g:6,id:"time",e:"⏰",t:"Time and days",intro:"Talk about the time, the day and the week.",
+w:[["🌅","morning","noun","the early part of the day","I wake up early in the morning.","SWR"],
+["🌞","afternoon","noun","the time after noon","We have class in the afternoon.","SWR"],
+["🌇","evening","noun","the time before night","I walk in the evening.","SWR"],
+["🌙","night","noun","the dark part of the day","I sleep at ten at night.","SWR"],
+["📆","today","noun / adverb","this day","Today is Monday.","SWR"],
+["➡️","tomorrow","noun / adverb","the day after today","I will call you tomorrow.","SWR"],
+["⬅️","yesterday","noun / adverb","the day before today","I was ill yesterday.","SWR"],
+["🗓️","week","noun","seven days","I go to the gym twice a week.","SWR"],
+["📅","month","noun","about four weeks","My birthday is next month.","SWR"],
+["🕒","o'clock","adverb","used for exact hours","The class starts at nine o'clock.","SWR"]],
+c:["Making a plan",[["Anna","What time is it now?"],["Ben","It is half past three."],["Anna","Can we meet tomorrow morning?"],["Ben","Sorry, I'm busy. How about the afternoon?"],["Anna","Fine. Four o'clock then."]]],
+m:{s:["What time is it?","See you tomorrow.","I'm free on Friday."],w:["Email: The meeting is on Monday at 10 o'clock.","Note: Submit it by next week."],r:["Sign: Open 9 am – 5 pm, Saturday to Thursday.","Timetable: Monday · Tuesday · Wednesday."]}},
+{g:6,id:"phone",e:"📱",t:"Phone and internet",intro:"Words for calls, messages and the internet.",
+w:[["📱","mobile phone","noun","a small phone you carry with you","I forgot my mobile phone at home.","SWR"],
+["🔌","charger","noun","a thing that puts power into a battery","Do you have a phone charger?","SWR"],
+["🔋","battery","noun","the part that stores power","My battery is low.","SWR"],
+["💬","message","noun / verb","a short written note you send","Send me a message when you arrive.","SWR"],
+["📞","call","noun / verb","to phone someone","I will call you tonight.","SWR"],
+["🌐","internet","noun","the worldwide network for web and email","The internet is slow today.","SWR"],
+["📶","Wi-Fi","noun","wireless internet in a place","What is the Wi-Fi password?","SWR"],
+["🔐","password","noun","a secret word to open an account","Never share your password.","SWR"],
+["🖥️","screen","noun","the part you look at on a phone or computer","The screen is broken.","SWR"],
+["📲","app","noun","a program on a phone","Download this app for free.","SWR"]],
+c:["On the phone",[["Rina","Hello, can you hear me? The signal is weak."],["Tom","Yes, but my battery is low."],["Rina","I'll send a message with the address."],["Tom","Okay. What is the Wi-Fi password at the café?"],["Rina","I'll text you that too."]]],
+m:{s:["Can you hear me?","I'll call you back.","The signal is weak."],w:["Message: Please send me the file by email.","Note: Never share your password."],r:["Sign: Free Wi-Fi available.","Screen: Battery low – 10%."]}},
+{g:7,id:"sports",e:"⚽",t:"Sports and games",intro:"Words for football, cricket and playing together.",
+w:[["⚽","football","noun","a game where teams kick a ball into a goal","We play football on Fridays.","SWR"],
+["🏏","cricket","noun","a game with a bat and a ball","Cricket is very popular in Bangladesh.","SWR"],
+["🏟️","match","noun","a game between two teams","The match starts at four.","SWR"],
+["👥","team","noun","a group that plays together","Our team is very strong.","SWR"],
+["🏃","player","noun","a person who plays a game","He is the best player.","SWR"],
+["🥅","goal","noun","the net where you score; a point scored","He scored a great goal.","SWR"],
+["🔢","score","noun / verb","the number of points; to get a point","What is the score?","SWR"],
+["🏆","win","verb","to be the best in a game","We hope to win the match.","SWR"],
+["😞","lose","verb","not to win","They lost by two goals.","SWR"],
+["🏟️","stadium","noun","a big place for sports","The stadium is full of fans.","SWR"]],
+c:["Talking about a match",[["Raj","Did you watch the match yesterday?"],["Sam","Yes! Our team won by two goals."],["Raj","What was the score?"],["Sam","Three to one. The best player scored twice."],["Raj","Great! Let's go to the stadium next time."]]],
+m:{s:["Who won the match?","What's the score?","Let's play football."],w:["Report: Our team won the match 3–1.","Note: Practice is at 4 pm."],r:["Board: Team A 2 – Team B 1.","Sign: Stadium Gate 3."]}},
+{g:7,id:"jobs",e:"👷",t:"Jobs and work",intro:"Names of common jobs and what people do.",
+w:[["🧑‍⚕️","doctor","noun","a person who treats sick people","The doctor is very kind.","SWR"],
+["🧑‍🏫","teacher","noun","a person who teaches","My teacher helps me a lot.","SWR"],
+["🧑‍🌾","farmer","noun","a person who grows crops","The farmer works in the field.","SWR"],
+["👷","engineer","noun","a person who designs or builds things","He is a civil engineer.","SWR"],
+["🚕","driver","noun","a person who drives a vehicle","The driver knows the road.","SWR"],
+["🧑‍⚕️","nurse","noun","a person who cares for patients","The nurse gave me medicine.","SWR"],
+["👮","police officer","noun","a person who keeps the law","Ask the police officer for help.","SWR"],
+["🛍️","shopkeeper","noun","a person who owns or runs a shop","The shopkeeper gave me a discount.","SWR"],
+["🧵","tailor","noun","a person who makes clothes","The tailor made my shirt.","SWR"],
+["👨‍🍳","cook","noun / verb","a person who prepares food; to prepare food","My mother is a good cook.","SWR"]],
+c:["What do you do?",[["Ali","What do you do for a living?"],["Sara","I'm a nurse in a hospital. And you?"],["Ali","I'm an engineer. My brother is a farmer."],["Sara","Do you like your job?"],["Ali","Yes, very much."]]],
+m:{s:["What do you do?","I work as a …","I'm looking for a job."],w:["CV: I am a teacher with five years of experience.","Email: I would like to apply for the job of engineer."],r:["Notice: Drivers wanted.","Ad: Cook needed – apply today."]}}
+];
+
+(function(){"use strict";
+var $=function(i){return document.getElementById(i)};
+function el(t,x,c,f){var e=document.createElement(t);if(x)e.textContent=x;if(c)e.className=c;if(f)e.onclick=f;return e}
+function ls(k){try{return localStorage.getItem(k)}catch(e){return null}}function lw(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function jp(k,d){try{var v=JSON.parse(ls(k));return v==null?d:v}catch(e){return d}}
+function shuf(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+var IC={list:'<path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/>',home:'<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v12h5v-6h4v6h5V9"/>',search:'<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>',star:'<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',sliders:'<path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/>'};
+[].forEach.call(document.querySelectorAll("[data-i]"),function(b){b.insertAdjacentHTML("afterbegin",'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+IC[b.dataset.i]+'</svg>')});
+var CFG=Object.assign({acc:"en-GB",rate:.85,fs:16,font:"serif"},jp("sit-cfg",{}));
+function saveCfg(){lw("sit-cfg",JSON.stringify(CFG))}
+function applyCfg(){document.documentElement.style.setProperty("--fs",CFG.fs+"px");document.documentElement.dataset.font=CFG.font}applyCfg();
+function stopSay(){if(window.speechSynthesis)speechSynthesis.cancel()}
+function say(t,done){if(!window.speechSynthesis){if(done)done();return}speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang=CFG.acc;u.rate=CFG.rate;if(done){u.onend=done;u.onerror=done}speechSynthesis.speak(u)}
+var RO=["I","II","III","IV","V","VI","VII","VIII"],ORDER=S.map(function(s){return s.id}),BY={};S.forEach(function(s,i){BY[s.id]=s;s.n=i+1});
+var TAG={S:["🗣","Speaking"],W:["✍","Writing"],R:["👁","Reading"]};
+
+/* saved words */
+var ST=jp("sit-st",[]),RM="";
+function sv(){lw("sit-st",JSON.stringify(ST));var c=$("cnt2");c.textContent=ST.length;c.hidden=!ST.length}
+function star(k,t,ch){var on=ST.some(function(x){return x.k===k}),b=el("button",on?"★":"☆","sp"+(on?" on":""),function(){var i=-1;ST.forEach(function(x,n){if(x.k===k)i=n});if(i<0)ST.push({k:k,t:t,ch:ch});else ST.splice(i,1);b.textContent=i<0?"★":"☆";b.classList.toggle("on",i<0);sv();if(RM==="saved")renderR()});b.setAttribute("aria-label","Save word");return b}
+
+/* chapters */
+var main=$("book");
+function wordCard(s,w,i){var d=el("div","","wc");d.dataset.k=s.id+":"+i;d.dataset.tags=w[5];
+ var h=el("div","","wh");h.appendChild(el("span",w[0],"em"));h.appendChild(el("b",w[1]));h.appendChild(el("i",w[2],"pos"));
+ w[5].split("").forEach(function(c){var g=el("span",TAG[c][0],"bdg");g.title=TAG[c][1];h.appendChild(g)});
+ h.appendChild(el("button","🔊","sp",function(){say(w[1])}));h.appendChild(star(s.id+":"+i,w[1]+" – "+w[3],s.id));d.appendChild(h);
+ d.appendChild(el("p",w[3],"mean"));var x=el("p","","exs");x.appendChild(el("span",w[4]));x.appendChild(el("button","🔊","sp",function(){say(w[4])}));d.appendChild(x);return d}
+function quiz(s,box){var qs,qi,hit;
+ function start(){qs=shuf(s.w.map(function(_,i){return i})).slice(0,5);qi=0;hit=0;ask()}
+ function ask(){box.textContent="";if(qi>=qs.length){box.appendChild(el("p","Finished! Score: "+hit+" / "+qs.length,"qd"));box.appendChild(el("button","Try again","btn alt",start));return}
+  var n=qs[qi],o=shuf([n].concat(shuf(s.w.map(function(_,i){return i}).filter(function(i){return i!==n})).slice(0,3))),bs=[];
+  box.appendChild(el("p",(qi+1)+" / "+qs.length,"m"));box.appendChild(el("p","Which word means: "+s.w[n][3]+"?","qd"));
+  o.forEach(function(k){var b=el("button",s.w[k][1],"opt",function(){bs.forEach(function(y){y.disabled=true});if(k===n){hit++;b.classList.add("g")}else{b.classList.add("r");bs[o.indexOf(n)].classList.add("g")}say(s.w[n][1]);box.appendChild(el("button",qi<qs.length-1?"Next ›":"Finish","btn",function(){qi++;ask()}))});bs.push(b);box.appendChild(b)})}
+ box.appendChild(el("button","Start quiz (5 questions)","btn",start))}
+function buildChapter(s){var p=el("section","","pane");p.id="p-"+s.id;p.hidden=true;
+ p.appendChild(el("div","Part "+RO[s.g]+" · "+G[s.g]+" · Chapter "+s.n,"chap"));p.appendChild(el("h2",s.e+" "+s.t));p.appendChild(el("p",s.intro,"m"));
+ p.appendChild(el("h3","Picture it"));var tl=el("div","","tiles");s.w.forEach(function(w){var b=el("button","","tile",function(){say(w[1])});b.appendChild(el("span",w[0],"big"));b.appendChild(el("small",w[1]));tl.appendChild(b)});p.appendChild(tl);
+ p.appendChild(el("p","Tap a picture to hear the word.","m hint"));
+ p.appendChild(el("h3","Words and how to use them"));
+ var f=el("div","","chips"),list=el("div"),cur="ALL";
+ function draw(){f.textContent="";[["ALL","All"],["S","🗣 Speak"],["W","✍ Write"],["R","👁 Read"]].forEach(function(o){f.appendChild(el("button",o[1],"chip"+(cur===o[0]?" on":""),function(){cur=o[0];draw()}))});list.textContent="";s.w.forEach(function(w,i){if(cur==="ALL"||w[5].indexOf(cur)>=0)list.appendChild(wordCard(s,w,i))})}
+ p.appendChild(el("p","🗣 common when speaking · ✍ common in writing · 👁 common in signs and reading.","m hint"));p.appendChild(f);p.appendChild(list);draw();
+ p.appendChild(el("h3","Conversation: "+s.c[0]));var cv=el("div","","cv"),pl=el("button","▶ Play conversation","btn alt");var running=false;
+ s.c[1].forEach(function(l,i){var b=el("div","","bub "+(i%2?"b2":"b1"));b.appendChild(el("b",l[0]));b.appendChild(el("span",l[1]));b.appendChild(el("button","🔊","sp",function(){say(l[0]+". "+l[1])}));b.id="b-"+s.id+i;cv.appendChild(b)});
+ pl.onclick=function(){if(running){running=false;stopSay();pl.textContent="▶ Play conversation";return}running=true;pl.textContent="■ Stop";var i=0;(function next(){[].forEach.call(cv.children,function(x){x.classList.remove("hot")});if(!running||i>=s.c[1].length){running=false;pl.textContent="▶ Play conversation";return}var b=cv.children[i];b.classList.add("hot");var l=s.c[1][i++];say(l[1],next)})()};
+ p.appendChild(pl);p.appendChild(cv);
+ p.appendChild(el("h3","How to use these words"));var md=el("div","","modes");
+ [["🗣","When you speak","s"],["✍","When you write","w"],["👁","When you read","r"]].forEach(function(m){var c=el("div","","mode");c.appendChild(el("b",m[0]+" "+m[1]));s.m[m[2]].forEach(function(t){var li=el("p",t);if(m[2]==="s"){li.className="lk";li.onclick=function(){say(t.replace(/…/g,""))}}c.appendChild(li)});md.appendChild(c)});p.appendChild(md);
+ p.appendChild(el("h3","Quick quiz"));var qb=el("div","","qc");quiz(s,qb);p.appendChild(qb);
+ main.appendChild(p)}
+S.forEach(buildChapter);
+var pn=el("div","","pn");main.appendChild(pn);
+
+/* navigation */
+var tocOpen=false;
+function wide(){return window.matchMedia("(min-width:1000px)").matches}
+function setToc(v){tocOpen=v;document.body.classList.toggle("tocOpen",v);if(wide())lw("sit-toc",v?"1":"0");else $("bg").classList.toggle("on",v)}
+function drawToc(cur){var t=$("toc"),seen=jp("sit-seen",{});t.textContent="";t.appendChild(el("h2","Contents"));
+ G.forEach(function(g,gi){t.appendChild(el("div","Part "+RO[gi]+" · "+g,"tp"));S.forEach(function(s){if(s.g!==gi)return;var b=el("button","","te"+(s.id===cur?" on":""),function(){go(s.id)});b.appendChild(el("span",String(s.n),"n"));b.appendChild(el("span",s.e+" "+s.t+(seen[s.id]?" ✓":""),"t"));b.appendChild(el("span","","l"));b.appendChild(el("small",String(s.w.length)));t.appendChild(b)})})}
+function flash(k){var e=document.querySelector('[data-k="'+k+'"]');if(!e)return;e.scrollIntoView({block:"center"});e.classList.add("flash");setTimeout(function(){e.classList.remove("flash")},1800)}
+function go(id,k){var s=BY[id];if(!s)return;stopSay();[].forEach.call(main.querySelectorAll(".pane"),function(p){p.hidden=p.id!=="p-"+id});
+ var seen=jp("sit-seen",{});seen[id]=1;lw("sit-seen",JSON.stringify(seen));lw("sit-ch",id);if(history.replaceState)history.replaceState(null,"","#"+id);
+ pn.textContent="";var n=ORDER.indexOf(id);if(n>0)pn.appendChild(el("button","← "+BY[ORDER[n-1]].t,"btn alt",function(){go(ORDER[n-1])}));if(n<ORDER.length-1)pn.appendChild(el("button",BY[ORDER[n+1]].t+" →","btn",function(){go(ORDER[n+1])}));
+ $("bt").textContent=s.e+" "+s.t;drawToc(id);if(!wide())setToc(false);if(k)setTimeout(function(){flash(k)},30);else window.scrollTo(0,0)}
+$("bToc").onclick=function(){setToc(!tocOpen)};$("bt").onclick=function(){setToc(!tocOpen)};
+
+/* right panel */
+var dr2=$("dr2"),bg=$("bg");
+function openR(m){RM=m;renderR();dr2.classList.add("on");bg.classList.add("on")}
+function closeR(){dr2.classList.remove("on");bg.classList.remove("on");RM="";if(tocOpen&&!wide())setToc(false)}
+function renderR(){dr2.textContent="";var x=el("button","✕","sp",closeR);x.style.float="right";dr2.appendChild(x);({search:rSearch,saved:rSaved,set:rSet})[RM]()}
+bg.onclick=closeR;$("bSe").onclick=function(){openR("search")};$("bSv").onclick=function(){openR("saved")};$("bSt").onclick=function(){openR("set")};
+var SQ="";
+function rSearch(){dr2.appendChild(el("h2","Search words"));var i=document.createElement("input");i.className="si";i.type="search";i.placeholder="Word, meaning or example…";i.value=SQ;dr2.appendChild(i);var res=el("div");dr2.appendChild(res);
+ function run(){SQ=i.value.trim();res.textContent="";if(SQ.length<2){res.appendChild(el("p","Type at least 2 letters. All chapters are searched.","m"));return}var f=SQ.toLowerCase(),n=0;
+  S.forEach(function(s){s.w.forEach(function(w,wi){if(n>=100||(w[1]+" "+w[3]+" "+w[4]).toLowerCase().indexOf(f)<0)return;n++;var b=el("button","","toc",function(){closeR();go(s.id,s.id+":"+wi)});b.appendChild(el("b",w[0]+" "+w[1]));b.appendChild(el("small",w[3]+" · "+s.t));res.appendChild(b)})});
+  res.insertBefore(el("p",n?n+(n>=100?"+":"")+" results":"No matches.","m"),res.firstChild)}
+ i.oninput=run;run();setTimeout(function(){i.focus()},60)}
+function rSaved(){dr2.textContent="";var x=el("button","✕","sp",closeR);x.style.float="right";dr2.appendChild(x);dr2.appendChild(el("h2","Saved words ("+ST.length+")"));if(!ST.length)dr2.appendChild(el("p","Tap ☆ beside any word to keep it here.","m"));
+ ST.forEach(function(it){if(!BY[it.ch])return;var b=el("button","","toc",function(){closeR();go(it.ch,it.k)});b.appendChild(el("b",it.t.split(" – ")[0]));b.appendChild(el("small",it.t.split(" – ").slice(1).join(" – ")+" · "+BY[it.ch].t));dr2.appendChild(b)});
+ if(ST.length)dr2.appendChild(el("button","Clear all","btn alt",function(){if(confirm("Remove all saved words?")){ST=[];sv();location.reload()}}))}
+function seg(k,o,c){var d=el("div","","seg");o.forEach(function(x){var b=el("button",x[1],"",function(){setOpt(k,x[0])});b.setAttribute("aria-pressed",String(String(x[0])===String(c)));d.appendChild(b)});return d}
+function chk(t,on,fn){var l=el("label","","chk"),i=document.createElement("input");i.type="checkbox";i.checked=on;i.onchange=function(){fn(i.checked)};l.appendChild(i);l.appendChild(document.createTextNode(" "+t));return l}
+function rng(a,b,v,fn){var i=document.createElement("input");i.type="range";i.min=a;i.max=b;i.value=v;i.oninput=function(){fn(+i.value)};return i}
+var EYE=Object.assign({b:100,w:0,auto:false,wake:false},jp("sit-eye",{}));
+function applyEye(){$("dim").style.opacity=((100-EYE.b)/100*.85).toFixed(3);var h=new Date().getHours(),w=Math.max(EYE.w,EYE.auto&&(h>=22||h<6)?30:0);$("warm").style.opacity=(w/100*.55).toFixed(3)}
+function autoTheme(){var t="light";try{t=JSON.parse(ls("ielts-gl-reader")||"{}").theme||"light"}catch(e){}if(EYE.auto){var h=new Date().getHours();t=(h>=22||h<6)?"dark":(h>=18?"sepia":t)}document.documentElement.dataset.theme=t;applyEye()}
+function saveEye(){lw("sit-eye",JSON.stringify(EYE))}
+var wl=null;function wake(){try{if(EYE.wake&&"wakeLock"in navigator&&document.visibilityState==="visible")navigator.wakeLock.request("screen").then(function(x){wl=x});else if(wl){wl.release();wl=null}}catch(e){}}
+document.addEventListener("visibilitychange",function(){if(EYE.wake)wake()});
+function setOpt(k,v){if(k==="theme"){try{var q=JSON.parse(ls("ielts-gl-reader")||"{}");q.theme=v;lw("ielts-gl-reader",JSON.stringify(q))}catch(e){}autoTheme()}else if(k==="font"){CFG.font=v;saveCfg();applyCfg()}else if(k==="acc"){CFG.acc=v;saveCfg()}else if(k==="rate"){CFG.rate=+v;saveCfg()}renderR()}
+function rSet(){var H=function(t){dr2.appendChild(el("div",t,"sh"))};dr2.appendChild(el("h2","Settings"));
+ H("Theme");dr2.appendChild(seg("theme",[["light","Light"],["sepia","Sepia"],["dark","Night"]],document.documentElement.dataset.theme));
+ H("Typeface");dr2.appendChild(seg("font",[["serif","Serif"],["sans","Sans"]],CFG.font));
+ H("Text size");dr2.appendChild(rng(13,26,CFG.fs,function(v){CFG.fs=v;saveCfg();applyCfg()}));
+ H("Voice accent");dr2.appendChild(seg("acc",[["en-GB","British"],["en-US","American"]],CFG.acc));
+ H("Voice speed");dr2.appendChild(seg("rate",[[.7,"Slow"],[.85,"Normal"],[1,"Fast"]],CFG.rate));
+ H("Eye comfort");dr2.appendChild(el("div","Brightness","m"));dr2.appendChild(rng(30,100,EYE.b,function(v){EYE.b=v;applyEye();saveEye()}));
+ dr2.appendChild(el("div","Warm light (less blue)","m"));dr2.appendChild(rng(0,100,EYE.w,function(v){EYE.w=v;applyEye();saveEye()}));
+ dr2.appendChild(chk("Auto night mode (sepia from 6 pm, dark from 10 pm)",EYE.auto,function(v){EYE.auto=v;saveEye();autoTheme();renderR()}));
+ dr2.appendChild(chk("Keep screen on while reading",EYE.wake,function(v){EYE.wake=v;saveEye();wake()}))}
+autoTheme();wake();setInterval(autoTheme,600000);
+addEventListener("keydown",function(e){if(e.key==="Escape")closeR();if(/INPUT|TEXTAREA/.test(e.target.tagName))return;if(e.key==="ArrowRight"){var n=ORDER.indexOf(ls("sit-ch"));if(n>=0&&n<ORDER.length-1)go(ORDER[n+1])}else if(e.key==="ArrowLeft"){var m=ORDER.indexOf(ls("sit-ch"));if(m>0)go(ORDER[m-1])}});
+function setTop(){document.documentElement.style.setProperty("--top",$("bar").offsetHeight+"px")}setTop();if(window.ResizeObserver)new ResizeObserver(setTop).observe($("bar"));
+var ly=scrollY;addEventListener("scroll",function(){var y=scrollY;if(y<80||y<ly-8)document.body.classList.remove("off");else if(y>ly+8)document.body.classList.add("off");ly=y},{passive:true});
+sv();var h0=decodeURIComponent(location.hash.slice(1)),st=BY[h0]?h0:(BY[ls("sit-ch")]?ls("sit-ch"):ORDER[0]);
+go(st);setToc(wide()?ls("sit-toc")!=="0":false);
+})();
+</script>
+</body>
+</html>
