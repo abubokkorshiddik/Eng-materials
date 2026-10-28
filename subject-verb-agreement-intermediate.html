@@ -1,159 +1,291 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Subject–Verb Agreement: Intermediate | IELTS Grammar Lab</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Subject–verb agreement | English Materials</title>
+<meta name="theme-color" content="#1f2a44">
 <meta name="description" content="Practise compound subjects, indefinite pronouns, collective nouns, quantities and a quiz.">
-<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/10719400.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600;7..72,700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="lesson.css">
+<link rel="icon" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/10719400.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Literata:wght@400;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+
+<script>
+try {
+  var s = JSON.parse(localStorage.getItem("ielts-gl-reader") || "{}");
+  document.documentElement.dataset.theme = s.theme || "light";
+} catch(e) {}
+</script>
+
 <style>
-:root{--a:#b45309;--d:#78350f;--l:#fdf0dc;--bg:#fffaf2}
-/* Added only for readability and quiz layout; existing lesson.css and scripts are untouched. */
-body{line-height:1.75}
-main{max-width:920px;margin-inline:auto;padding:1.25rem}
-h1,h2,h3{line-height:1.3}
-p,li{line-height:1.8}
-table{width:100%;border-collapse:collapse;margin:1rem 0;display:block;overflow-x:auto}
-th,td{border:1px solid #d6c4ac;padding:.7rem .8rem;text-align:left;vertical-align:top}
-th{background:var(--l);color:var(--d)}
-.quiz-extra{margin-top:1rem;padding:1rem;border:1px solid #d6c4ac;border-radius:12px}
-.quiz-extra fieldset{border:0;padding:.5rem 0 1rem;margin:0;border-bottom:1px solid #eadfce}
-.quiz-extra legend{font-weight:700;margin-bottom:.5rem}
-.quiz-extra label{display:block;padding:.35rem .5rem;cursor:pointer}
-.quiz-extra button{margin-top:1rem;padding:.7rem 1rem;border:0;border-radius:8px;background:var(--d);color:white;font-weight:700;cursor:pointer}
-.quiz-result{font-weight:700;margin-top:1rem}
-.correct-answer{font-weight:600}
+:root {
+  --ink:#1f2a44;
+  --blue:#b45309;
+  --paper:#fbfaf7;
+  --line:#0002;
+  --text:#222;
+  --muted:#555;
+  --ok:#1d7a46;
+  --bad:#b3261e;
+}
+html[data-theme=sepia] {
+  --ink:#3b2f1e;
+  --blue:#8a4b12;
+  --paper:#f4ecd8;
+  --line:#4a3b2633;
+  --text:#4a3b26;
+  --muted:#7a6a52;
+}
+html[data-theme=dark] {
+  --ink:#e8ecf7;
+  --blue:#8fb0ff;
+  --paper:#14171f;
+  --line:#fff3;
+  --text:#e6e6e6;
+  --muted:#a9afbd;
+  --ok:#6fd49a;
+  --bad:#ff8a80;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  background:var(--paper);
+  color:var(--text);
+  font:18px/1.7 Literata,Georgia,serif;
+  overflow-wrap:anywhere;
+  padding:0 env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0);
+}
+a { color:var(--blue); }
+main,.top { width:100%; max-width:720px; margin:auto; padding:16px 18px; }
+@media(min-width:700px) { main,.top { max-width:1000px; } }
+.top { font:600 .9rem Inter,sans-serif; }
+.top a { color:var(--ink); text-decoration:none; margin-right:14px; }
+h1,h2,h3 { font-family:Fraunces,Georgia,serif; color:var(--ink); line-height:1.2; }
+h1 { font-size:clamp(2rem,7vw,3rem); margin:14px 0; }
+h2 { margin:44px 0 8px; }
+h3 { font-size:1.1rem; margin:18px 0 4px; }
+.m { color:var(--muted); font-size:.95rem; }
+.btn {
+  display:inline-block; background:var(--ink); color:var(--paper); padding:10px 16px;
+  border:1px solid var(--ink); border-radius:6px; font:600 .9rem Inter,sans-serif;
+  margin:4px 6px 4px 0; cursor:pointer; text-decoration:none;
+}
+.btn.alt { background:none; color:var(--ink); }
+.ok { color:var(--ok); }
+.no { color:var(--bad); }
+:focus-visible { outline:3px solid var(--blue); outline-offset:3px; }
+
+html{--sheet:#fffdf8;--desk:#d9d3c4;--rule:#cfc6ad;font-size:var(--fs,16px)}
+html[data-theme=sepia]{--sheet:#f4ecd8;--desk:#d6c8a2;--rule:#cdbb91}
+html[data-theme=dark]{--sheet:#181c26;--desk:#0b0d12;--rule:#2e3548}
+html[data-font=sans] body{font-family:Inter,system-ui,sans-serif}
+[hidden]{display:none!important}
+body{background:var(--desk);font-size:1.125rem;padding-top:var(--top,100px)}
+.top{display:none}
+main{position:relative;background:var(--sheet);max-width:860px;margin:14px auto 40px;padding:26px 28px 40px 34px;border-radius:3px 8px 8px 3px;box-shadow:2px 2px 0 var(--sheet),3px 3px 0 var(--rule),5px 5px 0 var(--sheet),6px 6px 0 var(--rule),0 18px 40px rgba(0,0,0,.3)}
+main::before{content:"";position:absolute;left:0;top:0;bottom:0;width:24px;border-radius:3px 0 0 3px;background:linear-gradient(90deg,rgba(0,0,0,.14),transparent);pointer-events:none}
+@media(max-width:700px){main{margin:0;border-radius:0;box-shadow:none;padding:20px 16px 34px 22px}}
+h1{text-align:center}h1::after{content:"\2766";display:block;font-size:1.1rem;color:var(--blue);margin-top:6px}
+.pane h2{margin:6px 0 10px;text-align:center}.pane>p.m{text-align:center}
+#bar{position:fixed;left:0;right:0;top:0;z-index:30;display:flex;flex-wrap:wrap;align-items:center;gap:2px;padding:4px 8px;padding-top:calc(4px + env(safe-area-inset-top,0px));background:color-mix(in srgb,var(--sheet) 88%,transparent);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);border-bottom:1px solid var(--rule);transition:transform .25s}
+body.off #bar{transform:translateY(-110%)}
+.ib{width:40px;height:40px;border:0;border-radius:10px;background:none;color:var(--ink);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none;position:relative;flex:none}.ib:hover{background:var(--line)}.ib svg{pointer-events:none}
+#bt{flex:1;min-width:0;text-align:center;font:600 .9rem Inter,sans-serif;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#cnt2{position:absolute;top:2px;right:0;background:var(--blue);color:var(--paper);border-radius:99px;padding:0 5px;font:600 10px/15px Inter,sans-serif}
+#bg{position:fixed;inset:0;background:#0006;z-index:39;display:none}#bg.on{display:block}
+#dr2{position:fixed;top:0;bottom:0;right:0;width:min(92vw,400px);background:var(--sheet);color:var(--text);z-index:40;padding:calc(14px + env(safe-area-inset-top,0px)) 16px 24px;overflow:auto;transform:translateX(102%);transition:transform .25s;box-shadow:-2px 0 20px rgba(0,0,0,.4);font-family:Inter,sans-serif}#dr2.on{transform:none}#dr2 h2{margin:6px 0 10px}
+.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}.seg button{flex:1;background:none;border:0;border-right:1px solid var(--line);padding:10px 4px;font:600 .8rem Inter,sans-serif;color:var(--text);cursor:pointer}.seg button:last-child{border-right:0}.seg button[aria-pressed=true]{background:var(--blue);color:var(--paper)}
+.sh{margin:16px 0 6px;font:600 .72rem Inter,sans-serif;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+#dr2 input[type=range]{width:100%;accent-color:var(--blue)}.chk{display:flex;gap:8px;align-items:flex-start;font:500 .9rem Inter,sans-serif;margin:8px 0}.chk input{margin-top:4px}
+.pane .chk{font:inherit;font-size:1rem}
+.toc{display:block;width:100%;text-align:left;background:none;color:var(--text);border:0;border-top:1px solid var(--rule);padding:10px 4px;font:500 .95rem Inter,sans-serif;cursor:pointer}.toc small{display:block;color:var(--muted);margin-top:2px}
+.sp{border:1px solid var(--line);background:none;color:var(--text);border-radius:6px;cursor:pointer;padding:3px 9px;font-size:1rem;margin-left:4px}.sp.on{color:var(--blue)}
+.row{display:flex;align-items:flex-start;gap:6px;border-top:1px solid var(--rule);padding:10px 0}.row>span{flex:1}
+.big{font:700 3rem Fraunces,serif;color:var(--ink);text-align:center;margin:8px 0}
+#dr2 input.s{padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--text);font:1rem Inter,sans-serif;width:100%}
+#dim,#warm{position:fixed;inset:0;pointer-events:none;z-index:200;opacity:0;transition:opacity .2s}#dim{background:#000}#warm{background:#ff9a2e;mix-blend-mode:multiply}
+.chap{text-align:center;font:600 .72rem Inter,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.pn{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:28px;border-top:1px solid var(--rule);padding-top:14px}.pn .btn{margin:0}
+#toc{position:fixed;left:0;top:var(--top,60px);bottom:0;width:min(88vw,300px);background:var(--sheet);color:var(--text);border-right:1px solid var(--rule);z-index:41;overflow:auto;transform:translateX(-102%);transition:transform .25s;padding:12px 16px 24px;box-shadow:2px 0 20px rgba(0,0,0,.35);font-family:Inter,sans-serif}
+body.tocOpen #toc{transform:none}#toc h2{margin:4px 0 6px;text-align:center}
+.tp{font:700 .95rem Fraunces,serif;color:var(--ink);margin:16px 0 2px;padding-bottom:4px;border-bottom:1px solid var(--rule)}
+.te{display:flex;align-items:baseline;gap:6px;width:100%;background:none;border:0;padding:8px 2px;text-align:left;cursor:pointer;color:var(--text);font:500 .92rem Inter,sans-serif}
+.te .n{width:1.5em;flex:none;color:var(--muted)}.te .t{flex:none;max-width:70%}.te .l{flex:1;min-width:10px;border-bottom:1px dotted var(--muted);transform:translateY(-3px)}.te small{flex:none;color:var(--muted);font:500 .72rem Inter,sans-serif}.te.on .t{color:var(--blue);font-weight:700}.te:hover .t{text-decoration:underline}
+@media(min-width:1000px){#toc{box-shadow:none;z-index:25;width:290px}body{transition:padding-left .25s}body.tocOpen{padding-left:290px}}
+
+/* lesson content */
+.tools{display:flex;justify-content:center;gap:6px;margin:0 0 14px}
+.say{font-size:1.05rem}
+.rule,.tip{padding:12px 16px;margin:16px 0;border-left:4px solid var(--blue);border-radius:0 10px 10px 0;background:color-mix(in srgb,var(--blue) 10%,transparent)}
+.tip{border-left-color:var(--ok);background:color-mix(in srgb,var(--ok) 10%,transparent)}
+.rule p,.tip p{margin:6px 0}
+.example{padding:10px 15px;margin:12px 0;border:1px solid var(--rule);border-radius:10px}
+.example p{margin:6px 0}
+del{color:var(--bad);text-decoration:line-through}
+ins{color:var(--ok);text-decoration:none;font-weight:700}
+.note{color:var(--muted);font-size:.9rem}
+.pane ul,.pane ol{padding-left:22px}.pane li{margin:6px 0}
+.pane details{border:1px solid var(--rule);border-radius:10px;padding:0 14px;margin:8px 0}
+.pane details summary{font:600 .9rem Inter,sans-serif;padding:8px 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.two{grid-template-columns:1fr}}
+.two>div{border:1px solid var(--rule);border-radius:10px;padding:4px 14px 10px}
+.q{border:3px double var(--rule);border-radius:12px;padding:14px 16px;margin:14px 0;min-width:0}
+.q legend{font:700 1rem Fraunces,serif;color:var(--ink);padding:0 6px}
+.q label{display:flex;gap:9px;align-items:flex-start;padding:7px 8px;border-radius:8px;cursor:pointer;border:1px solid transparent}
+.q label:hover{background:var(--line)}
+.q label.sel{border-color:var(--blue)}
+.q label.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,transparent)}
+.q label.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 14%,transparent)}
+.q input{margin-top:8px;accent-color:var(--blue)}
+.fb{font:500 .85rem/1.5 Inter,sans-serif;margin-top:6px}
+.result{display:none;padding:16px;margin-top:16px;border:3px double var(--rule);border-radius:12px;text-align:center}.result.show{display:block}
+.bar2{height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin:6px 0 14px}.bar2 i{display:block;height:100%;background:var(--ok);transition:width .3s}
+.tw{overflow-x:auto;margin:1em 0}.tw table{border-collapse:collapse;width:100%;font-size:.92em}.tw th,.tw td{border:1px solid var(--rule);padding:.5em .7em;text-align:left;vertical-align:top}.tw th{background:var(--sheet)}
 </style>
 </head>
+
 <body>
-<nav class="top"><a href="index.html" class="brand">IELTS Grammar Lab</a><a href="subject-verb-agreement.html">All levels</a></nav>
+<header id="bar"><a class="ib" href="index.html" aria-label="Home" data-i="home"></a><button class="ib" id="bToc" type="button" aria-label="Show or hide contents" data-i="list"></button><div id="bt">Subject–verb agreement</div><button class="ib" id="bSe" type="button" aria-label="Search" data-i="search"></button><button class="ib" id="bSv" type="button" aria-label="Saved chapters" data-i="star"><span id="cnt2" hidden>0</span></button><button class="ib" id="bSt" type="button" aria-label="Settings" data-i="sliders"></button></header>
+<aside id="toc" aria-label="Contents"></aside><div id="bg"></div><aside id="dr2" aria-label="Panel"></aside><div id="dim" aria-hidden="true"></div><div id="warm" aria-hidden="true"></div>
+<header class="top">
+  <a href="index.html">← English Materials</a>
+  <a href="index.html#topics">All topics</a>
+</header>
+
 <main>
-<div class="hd v2"><span class="lvl">Level 2 · Intermediate</span><h1>Subject–verb agreement</h1></div>
-<p class="sub">Practise compound subjects, indefinite pronouns, collective nouns, quantities and a quiz.</p>
-
-<section><h2>1. Find the real subject</h2><p>The verb agrees with the main subject, not with a nearby noun in a phrase beginning with <em>of, with, together with, as well as</em> or <em>in addition to</em>.</p>
-<table><thead><tr><th>Sentence</th><th>Subject</th><th>Correct verb</th></tr></thead><tbody>
-<tr><td>The quality of the products ___ improving.</td><td>quality (singular)</td><td>is</td></tr><tr><td>The results of the experiment ___ reliable.</td><td>results (plural)</td><td>are</td></tr><tr><td>The professor, along with two students, ___ attending.</td><td>professor (singular)</td><td>is</td></tr></tbody></table>
-<p class="why">Ignore the words between the subject and the verb when identifying the main subject.</p></section>
-<section><h2>2. Subjects joined by conjunctions</h2>
-<table><thead><tr><th>Structure</th><th>Usual agreement</th><th>Example</th></tr></thead><tbody>
-<tr><td>A and B</td><td>Plural</td><td>Research and innovation are essential.</td></tr><tr><td>Either A or B</td><td>Usually agrees with the nearer subject</td><td>Either the manager or the assistants are coming.</td></tr><tr><td>Neither A nor B</td><td>Usually agrees with the nearer subject</td><td>Neither the assistants nor the manager is coming.</td></tr><tr><td>A or B (alternatives)</td><td>Often agrees with the nearer subject</td><td>Neither the teacher nor the students are available.</td></tr></tbody></table>
-<p>When the result sounds awkward, rewrite the sentence to make the subject and verb easier to follow.</p></section>
-<section><h2>3. Indefinite pronouns</h2>
-<table><thead><tr><th>Usually singular</th><th>Usually plural</th><th>Examples</th></tr></thead><tbody>
-<tr><td>everyone, everybody, someone, somebody, each, either, neither</td><td>both, few, many, several</td><td>Everyone is ready. Several reports contain errors.</td></tr></tbody></table>
-<p>Some expressions depend on the noun after <em>of</em>: <em>all, some, most, none</em>.</p>
-<ul><li>Some of the water <strong>is</strong> contaminated.</li><li>Some of the samples <strong>are</strong> contaminated.</li></ul></section>
-<section><h2>4. Collective nouns</h2><p>Words such as <em>team, family, committee, staff</em> and <em>government</em> name groups. Use singular agreement when the group acts as one unit. British English may use plural agreement when members are viewed as individuals; usage differs by variety and context.</p><table><thead><tr><th>One unit</th><th>Members as individuals (common in British English)</th></tr></thead><tbody><tr><td>The committee has made its decision.</td><td>The committee are arguing among themselves.</td></tr></tbody></table></section>
-<section><h2>5. Amounts, time and distance</h2><p>A sum, measurement, or period considered one total usually takes a singular verb.</p><table><thead><tr><th>One total</th><th>Separate countable items</th></tr></thead><tbody><tr><td>Ten kilometres is a long distance.</td><td>Ten kilometres of roads were inspected.</td></tr><tr><td>Five years is a long time.</td><td>The five years they spent abroad were challenging.</td></tr></tbody></table></section>
-<section><h2>6. There is / there are</h2><p>In these structures, the verb agrees with the noun phrase that follows.</p><p class="ex">There is one reason. / There are several reasons.</p><p class="why">In formal writing, avoid using “there's” with a plural noun if you want a consistently formal style.</p></section>
-
-<section><h2>Practice quiz</h2><p>Choose one answer for each question, then select <strong>Check answers</strong>. Correct answers and explanations will appear below.</p><form id="extra-quiz" class="quiz-extra">
-<fieldset data-answer="1" data-explanation="The main subject is quality, not products."><legend>1. The quality of these products ___ improving.</legend>
-<label><input type="radio" name="q1" value="0"> are</label>
-<label><input type="radio" name="q1" value="1"> is</label>
-<label><input type="radio" name="q1" value="2"> were</label>
-<label><input type="radio" name="q1" value="3"> have</label>
-</fieldset>
-<fieldset data-answer="2" data-explanation="Two distinct subjects joined by and usually take a plural verb."><legend>2. Research and innovation ___ important.</legend>
-<label><input type="radio" name="q2" value="0"> is</label>
-<label><input type="radio" name="q2" value="1"> was</label>
-<label><input type="radio" name="q2" value="2"> are</label>
-<label><input type="radio" name="q2" value="3"> has</label>
-</fieldset>
-<fieldset data-answer="2" data-explanation="Everyone is grammatically singular."><legend>3. Everyone ___ a role to play.</legend>
-<label><input type="radio" name="q3" value="0"> have</label>
-<label><input type="radio" name="q3" value="1"> are</label>
-<label><input type="radio" name="q3" value="2"> has</label>
-<label><input type="radio" name="q3" value="3"> were</label>
-</fieldset>
-<fieldset data-answer="1" data-explanation="Each is singular, so use has."><legend>4. Each of the students ___ a book.</legend>
-<label><input type="radio" name="q4" value="0"> have</label>
-<label><input type="radio" name="q4" value="1"> has</label>
-<label><input type="radio" name="q4" value="2"> are having</label>
-<label><input type="radio" name="q4" value="3"> were</label>
-</fieldset>
-<fieldset data-answer="2" data-explanation="With neither...nor, the verb commonly agrees with the nearer subject, teacher."><legend>5. Neither the students nor the teacher ___ available.</legend>
-<label><input type="radio" name="q5" value="0"> are</label>
-<label><input type="radio" name="q5" value="1"> were</label>
-<label><input type="radio" name="q5" value="2"> is</label>
-<label><input type="radio" name="q5" value="3"> have</label>
-</fieldset>
-<fieldset data-answer="1" data-explanation="Several is plural, so use contain."><legend>6. Several reports ___ errors.</legend>
-<label><input type="radio" name="q6" value="0"> contains</label>
-<label><input type="radio" name="q6" value="1"> contain</label>
-<label><input type="radio" name="q6" value="2"> is containing</label>
-<label><input type="radio" name="q6" value="3"> has</label>
-</fieldset>
-<fieldset data-answer="2" data-explanation="A measurement treated as one total usually takes a singular verb."><legend>7. Ten kilometres ___ a long distance to walk.</legend>
-<label><input type="radio" name="q7" value="0"> are</label>
-<label><input type="radio" name="q7" value="1"> were</label>
-<label><input type="radio" name="q7" value="2"> is</label>
-<label><input type="radio" name="q7" value="3"> have</label>
-</fieldset>
-<fieldset data-answer="2" data-explanation="The real subject is reasons, which is plural."><legend>8. There ___ several reasons for this result.</legend>
-<label><input type="radio" name="q8" value="0"> is</label>
-<label><input type="radio" name="q8" value="1"> was</label>
-<label><input type="radio" name="q8" value="2"> are</label>
-<label><input type="radio" name="q8" value="3"> has</label>
-</fieldset>
-<fieldset data-answer="2" data-explanation="The committee is treated as one unit here."><legend>9. The committee ___ reached a decision.</legend>
-<label><input type="radio" name="q9" value="0"> have</label>
-<label><input type="radio" name="q9" value="1"> are</label>
-<label><input type="radio" name="q9" value="2"> has</label>
-<label><input type="radio" name="q9" value="3"> were</label>
-</fieldset>
-<fieldset data-answer="1" data-explanation="The main subject is list, which is singular."><legend>10. The list of recommendations ___ available.</legend>
-<label><input type="radio" name="q10" value="0"> are</label>
-<label><input type="radio" name="q10" value="1"> is</label>
-<label><input type="radio" name="q10" value="2"> have</label>
-<label><input type="radio" name="q10" value="3"> were</label>
-</fieldset>
-<button type="submit">Check answers</button> <button type="button" id="reset-extra-quiz">Try again</button><div id="extra-quiz-result" class="quiz-result" aria-live="polite"></div></form></section>
-<nav class="nav"><a href="subject-verb-agreement-beginner.html">← Previous</a><a href="subject-verb-agreement-advanced.html">Next →</a></nav>
+<h1>Subject–verb agreement</h1>
+<p class="m">Level 2 · Intermediate level · Practise compound subjects, indefinite pronouns, collective nouns, quantities and a quiz.</p>
+<div id="panes"></div>
 </main>
-<div id="quiz"></div>
+
 <script>
-const Q = [['The quality of these products ___ improving.', ['are', 'is', 'were', 'have'], 1, 'The main subject is quality.'], ['Research and innovation ___ important.', ['is', 'was', 'are', 'has'], 2, 'Two distinct subjects joined by and usually take a plural verb.'], ['Everyone ___ a role to play.', ['have', 'are', 'has', 'were'], 2, 'Everyone is grammatically singular.'], ['Each of the students ___ a book.', ['have', 'has', 'are having', 'were'], 1, 'Each is singular.'], ['There ___ several reasons.', ['is', 'was', 'are', 'has'], 2, 'The real subject, reasons, is plural.']];
-</script>
-<script src="quiz.js"></script>
-<script src="reader.js"></script>
-<script>
-/* Additional self-contained quiz. Existing quiz.js remains unchanged. */
-(function () {
-  const form = document.getElementById("extra-quiz");
-  if (!form) return;
-  const key = "sva-quiz-" + location.pathname;
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
-    const questions = [...form.querySelectorAll("fieldset")];
-    let score = 0;
-    const feedback = [];
-    questions.forEach((fieldset, index) => {
-      const chosen = fieldset.querySelector('input[type="radio"]:checked');
-      const answer = Number(fieldset.dataset.answer);
-      const options = [...fieldset.querySelectorAll('input[type="radio"]')];
-      options.forEach((input, i) => {
-        const label = input.closest("label");
-        if (i === answer) label.classList.add("correct-answer");
-        else label.classList.remove("correct-answer");
-      });
-      if (chosen && Number(chosen.value) === answer) score++;
-      feedback.push((index + 1) + ". " + (chosen && Number(chosen.value) === answer ? "Correct" : "Review") + " — " + fieldset.dataset.explanation);
-    });
-    document.getElementById("extra-quiz-result").innerHTML =
-      "Your score: " + score + " / " + questions.length + "<br><br>" + feedback.join("<br>");
-  });
-  const reset = document.getElementById("reset-extra-quiz");
-  if (reset) reset.addEventListener("click", function () {
-    form.reset();
-    document.getElementById("extra-quiz-result").textContent = "";
-    form.querySelectorAll("label").forEach(label => label.classList.remove("correct-answer"));
-  });
+(function(){"use strict";
+var PFX="svi-",NEXT="subject-verb-agreement-advanced.html",NEXTL="Advanced",PREV="subject-verb-agreement-beginner.html",PREVL="Beginner";
+var $=function(i){return document.getElementById(i)};
+function K(x){return PFX+x}
+function el(t,x,c,f){var e=document.createElement(t);if(x)e.textContent=x;if(c)e.className=c;if(f)e.onclick=f;return e}
+function ls(k){try{return localStorage.getItem(k)}catch(e){return null}}function lw(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function jp(k,d){try{var v=JSON.parse(ls(k));return v==null?d:v}catch(e){return d}}
+var IC={list:'<path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/>',home:'<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v12h5v-6h4v6h5V9"/>',search:'<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>',star:'<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',sliders:'<path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/>'};
+function ico(n,z){return '<svg viewBox="0 0 24 24" width="'+(z||20)+'" height="'+(z||20)+'" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+IC[n]+'</svg>'}
+[].forEach.call(document.querySelectorAll("[data-i]"),function(b){b.insertAdjacentHTML("afterbegin",ico(b.dataset.i,20))});
+var CFG=Object.assign({acc:"en-GB",rate:.85,fs:16,font:"serif"},jp(K("cfg"),{}));
+function saveCfg(){lw(K("cfg"),JSON.stringify(CFG))}
+function applyCfg(){document.documentElement.style.setProperty("--fs",CFG.fs+"px");document.documentElement.dataset.font=CFG.font}applyCfg();
+function say(t){if(!window.speechSynthesis)return;speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang=CFG.acc;u.rate=CFG.rate;speechSynthesis.speak(u)}
+
+/* ---------- content ---------- */
+var CH=[{"id": "real", "t": "1. Find the real subject", "c": "<p class=\"say\">The verb agrees with the main subject, not with a nearby noun in a phrase beginning with <em>of, with, together with, as well as</em> or <em>in addition to</em>.</p><div class=\"tw\"><table><thead><tr><th>Sentence</th><th>Subject</th><th>Correct verb</th></tr></thead><tbody><tr><td>The quality of the products ___ improving.</td><td>quality (singular)</td><td>is</td></tr><tr><td>The results of the experiment ___ reliable.</td><td>results (plural)</td><td>are</td></tr><tr><td>The professor, along with two students, ___ attending.</td><td>professor (singular)</td><td>is</td></tr></tbody></table></div><p class=\"note\">Ignore the words between the subject and the verb when identifying the main subject.</p><h3>Interrupting phrases</h3><ul><li><b>of:</b> the list of items is long.</li><li><b>with / along with / together with:</b> the manager, together with her team, is here.</li><li><b>as well as / in addition to:</b> The teacher, as well as the students, was late.</li><li><b>between commas:</b> The report, which includes many figures, is clear.</li></ul><h3>Quick test</h3><p>Cross out everything between the subject and the verb. <em>The quality (of the products) is improving.</em> The sentence now reads: <em>The quality is improving.</em></p>"}, {"id": "conj", "t": "2. Subjects joined by conjunctions", "c": "<div class=\"tw\"><table><thead><tr><th>Structure</th><th>Usual agreement</th><th>Example</th></tr></thead><tbody><tr><td>A and B</td><td>Plural</td><td>Research and innovation are essential.</td></tr><tr><td>Either A or B</td><td>Usually agrees with the nearer subject</td><td>Either the manager or the assistants are coming.</td></tr><tr><td>Neither A nor B</td><td>Usually agrees with the nearer subject</td><td>Neither the assistants nor the manager is coming.</td></tr><tr><td>A or B (alternatives)</td><td>Often agrees with the nearer subject</td><td>Neither the teacher nor the students are available.</td></tr></tbody></table></div><p>When the result sounds awkward, rewrite the sentence to make the subject and verb easier to follow.</p><h3>Special cases</h3><ul><li><b>One idea:</b> <em>Bread and butter is my usual breakfast.</em> (one dish)</li><li><b>Each / every + and:</b> <em>Every man and woman has a right.</em></li><li><b>Place the plural noun last</b> in or/nor structures for a smoother sentence: Neither the manager nor the assistants are coming.</li></ul>"}, {"id": "indef", "t": "3. Indefinite pronouns", "c": "<div class=\"tw\"><table><thead><tr><th>Usually singular</th><th>Usually plural</th><th>Examples</th></tr></thead><tbody><tr><td>everyone, everybody, someone, somebody, each, either, neither</td><td>both, few, many, several</td><td>Everyone is ready. Several reports contain errors.</td></tr></tbody></table></div><p>Some expressions depend on the noun after <em>of</em>: <em>all, some, most, none</em>.</p><ul><li>Some of the water <b>is</b> contaminated.</li><li>Some of the samples <b>are</b> contaminated.</li></ul><h3>More singular words</h3><ul><li>anyone, anybody, anything, everything, nothing, no one, nobody, somebody</li><li>Each of the students <b>has</b> a book. Neither of the answers <b>is</b> correct.</li></ul><h3>Remember</h3><p><em>Everyone</em> sounds like a group, but it is grammatically singular: <em>Everyone is here.</em> A later pronoun may be plural (<em>Everyone has their own opinion</em>), but the verb stays singular.</p>"}, {"id": "coll", "t": "4. Collective nouns", "c": "<p>Words such as <em>team, family, committee, staff</em> and <em>government</em> name groups. Use singular agreement when the group acts as one unit. British English may use plural agreement when members are viewed as individuals; usage differs by variety and context.</p><div class=\"tw\"><table><thead><tr><th>One unit</th><th>Members as individuals (common in British English)</th></tr></thead><tbody><tr><td>The committee has made its decision.</td><td>The committee are arguing among themselves.</td></tr></tbody></table></div><h3>Tips</h3><ul><li>Be consistent inside a sentence: <em>The team has won its first match.</em></li><li>In IELTS Writing, singular is the safest: <em>The government has introduced new laws.</em></li><li>People, police and cattle are always plural: <em>The police are investigating.</em></li></ul>"}, {"id": "amount", "t": "5. Amounts, time and distance", "c": "<p>A sum, measurement or period considered one total usually takes a singular verb.</p><div class=\"tw\"><table><thead><tr><th>One total</th><th>Separate countable items</th></tr></thead><tbody><tr><td>Ten kilometres is a long distance.</td><td>Ten kilometres of roads were inspected.</td></tr><tr><td>Five years is a long time.</td><td>The five years they spent abroad were challenging.</td></tr></tbody></table></div><h3>More examples</h3><ul><li>Fifty dollars is too much for this book.</li><li>Two hours is not enough time.</li><li>Three-quarters of the cake has gone.</li></ul>"}, {"id": "there", "t": "6. There is / there are", "c": "<p>In these structures, the verb agrees with the noun phrase that follows.</p><div class=\"example\"><p>There is one reason. / There are several reasons.</p></div><p class=\"note\">In formal writing, avoid using “there’s” with a plural noun if you want a consistently formal style.</p><h3>With two nouns</h3><div class=\"example\"><p>There is a pen and two books on the desk.</p><p class=\"note\">The verb may agree with the first noun, but rewrite if it sounds odd: There are a pen and two books…</p></div><h3>Also for questions</h3><div class=\"example\"><p>Is there a problem? Are there any questions?</p></div>"}, {"id": "quiz", "t": "Quiz", "quiz": 1}, {"id": "stick", "t": "Making it stick", "prog": 1}];
+var QZ=[["The quality of these products ___ improving.", ["are", "is", "were", "have"], 1, "The main subject is quality, not products."], ["Research and innovation ___ important.", ["is", "was", "are", "has"], 2, "Two distinct subjects joined by and usually take a plural verb."], ["Everyone ___ a role to play.", ["have", "are", "has", "were"], 2, "Everyone is grammatically singular."], ["Each of the students ___ a book.", ["have", "has", "are having", "were"], 1, "Each is singular, so use has."], ["Neither the students nor the teacher ___ available.", ["are", "were", "is", "have"], 2, "With neither…nor, the verb commonly agrees with the nearer subject, teacher."], ["Several reports ___ errors.", ["contains", "contain", "is containing", "has"], 1, "Several is plural, so use contain."], ["Ten kilometres ___ a long distance to walk.", ["are", "were", "is", "have"], 2, "A measurement treated as one total usually takes a singular verb."], ["There ___ several reasons for this result.", ["is", "was", "are", "has"], 2, "The real subject is reasons, which is plural."], ["The committee ___ reached a decision.", ["have", "are", "has", "were"], 2, "The committee is treated as one unit here."], ["The list of recommendations ___ available.", ["are", "is", "have", "were"], 1, "The main subject is list, which is singular."]];
+var CK=["Pick five long sentences from a text you read. Cross out the interrupting phrases and check the verbs.", "Redo the quiz after a day, three days and a week.", "Keep a small notebook of your own mistakes: the wrong sentence, the right one, and why. Read it every other day.", "Read examples aloud, then write three about your own life."];
+var TN={},ORDER=CH.map(function(c){TN[c.id]=c.t;return c.id}),CHM={};CH.forEach(function(c){CHM[c.id]=c});
+var GR=[["a", "Find the subject", ["real", "conj", "indef"]], ["b", "Special nouns", ["coll", "amount", "there"]], ["c", "Check and practise", ["quiz", "stick"]]],GOF={};
+var RO=["I","II","III","IV"],RM="",tocOpen=false;
+GR.forEach(function(g){g[2].forEach(function(id){GOF[id]=g})});
+
+/* ---------- saved chapters ---------- */
+var ST=jp(K("st"),[]);
+function sv(){lw(K("st"),JSON.stringify(ST));var c=$("cnt2");c.textContent=ST.length;c.hidden=!ST.length}
+function isS(id){return ST.indexOf(id)>-1}
+function star(id){var b=el("button",isS(id)?"★ Saved":"☆ Save","sp"+(isS(id)?" on":""),function(){var i=ST.indexOf(id);if(i<0)ST.push(id);else ST.splice(i,1);b.textContent=i<0?"★ Saved":"☆ Save";b.classList.toggle("on",i<0);sv();if(RM==="saved")rSaved()});return b}
+function plain(h){var d=document.createElement("div");d.innerHTML=h;return d.textContent.replace(/\s+/g," ").trim()}
+
+/* ---------- build panes ---------- */
+var panes=$("panes"),sub=el("div","","chap"),pn=el("div","","pn");
+panes.parentNode.insertBefore(sub,panes);panes.parentNode.appendChild(pn);
+CH.forEach(function(c){var s=el("section","","pane");s.id="p-"+c.id;s.hidden=true;panes.appendChild(s);
+ if(c.c){s.appendChild(el("h2",c.t));var tl=el("div","","tools");tl.appendChild(el("button","🔊 Read aloud","sp",function(){say(plain(c.c))}));tl.appendChild(el("button","■ Stop","sp",function(){if(window.speechSynthesis)speechSynthesis.cancel()}));tl.appendChild(star(c.id));s.appendChild(tl);var b=el("div");b.innerHTML=c.c;s.appendChild(b)}});
+
+/* quiz */
+(function(){var p=$("p-quiz");p.appendChild(el("h2","Quiz"));p.appendChild(el("p",QZ.length+" questions. Choose the best answer, then check your score.","m"));
+ var st=el("p","0 of "+QZ.length+" answered","m"),bar=el("div","","bar2"),bi=document.createElement("i");bi.style.width="0%";bar.appendChild(bi);p.appendChild(st);p.appendChild(bar);
+ var f=document.createElement("form"),res=el("div","","result");res.setAttribute("aria-live","polite");
+ function prog(){var n=0;QZ.forEach(function(_,i){if(f.querySelector('input[name="q'+i+'"]:checked'))n++});st.textContent=n+" of "+QZ.length+" answered";bi.style.width=(n/QZ.length*100)+"%"}
+ QZ.forEach(function(it,i){var fs=document.createElement("fieldset");fs.className="q";fs.id="qq"+i;fs.appendChild(el("legend",(i+1)+". "+it[0]));
+  it[1].forEach(function(o,j){var l=document.createElement("label"),r=document.createElement("input");r.type="radio";r.name="q"+i;r.value=j;r.onchange=function(){[].forEach.call(fs.querySelectorAll("label"),function(x){x.classList.remove("sel")});l.classList.add("sel");prog()};l.appendChild(r);l.appendChild(el("span",o));fs.appendChild(l)});
+  var fb=el("div","","fb");fb.id="fb"+i;fb.hidden=true;fs.appendChild(fb);f.appendChild(fs)});
+ var row=el("div");var go=el("button","Check my answers","btn");go.type="submit";
+ var rs=el("button","Start again","btn alt",function(){f.reset();QZ.forEach(function(_,i){var fs=$("qq"+i);[].forEach.call(fs.querySelectorAll("label"),function(x){x.className=""});$("fb"+i).hidden=true;$("fb"+i).textContent=""});res.className="result";res.textContent="";prog();f.scrollIntoView({behavior:"smooth",block:"start"})});rs.type="button";row.appendChild(go);row.appendChild(rs);f.appendChild(row);
+ f.onsubmit=function(e){e.preventDefault();var sc=0,un=0;QZ.forEach(function(it,i){var fs=$("qq"+i),s=f.querySelector('input[name="q'+i+'"]:checked'),fb=$("fb"+i),ls2=fs.querySelectorAll("label");
+  [].forEach.call(ls2,function(x,j){x.classList.remove("right","wrong");if(j===it[2])x.classList.add("right")});
+  fb.hidden=false;fb.textContent="";var ok=s&&+s.value===it[2];
+  if(!s){un++;fb.appendChild(el("b","No answer selected. "))}else if(ok){sc++;fb.appendChild(el("b","Correct. ","ok"))}else{ls2[+s.value].classList.add("wrong");fb.appendChild(el("b","Not quite. ","no"))}
+  fb.appendChild(document.createTextNode(it[3]))});
+  var pc=Math.round(sc/QZ.length*100),msg=pc>=90?"Excellent work!":pc>=70?"Good work. Review the explanations for any you missed.":pc>=50?"You are making progress. Revisit the chapters and try again.":"Keep practising. Read the explanations, then retake the quiz.";
+  res.className="result show";res.textContent="";res.appendChild(el("div",sc+" / "+QZ.length,"big"));res.appendChild(el("p",pc+"% · "+msg,"m"));
+  if(un)res.appendChild(el("p",un+" question(s) left unanswered.","m"));
+  var best=jp(K("best"),0);if(sc>best){best=sc;lw(K("best"),JSON.stringify(best))}res.appendChild(el("p","Best score: "+best+" / "+QZ.length+". Correct answers are highlighted in green.","m"));res.scrollIntoView({behavior:"smooth",block:"nearest"})};
+ p.appendChild(f);p.appendChild(res)})();
+
+/* making it stick + progress */
+function drawProg(){var p=$("p-stick");p.textContent="";p.appendChild(el("h2","Making it stick"));p.appendChild(el("p","Tick off each habit as you try it, and see your chapters visited and best quiz score. Everything is saved on this device.","m"));
+ var seen=jp(K("seen"),{}),L=CH.filter(function(c){return c.c}),n=0;L.forEach(function(c){if(seen[c.id])n++});
+ p.appendChild(el("h3","Habits to build"));var ck=jp(K("ck"),[]);
+ CK.forEach(function(t,i){var l=el("label","","chk"),c=document.createElement("input");c.type="checkbox";c.checked=!!ck[i];c.onchange=function(){ck[i]=c.checked;lw(K("ck"),JSON.stringify(ck))};l.appendChild(c);l.appendChild(el("span",t));p.appendChild(l)});
+ p.appendChild(el("h3","Chapters visited: "+n+" of "+L.length));var bar=el("div","","bar2"),i2=document.createElement("i");i2.style.width=(n/L.length*100)+"%";bar.appendChild(i2);p.appendChild(bar);
+ L.forEach(function(c,k){var d=el("div","","row");d.appendChild(el("span",(k+1)+". "+c.t+(seen[c.id]?" ✓":"")));d.appendChild(el("button","Open","sp",function(){go(c.id)}));p.appendChild(d)});
+ p.appendChild(el("h3","Quiz"));p.appendChild(el("p","Best score: "+jp(K("best"),0)+" / "+QZ.length,"m"));
+ p.appendChild(el("button","Reset progress","btn alt",function(){if(confirm("Reset habits, chapters visited and best score?")){lw(K("seen"),"{}");lw(K("best"),"0");lw(K("ck"),"[]");drawProg();drawToc("stick")}}));
+ var nav=el("p");var a=el("a","All topics","btn alt");a.href="index.html#topics";var b=el("a",NEXTL+" →","btn");b.href=NEXT;if(PREV){var pv=el("a","← "+PREVL,"btn alt");pv.href=PREV;nav.appendChild(pv)}nav.appendChild(a);nav.appendChild(b);p.appendChild(nav)}
+drawProg();
+
+/* ---------- navigation ---------- */
+function go(id){var g=GOF[id];[].forEach.call(panes.children,function(p){p.hidden=p.id!=="p-"+id});
+ var n=ORDER.indexOf(id);sub.textContent="Part "+RO[GR.indexOf(g)]+" · "+g[1]+" · Chapter "+(n+1);
+ var seen=jp(K("seen"),{});if(CHM[id].c){seen[id]=1;lw(K("seen"),JSON.stringify(seen))}
+ pn.textContent="";if(n>0)pn.appendChild(el("button","← "+short(ORDER[n-1]),"btn alt",function(){go(ORDER[n-1])}));if(n<ORDER.length-1)pn.appendChild(el("button",short(ORDER[n+1])+" →","btn",function(){go(ORDER[n+1])}));
+ if(id==="stick")drawProg();
+ lw(K("tab"),id);if(history.replaceState)history.replaceState(null,"","#"+id);window.scrollTo(0,0);drawToc(id);if(!wide())setToc(false)}
+function short(id){var t=TN[id];return t.length>26?t.slice(0,24)+"…":t}
+function wide(){return window.matchMedia("(min-width:1000px)").matches}
+function setToc(v){tocOpen=v;document.body.classList.toggle("tocOpen",v);if(wide())lw(K("toc"),v?"1":"0");else $("bg").classList.toggle("on",v)}
+function drawToc(cur){var t=$("toc"),seen=jp(K("seen"),{}),n=0;t.textContent="";t.appendChild(el("h2","Contents"));
+ GR.forEach(function(g,gi){t.appendChild(el("div","Part "+RO[gi]+" · "+g[1],"tp"));g[2].forEach(function(id){n++;var b=el("button","","te"+(id===cur?" on":""),function(){go(id)});b.appendChild(el("span",String(n),"n"));b.appendChild(el("span",TN[id]+(seen[id]?" ✓":""),"t"));b.appendChild(el("span","","l"));b.appendChild(el("small",id==="quiz"?QZ.length+" Qs":id==="stick"?"habits":id==="practice"?"exercises":"lesson"));t.appendChild(b)})})}
+$("bToc").onclick=function(){setToc(!tocOpen)};
+
+/* ---------- right panel ---------- */
+var dr2=$("dr2"),bg=$("bg");
+function openR(m){RM=m;renderR();dr2.classList.add("on");bg.classList.add("on")}
+function closeR(){dr2.classList.remove("on");bg.classList.remove("on");RM="";if(tocOpen&&!wide())setToc(false)}
+function renderR(){dr2.textContent="";var x=el("button","✕","sp",closeR);x.style.float="right";dr2.appendChild(x);({search:rSearch,saved:rSaved,set:rSet})[RM]()}
+bg.onclick=closeR;$("bSe").onclick=function(){openR("search")};$("bSv").onclick=function(){openR("saved")};$("bSt").onclick=function(){openR("set")};
+var SQ="";
+function rSearch(){dr2.appendChild(el("h2","Search"));var i=document.createElement("input");i.className="s";i.type="search";i.placeholder="neither nor, everyone, committee…";i.value=SQ;dr2.appendChild(i);var res=el("div");dr2.appendChild(res);
+ function run(){SQ=i.value.trim();res.textContent="";if(SQ.length<2){res.appendChild(el("p","Type at least 2 letters. All chapters are searched.","m"));return}var f=SQ.toLowerCase(),n=0;
+  CH.forEach(function(c){var tx=c.c?plain(c.c):c.t,ix=tx.toLowerCase().indexOf(f),inT=c.t.toLowerCase().indexOf(f)>-1;if(ix<0&&!inT)return;n++;var b=el("button","","toc",function(){closeR();go(c.id)});b.appendChild(el("b",c.t));var sn=ix<0?"":(ix>40?"…":"")+tx.slice(Math.max(0,ix-40),ix+80)+"…";if(sn)b.appendChild(el("small",sn));res.appendChild(b)});
+  res.insertBefore(el("p",n?n+" result"+(n>1?"s":""):"No matches.","m"),res.firstChild)}
+ i.oninput=run;run();setTimeout(function(){i.focus()},60)}
+function rSaved(){dr2.textContent="";var x=el("button","✕","sp",closeR);x.style.float="right";dr2.appendChild(x);dr2.appendChild(el("h2","Saved ("+ST.length+")"));if(!ST.length)dr2.appendChild(el("p","Tap ☆ Save on any chapter to keep it here.","m"));
+ ST.forEach(function(id){var b=el("button","","toc",function(){closeR();go(id)});b.appendChild(el("b",TN[id]));dr2.appendChild(b)});
+ if(ST.length)dr2.appendChild(el("button","Clear all","btn alt",function(){if(confirm("Remove all saved chapters?")){ST=[];sv();location.reload()}}))}
+function seg(k,o,c){var d=el("div","","seg");o.forEach(function(x){var b=el("button",x[1],"",function(){setOpt(k,x[0])});b.setAttribute("aria-pressed",String(String(x[0])===String(c)));d.appendChild(b)});return d}
+function chk(t,on,fn){var l=el("label","","chk"),i=document.createElement("input");i.type="checkbox";i.checked=on;i.onchange=function(){fn(i.checked)};l.appendChild(i);l.appendChild(document.createTextNode(" "+t));return l}
+function rng(a,b,v,fn){var i=document.createElement("input");i.type="range";i.min=a;i.max=b;i.value=v;i.oninput=function(){fn(+i.value)};return i}
+var EYE=Object.assign({b:100,w:0,auto:false,wake:false},jp(K("eye"),{}));
+function applyEye(){$("dim").style.opacity=((100-EYE.b)/100*.85).toFixed(3);var h=new Date().getHours(),w=Math.max(EYE.w,EYE.auto&&(h>=22||h<6)?30:0);$("warm").style.opacity=(w/100*.55).toFixed(3)}
+function autoTheme(){var t="light";try{t=JSON.parse(ls("ielts-gl-reader")||"{}").theme||"light"}catch(e){}if(EYE.auto){var h=new Date().getHours();t=(h>=22||h<6)?"dark":(h>=18?"sepia":t)}document.documentElement.dataset.theme=t;applyEye()}
+function saveEye(){lw(K("eye"),JSON.stringify(EYE))}
+var wl=null;function wake(){try{if(EYE.wake&&"wakeLock"in navigator&&document.visibilityState==="visible")navigator.wakeLock.request("screen").then(function(x){wl=x});else if(wl){wl.release();wl=null}}catch(e){}}
+document.addEventListener("visibilitychange",function(){if(EYE.wake)wake()});
+function setOpt(k,v){if(k==="theme"){try{var q=JSON.parse(ls("ielts-gl-reader")||"{}");q.theme=v;lw("ielts-gl-reader",JSON.stringify(q))}catch(e){}autoTheme()}else if(k==="font"){CFG.font=v;saveCfg();applyCfg()}else if(k==="acc"){CFG.acc=v;saveCfg()}else if(k==="rate"){CFG.rate=+v;saveCfg()}renderR()}
+function rSet(){var S=function(t){dr2.appendChild(el("div",t,"sh"))};dr2.appendChild(el("h2","Settings"));
+ S("Theme");dr2.appendChild(seg("theme",[["light","Light"],["sepia","Sepia"],["dark","Night"]],document.documentElement.dataset.theme));
+ S("Typeface");dr2.appendChild(seg("font",[["serif","Serif"],["sans","Sans"]],CFG.font));
+ S("Text size");dr2.appendChild(rng(13,26,CFG.fs,function(v){CFG.fs=v;saveCfg();applyCfg()}));
+ S("Voice accent");dr2.appendChild(seg("acc",[["en-GB","British"],["en-US","American"]],CFG.acc));
+ S("Voice speed");dr2.appendChild(seg("rate",[[.7,"Slow"],[.85,"Normal"],[1,"Fast"]],CFG.rate));dr2.appendChild(el("button","🔊 Hear a sample","btn alt",function(){say("Neither the students nor the teacher is available.")}));
+ S("Eye comfort");dr2.appendChild(el("div","Brightness","m"));dr2.appendChild(rng(30,100,EYE.b,function(v){EYE.b=v;applyEye();saveEye()}));
+ dr2.appendChild(el("div","Warm light (less blue)","m"));dr2.appendChild(rng(0,100,EYE.w,function(v){EYE.w=v;applyEye();saveEye()}));
+ dr2.appendChild(chk("Auto night mode (sepia from 6 pm, dark from 10 pm)",EYE.auto,function(v){EYE.auto=v;saveEye();autoTheme();renderR()}));
+ dr2.appendChild(chk("Keep screen on while reading",EYE.wake,function(v){EYE.wake=v;saveEye();wake()}))}
+autoTheme();wake();setInterval(autoTheme,600000);
+addEventListener("keydown",function(e){if(e.key==="Escape")closeR()});
+
+/* ---------- layout helpers ---------- */
+function setTop(){document.documentElement.style.setProperty("--top",$("bar").offsetHeight+"px")}setTop();if(window.ResizeObserver)new ResizeObserver(setTop).observe($("bar"));
+var ly=scrollY;addEventListener("scroll",function(){var y=scrollY;if(y<80||y<ly-8)document.body.classList.remove("off");else if(y>ly+8)document.body.classList.add("off");ly=y},{passive:true});
+sv();var h0=decodeURIComponent(location.hash.slice(1)),t0=TN[h0]?h0:(TN[ls(K("tab"))]?ls(K("tab")):ORDER[0]);
+go(t0);setToc(wide()?ls(K("toc"))!=="0":false);
 })();
 </script>
 </body>
