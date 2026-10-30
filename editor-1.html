@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Writer | English Materials</title>
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/10719400.png">
+<meta name="theme-color" content="#1f4fbf">
+<meta name="description" content="A free online word processor. Write, format, add tables and pictures, then download as Word or print as PDF.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Lora:wght@400;700&family=Merriweather:wght@400;700&family=Open+Sans:wght@400;700&family=Roboto:wght@400;700&family=Source+Code+Pro:wght@400&family=Noto+Sans+Bengali:wght@400;700&family=Hind+Siliguri:wght@400;700&display=swap" rel="stylesheet">
+<script>
+try {
+  var st = JSON.parse(localStorage.getItem('ielts-gl-reader') || '{}');
+  document.documentElement.dataset.theme = st.theme || localStorage.getItem('theme') || 'light';
+} catch (e) {}
+</script>
+<style>
+:root { --bar:#fff; --glass:rgba(255,255,255,.92); --bg2:#f7f7f7; --onacc:#fff; --bg:#e6e6e6; --text:#242424; --line:#0002; --accent:#185abd; --soft:#185abd18; }
+html[data-theme="sepia"] { --bar:#efe5cc; --glass:rgba(239,229,204,.94); --bg2:#e6d9bb; --onacc:#fff8e8; --bg:#d9cba8; --text:#4a3b26; --line:#4a3b2633; --accent:#8a4b12; --soft:#8a4b1220; }
+html[data-theme="dark"] { --bar:#1b1f29; --glass:rgba(27,31,41,.94); --bg2:#252a38; --onacc:#10131a; --bg:#10131a; --text:#e6e6e6; --line:#fff3; --accent:#8fb0ff; --soft:#8fb0ff22; }
+* { box-sizing:border-box; }
+html { -webkit-text-size-adjust:100%; }
+body { margin:0; background:var(--bg); color:var(--text); font:600 14px Inter, system-ui, sans-serif; height:100vh; height:100dvh; display:flex; flex-direction:column; overflow:hidden; }
+:focus-visible { outline:3px solid var(--accent); outline-offset:1px; }
+[hidden] { display:none !important; }
+button, select, input { font:inherit; color:var(--text); }
+svg { display:block; pointer-events:none; }
+
+/* Title bar */
+.top { display:flex; align-items:center; gap:6px; padding:4px 10px; padding-top:calc(4px + env(safe-area-inset-top,0px)); background:#185abd; color:#fff; flex:none; }
+html[data-theme="dark"] .top { background:#143a73; }
+html[data-theme="sepia"] .top { background:#8a4b12; }
+.top a, .top button { color:#fff; background:none; border:0; border-radius:6px; width:34px; height:34px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; text-decoration:none; flex:none; }
+.top a:hover, .top button:hover { background:#fff3; }
+.app { font-weight:700; font-size:15px; margin:0 8px 0 2px; }
+.top .as { width:auto; height:30px; padding:0 8px; gap:6px; font-size:12px; }
+.sl { width:34px; height:18px; border-radius:9px; background:#fff3; border:1px solid #fffa; position:relative; flex:none; }
+.sl i { position:absolute; top:2px; left:2px; width:12px; height:12px; border-radius:50%; background:#fff; transition:left .15s; }
+.as[aria-checked="true"] .sl { background:#fff; }
+.as[aria-checked="true"] .sl i { left:18px; background:#185abd; }
+#dname { width:min(30vw,240px); min-width:90px; background:transparent; border:1px solid transparent; border-radius:6px; color:#fff; padding:5px 8px; font-size:13px; font-weight:600; }
+#dname:hover, #dname:focus { border-color:#fff7; background:#fff2; }
+#sstat { font-size:11px; opacity:.85; white-space:nowrap; font-weight:500; flex:none; }
+#tsearch { flex:1; max-width:420px; margin:0 auto; min-width:60px; height:30px; border-radius:6px; border:0; background:rgba(255,255,255,.95); color:#222; padding:0 12px; font-weight:500; }
+.top .sp { flex:1; }
+@media (max-width:760px) { .at, .app { display:none; } #tsearch { display:none; } .top .sp { display:block; } }
+
+/* Tabs and ribbon */
+.tabs { display:flex; gap:2px; padding:4px 8px 0; background:var(--bar); border-bottom:1px solid var(--line); overflow-x:auto; flex:none; scrollbar-width:none; }
+.tabs::-webkit-scrollbar { display:none; }
+.tab { border:0; background:none; padding:8px 14px; border-radius:8px 8px 0 0; cursor:pointer; font-size:13px; white-space:nowrap; }
+.tab:hover { background:var(--soft); }
+.tab[aria-selected="true"] { background:none; color:var(--accent); box-shadow:inset 0 -2px 0 var(--accent); border-radius:0; }
+.tab.file { margin-right:4px; }
+.ribbon { background:var(--bg2); border-bottom:1px solid var(--line); flex:none; overflow-x:auto; scrollbar-width:thin; }
+.panel { display:flex; align-items:stretch; padding:6px 8px; gap:0; min-width:max-content; }
+.grp { display:flex; flex-direction:column; justify-content:space-between; padding:0 8px; border-right:1px solid var(--line); }
+.grp:last-child { border-right:0; }
+.grp .rows { display:flex; flex-direction:column; gap:3px; }
+.grp .row { display:flex; gap:2px; align-items:center; }
+.grp .gl { text-align:center; font-size:10.5px; opacity:.65; margin-top:3px; font-weight:600; }
+.rb { min-width:32px; height:30px; border:0; background:none; border-radius:6px; display:inline-flex; align-items:center; justify-content:center; gap:4px; cursor:pointer; padding:0 6px; flex:none; font-size:14px; }
+.rb:hover { background:var(--line); }
+.rb.on, .rb[aria-pressed="true"] { background:var(--accent); color:var(--onacc); }
+.rb.big { flex-direction:column; height:62px; min-width:54px; font-size:11px; gap:3px; }
+.rb.sty { min-width:64px; height:46px; border:1px solid var(--line); background:var(--bar); flex-direction:column; font-size:11px; margin-right:3px; }
+.rb.sty span { font-size:15px; line-height:1.1; }
+select.rs, input.rs { height:30px; border:1px solid var(--line); background:var(--bar); border-radius:6px; padding:0 6px; cursor:pointer; }
+#ffam { width:130px; } #fsz { width:62px; }
+.ar::after { content:""; border:4px solid transparent; border-top-color:currentColor; border-bottom:0; margin-left:2px; }
+.cbar { display:block; width:14px; height:3px; border-radius:1px; margin-top:1px; }
+
+/* Floating menu */
+#menu { position:fixed; z-index:60; background:var(--bar); border:1px solid var(--line); border-radius:10px; box-shadow:0 10px 30px #0004; padding:6px; min-width:150px; max-height:70vh; overflow:auto; }
+#menu button.mi { display:flex; width:100%; align-items:center; gap:8px; text-align:left; border:0; background:none; padding:8px 10px; border-radius:6px; cursor:pointer; }
+#menu button.mi:hover { background:var(--soft); }
+#menu .pal { display:grid; grid-template-columns:repeat(8,24px); gap:4px; padding:4px; }
+#menu .pal button { width:24px; height:24px; border-radius:4px; border:1px solid var(--line); cursor:pointer; padding:0; }
+#menu .tg { display:grid; grid-template-columns:repeat(8,20px); gap:2px; padding:4px; }
+#menu .tg i { width:20px; height:20px; border:1px solid var(--line); border-radius:2px; background:var(--bar); }
+#menu .tg i.on { background:var(--accent); border-color:var(--accent); }
+#menu .tl { text-align:center; font-size:12px; padding:2px; opacity:.8; }
+#menu .sym { display:grid; grid-template-columns:repeat(8,32px); gap:2px; }
+#menu .sym button { width:32px; height:32px; border:0; background:none; border-radius:6px; cursor:pointer; font-size:17px; }
+#menu .sym button:hover { background:var(--soft); }
+
+/* Workspace */
+#work { flex:1; min-height:0; overflow:auto; position:relative; padding:12px 8px 40px; -webkit-overflow-scrolling:touch; }
+#zoomer { width:max-content; margin:0 auto; transform-origin:top center; }
+#ruler { height:20px; margin:0 auto 8px; background:var(--bar); border:1px solid var(--line); border-radius:3px; position:relative; overflow:hidden; opacity:.9; }
+#ruler .tk { position:absolute; inset:0; background:
+  repeating-linear-gradient(90deg, var(--text) 0 1px, transparent 1px 96px) 0 100%/100% 12px no-repeat,
+  repeating-linear-gradient(90deg, var(--text) 0 1px, transparent 1px 48px) 0 100%/100% 8px no-repeat,
+  repeating-linear-gradient(90deg, var(--text) 0 1px, transparent 1px 12px) 0 100%/100% 4px no-repeat; opacity:.45; }
+#ruler .mg { position:absolute; top:0; bottom:0; background:var(--line); }
+#paper { background:var(--pc,#fff); color:#111; box-shadow:0 2px 10px #0004; margin:0 auto; position:relative;
+  background-image:repeating-linear-gradient(to bottom, var(--pc,#fff) 0, var(--pc,#fff) calc(var(--ph) - 8px), #cfcdc7 calc(var(--ph) - 8px), #cfcdc7 var(--ph)); }
+#doc .cmt { background:#fff1b8; border-bottom:2px solid #f0b400; }
+#doc .cmt.fl { outline:2px solid #f0b400; }
+#doc ins.trk { color:#c62828; text-decoration:underline; }
+#doc del.trk { color:#c62828; text-decoration:line-through; }
+#doc .toc { border:1px solid #ddd; padding:10px 16px; margin:10px 0; background:#fafafa; }
+#doc .toc p { margin:0 0 4px; }
+#doc .toc .tl { display:flex; align-items:baseline; }
+#doc .toc .dots { flex:1; border-bottom:1px dotted #777; margin:0 6px 4px; }
+#doc .fnline { width:30%; margin:24px 0 6px 0; }
+#doc .fnotes p { font-size:13px; margin:0 0 3px; }
+#doc .cap { font-size:13px; color:#44546a; }
+#doc sup.fn { color:#185abd; }
+#cpane { position:fixed; right:0; top:var(--pt,170px); bottom:30px; width:min(92vw,280px); background:var(--bar); border-left:1px solid var(--line); z-index:30; overflow:auto; padding:10px; box-shadow:-4px 0 14px #0002; }
+#cpane .ch { display:flex; align-items:center; gap:6px; margin-bottom:6px; } #cpane .ch b { flex:1; font-size:15px; }
+#cpane textarea { width:100%; min-height:70px; border:1px solid var(--line); border-radius:6px; padding:8px; background:var(--bg2); font:500 13px Inter, sans-serif; }
+#cpane .cc { margin:8px 0; display:flex; flex-direction:column; gap:6px; }
+#cpane .ci { border:1px solid var(--line); border-left:4px solid #f0b400; border-radius:8px; padding:8px 10px; margin:8px 0; cursor:pointer; font-weight:500; font-size:13px; }
+#cpane .ci small { display:block; opacity:.65; margin-bottom:3px; } #cpane .ci q { display:block; opacity:.7; margin:2px 0 4px; font-style:italic; } #cpane .cn { opacity:.7; font-weight:500; font-size:13px; }
+#dlg { position:fixed; inset:0; background:#0006; z-index:95; display:flex; align-items:center; justify-content:center; padding:16px; }
+.dbx { background:var(--bar); border:1px solid var(--line); border-radius:12px; padding:18px; width:min(100%,340px); }
+.dbx h3 { margin:0 0 10px; font-size:16px; } .dbx table { width:100%; border-collapse:collapse; } .dbx td { padding:5px 0; font-weight:500; } .dbx td:last-child { text-align:right; font-weight:700; }
+.dact { text-align:right; margin-top:12px; }
+.dbx { max-height:90vh; overflow:auto; } .dbx.wide { width:min(100%,560px); }
+.fin { display:block; width:100%; margin:0 0 8px; border:1px solid var(--line); background:var(--bg2); color:var(--text); border-radius:6px; padding:8px; font:500 13px Inter, sans-serif; }
+.two { display:flex; gap:6px; } .two .fin { min-width:0; }
+.srclist { max-height:46vh; overflow:auto; margin:8px 0; }
+.srow2 { display:flex; gap:6px; align-items:center; border-top:1px solid var(--line); padding:6px 0; }
+.srow2 > div { flex:1; min-width:0; font-weight:500; font-size:13px; } .srow2 small { display:block; opacity:.65; }
+.srcbtn { display:flex; gap:6px; flex-wrap:wrap; }
+.chk2 { display:flex; gap:8px; align-items:center; font-weight:500; margin:4px 0 10px; }
+#doc .cite { background:#e8f0fe; border-radius:3px; }
+#doc .bibl { margin:12px 0; }
+#doc { outline:none; min-height:100px; font:400 16px/1.5 Calibri, Carlito, "Open Sans", Arial, sans-serif; word-wrap:break-word; overflow-wrap:anywhere; }
+#doc p, #doc div { margin:0 0 8px; }
+#doc h1 { font-size:28px; margin:18px 0 8px; } #doc h2 { font-size:22px; margin:16px 0 6px; } #doc h3 { font-size:18px; margin:14px 0 6px; }
+#doc blockquote { margin:10px 24px; padding:4px 14px; border-left:4px solid #bbb; color:#555; font-style:italic; }
+#doc .ttl { font-size:38px; font-weight:400; text-align:center; letter-spacing:.5px; margin:0 0 14px; }
+#doc table { border-collapse:collapse; margin:8px 0; width:100%; table-layout:fixed; }
+#doc td, #doc th { border:1px solid #777; padding:5px 8px; vertical-align:top; min-width:30px; }
+#doc img { max-width:100%; height:auto; cursor:pointer; }
+#doc img.sel { outline:3px solid var(--accent); }
+#doc hr { border:0; border-top:1px solid #777; margin:12px 0; }
+#doc hr.pagebreak { border-top:2px dashed #999; position:relative; margin:18px 0; break-after:page; page-break-after:always; }
+#doc hr.pagebreak::after { content:"Page break"; position:absolute; left:50%; top:-9px; transform:translateX(-50%); background:#fff; padding:0 8px; font:600 11px Inter, sans-serif; color:#888; }
+#doc a { color:#1f4fbf; }
+#doc mark.fm { background:#ffd54a; }
+#doc ::selection { background:rgba(40,110,255,.3); }
+#doc .pgsp { margin:0 !important; padding:0; border:0; user-select:none; -webkit-user-select:none; pointer-events:none; }
+#hf { position:absolute; inset:0; pointer-events:none; user-select:none; -webkit-user-select:none; font:500 12px Calibri, "Open Sans", Arial, sans-serif; color:#777; overflow:hidden; }
+#hf div { position:absolute; display:flex; justify-content:space-between; gap:12px; white-space:nowrap; overflow:hidden; line-height:18px; }
+::highlight(wfind) { background:#ffe14d; color:#000; }
+::highlight(wcur) { background:#ff9632; color:#000; }
+#doc.fp { cursor:copy; }
+.tabs .tog { margin-left:auto; padding:8px 12px; font-size:15px; }
+.ribbon.off { display:none; }
+#find .fo { display:flex; gap:14px; flex-wrap:wrap; margin:2px 0 8px; font-weight:500; font-size:12px; }
+#find .fo label { display:flex; align-items:center; gap:6px; cursor:pointer; }
+#find .fo input { width:auto; height:auto; margin:0; }
+#npane { position:fixed; left:0; top:var(--pt,170px); bottom:30px; width:min(86vw,250px); background:var(--bar); border-right:1px solid var(--line); z-index:30; overflow:auto; padding:10px; box-shadow:4px 0 14px #0002; }
+#npane .ch { display:flex; align-items:center; gap:6px; margin-bottom:6px; } #npane .ch b { flex:1; font-size:15px; }
+#npane button.ni { display:block; width:100%; text-align:left; border:0; background:none; padding:6px 8px; border-radius:6px; cursor:pointer; font-weight:500; font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+#npane button.ni:hover { background:var(--soft); }
+#npane .cn { opacity:.7; font-weight:500; font-size:13px; }
+#rsz { position:fixed; z-index:41; width:14px; height:14px; background:var(--accent); border:2px solid #fff; border-radius:3px; cursor:nwse-resize; touch-action:none; }
+
+/* Context toolbar (tables, images) */
+#ctx { position:fixed; z-index:40; display:flex; gap:2px; flex-wrap:wrap; max-width:94vw; background:var(--bar); border:1px solid var(--line); border-radius:10px; box-shadow:0 6px 20px #0004; padding:4px; }
+#ctx button { border:0; background:none; border-radius:6px; padding:6px 9px; cursor:pointer; font-size:12px; white-space:nowrap; }
+#ctx button:hover { background:var(--soft); }
+#ctx .x { color:#d33; }
+
+/* Status bar */
+.status { display:flex; align-items:center; gap:14px; padding:4px 12px; padding-bottom:calc(4px + env(safe-area-inset-bottom,0px)); background:var(--bar); color:var(--text); border-top:1px solid var(--line); font-size:12px; flex:none; font-weight:500; }
+.status .sp { flex:1; }
+.status button { background:none; border:0; color:var(--text); cursor:pointer; width:24px; height:24px; border-radius:50%; font-size:16px; line-height:1; }
+.status button:hover { background:var(--line); }
+#zr { width:110px; accent-color:var(--accent); }
+.status .hide-s { }
+@media (max-width:640px) { .hide-s { display:none; } #zr { width:70px; } }
+
+/* Find panel */
+#find { position:fixed; right:12px; top:calc(var(--ft,120px)); z-index:50; width:min(330px,94vw); background:var(--bar); border:1px solid var(--line); border-radius:12px; box-shadow:0 10px 30px #0005; padding:12px; }
+#find input { width:100%; height:34px; border:1px solid var(--line); background:var(--bg); border-radius:6px; padding:0 10px; margin-bottom:6px; }
+#find .fr { display:flex; gap:6px; flex-wrap:wrap; margin-top:2px; }
+.btn { border:1px solid var(--line); background:none; border-radius:8px; padding:7px 12px; cursor:pointer; min-height:34px; display:inline-flex; align-items:center; gap:6px; text-decoration:none; color:var(--text); }
+.btn:hover { background:var(--soft); }
+.btn.pri { background:var(--accent); color:var(--onacc); border-color:var(--accent); }
+#fmsg { font-size:12px; opacity:.75; margin:6px 0 0; font-weight:500; }
+
+/* File drawer */
+#back { position:fixed; inset:0; background:#0006; z-index:70; }
+#file { position:fixed; top:0; bottom:0; left:0; width:min(92vw,380px); background:var(--bar); z-index:71; box-shadow:2px 0 16px #0004; display:flex; flex-direction:column; padding-top:env(safe-area-inset-top,0px); }
+#file .fh { display:flex; align-items:center; justify-content:space-between; padding:10px 12px 10px 16px; font-size:16px; border-bottom:1px solid var(--line); }
+#file .fb { overflow:auto; padding:8px 12px 24px; flex:1; }
+.fi { display:flex; align-items:center; gap:12px; width:100%; text-align:left; border:0; background:none; padding:12px 8px; border-radius:8px; cursor:pointer; text-decoration:none; color:var(--text); }
+.fi:hover { background:var(--soft); }
+.fi small { display:block; opacity:.65; font-weight:500; font-size:11px; }
+.fsh { margin:16px 6px 4px; font-size:12px; opacity:.65; }
+.drow { display:flex; align-items:center; border-top:1px solid var(--line); }
+.drow button.o { flex:1; text-align:left; background:none; border:0; padding:10px 6px; cursor:pointer; min-width:0; }
+.drow button.o small { display:block; opacity:.65; font-weight:500; font-size:11px; }
+.drow button.d { background:none; border:0; cursor:pointer; padding:8px; opacity:.7; }
+#toast { position:fixed; left:50%; bottom:calc(52px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); background:var(--bar); border:1px solid var(--line); border-radius:999px; padding:7px 16px; font-size:12px; box-shadow:0 4px 14px #0004; z-index:90; opacity:0; pointer-events:none; transition:opacity .2s; }
+#toast.show { opacity:1; }
+
+@media print {
+  body { display:block; height:auto; overflow:visible; background:#fff; }
+  .top, .tabs, .ribbon, .status, #ruler, #ctx, #find, #menu, #file, #back, #toast, #cpane, #npane, #rsz, #hf, #dlg, #doc .pgsp { display:none !important; }
+  #work { overflow:visible; padding:0 !important; }
+  #zoomer { zoom:1 !important; }
+  #paper { box-shadow:none; margin:0; background:#fff !important; background-image:none !important; width:auto !important; min-height:0 !important; padding:0 !important; outline:none !important; }
+  #doc .cmt { background:none; border:0; } #doc .cite, #doc .toc { background:none; }
+}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <a href="./index.html" aria-label="Home" data-i="home"></a>
+  <span class="app">Word</span>
+  <button class="as" id="asBtn" type="button" role="switch" aria-checked="true" aria-label="AutoSave"><span class="sl"><i></i></span><span class="at">AutoSave</span></button>
+  <input id="dname" type="text" value="Untitled document" aria-label="Document name" maxlength="80" spellcheck="false">
+  <span id="sstat">Saved</span>
+  <input id="tsearch" type="search" placeholder="Search" aria-label="Search the document">
+  <span class="sp"></span>
+  <button id="cmBtn" type="button" aria-label="Comments" title="Comments" data-i="comment"></button>
+  <button id="themeBtn" type="button" aria-label="Change theme" data-i="sun"></button>
+</div>
+
+<nav class="tabs" role="tablist" aria-label="Ribbon tabs">
+  <button class="tab file" id="fileBtn" type="button">File</button>
+  <button class="tab" role="tab" data-tab="home" aria-selected="true">Home</button>
+  <button class="tab" role="tab" data-tab="insert" aria-selected="false">Insert</button>
+  <button class="tab" role="tab" data-tab="design" aria-selected="false">Design</button>
+  <button class="tab" role="tab" data-tab="layout" aria-selected="false">Layout</button>
+  <button class="tab" role="tab" data-tab="refs" aria-selected="false">References</button>
+  <button class="tab" role="tab" data-tab="review" aria-selected="false">Review</button>
+  <button class="tab" role="tab" data-tab="view" aria-selected="false">View</button>
+  <button class="tab tog" id="ribToggle" type="button" aria-label="Collapse the ribbon" aria-expanded="true" title="Collapse or expand the ribbon (double-click a tab)">⌃</button>
+</nav>
+
+<div class="ribbon" id="ribbon">
+  <!-- HOME -->
+  <div class="panel" data-panel="home">
+    <div class="grp">
+      <div class="row">
+        <button class="rb big" type="button" data-act="paste" data-i="paste" data-s="22">Paste</button>
+        <div class="rows">
+          <button class="rb" type="button" data-act="cut" data-i="cut" aria-label="Cut" title="Cut (Ctrl+X)"></button>
+          <button class="rb" type="button" data-act="copy" data-i="copy" aria-label="Copy" title="Copy (Ctrl+C)"></button>
+        </div>
+        <div class="rows">
+          <button class="rb" type="button" data-cmd="undo" data-i="undo" aria-label="Undo" title="Undo (Ctrl+Z)"></button>
+          <button class="rb" type="button" data-cmd="redo" data-i="redo" aria-label="Redo" title="Redo (Ctrl+Y)"></button>
+        </div>
+        <div class="rows">
+          <button class="rb" type="button" data-act="fpaint" data-i="brush" aria-label="Format Painter" title="Format Painter: copy formatting from one place to another"></button>
+        </div>
+      </div>
+      <div class="gl">Clipboard</div>
+    </div>
+    <div class="grp">
+      <div class="rows">
+        <div class="row">
+          <select class="rs" id="ffam" aria-label="Font">
+            <option>Calibri</option><option>Arial</option><option>Times New Roman</option><option>Georgia</option><option>Verdana</option><option>Courier New</option>
+            <option>Inter</option><option>Roboto</option><option>Open Sans</option><option>Lora</option><option>Merriweather</option><option>Source Code Pro</option><option>Noto Sans Bengali</option><option>Hind Siliguri</option>
+          </select>
+          <select class="rs" id="fsz" aria-label="Font size"></select>
+          <button class="rb" type="button" data-act="grow" aria-label="Increase font size" title="Increase font size" style="font-size:16px">A<sup style="font-size:9px">+</sup></button>
+          <button class="rb" type="button" data-act="shrink" aria-label="Decrease font size" title="Decrease font size" style="font-size:12px">A<sup style="font-size:9px">−</sup></button>
+          <button class="rb ar" type="button" data-menu="case" aria-label="Change case" title="Change case" style="font-size:13px">Aa</button>
+        </div>
+        <div class="row">
+          <button class="rb" type="button" data-cmd="bold" aria-label="Bold" title="Bold (Ctrl+B)"><b>B</b></button>
+          <button class="rb" type="button" data-cmd="italic" aria-label="Italic" title="Italic (Ctrl+I)"><i style="font-family:serif">I</i></button>
+          <button class="rb" type="button" data-cmd="underline" aria-label="Underline" title="Underline (Ctrl+U)"><u>U</u></button>
+          <button class="rb" type="button" data-cmd="strikeThrough" aria-label="Strikethrough" title="Strikethrough"><s>S</s></button>
+          <button class="rb" type="button" data-cmd="subscript" aria-label="Subscript" title="Subscript">x<sub style="font-size:9px">2</sub></button>
+          <button class="rb" type="button" data-cmd="superscript" aria-label="Superscript" title="Superscript">x<sup style="font-size:9px">2</sup></button>
+          <button class="rb" type="button" data-menu="hl" aria-label="Highlight colour" title="Text highlight colour" style="flex-direction:column;gap:0"><span data-i="hlp"></span><i class="cbar" id="hlbar" style="background:#ffe14d"></i></button>
+          <button class="rb" type="button" data-menu="fc" aria-label="Font colour" title="Font colour" style="flex-direction:column;gap:0"><b style="line-height:1.1">A</b><i class="cbar" id="fcbar" style="background:#e53935"></i></button>
+          <button class="rb" type="button" data-act="clearfmt" aria-label="Clear formatting" title="Clear all formatting" data-i="eraser"></button>
+        </div>
+      </div>
+      <div class="gl">Font</div>
+    </div>
+    <div class="grp">
+      <div class="rows">
+        <div class="row">
+          <button class="rb" type="button" data-cmd="insertUnorderedList" data-i="ul" aria-label="Bullets" title="Bullets"></button>
+          <button class="rb" type="button" data-cmd="insertOrderedList" data-i="ol" aria-label="Numbering" title="Numbering"></button>
+          <button class="rb" type="button" data-cmd="outdent" data-i="outdent" aria-label="Decrease indent" title="Decrease indent"></button>
+          <button class="rb" type="button" data-cmd="indent" data-i="indent" aria-label="Increase indent" title="Increase indent"></button>
+          <button class="rb ar" type="button" data-menu="lh" data-i="spacing" aria-label="Line spacing" title="Line and paragraph spacing"></button>
+        </div>
+        <div class="row">
+          <button class="rb" type="button" data-cmd="justifyLeft" data-i="al" aria-label="Align left" title="Align left (Ctrl+L)"></button>
+          <button class="rb" type="button" data-cmd="justifyCenter" data-i="ac" aria-label="Centre" title="Centre (Ctrl+E)"></button>
+          <button class="rb" type="button" data-cmd="justifyRight" data-i="ar" aria-label="Align right" title="Align right (Ctrl+R)"></button>
+          <button class="rb" type="button" data-cmd="justifyFull" data-i="aj" aria-label="Justify" title="Justify (Ctrl+J)"></button>
+        </div>
+      </div>
+      <div class="gl">Paragraph</div>
+    </div>
+    <div class="grp">
+      <div class="row">
+        <button class="rb sty" type="button" data-style="p"><span>Aa</span>Normal</button>
+        <button class="rb sty" type="button" data-style="ttl"><span style="font-size:19px">Aa</span>Title</button>
+        <button class="rb sty" type="button" data-style="h1"><span style="font-weight:700;font-size:18px">Aa</span>Heading 1</button>
+        <button class="rb sty" type="button" data-style="h2"><span style="font-weight:700;font-size:16px">Aa</span>Heading 2</button>
+        <button class="rb sty" type="button" data-style="h3"><span style="font-weight:700">Aa</span>Heading 3</button>
+        <button class="rb sty" type="button" data-style="blockquote"><span style="font-style:italic">Aa</span>Quote</button>
+      </div>
+      <div class="gl">Styles</div>
+    </div>
+    <div class="grp">
+      <div class="rows">
+        <button class="rb" type="button" data-act="find" data-i="search"> Find</button>
+        <button class="rb" type="button" data-act="replace"> Replace</button>
+        <button class="rb" type="button" data-act="all"> Select all</button>
+      </div>
+      <div class="gl">Editing</div>
+    </div>
+  </div>
+
+  <!-- INSERT -->
+  <div class="panel" data-panel="insert" hidden>
+    <div class="grp">
+      <div class="row">
+        <button class="rb big ar" type="button" data-menu="tbl" data-i="table" data-s="22">Table</button>
+        <button class="rb big" type="button" data-act="image" data-i="image" data-s="22">Picture</button>
+        <button class="rb big" type="button" data-act="link" data-i="link" data-s="22">Link</button>
+      </div>
+      <div class="gl">Insert</div>
+    </div>
+    <div class="grp">
+      <div class="row">
+        <button class="rb big" type="button" data-act="hr" data-i="hr" data-s="22">Line</button>
+        <button class="rb big" type="button" data-act="pb" data-i="pb" data-s="22">Page break</button>
+        <button class="rb big ar" type="button" data-menu="sym" data-i="omega" data-s="22">Symbol</button>
+        <button class="rb big" type="button" data-act="date" data-i="cal" data-s="22">Date</button>
+      </div>
+      <div class="gl">Text and objects</div>
+    </div>
+    <div class="grp">
+      <div class="row">
+        <button class="rb big" type="button" data-act="hf" data-i="file" data-s="22">Header &amp; Footer</button>
+      </div>
+      <div class="gl">Header and footer</div>
+    </div>
+  </div>
+
+  <!-- LAYOUT -->
+  <div class="panel" data-panel="layout" hidden>
+    <div class="grp">
+      <div class="row">
+        <button class="rb big ar" type="button" data-menu="mar" data-i="margin" data-s="22">Margins</button>
+        <button class="rb big ar" type="button" data-menu="ori" data-i="orient" data-s="22">Orientation</button>
+        <button class="rb big ar" type="button" data-menu="siz" data-i="file" data-s="22">Size</button>
+        <button class="rb big ar" type="button" data-menu="col" data-i="cols" data-s="22">Columns</button>
+      </div>
+      <div class="gl">Page setup</div>
+    </div>
+  </div>
+
+  <!-- DESIGN -->
+  <div class="panel" data-panel="design" hidden>
+    <div class="grp">
+      <div class="row">
+        <button class="rb big" type="button" data-act="ss1" data-i="file" data-s="22">Modern</button>
+        <button class="rb big" type="button" data-act="ss2" data-i="file" data-s="22">Classic</button>
+        <button class="rb big" type="button" data-act="ss3" data-i="file" data-s="22">Academic</button>
+        <button class="rb big" type="button" data-act="ss4" data-i="file" data-s="22">Compact</button>
+      </div>
+      <div class="gl">Document formatting</div>
+    </div>
+    <div class="grp">
+      <div class="row">
+        <button class="rb big ar" type="button" data-menu="pc" data-i="hlp" data-s="22">Page colour</button>
+        <button class="rb big" type="button" id="pborBtn" data-act="pbor" data-i="margin" data-s="22" aria-pressed="false">Page borders</button>
+      </div>
+      <div class="gl">Page background</div>
+    </div>
+  </div>
+
+  <!-- REFERENCES -->
+  <div class="panel" data-panel="refs" hidden>
+    <div class="grp">
+      <div class="row">
+        <button class="rb big" type="button" data-act="toc" data-i="ul" data-s="22">Table of Contents</button>
+        <button class="rb big" type="button" data-act="toc2" data-i="redo" data-s="22">Update Table</button>
+      </div>
+      <div class="gl">Table of Contents</div>
+    </div>
+    <div class="grp">
+      <div class="row">
+        <button class="rb big" type="button" data-act="fn" data-i="fnote" data-s="22">Insert Footnote</button>
+      </div>
+      <div class="gl">Footnotes</div>
+    </div>
+    <div class="grp">
+      <div class="row">
+        <button class="rb big" type="button" data-act="lib" data-i="book" data-s="22">Manage Sources</button>
+        <button class="rb big ar" type="button" data-menu="cite" data-i="quote" data-s="22">Insert Citation</button>
+        <button class="rb big" type="button" data-act="bib" data-i="ul" data-s="22">Bibliography</button>
+      </div>
+      <div class="gl">Citations and Bibliography</div>
+    </div>
+    <div class="grp">
+      <div class="rows">
+        <select class="rs" id="cstyle" aria-label="Citation style" style="width:130px">
+          <option value="apa">APA 7th</option><option value="mla">MLA 9th</option><option value="harvard">Harvard</option><option value="ieee">IEEE</option><option value="chicago">Chicago (author-date)</option>
+        </select>
+        <button class="rb" type="button" data-act="refresh" data-i="redo"> Update citations</button>
+      </div>
+      <div class="gl">Style</div>
+    </div>
+    <div class="grp">
+      <div class="row">
+        <button class="rb big" type="button" data-act="zot" data-i="globe" data-s="22">Zotero</button>
+        <button class="rb big" type="button" data-act="mend" data-i="globe" data-s="22">Mendeley</button>
+        <button class="rb big" type="button" data-act="imp" data-i="dl" data-s="22">Import file</button>
+      </div>
+      <div class="gl">Reference managers</div>
+    </div>
+    <div class="grp">
+      <div class="row">
+        <button class="rb big" type="button" data-act="cap" data-i="capt" data-s="22">Insert Caption</button>
+      </div>
+      <div class="gl">Captions</div>
+    </div>
+  </div>
+
+  <!-- REVIEW -->
+  <div class="panel" data-panel="review" hidden>
+    <div class="grp">
+      <div class="row">
+        <button class="rb big" type="button" id="spBtn" data-act="spell" data-i="spell" data-s="22" aria-pressed="true">Spelling</button>
+        <button class="rb big" type="button" data-act="wc" data-i="count" data-s="22">Word Count</button>
+        <button class="rb big ar" type="button" data-menu="lang" data-i="globe" data-s="22">Language</button>
+      </div>
+      <div class="gl">Proofing</div>
+    </div>
+    <div class="grp">
+      <div class="row">
+        <button class="rb big" type="button" data-act="read" data-i="speaker" data-s="22">Read Aloud</button>
+        <button class="rb big" type="button" data-act="trans" data-i="globe" data-s="22">Translate</button>
+      </div>
+      <div class="gl">Speech and Language</div>
+    </div>
+    <div class="grp">
+      <div class="row">
+        <button class="rb big" type="button" data-act="newcm" data-i="comment" data-s="22">New Comment</button>
+        <button class="rb big" type="button" data-act="delcm" data-i="trash" data-s="22">Delete</button>
+        <button class="rb big" type="button" data-act="prevcm" data-i="chevL" data-s="22">Previous</button>
+        <button class="rb big" type="button" data-act="nextcm" data-i="chevR" data-s="22">Next</button>
+        <button class="rb big" type="button" data-act="pane" data-i="list2" data-s="22">Show Comments</button>
+      </div>
+      <div class="gl">Comments</div>
+    </div>
+    <div class="grp">
+      <div class="row">
+        <button class="rb big" type="button" id="trBtn" data-act="track" data-i="pen" data-s="22" aria-pressed="false">Track Changes</button>
+        <button class="rb big" type="button" data-act="acc" data-i="check" data-s="22">Accept All</button>
+        <button class="rb big" type="button" data-act="rej" data-i="x" data-s="22">Reject All</button>
+      </div>
+      <div class="gl">Tracking</div>
+    </div>
+  </div>
+
+  <!-- VIEW -->
+  <div class="panel" data-panel="view" hidden>
+    <div class="grp">
+      <div class="row">
+        <button class="rb big" type="button" data-act="zout" data-i="minus" data-s="22">Zoom out</button>
+        <button class="rb big" type="button" data-act="zfit" data-i="full" data-s="22">100%</button>
+        <button class="rb big" type="button" data-act="zin" data-i="plus" data-s="22">Zoom in</button>
+        <button class="rb big" type="button" data-act="zwide" data-i="full" data-s="22">Page width</button>
+      </div>
+      <div class="gl">Zoom</div>
+    </div>
+    <div class="grp">
+      <div class="row">
+        <button class="rb big" type="button" id="rulerBtn" data-act="ruler" data-i="ruler" data-s="22" aria-pressed="true">Ruler</button>
+        <button class="rb big" type="button" data-act="theme" data-i="sun" data-s="22">Theme</button>
+        <button class="rb big" type="button" data-act="nav" data-i="list2" data-s="22">Navigation</button>
+        <button class="rb big" type="button" data-act="fs" data-i="full" data-s="22">Full screen</button>
+      </div>
+      <div class="gl">Show</div>
+    </div>
+  </div>
+</div>
+
+<div id="work">
+  <div id="zoomer">
+    <div id="ruler"><div class="tk"></div><div class="mg" id="rl"></div><div class="mg" id="rr"></div></div>
+    <div id="paper"><div id="doc" contenteditable="true" spellcheck="true" role="textbox" aria-multiline="true" aria-label="Document"><p><br></p></div><div id="hf" aria-hidden="true"></div></div>
+  </div>
+</div>
+
+<div class="status">
+  <span id="spg">Page 1 of 1</span>
+  <span id="swd">0 words</span>
+  <span id="sch" class="hide-s">0 characters</span>
+  <span class="sp"></span>
+  <button type="button" data-act="zout" aria-label="Zoom out">−</button>
+  <input type="range" id="zr" min="50" max="200" value="100" aria-label="Zoom">
+  <button type="button" data-act="zin" aria-label="Zoom in">+</button>
+  <span id="zv" style="min-width:36px;text-align:right">100%</span>
+</div>
+
+<div id="menu" hidden></div>
+<aside id="cpane" hidden aria-label="Comments"></aside>
+<aside id="npane" hidden aria-label="Navigation"></aside>
+<div id="rsz" hidden aria-hidden="true" title="Drag to resize the picture"></div>
+<div id="dlg" hidden role="dialog" aria-modal="true"><div class="dbx"><h3 id="dt"></h3><div id="db"></div><div class="dact"><button class="btn pri" id="dok" type="button">OK</button></div></div></div>
+<div id="ctx" hidden></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<input type="file" id="imgIn" accept="image/*" hidden>
+<input type="file" id="openIn" accept=".docx,.html,.htm,.txt,.doc,.md,text/html,text/plain" hidden>
+<input type="file" id="refIn" accept=".bib,.ris,.json,.txt,.enw" hidden>
+
+<div id="find" hidden>
+  <input type="text" id="fq" placeholder="Find" aria-label="Find">
+  <input type="text" id="fr" placeholder="Replace with" aria-label="Replace with">
+  <div class="fo"><label><input type="checkbox" id="fCase"> Match case</label><label><input type="checkbox" id="fWord"> Whole word</label></div>
+  <div class="fr">
+    <button class="btn" id="fPrev" type="button">Previous</button>
+    <button class="btn" id="fNext" type="button">Next</button>
+    <button class="btn" id="fRep" type="button">Replace</button>
+    <button class="btn" id="fAll" type="button">Replace all</button>
+    <button class="btn" id="fX" type="button">Close</button>
+  </div>
+  <p id="fmsg"></p>
+</div>
+
+<div id="back" hidden></div>
+<aside id="file" hidden aria-label="File menu">
+  <div class="fh"><strong>File</strong><button class="btn" id="fileX" type="button" aria-label="Close">✕</button></div>
+  <div class="fb" id="fileBody"></div>
+</aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html-docx-js@0.3.1/dist/html-docx.js"></script>
+<script>
+(function () {
+  "use strict";
+  const $ = id => document.getElementById(id);
+  const doc = $("doc"), paper = $("paper"), work = $("work"), zoomer = $("zoomer"), menu = $("menu"), ctx = $("ctx");
+  const esc = s => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } }
+  };
+
+  /* ---------- Icons ---------- */
+  const IC = {
+    home:'<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v12h5v-6h4v6h5V9"/>',
+    sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+    paste:'<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/>',
+    cut:'<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.1 15.9M14.5 14.5 20 20M8.1 8.1 12 12"/>',
+    copy:'<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
+    undo:'<path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-15-6.7L3 13"/>',
+    redo:'<path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 15-6.7L21 13"/>',
+    ul:'<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>',
+    ol:'<path d="M10 6h11M10 12h11M10 18h11M4 6h1v4M4 10h2M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/>',
+    indent:'<path d="M3 6h18M11 12h10M11 18h10M3 9l3 3-3 3"/>',
+    outdent:'<path d="M3 6h18M11 12h10M11 18h10M6 9l-3 3 3 3"/>',
+    al:'<path d="M3 6h18M3 12h12M3 18h16"/>', ac:'<path d="M3 6h18M7 12h10M5 18h14"/>', ar:'<path d="M3 6h18M9 12h12M5 18h16"/>', aj:'<path d="M3 6h18M3 12h18M3 18h18"/>',
+    spacing:'<path d="M21 6H11M21 12H11M21 18H11M5 4v16M3 6l2-2 2 2M3 18l2 2 2-2"/>',
+    table:'<rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 10h18M3 15h18M9 4v16M15 4v16"/>',
+    image:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/>',
+    link:'<path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/>',
+    hr:'<path d="M3 12h18"/>',
+    pb:'<path d="M5 3v6h14V3M5 21v-6h14v6M2 12h2M8 12h2M14 12h2M20 12h2"/>',
+    omega:'<path d="M5 20h4v-2a7 7 0 1 1 6 0v2h4"/>',
+    cal:'<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+    search:'<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>',
+    eraser:'<path d="m7 21-4.3-4.3a2.4 2.4 0 0 1 0-3.4l9.6-9.6a2.4 2.4 0 0 1 3.4 0l5.6 5.6a2.4 2.4 0 0 1 0 3.4L13 21"/><path d="M22 21H7"/>',
+    hlp:'<path d="m9 11-6 6v3h9l3-3"/><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"/>',
+    margin:'<rect x="3" y="3" width="18" height="18" rx="1"/><path d="M7 3v18M17 3v18M3 7h18M3 17h18" stroke-dasharray="2 2"/>',
+    orient:'<rect x="4" y="2" width="10" height="14" rx="1"/><rect x="9" y="12" width="13" height="9" rx="1"/>',
+    file:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>',
+    cols:'<rect x="3" y="3" width="18" height="18" rx="1"/><path d="M12 3v18M6 8h3M6 12h3M15 8h3M15 12h3"/>',
+    plus:'<path d="M12 5v14M5 12h14"/>', minus:'<path d="M5 12h14"/>',
+    full:'<path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/>',
+    ruler:'<path d="M3 17 17 3l4 4L7 21z"/><path d="m7 13 2 2M10 10l2 2M13 7l2 2"/>',
+    save:'<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/>',
+    print:'<path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/>',
+    dl:'<path d="M12 3v12M7 10l5 5 5-5M4 21h16"/>',
+    folder:'<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
+    trash:'<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>'
+  };
+  const ico = (n, s) => '<svg viewBox="0 0 24 24" width="' + (s || 18) + '" height="' + (s || 18) + '" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (IC[n] || "") + '</svg>';
+  Object.assign(IC, {
+    comment:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 13h5"/>',
+    fnote:'<path d="M4 5h9M8.5 5v11M16 13h4l-4 3.5a2 2 0 1 0 4 1"/>',
+    spell:'<path d="M3 17 8 5l5 12M5 13h6M15 19l3 3 5-6"/>',
+    count:'<path d="M4 20h4M6 20V4M12 5h8M12 11h8M12 17h8"/>',
+    speaker:'<path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/>',
+    quote:'<path d="M3 21c4 0 7-2 7-8V5H3v8h4c0 3-1 4-4 4zM14 21c4 0 7-2 7-8V5h-7v8h4c0 3-1 4-4 4z"/>',
+    book:'<path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/>',
+    capt:'<rect x="3" y="3" width="18" height="12" rx="1"/><path d="M6 19h12"/>',
+    globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+    pen:'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',
+    chevL:'<path d="m15 18-6-6 6-6"/>', chevR:'<path d="m9 18 6-6-6-6"/>',
+    brush:'<path d="M18 3 9 12l3 3 9-9z"/><path d="M9 12c-3 0-5 2-5 5 0 2-1 3-2 4 4 1 9 0 9-5"/>',
+    list2:'<path d="M4 6h16M4 12h16M4 18h10"/>', check:'<path d="m5 12 5 5 9-10"/>', x:'<path d="M18 6 6 18M6 6l12 12"/>'
+  });
+  document.querySelectorAll("[data-i]").forEach(el => el.insertAdjacentHTML("afterbegin", ico(el.dataset.i, +el.dataset.s || 18)));
+
+  function toast(t) { const el = $("toast"); el.textContent = t; el.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove("show"), 1600); }
+
+  /* ---------- Theme ---------- */
+  function cycleTheme() {
+    const order = ["light", "sepia", "dark"], cur = document.documentElement.dataset.theme;
+    const t = order[(order.indexOf(cur) + 1) % 3];
+    document.documentElement.dataset.theme = t;
+    let s = {}; try { s = JSON.parse(store.get("ielts-gl-reader") || "{}"); } catch (e) {}
+    s.theme = t; store.set("ielts-gl-reader", JSON.stringify(s)); store.set("theme", t);
+  }
+  $("themeBtn").addEventListener("click", cycleTheme);
+
+  /* ---------- Page setup ---------- */
+  const SIZES = { a4: [794, 1123, "A4"], letter: [816, 1056, "Letter"], legal: [816, 1344, "Legal"], a5: [559, 794, "A5"] };
+  const MARGINS = { normal: [96, "Normal (2.5 cm)"], narrow: [48, "Narrow (1.25 cm)"], moderate: [72, "Moderate (1.9 cm)"], wide: [144, "Wide (3.8 cm)"] };
+  let page = { size: "a4", orient: "p", margin: "normal", cols: 1 };
+  let zoom = 1;
+  function pageDims() {
+    const s = SIZES[page.size] || SIZES.a4;
+    return page.orient === "l" ? { w: s[1], h: s[0] } : { w: s[0], h: s[1] };
+  }
+  function applyPage() {
+    const d = pageDims(), m = (MARGINS[page.margin] || MARGINS.normal)[0];
+    paper.style.width = d.w + "px"; paper.style.padding = m + "px";
+    paper.style.setProperty("--pc", page.color || "#fff");
+    paper.style.outline = page.border ? "2px solid #333" : ""; paper.style.outlineOffset = page.border ? "-36px" : "";
+    doc.style.fontFamily = page.font || ""; doc.style.fontSize = page.fs || ""; doc.style.lineHeight = page.lh || "";
+    doc.lang = page.lang || "en-US"; doc.dir = /^(ar|he|fa|ur)/.test(page.lang || "") ? "rtl" : "ltr";
+    const pb = $("pborBtn"); if (pb) pb.setAttribute("aria-pressed", String(!!page.border));
+    paper.style.setProperty("--ph", d.h + "px");
+    $("ruler").style.width = d.w + "px";
+    $("rl").style.left = "0"; $("rl").style.width = m + "px";
+    $("rr").style.right = "0"; $("rr").style.width = m + "px";
+    doc.style.columnCount = page.cols > 1 ? page.cols : ""; doc.style.columnGap = page.cols > 1 ? "32px" : "";
+    let st = $("pgStyle"); if (!st) { st = document.createElement("style"); st.id = "pgStyle"; document.head.appendChild(st); }
+    /* Printing: paper size, margins, and the header and page numbers on every page (Chrome and Edge 131+) */
+    const mbx = "font:12px Calibri,Arial,sans-serif;color:#777;";
+    const pn = page.nfmt === "pn" ? '"Page " counter(page)' : page.nfmt === "pnn" ? '"Page " counter(page) " of " counter(pages)' : "counter(page)";
+    let mb = "";
+    if (page.hdr) mb += "@top-center{content:" + cssStr(page.hdr) + ";" + mbx + "}";
+    if (page.num === "center") mb += "@bottom-center{content:" + (page.ftr ? cssStr(page.ftr + " · ") + " " : "") + pn + ";" + mbx + "}";
+    else {
+      if (page.ftr) mb += "@bottom-left{content:" + cssStr(page.ftr) + ";" + mbx + "}";
+      if (page.num === "right") mb += "@bottom-right{content:" + pn + ";" + mbx + "}";
+    }
+    st.textContent = "@page{size:" + (SIZES[page.size] || SIZES.a4)[2] + " " + (page.orient === "l" ? "landscape" : "portrait") + ";margin:" + (m / 96).toFixed(2) + "in;" + mb + "}";
+    hfPages = -1; paginate();
+  }
+  function marginPx() { return (MARGINS[page.margin] || MARGINS.normal)[0]; }
+  function cssStr(x) { return '"' + String(x).replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\s+/g, " ") + '"'; }
+  function layout() { sizePaper(); queuePaginate(); }
+  function setZoom(z) {
+    zoom = Math.max(0.5, Math.min(2, Math.round(z * 100) / 100));
+    zoomer.style.zoom = zoom;
+    $("zr").value = Math.round(zoom * 100); $("zv").textContent = Math.round(zoom * 100) + "%";
+  }
+  function fitWidth() { const d = pageDims(); setZoom((work.clientWidth - 24) / d.w); }
+
+  /* ---------- Selection helpers ---------- */
+  let saved = null;
+  let syncT = 0;
+  document.addEventListener("selectionchange", () => {
+    const s = getSelection();
+    if (s.rangeCount && doc.contains(s.anchorNode)) {
+      saved = s.getRangeAt(0).cloneRange();
+      if (!syncT) syncT = requestAnimationFrame(() => { syncT = 0; syncUI(); updateStatus(); });
+    }
+  });
+  function restore() {
+    doc.focus({ preventScroll: true });
+    if (saved) { const s = getSelection(); s.removeAllRanges(); s.addRange(saved); }
+  }
+  function exec(cmd, val) { restore(); document.execCommand(cmd, false, val == null ? null : val); changed(); syncUI(); }
+  function blockOf(n) {
+    n = n && n.nodeType === 3 ? n.parentNode : n;
+    while (n && n !== doc) { if (/^(P|DIV|H[1-6]|LI|BLOCKQUOTE|TD|TH)$/.test(n.nodeName)) return n; n = n.parentNode; }
+    return null;
+  }
+  function selBlocks() {
+    restore();
+    const s = getSelection(); if (!s.rangeCount) return [];
+    const r = s.getRangeAt(0), out = [];
+    doc.querySelectorAll("p,div,h1,h2,h3,h4,h5,h6,li,blockquote").forEach(b => { if (!b.classList.contains("pgsp") && r.intersectsNode(b) && !b.querySelector("p,div,h1,h2,h3,li,blockquote,table")) out.push(b); });
+    if (!out.length) { const b = blockOf(r.startContainer); if (b) out.push(b); }
+    return out;
+  }
+
+  /* ---------- Change tracking, autosave, docs ---------- */
+  /* Documents live in IndexedDB (a large quota, so pictures fit). localStorage is only a fallback. */
+  let DOCS = {}, idb = null, cid = store.get("wcur") || "", dirtyT;
+  const DEF_PAGE = () => ({ size: "a4", orient: "p", margin: "normal", cols: 1 });
+  function idbOpen() {
+    return new Promise((res, rej) => {
+      if (!window.indexedDB) return rej(new Error("no IndexedDB"));
+      const r = indexedDB.open("writer-docs", 1);
+      r.onupgradeneeded = () => r.result.createObjectStore("docs", { keyPath: "id" });
+      r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error);
+    });
+  }
+  function putDoc(d) {
+    if (idb) return new Promise(res => { try { const t = idb.transaction("docs", "readwrite"); t.objectStore("docs").put(d); t.oncomplete = () => res(true); t.onerror = t.onabort = () => res(false); } catch (e) { res(false); } });
+    const o = {}; Object.keys(DOCS).forEach(k => { const v = DOCS[k]; o[k] = { name: v.name, html: v.html, page: v.page, t: v.t }; });
+    return Promise.resolve(store.set("wdocs", JSON.stringify(o)));
+  }
+  function delDoc(id) { delete DOCS[id]; if (idb) { try { idb.transaction("docs", "readwrite").objectStore("docs").delete(id); } catch (e) {} } else putDoc(null); }
+  async function loadAllDocs() {
+    try {
+      idb = await idbOpen();
+      DOCS = await new Promise((res, rej) => { const q = idb.transaction("docs").objectStore("docs").getAll(); q.onsuccess = () => { const o = {}; (q.result || []).forEach(x => { o[x.id] = x; }); res(o); }; q.onerror = () => rej(q.error); });
+    } catch (e) { idb = null; DOCS = {}; }
+    try {
+      const old = JSON.parse(store.get("wdocs") || "{}"), ids = Object.keys(old);
+      for (const id of ids) { if (!DOCS[id]) { DOCS[id] = Object.assign({ id }, old[id]); if (idb) await putDoc(DOCS[id]); } }
+      if (idb && ids.length) { try { localStorage.removeItem("wdocs"); } catch (e) {} }
+    } catch (e) {}
+  }
+  function newId() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 5); }
+  function docHtml() { return doc.innerHTML.replace(/<div class="pgsp"[^>]*><\/div>/g, ""); }
+  async function saveNow() {
+    if (!cid) cid = newId();
+    const d = { id: cid, name: $("dname").value.trim() || "Untitled document", html: docHtml(), page: Object.assign({}, page), t: Date.now() };
+    DOCS[cid] = d; store.set("wcur", cid);
+    const ok = await putDoc(d);
+    $("sstat").textContent = ok ? "Saved" : "Could not save: download a copy";
+    document.title = d.name + " | Writer";
+  }
+  let autosave = store.get("wauto") !== "0";
+  function changed() {
+    clearTimeout(dirtyT);
+    if (autosave) { $("sstat").textContent = "Saving…"; dirtyT = setTimeout(saveNow, 700); }
+    else $("sstat").textContent = "Unsaved changes (Ctrl+S)";
+    queueHist(); layout();
+  }
+  doc.addEventListener("input", changed);
+  $("dname").addEventListener("input", changed);
+  window.addEventListener("beforeunload", () => { try { saveNow(); } catch (e) {} });
+  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") { try { saveNow(); } catch (e) {} } });
+
+  function loadDoc(id) {
+    const d = DOCS[id]; if (!d) return false;
+    cid = id; store.set("wcur", id);
+    doc.innerHTML = d.html || "<p><br></p>"; $("dname").value = d.name;
+    page = Object.assign(DEF_PAGE(), d.page || {});
+    applyPage(); resetHist(); document.title = d.name + " | Writer"; $("sstat").textContent = "Saved";
+    return true;
+  }
+  function newDoc() {
+    saveNow(); cid = newId();
+    doc.innerHTML = "<p><br></p>"; $("dname").value = "Untitled document";
+    page = DEF_PAGE(); applyPage(); resetHist(); saveNow(); doc.focus();
+  }
+
+  /* ---------- Status bar ---------- */
+  let totalWords = 0, cntT = 0;
+  function updateCounts() {
+    const txt = doc.innerText || "";
+    totalWords = (txt.match(/\S+/g) || []).length;
+    $("sch").textContent = txt.replace(/\n/g, "").length + " characters";
+    updateSelCount();
+    if (!$("npane").hidden) renderNav();
+  }
+  function updateSelCount() {
+    const s = getSelection(), t = s.rangeCount && !s.isCollapsed && doc.contains(s.anchorNode) ? String(s) : "";
+    const w = (t.match(/\S+/g) || []).length;
+    $("swd").textContent = w ? w + " of " + totalWords + " words" : totalWords + (totalWords === 1 ? " word" : " words");
+  }
+  function updatePageNo() {
+    const H = pageDims().h, total = Math.max(1, Math.round(paper.offsetHeight / H)); let cur = 1;
+    const s = getSelection();
+    if (s.rangeCount && doc.contains(s.anchorNode)) {
+      let r = s.getRangeAt(0).getClientRects()[0];
+      if (!r) { const b = blockOf(s.anchorNode); if (b) r = b.getBoundingClientRect(); }
+      if (r) {
+        const pr = paper.getBoundingClientRect(), sc = pr.height / paper.offsetHeight || 1;
+        cur = Math.min(total, Math.max(1, Math.floor((r.top - pr.top) / sc / H) + 1));
+      }
+    }
+    $("spg").textContent = "Page " + cur + " of " + total;
+  }
+  function updateStatus() { clearTimeout(cntT); cntT = setTimeout(updateCounts, 300); updatePageNo(); updateSelCount(); }
+  work.addEventListener("scroll", () => { hideCtx(); }, { passive: true });
+
+  /* ---------- Toolbar state ---------- */
+  function syncUI() {
+    document.querySelectorAll("[data-cmd]").forEach(b => {
+      if (/^(undo|redo|indent|outdent)$/.test(b.dataset.cmd)) return;
+      let on = false; try { on = document.queryCommandState(b.dataset.cmd); } catch (e) {}
+      b.setAttribute("aria-pressed", String(!!on));
+    });
+    const s = getSelection();
+    if (s.rangeCount && doc.contains(s.anchorNode)) {
+      const el = s.anchorNode.nodeType === 3 ? s.anchorNode.parentElement : s.anchorNode;
+      if (el && el.nodeType === 1) {
+        const cs = getComputedStyle(el);
+        const px = Math.round(parseFloat(cs.fontSize) / (zoom || 1));
+        if (document.activeElement !== $("fsz")) $("fsz").value = String(Math.round(parseFloat(cs.fontSize)));
+        const fam = cs.fontFamily.split(",")[0].replace(/["']/g, "").trim();
+        const opt = [...$("ffam").options].find(o => o.value.toLowerCase() === fam.toLowerCase());
+        if (opt && document.activeElement !== $("ffam")) $("ffam").value = opt.value;
+        void px;
+      }
+    }
+  }
+  const sz = $("fsz");
+  [8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 32, 36, 40, 48, 60, 72].forEach(n => sz.add(new Option(n, n)));
+  sz.value = "16";
+
+  /* ---------- Font size / family ---------- */
+  function applySize(px) {
+    restore();
+    document.execCommand("styleWithCSS", false, false);
+    document.execCommand("fontSize", false, "7");
+    doc.querySelectorAll('font[size="7"]').forEach(f => { const sp = document.createElement("span"); sp.style.fontSize = px + "px"; while (f.firstChild) sp.appendChild(f.firstChild); f.replaceWith(sp); });
+    doc.querySelectorAll("span[style*='font-size']").forEach(sp => { sp.querySelectorAll("span[style*='font-size']").forEach(i => { if (i.parentNode === sp && sp.childNodes.length === 1) sp.style.fontSize = ""; }); });
+    changed(); syncUI();
+  }
+  $("fsz").addEventListener("change", e => { applySize(+e.target.value); });
+  $("ffam").addEventListener("change", e => exec("fontName", e.target.value));
+  function curSize() { const s = getSelection(); const el = s.anchorNode && (s.anchorNode.nodeType === 3 ? s.anchorNode.parentElement : s.anchorNode); return el ? Math.round(parseFloat(getComputedStyle(el).fontSize)) : 16; }
+  function stepSize(d) {
+    const list = [...sz.options].map(o => +o.value), c = curSize();
+    let n = d > 0 ? list.find(v => v > c) : [...list].reverse().find(v => v < c);
+    if (!n) n = c + d; applySize(n);
+  }
+
+  /* ---------- Styles ---------- */
+  function applyStyle(st) {
+    restore();
+    if (st === "ttl") { document.execCommand("formatBlock", false, "div"); selBlocks().forEach(b => { b.className = "ttl"; }); }
+    else {
+      document.execCommand("formatBlock", false, st === "p" ? "div" : st);
+      selBlocks().forEach(b => { b.classList.remove("ttl"); if (st === "p" && b.tagName === "DIV") { /* normal */ } });
+    }
+    changed();
+  }
+
+  /* ---------- Line spacing ---------- */
+  function setLH(v, after) { selBlocks().forEach(b => { b.style.lineHeight = v; if (after != null) b.style.marginBottom = after + "px"; }); changed(); }
+
+  /* ---------- Menus ---------- */
+  const COLORS = ["#000000","#434343","#666666","#999999","#cccccc","#efefef","#f3f3f3","#ffffff","#e53935","#ff6d00","#ffb300","#ffe14d","#7ee08a","#00a86b","#00acc1","#8ec5ff","#1f4fbf","#3949ab","#8e24aa","#ff9ec4","#d81b60","#6d4c41","#455a64","#a1887f"];
+  let menuFor = null;
+  function openMenu(btn, kind) {
+    if (menuFor === btn && !menu.hidden) { closeMenu(); return; }
+    saveSel();
+    menu.innerHTML = ""; menuFor = btn;
+    const list = items => items.forEach(it => { const b = document.createElement("button"); b.type = "button"; b.className = "mi"; b.textContent = it[0]; b.onclick = () => { closeMenu(); it[1](); }; menu.appendChild(b); });
+    if (kind === "lh") list([["1.0", () => setLH("1")], ["1.15", () => setLH("1.15")], ["1.5", () => setLH("1.5")], ["2.0", () => setLH("2")], ["2.5", () => setLH("2.5")], ["No space after paragraph", () => setLH("", 0)], ["8 pt space after paragraph", () => setLH("", 8)], ["16 pt space after paragraph", () => setLH("", 16)]]);
+    else if (kind === "mar") list(Object.keys(MARGINS).map(k => [(page.margin === k ? "✓ " : "") + MARGINS[k][1], () => { page.margin = k; applyPage(); changed(); }]));
+    else if (kind === "ori") list([[(page.orient === "p" ? "✓ " : "") + "Portrait", () => { page.orient = "p"; applyPage(); changed(); }], [(page.orient === "l" ? "✓ " : "") + "Landscape", () => { page.orient = "l"; applyPage(); changed(); }]]);
+    else if (kind === "siz") list(Object.keys(SIZES).map(k => [(page.size === k ? "✓ " : "") + SIZES[k][2], () => { page.size = k; applyPage(); changed(); }]));
+    else if (kind === "col") list([1, 2, 3].map(n => [(page.cols === n ? "✓ " : "") + (n === 1 ? "One" : n === 2 ? "Two" : "Three"), () => { page.cols = n; applyPage(); changed(); }]));
+    else if (kind === "fc" || kind === "hl" || kind === "pc") {
+      const p = document.createElement("div"); p.className = "pal";
+      COLORS.forEach(c => { const b = document.createElement("button"); b.type = "button"; b.style.background = c; b.setAttribute("aria-label", c); b.onclick = () => { closeMenu(); if (kind === "fc") { $("fcbar").style.background = c; exec("foreColor", c); } else if (kind === "hl") { $("hlbar").style.background = c; exec("hiliteColor", c); } else { page.color = c; applyPage(); changed(); } }; p.appendChild(b); });
+      menu.appendChild(p);
+      list([[kind === "fc" ? "Automatic" : "No colour", () => { if (kind === "fc") exec("foreColor", "#111111"); else if (kind === "hl") exec("hiliteColor", "transparent"); else { page.color = ""; applyPage(); changed(); } }]]);
+    }
+    else if (kind === "cite") {
+      if (srcs.length) list(srcs.slice(0, 40).map(s => [citeLabel(s), () => insertCite(s.id)]));
+      list([[srcs.length ? "Manage sources…" : "No sources yet. Open Manage Sources", () => openLibrary()]]);
+    }
+    else if (kind === "sym") {
+      const g = document.createElement("div"); g.className = "sym";
+      "© ® ™ § ¶ † ‡ • … – — ‘ ’ “ ” « » ° ± × ÷ ≠ ≤ ≥ ∞ √ π Ω µ € £ ¥ ¢ ← → ↑ ↓ ✓ ✗ ★ ☆ ♥ ½ ¼ ¾ α β γ δ".split(" ").forEach(ch => { const b = document.createElement("button"); b.type = "button"; b.textContent = ch; b.onclick = () => { closeMenu(); exec("insertText", ch); }; g.appendChild(b); });
+      menu.appendChild(g);
+    }
+    else if (kind === "tbl") {
+      const g = document.createElement("div"); g.className = "tg"; const lab = document.createElement("div"); lab.className = "tl"; lab.textContent = "Insert table";
+      for (let r = 1; r <= 6; r++) for (let c = 1; c <= 8; c++) { const i = document.createElement("i"); i.dataset.r = r; i.dataset.c = c; g.appendChild(i); }
+      const hi = (r, c) => { g.querySelectorAll("i").forEach(x => x.classList.toggle("on", +x.dataset.r <= r && +x.dataset.c <= c)); lab.textContent = r + " × " + c + " table"; };
+      g.addEventListener("mouseover", e => { if (e.target.dataset.r) hi(+e.target.dataset.r, +e.target.dataset.c); });
+      g.addEventListener("click", e => { if (e.target.dataset.r) { closeMenu(); insertTable(+e.target.dataset.r, +e.target.dataset.c); } });
+      menu.appendChild(g); menu.appendChild(lab);
+      const cb = document.createElement("button"); cb.type = "button"; cb.className = "mi"; cb.textContent = "Custom size…";
+      cb.onclick = () => { closeMenu(); const r = parseInt(prompt("Rows", "3"), 10), c = parseInt(prompt("Columns", "3"), 10); if (r > 0 && c > 0 && r <= 100 && c <= 20) insertTable(r, c); };
+      menu.appendChild(cb);
+    }
+    menu.hidden = false;
+    const b = btn.getBoundingClientRect(), mw = menu.offsetWidth, mh = menu.offsetHeight;
+    menu.style.left = Math.max(6, Math.min(innerWidth - mw - 6, b.left)) + "px";
+    menu.style.top = Math.min(innerHeight - mh - 6, b.bottom + 4) + "px";
+  }
+  function saveSel() { const s = getSelection(); if (s.rangeCount && doc.contains(s.anchorNode)) saved = s.getRangeAt(0).cloneRange(); }
+  function closeMenu() { menu.hidden = true; menuFor = null; }
+  document.addEventListener("mousedown", e => { if (!menu.hidden && !menu.contains(e.target) && !e.target.closest("[data-menu]")) closeMenu(); if (!e.target.closest("#ctx") && !(e.target.closest && e.target.closest("#doc"))) hideCtx(); });
+  document.addEventListener("touchstart", e => { if (!menu.hidden && !menu.contains(e.target) && !e.target.closest("[data-menu]")) closeMenu(); }, { passive: true });
+
+  /* ---------- Insert ---------- */
+  function insertTable(r, c) {
+    let h = '<table><tbody>';
+    for (let i = 0; i < r; i++) { h += "<tr>"; for (let j = 0; j < c; j++) h += "<td><br></td>"; h += "</tr>"; }
+    h += "</tbody></table><p><br></p>";
+    exec("insertHTML", h);
+  }
+  function insertLink() {
+    saveSel();
+    const sel = String(saved || "");
+    let u = prompt("Link address (URL)", "https://"); if (!u || u === "https://") return;
+    if (!/^(https?:|mailto:|tel:|#)/i.test(u)) u = "https://" + u;
+    restore();
+    if (sel) document.execCommand("createLink", false, u); else document.execCommand("insertHTML", false, '<a href="' + esc(u) + '">' + esc(u) + "</a>&nbsp;");
+    doc.querySelectorAll("a[href]").forEach(a => { a.target = "_blank"; a.rel = "noopener"; });
+    changed();
+  }
+  $("imgIn").addEventListener("change", e => {
+    const f = e.target.files[0]; e.target.value = ""; if (!f) return;
+    const r = new FileReader();
+    r.onload = () => {
+      const im = new Image();
+      im.onload = () => {
+        const max = 1400, k = Math.min(1, max / im.width), cv = document.createElement("canvas");
+        cv.width = Math.round(im.width * k); cv.height = Math.round(im.height * k);
+        cv.getContext("2d").drawImage(im, 0, 0, cv.width, cv.height);
+        const url = /png|gif|svg/.test(f.type) ? cv.toDataURL("image/png") : cv.toDataURL("image/jpeg", 0.85);
+        exec("insertHTML", '<img src="' + url + '" alt="' + esc(f.name) + '">');
+      };
+      im.src = r.result;
+    };
+    r.readAsDataURL(f);
+  });
+
+  /* ---------- Context toolbar for tables and images ---------- */
+  let ctxEl = null;
+  function hideCtx() { ctx.hidden = true; doc.querySelectorAll("img.sel").forEach(i => i.classList.remove("sel")); }
+  function cellOf(n) { n = n && n.nodeType === 3 ? n.parentNode : n; return n && n.closest ? n.closest("td,th") : null; }
+  function showCtx(kind, el) {
+    ctxEl = el; ctx.innerHTML = "";
+    const add = (t, fn, cls) => { const b = document.createElement("button"); b.type = "button"; b.textContent = t; if (cls) b.className = cls; b.onmousedown = ev => ev.preventDefault(); b.onclick = fn; ctx.appendChild(b); };
+    if (kind === "table") {
+      const tbl = el.closest("table");
+      add("Row above", () => rowAt(el, 0)); add("Row below", () => rowAt(el, 1));
+      add("Column left", () => colAt(el, 0)); add("Column right", () => colAt(el, 1));
+      add("Delete row", () => { const tr = el.parentNode; if (tr.parentNode.rows.length < 2) tbl.remove(); else tr.remove(); hideCtx(); changed(); }, "x");
+      add("Delete column", () => { const i = el.cellIndex; [...tbl.rows].forEach(r => r.cells[i] && r.cells[i].remove()); if (!tbl.rows[0] || !tbl.rows[0].cells.length) tbl.remove(); hideCtx(); changed(); }, "x");
+      add("Delete table", () => { tbl.remove(); hideCtx(); changed(); }, "x");
+    } else {
+      el.classList.add("sel");
+      add("Small", () => { el.style.width = "25%"; reposition(); changed(); }); add("Medium", () => { el.style.width = "50%"; reposition(); changed(); });
+      add("Large", () => { el.style.width = "100%"; reposition(); changed(); });
+      add("Left", () => { el.style.display = "block"; el.style.margin = "0 auto 0 0"; changed(); }); add("Centre", () => { el.style.display = "block"; el.style.margin = "0 auto"; changed(); });
+      add("Right", () => { el.style.display = "block"; el.style.margin = "0 0 0 auto"; changed(); });
+      add("Delete", () => { el.remove(); hideCtx(); changed(); }, "x");
+    }
+    ctx.hidden = false; reposition();
+  }
+  function reposition() {
+    if (!ctxEl) return;
+    const t = (ctxEl.closest("table") || ctxEl).getBoundingClientRect(), w = ctx.offsetWidth, h = ctx.offsetHeight;
+    const wr = work.getBoundingClientRect();
+    ctx.style.left = Math.max(6, Math.min(innerWidth - w - 6, t.left)) + "px";
+    ctx.style.top = Math.max(wr.top + 4, Math.min(innerHeight - h - 40, t.top - h - 6 < wr.top ? t.bottom + 6 : t.top - h - 6)) + "px";
+  }
+  function rowAt(cell, after) {
+    const tr = cell.parentNode, n = tr.cells.length, nr = document.createElement("tr");
+    for (let i = 0; i < n; i++) nr.insertAdjacentHTML("beforeend", "<td><br></td>");
+    tr.parentNode.insertBefore(nr, after ? tr.nextSibling : tr); changed();
+  }
+  function colAt(cell, after) {
+    const i = cell.cellIndex + (after ? 1 : 0), tbl = cell.closest("table");
+    [...tbl.rows].forEach(r => { const c = r.insertCell(i); c.innerHTML = "<br>"; }); changed();
+  }
+  function ctxCheck(e) {
+    const t = e && e.target && e.target.nodeType === 1 ? e.target : null;
+    if (t && t.tagName === "IMG" && doc.contains(t)) { showCtx("img", t); return; }
+    const s = getSelection(), c = s.rangeCount ? cellOf(s.anchorNode) : null;
+    if (c && doc.contains(c)) showCtx("table", c); else hideCtx();
+  }
+  doc.addEventListener("click", ctxCheck);
+  doc.addEventListener("keyup", e => { if (/^Arrow|Tab|Enter/.test(e.key)) ctxCheck(); });
+
+  /* ---------- Find and replace ---------- */
+  const fq = $("fq"), frp = $("fr");
+  function openFind(withReplace) {
+    saveSel();
+    const sel = String(saved || "").trim(); if (sel && sel.length < 80) fq.value = sel;
+    $("find").style.setProperty("--ft", (document.querySelector(".ribbon").getBoundingClientRect().bottom + 8) + "px");
+    $("find").hidden = false; (withReplace ? frp : fq).focus(); if (!withReplace) fq.select();
+  }
+  function findNext(back) {
+    const q = fq.value; if (!q) return false;
+    doc.focus(); if (saved) { const s = getSelection(); s.removeAllRanges(); s.addRange(saved); }
+    const ok = window.find(q, false, !!back, true, false, false, false);
+    $("fmsg").textContent = ok ? "" : "No more matches.";
+    if (ok) saveSel();
+    return ok;
+  }
+  function esr(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
+  $("fNext").onclick = () => { findNext(false); fq.focus(); };
+  fq.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); findNext(e.shiftKey); fq.focus(); } });
+  $("fRep").onclick = () => {
+    const q = fq.value; if (!q) return;
+    if (saved && String(saved).toLowerCase() === q.toLowerCase()) { restore(); document.execCommand("insertText", false, frp.value); changed(); saveSel(); }
+    findNext(false);
+  };
+  $("fAll").onclick = () => {
+    const q = fq.value; if (!q) return;
+    const re = new RegExp(esr(q), "gi"), w = document.createTreeWalker(doc, NodeFilter.SHOW_TEXT), nodes = []; let n, c = 0;
+    while ((n = w.nextNode())) nodes.push(n);
+    nodes.forEach(t => { const m = t.nodeValue.match(re); if (m) { c += m.length; t.nodeValue = t.nodeValue.replace(re, () => frp.value); } });
+    $("fmsg").textContent = c ? "Replaced " + c + (c === 1 ? " match." : " matches.") : "No matches found."; if (c) changed();
+  };
+  $("fX").onclick = () => { $("find").hidden = true; doc.focus(); };
+
+  /* ---------- File drawer ---------- */
+  function openFile() {
+    const all = allDocs(), ids = Object.keys(all).sort((a, b) => all[b].t - all[a].t);
+    $("fileBody").innerHTML =
+      '<button class="fi" data-f="new">' + ico("file", 22) + '<span>New blank document</span></button>' +
+      '<button class="fi" data-f="open">' + ico("folder", 22) + '<span>Open from this device<small>Word (.docx), HTML or text files</small></span></button>' +
+      '<button class="fi" data-f="save">' + ico("save", 22) + '<span>Save in this browser<small>Also saves automatically as you type</small></span></button>' +
+      '<div class="fsh">Download or print</div>' +
+      '<button class="fi" data-f="docx">' + ico("dl", 22) + '<span>Download as Word (.docx)<small>Recommended. Opens in Microsoft Word</small></span></button>' +
+      '<button class="fi" data-f="doc">' + ico("dl", 22) + '<span>Download as Word 97–2003 style (.doc)</span></button>' +
+      '<button class="fi" data-f="html">' + ico("dl", 22) + '<span>Download as web page (.html)</span></button>' +
+      '<button class="fi" data-f="txt">' + ico("dl", 22) + '<span>Download as plain text (.txt)</span></button>' +
+      '<button class="fi" data-f="print">' + ico("print", 22) + '<span>Print or save as PDF<small>Choose "Save as PDF" in the print window</small></span></button>' +
+      '<div class="fsh">Your documents (this browser)</div>' +
+      (ids.length ? ids.map(id => '<div class="drow"><button class="o" data-open="' + id + '">' + esc(all[id].name) + (id === cid ? " (open)" : "") + '<small>' + new Date(all[id].t).toLocaleString() + '</small></button><button class="d" data-del="' + id + '" aria-label="Delete">' + ico("trash", 16) + '</button></div>').join("") : '<p style="opacity:.65;font-weight:500;margin:6px">No saved documents yet.</p>');
+    $("file").hidden = $("back").hidden = false;
+  }
+  function closeFile() { $("file").hidden = $("back").hidden = true; }
+  $("fileBtn").onclick = openFile; $("fileX").onclick = closeFile; $("back").onclick = closeFile;
+  function download(name, text, type) {
+    const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([text], { type })); a.download = name;
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  }
+  const fname = () => ($("dname").value.trim() || "document").replace(/[^\w\- ]+/g, "");
+  function cleanHtml() { const c = doc.cloneNode(true); c.querySelectorAll("img.sel").forEach(i => i.classList.remove("sel")); return c.innerHTML; }
+  function wordHtml() {
+    const d = pageDims(), m = (MARGINS[page.margin] || MARGINS.normal)[0];
+    return '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><title>' + esc(fname()) + '</title><style>@page WordSection1{size:' + (SIZES[page.size] || SIZES.a4)[2] + (page.orient === "l" ? " landscape" : "") + ';margin:' + (m / 96).toFixed(2) + 'in}div.WordSection1{page:WordSection1}body{font-family:Calibri,Arial,sans-serif;font-size:12pt}table{border-collapse:collapse}td,th{border:1px solid #777;padding:4px 6px}blockquote{border-left:4px solid #bbb;margin:10px 24px;padding-left:12px;color:#555}.ttl{font-size:28pt;text-align:center}</style></head><body><div class="WordSection1">' + cleanHtml().replace(/<hr class="pagebreak">/g, '<br clear="all" style="page-break-before:always">') + "</div></body></html>";
+  }
+  function importHtml(src, name) {
+    const d = new DOMParser().parseFromString(src, "text/html");
+    d.querySelectorAll("script,style,link,meta,iframe,object,embed").forEach(x => x.remove());
+    d.querySelectorAll("*").forEach(el => [...el.attributes].forEach(a => { if (/^on/i.test(a.name) || (/^(href|src)$/i.test(a.name) && /^\s*javascript:/i.test(a.value))) el.removeAttribute(a.name); }));
+    saveNow(); cid = newId();
+    doc.innerHTML = d.body.innerHTML.trim() || "<p><br></p>"; $("dname").value = name || "Imported document"; applyPage(); saveNow();
+  }
+  $("openIn").addEventListener("change", e => {
+    const f = e.target.files[0]; e.target.value = ""; if (!f) return;
+    if (/\.docx$/i.test(f.name)) { openDocx(f); return; }
+    const r = new FileReader();
+    r.onload = () => {
+      const n = f.name.replace(/\.[^.]+$/, "");
+      if (/\.(html?|doc)$/i.test(f.name)) importHtml(String(r.result), n);
+      else importHtml("<body>" + String(r.result).split(/\n{2,}/).map(p => "<p>" + esc(p).replace(/\n/g, "<br>") + "</p>").join("") + "</body>", n);
+      toast("Opened " + f.name);
+    };
+    r.readAsText(f);
+  });
+  $("fileBody").addEventListener("click", e => {
+    const o = e.target.closest("[data-open]"), d = e.target.closest("[data-del]"), f = e.target.closest("[data-f]");
+    if (o) { saveNow(); loadDoc(o.dataset.open); closeFile(); return; }
+    if (d) { if (!confirm("Delete this saved document?")) return; const all = allDocs(); delete all[d.dataset.del]; store.set(DK, JSON.stringify(all)); if (d.dataset.del === cid) { cid = ""; newDoc(); } openFile(); return; }
+    if (!f) return;
+    const k = f.dataset.f;
+    if (k === "new") { newDoc(); closeFile(); }
+    else if (k === "open") { closeFile(); $("openIn").click(); }
+    else if (k === "save") { saveNow(); toast("Saved in this browser"); closeFile(); }
+    else if (k === "docx") { exportDocx(); closeFile(); }
+    else if (k === "doc") { download(fname() + ".doc", wordHtml(), "application/msword"); closeFile(); }
+    else if (k === "html") { download(fname() + ".html", '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' + esc(fname()) + '</title></head><body style="font-family:Calibri,Arial,sans-serif;max-width:800px;margin:40px auto">' + cleanHtml() + "</body></html>", "text/html"); closeFile(); }
+    else if (k === "txt") { download(fname() + ".txt", doc.innerText, "text/plain"); closeFile(); }
+    else if (k === "print") { closeFile(); setTimeout(() => window.print(), 200); }
+  });
+
+  /* ---------- Ribbon wiring ---------- */
+  document.querySelector(".tabs").addEventListener("click", e => {
+    const t = e.target.closest("[data-tab]"); if (!t) return;
+    document.querySelectorAll(".tab[data-tab]").forEach(b => b.setAttribute("aria-selected", String(b === t)));
+    document.querySelectorAll(".panel").forEach(p => p.hidden = p.dataset.panel !== t.dataset.tab);
+  });
+  document.addEventListener("mousedown", e => { if (e.target.closest(".ribbon, .status, #ctx, #menu") && !e.target.closest("select,input")) e.preventDefault(); });
+  async function pasteClip() {
+    restore();
+    try { const t = await navigator.clipboard.readText(); document.execCommand("insertText", false, t); changed(); }
+    catch (e) { toast("Press Ctrl+V to paste (browser blocked clipboard access)"); }
+  }
+  function act(a) {
+    switch (a) {
+      case "paste": pasteClip(); break;
+      case "cut": restore(); document.execCommand("cut"); changed(); break;
+      case "copy": restore(); document.execCommand("copy"); toast("Copied"); break;
+      case "grow": stepSize(1); break; case "shrink": stepSize(-1); break;
+      case "clearfmt": exec("removeFormat"); selBlocks().forEach(b => { b.removeAttribute("style"); b.classList.remove("ttl"); }); exec("formatBlock", "div"); break;
+      case "find": openFind(false); break; case "replace": openFind(true); break;
+      case "all": restore(); document.execCommand("selectAll"); break;
+      case "image": saveSel(); $("imgIn").click(); break;
+      case "link": insertLink(); break;
+      case "hr": exec("insertHTML", "<hr><p><br></p>"); break;
+      case "pb": exec("insertHTML", '<hr class="pagebreak"><p><br></p>'); break;
+      case "date": exec("insertText", new Date().toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })); break;
+      case "zin": setZoom(zoom + 0.1); break; case "zout": setZoom(zoom - 0.1); break;
+      case "zfit": setZoom(1); break; case "zwide": fitWidth(); break;
+      case "ruler": { const on = $("ruler").hidden = !$("ruler").hidden; $("rulerBtn").setAttribute("aria-pressed", String(!on)); store.set("wruler", on ? "0" : "1"); break; }
+      case "theme": cycleTheme(); break;
+      case "toc": insertToc(); break; case "toc2": updateToc(); break;
+      case "fn": addFootnote(); break; case "cap": addCaption(); break;
+      case "src": addSource(); break; case "bib": addBib(); break;
+      case "spell": toggleSpell(); break; case "wc": wcDlg(); break;
+      case "read": readAloud(); break; case "trans": translateSel(); break;
+      case "newcm": newComment(); break; case "delcm": deleteComment(); break;
+      case "prevcm": jumpCm(-1); break; case "nextcm": jumpCm(1); break; case "pane": showPane(cpane.hidden); break;
+      case "track": toggleTrack(); break; case "acc": resolveTrk(true); break; case "rej": resolveTrk(false); break;
+      case "pbor": page.border = !page.border; applyPage(); changed(); break;
+      case "ss1": case "ss2": case "ss3": case "ss4": styleSet(a); break;
+      case "lib": openLibrary(); break; case "refresh": refreshRefs(); break;
+      case "zot": zotDlg(); break; case "mend": menDlg(); break; case "imp": $("refIn").click(); break;
+      case "fs": try { if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen(); } catch (e) {} break;
+    }
+  }
+  document.body.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    if (b.dataset.cmd) { exec(b.dataset.cmd); return; }
+    if (b.dataset.style) { applyStyle(b.dataset.style); return; }
+    if (b.dataset.menu) { openMenu(b, b.dataset.menu); return; }
+    if (b.dataset.act) act(b.dataset.act);
+  });
+  $("zr").addEventListener("input", e => setZoom(+e.target.value / 100));
+  if (store.get("wruler") === "0") { $("ruler").hidden = true; $("rulerBtn").setAttribute("aria-pressed", "false"); }
+
+  /* ---------- Keyboard ---------- */
+  doc.addEventListener("keydown", e => {
+    const k = e.key.toLowerCase(), c = e.ctrlKey || e.metaKey;
+    if (c && k === "s") { e.preventDefault(); saveNow(); toast("Saved"); }
+    else if (c && k === "f") { e.preventDefault(); openFind(false); }
+    else if (c && k === "h") { e.preventDefault(); openFind(true); }
+    else if (c && k === "k") { e.preventDefault(); insertLink(); }
+    else if (c && k === "l") { e.preventDefault(); exec("justifyLeft"); }
+    else if (c && k === "e") { e.preventDefault(); exec("justifyCenter"); }
+    else if (c && k === "r") { e.preventDefault(); exec("justifyRight"); }
+    else if (c && k === "j") { e.preventDefault(); exec("justifyFull"); }
+    else if (e.key === "Tab") {
+      e.preventDefault();
+      const s = getSelection(), n = s.anchorNode, cell = cellOf(n);
+      if (cell) {
+        const cells = [...cell.closest("table").querySelectorAll("td,th")], i = cells.indexOf(cell) + (e.shiftKey ? -1 : 1);
+        if (i >= cells.length) { rowAt(cell.parentNode.lastElementChild, 1); const nr = cell.closest("table").rows; const r = nr[nr.length - 1].cells[0]; const rg = document.createRange(); rg.selectNodeContents(r); rg.collapse(true); s.removeAllRanges(); s.addRange(rg); }
+        else if (i >= 0) { const rg = document.createRange(); rg.selectNodeContents(cells[i]); rg.collapse(true); s.removeAllRanges(); s.addRange(rg); }
+      } else if (n && (n.nodeType === 3 ? n.parentNode : n).closest("li")) document.execCommand(e.shiftKey ? "outdent" : "indent");
+      else document.execCommand("insertHTML", false, "&emsp;&emsp;");
+    }
+  });
+  window.addEventListener("keydown", e => { if (e.key === "Escape") { closeMenu(); closeFile(); $("find").hidden = true; } });
+  doc.addEventListener("paste", e => {
+    const h = e.clipboardData && e.clipboardData.getData("text/html");
+    if (!h) return;
+    e.preventDefault();
+    const d = new DOMParser().parseFromString(h, "text/html");
+    d.querySelectorAll("script,style,link,meta,iframe,object,embed,title").forEach(x => x.remove());
+    d.querySelectorAll("*").forEach(el => { [...el.attributes].forEach(a => { if (/^on/i.test(a.name) || a.name === "class" || a.name === "id" || (/^(href|src)$/i.test(a.name) && /^\s*javascript:/i.test(a.value))) el.removeAttribute(a.name); }); });
+    document.execCommand("insertHTML", false, d.body.innerHTML);
+  });
+  window.addEventListener("resize", () => { layout(); reposition(); });
+
+  /* ---------- Design, References and Review ---------- */
+  function dlg(title, html, wide) { $("dt").textContent = title; $("db").innerHTML = html; document.querySelector(".dbx").classList.toggle("wide", !!wide); $("dok").textContent = "Close"; $("dlg").hidden = false; }
+  $("dok").onclick = () => { $("dlg").hidden = true; doc.focus(); };
+  $("dlg").addEventListener("click", e => { if (e.target.id === "dlg") $("dlg").hidden = true; });
+
+  const STY = { ss1: ["Calibri", "16px", "1.5"], ss2: ["Times New Roman", "17px", "1.5"], ss3: ["Georgia", "16px", "2"], ss4: ["Arial", "14px", "1.15"] };
+  function styleSet(k) { const s = STY[k]; page.font = s[0]; page.fs = s[1]; page.lh = s[2]; applyPage(); changed(); }
+
+  /* Table of contents */
+  function tocHtml() {
+    const hs = [...doc.querySelectorAll("h1,h2,h3")]; if (!hs.length) return null;
+    const ph = pageDims().h, pr = paper.getBoundingClientRect(), sc = pr.height / paper.offsetHeight || 1;
+    return '<div class="toc" contenteditable="false"><p><b>Table of Contents</b></p>' + hs.map(h => {
+      const pg = Math.floor((h.getBoundingClientRect().top - pr.top) / sc / ph) + 1, lv = +h.tagName[1] - 1;
+      return '<p class="tl" style="margin-left:' + lv * 20 + 'px"><span>' + esc(h.textContent) + '</span><span class="dots"></span><span>' + pg + "</span></p>";
+    }).join("") + "</div>";
+  }
+  function insertToc() {
+    if (doc.querySelector(".toc")) { updateToc(); return; }
+    const h = tocHtml(); if (!h) { toast("Add some headings first (Home → Styles)"); return; }
+    exec("insertHTML", h + "<p><br></p>");
+  }
+  function updateToc() {
+    const t = doc.querySelector(".toc"); if (!t) { insertToc(); return; }
+    const h = tocHtml(); if (!h) { t.remove(); changed(); return; }
+    t.outerHTML = h; changed(); toast("Table of contents updated");
+  }
+  function addFootnote() {
+    saveSel(); const t = prompt("Footnote text"); if (!t) return;
+    let box = doc.querySelector(".fnotes");
+    if (!box) { box = document.createElement("div"); box.className = "fnotes"; box.innerHTML = '<hr class="fnline">'; doc.appendChild(box); }
+    const n = box.querySelectorAll("p").length + 1;
+    restore(); document.execCommand("insertHTML", false, '<sup class="fn">' + n + "</sup>");
+    box.insertAdjacentHTML("beforeend", "<p><sup>" + n + "</sup> " + esc(t) + "</p>"); changed();
+  }
+  function addCaption() {
+    const t = prompt("Caption text", "") || ""; const n = doc.querySelectorAll(".cap").length + 1;
+    exec("insertHTML", '<p class="cap" style="text-align:center"><b>Figure ' + n + ".</b> " + esc(t) + "</p>");
+  }
+  /* ---------- Reference manager: library, import, Zotero, styles ---------- */
+  function uid() { return "s" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+  function nameOf(n) {
+    n = String(n || "").trim(); if (!n) return { family: "", given: "" };
+    if (n.includes(",")) { const p = n.split(","); return { family: p[0].trim(), given: p.slice(1).join(" ").trim() }; }
+    const p = n.split(/\s+/); return { family: p.pop(), given: p.join(" ") };
+  }
+  function mkSrc(o) { return Object.assign({ id: uid(), type: "article-journal", title: "", author: [], year: "n.d.", publisher: "", journal: "", volume: "", issue: "", pages: "", doi: "", url: "" }, o); }
+  let srcs = []; try { srcs = JSON.parse(store.get("wlib") || "[]"); } catch (e) {}
+  if (!srcs.length) { try { srcs = JSON.parse(store.get("wsrc") || "[]").map(o => mkSrc({ title: o.ti, author: [nameOf(o.a)], year: o.y, publisher: o.pb })); } catch (e) {} }
+  const saveLib = () => store.set("wlib", JSON.stringify(srcs));
+  let cstyle = store.get("wstyle") || "apa"; $("cstyle").value = cstyle;
+  const STYLE_NAME = { apa: "APA 7th", mla: "MLA 9th", harvard: "Harvard", ieee: "IEEE", chicago: "Chicago" };
+
+  function addMany(list) {
+    const key = s => (s.doi || (s.title + "|" + s.year)).toLowerCase(); let n = 0;
+    list.forEach(s => { if (!s.title || srcs.some(x => key(x) === key(s))) return; srcs.push(s); n++; });
+    saveLib(); return n;
+  }
+  function parseBib(t) {
+    const out = [], re = /@(\w+)\s*\{/g; let m;
+    while ((m = re.exec(t))) {
+      const type = m[1].toLowerCase(); if (/^(comment|string|preamble)$/.test(type)) continue;
+      const i = re.lastIndex; let depth = 1, j = i;
+      while (j < t.length && depth) { const c = t[j]; if (c === "{") depth++; else if (c === "}") depth--; j++; }
+      const body = t.slice(i, j - 1); re.lastIndex = j;
+      const f = {}, fr = /(\w+)\s*=\s*/g; let fm;
+      while ((fm = fr.exec(body))) {
+        const k = fm[1].toLowerCase(), p = fr.lastIndex; let v = "";
+        if (body[p] === "{") { let d = 1, q = p + 1; while (q < body.length && d) { if (body[q] === "{") d++; else if (body[q] === "}") d--; q++; } v = body.slice(p + 1, q - 1); fr.lastIndex = q; }
+        else if (body[p] === '"') { let q = p + 1; while (q < body.length && body[q] !== '"') q++; v = body.slice(p + 1, q); fr.lastIndex = q + 1; }
+        else { const mm = /^[^,\s}]+/.exec(body.slice(p)); v = mm ? mm[0] : ""; fr.lastIndex = p + v.length; }
+        f[k] = v.replace(/[{}]/g, "").replace(/\\&/g, "&").replace(/\s+/g, " ").trim();
+      }
+      out.push(mkSrc({
+        type: /^(book|inbook|incollection)$/.test(type) ? "book" : /^(inproceedings|conference)$/.test(type) ? "paper-conference" : /^(phdthesis|mastersthesis)$/.test(type) ? "thesis" : /^(misc|online|electronic)$/.test(type) ? "webpage" : "article-journal",
+        title: f.title || "", author: (f.author || "").split(/\s+and\s+/i).filter(Boolean).map(nameOf),
+        year: f.year || (f.date || "").slice(0, 4) || "n.d.", publisher: f.publisher || f.school || f.institution || "",
+        journal: f.journal || f.journaltitle || f.booktitle || "", volume: f.volume || "", issue: f.number || f.issue || "",
+        pages: (f.pages || "").replace(/--/g, "–"), doi: f.doi || "", url: f.url || ""
+      }));
+    }
+    return out;
+  }
+  function parseRis(t) {
+    const out = []; let r = null;
+    t.split(/\r?\n/).forEach(line => {
+      const m = /^([A-Z][A-Z0-9])\s{1,2}-\s?(.*)$/.exec(line); if (!m) return;
+      const k = m[1], v = m[2].trim();
+      if (k === "TY") { r = { type: v, author: [] }; return; }
+      if (!r) return;
+      if (k === "ER") {
+        out.push(mkSrc({ type: /^(BOOK|CHAP)/.test(r.type) ? "book" : /^CONF/.test(r.type) ? "paper-conference" : /^THES/.test(r.type) ? "thesis" : /^(ELEC|WEB)/.test(r.type) ? "webpage" : "article-journal",
+          title: r.title || "", author: r.author, year: ((r.year || "").match(/\d{4}/) || ["n.d."])[0], publisher: r.pub || "", journal: r.j || "",
+          volume: r.vl || "", issue: r.is || "", pages: [r.sp, r.ep].filter(Boolean).join("–"), doi: r.doi || "", url: r.url || "" }));
+        r = null; return;
+      }
+      if (k === "AU" || k === "A1") r.author.push(nameOf(v));
+      else if (k === "TI" || k === "T1") r.title = v;
+      else if (k === "PY" || k === "Y1" || k === "DA") r.year = r.year || v;
+      else if (k === "JO" || k === "JF" || k === "T2" || k === "JA") r.j = r.j || v;
+      else if (k === "VL") r.vl = v; else if (k === "IS") r.is = v; else if (k === "SP") r.sp = v; else if (k === "EP") r.ep = v;
+      else if (k === "PB") r.pub = v; else if (k === "DO") r.doi = v; else if (k === "UR") r.url = v;
+    });
+    return out;
+  }
+  function fromCsl(a) {
+    return a.filter(i => i && i.title && !/^(attachment|note)$/.test(i.type || "")).map(i => mkSrc({
+      type: /book/.test(i.type || "") ? "book" : /conference/.test(i.type || "") ? "paper-conference" : /thesis/.test(i.type || "") ? "thesis" : /webpage|post/.test(i.type || "") ? "webpage" : "article-journal",
+      title: String(i.title), author: (i.author || []).map(x => ({ family: x.family || x.literal || "", given: x.given || "" })),
+      year: String((i.issued && i.issued["date-parts"] && i.issued["date-parts"][0] && i.issued["date-parts"][0][0]) || "n.d."),
+      publisher: i.publisher || "", journal: i["container-title"] || "", volume: String(i.volume || ""), issue: String(i.issue || ""),
+      pages: String(i.page || "").replace(/-/g, "–"), doi: i.DOI || "", url: i.URL || ""
+    }));
+  }
+  $("refIn").addEventListener("change", e => {
+    const f = e.target.files[0]; e.target.value = ""; if (!f) return;
+    const r = new FileReader();
+    r.onload = () => {
+      const t = String(r.result); let list = [];
+      try {
+        if (/\.json$/i.test(f.name) || /^\s*[\[{]/.test(t)) { const j = JSON.parse(t); list = fromCsl(Array.isArray(j) ? j : (j.items || [])); }
+        else if (/^\s*TY\s+-/m.test(t)) list = parseRis(t); else list = parseBib(t);
+      } catch (err) { toast("Could not read that file"); return; }
+      const n = addMany(list);
+      toast(n + " source" + (n === 1 ? "" : "s") + " imported" + (list.length - n ? " (" + (list.length - n) + " skipped)" : ""));
+      if (!$("dlg").hidden) openLibrary();
+    };
+    r.readAsText(f);
+  });
+  async function zoteroSync(userId, key, out) {
+    const hdr = { "Zotero-API-Version": "3" }; if (key) hdr["Zotero-API-Key"] = key;
+    let start = 0, all = [];
+    for (let p = 0; p < 10; p++) {
+      const r = await fetch("https://api.zotero.org/users/" + encodeURIComponent(userId) + "/items/top?format=csljson&limit=100&start=" + start, { headers: hdr });
+      if (!r.ok) throw new Error(r.status === 403 ? "Access denied. Check that your API key allows library read access." : r.status === 404 ? "User ID not found." : "Zotero returned error " + r.status + ".");
+      const items = (await r.json()).items || [];
+      all = all.concat(items); out.textContent = "Fetched " + all.length + " items…";
+      if (items.length < 100) break; start += 100;
+    }
+    return fromCsl(all);
+  }
+  function zotDlg() {
+    dlg("Zotero", '<p class="cn" style="font-weight:500;font-size:13px">Find your numeric <b>User ID</b> and create a read-only <b>API key</b> at zotero.org/settings/keys. The key is sent only to api.zotero.org.</p>' +
+      '<input class="fin" id="zU" inputmode="numeric" placeholder="Zotero user ID (number)" value="' + esc(store.get("wzu") || "") + '">' +
+      '<input class="fin" id="zK" type="password" placeholder="API key" value="' + esc(store.get("wzk") || "") + '">' +
+      '<label class="chk2"><input type="checkbox" id="zR"' + (store.get("wzk") ? " checked" : "") + '> Remember the key on this device</label>' +
+      '<div class="srcbtn"><button class="btn pri" id="zGo" type="button">Sync library</button><button class="btn" id="zBack" type="button">Back to sources</button></div><p id="zM" class="cn" style="font-weight:500;font-size:13px"></p>');
+    $("zBack").onclick = () => openLibrary();
+    $("zGo").onclick = async () => {
+      const u = $("zU").value.trim(), k = $("zK").value.trim(), m = $("zM");
+      if (!/^\d+$/.test(u)) { m.textContent = "Enter your numeric Zotero user ID."; return; }
+      store.set("wzu", u); store.set("wzk", $("zR").checked ? k : "");
+      m.textContent = "Connecting…";
+      try { const list = await zoteroSync(u, k, m), n = addMany(list); m.textContent = "Done. " + n + " new source" + (n === 1 ? "" : "s") + " added; " + (list.length - n) + " were already in your library."; }
+      catch (err) { m.textContent = err && err.message && !/fetch/i.test(err.message) ? err.message : "Could not reach Zotero. Check your internet connection, user ID and key."; }
+    };
+  }
+  function menDlg() {
+    dlg("Mendeley", '<p class="cn" style="font-weight:500;font-size:13px">In Mendeley Reference Manager, select your references, choose <b>Export</b>, pick <b>BibTeX (.bib)</b> or <b>RIS</b>, then import the file here. Mendeley\'s own web login needs a secure server, which a static page cannot do safely, so file import is the reliable route.</p><div class="srcbtn"><button class="btn pri" id="mImp" type="button">Import .bib / .ris file</button><button class="btn" id="mBack" type="button">Back to sources</button></div>');
+    $("mImp").onclick = () => $("refIn").click(); $("mBack").onclick = () => openLibrary();
+  }
+
+  /* Formatting */
+  const AUTH = s => (s.author || []).filter(a => a.family);
+  const ini = g => String(g || "").split(/[\s.-]+/).filter(Boolean).map(w => w[0].toUpperCase() + ".").join(" ");
+  function authorsShort(s) { const a = AUTH(s).map(x => x.family); return !a.length ? "Unknown" : a.length === 1 ? a[0] : a.length === 2 ? a[0] + " & " + a[1] : a[0] + " et al."; }
+  const citeLabel = s => authorsShort(s) + " (" + s.year + ") " + (s.title || "").slice(0, 32);
+  function citeText(s, st, order) {
+    const a = AUTH(s).map(x => x.family), y = s.year || "n.d.";
+    if (st === "ieee") return "[" + ((order.indexOf(s.id) + 1) || "?") + "]";
+    const au = !a.length ? (s.title || "Unknown").split(" ").slice(0, 3).join(" ") : a.length === 1 ? a[0] : a.length === 2 ? a[0] + (st === "apa" ? " & " : " and ") + a[1] : a[0] + " et al.";
+    return st === "mla" ? "(" + au + ")" : st === "chicago" ? "(" + au + " " + y + ")" : "(" + au + ", " + y + ")";
+  }
+  function bibText(s, st) {
+    const au = AUTH(s), y = esc(s.year || "n.d."), t = esc(s.title || ""), j = esc(s.journal || ""), pp = esc(s.pages || ""), v = esc(s.volume || ""), is = esc(s.issue || ""), pub = esc(s.publisher || "");
+    const art = s.type === "article-journal" || s.type === "paper-conference";
+    const link = s.doi ? "https://doi.org/" + esc(s.doi.replace(/^https?:\/\/(dx\.)?doi\.org\//i, "")) : esc(s.url || "");
+    const famI = a => esc(a.family) + (a.given ? ", " + esc(ini(a.given)) : "");
+    const lastFirst = a => esc(a.family) + (a.given ? ", " + esc(a.given) : "");
+    const firstLast = a => (a.given ? esc(a.given) + " " : "") + esc(a.family);
+    const iFam = a => (a.given ? esc(ini(a.given)) + " " : "") + esc(a.family);
+    const list = (arr, sep, last) => arr.length > 1 ? arr.slice(0, -1).join(sep) + last + arr[arr.length - 1] : arr[0] || "";
+    if (st === "mla") {
+      const a = !au.length ? "" : au.length === 1 ? lastFirst(au[0]) : au.length === 2 ? lastFirst(au[0]) + ", and " + firstLast(au[1]) : lastFirst(au[0]) + ", et al";
+      return (a ? a + ". " : "") + (art ? "“" + t + ".” <i>" + j + "</i>" + (v ? ", vol. " + v : "") + (is ? ", no. " + is : "") + ", " + y + (pp ? ", pp. " + pp : "") + "." : "<i>" + t + "</i>. " + (pub ? pub + ", " : "") + y + ".") + (link ? " " + link + "." : "");
+    }
+    if (st === "harvard") {
+      const a = list(au.map(famI), ", ", " and ");
+      return (a ? a + " " : "") + "(" + y + ") " + (art ? "‘" + t + "’, <i>" + j + "</i>" + (v ? ", " + v : "") + (is ? "(" + is + ")" : "") + (pp ? ", pp. " + pp : "") + "." : "<i>" + t + "</i>." + (pub ? " " + pub + "." : "")) + (link ? " Available at: " + link + "." : "");
+    }
+    if (st === "ieee") {
+      const a = au.length > 6 ? iFam(au[0]) + " et al." : list(au.map(iFam), ", ", ", and ");
+      return (a ? a + ", " : "") + (art ? "“" + t + ",” <i>" + j + "</i>" + (v ? ", vol. " + v : "") + (is ? ", no. " + is : "") + (pp ? ", pp. " + pp : "") + ", " + y + "." : "<i>" + t + "</i>. " + (pub ? pub + ", " : "") + y + ".") + (link ? " " + link : "");
+    }
+    if (st === "chicago") {
+      const a = !au.length ? "" : au.length === 1 ? lastFirst(au[0]) : lastFirst(au[0]) + (au.length > 2 ? ", " + au.slice(1, -1).map(firstLast).join(", ") : "") + ", and " + firstLast(au[au.length - 1]);
+      return (a ? a + ". " : "") + y + ". " + (art ? "“" + t + ".” <i>" + j + "</i>" + (v ? " " + v : "") + (is ? " (" + is + ")" : "") + (pp ? ": " + pp : "") + "." : "<i>" + t + "</i>." + (pub ? " " + pub + "." : "")) + (link ? " " + link + "." : "");
+    }
+    const names = au.map(famI), a = names.length > 1 ? names.slice(0, -1).join(", ") + ", & " + names[names.length - 1] : names[0] || "";
+    return (a ? a + " " : "") + "(" + y + "). " + (art ? t + ". <i>" + j + "</i>" + (v ? ", <i>" + v + "</i>" : "") + (is ? "(" + is + ")" : "") + (pp ? ", " + pp : "") + "." : "<i>" + t + "</i>." + (pub ? " " + pub + "." : "")) + (link ? " " + link : "");
+  }
+  const citeOrder = () => [...new Set([...doc.querySelectorAll(".cite")].map(c => c.dataset.id))];
+  function bibInner() {
+    let L = citeOrder().map(id => srcs.find(x => x.id === id)).filter(Boolean);
+    if (!L.length) L = srcs.slice();
+    if (cstyle !== "ieee") L.sort((x, y) => (AUTH(x)[0] ? AUTH(x)[0].family : x.title || "").localeCompare(AUTH(y)[0] ? AUTH(y)[0].family : y.title || ""));
+    return "<h2>" + (cstyle === "mla" ? "Works Cited" : cstyle === "chicago" ? "Bibliography" : "References") + "</h2>" +
+      L.map((s, i) => '<p style="padding-left:36px;text-indent:-36px">' + (cstyle === "ieee" ? "[" + (i + 1) + "] " : "") + bibText(s, cstyle) + "</p>").join("");
+  }
+  function refreshRefs(silent) {
+    const ord = citeOrder();
+    doc.querySelectorAll(".cite").forEach(c => { const s = srcs.find(x => x.id === c.dataset.id); c.textContent = s ? citeText(s, cstyle, ord) : "(Missing source)"; });
+    const b = doc.querySelector(".bibl"); if (b) b.innerHTML = bibInner();
+    changed(); if (!silent) toast("Updated to " + STYLE_NAME[cstyle]);
+  }
+  function insertCite(id) {
+    const s = srcs.find(x => x.id === id); if (!s) return; $("dlg").hidden = true;
+    exec("insertHTML", '<span class="cite" data-id="' + id + '" contenteditable="false">' + esc(citeText(s, cstyle, [id])) + "</span>&nbsp;");
+    refreshRefs(true);
+  }
+  function addBib() {
+    if (!srcs.length) { toast("Add or import sources first"); return; }
+    if (doc.querySelector(".bibl")) { refreshRefs(); return; }
+    exec("insertHTML", '<div class="bibl" contenteditable="false">' + bibInner() + "</div><p><br></p>");
+  }
+  $("cstyle").addEventListener("change", e => { cstyle = e.target.value; store.set("wstyle", cstyle); refreshRefs(); });
+
+  function openLibrary(q) {
+    q = (q || "").toLowerCase();
+    const rows = srcs.filter(s => !q || (s.title + " " + AUTH(s).map(a => a.family).join(" ") + " " + s.year).toLowerCase().includes(q));
+    dlg("Source Manager (" + srcs.length + ")", '<input class="fin" id="lq" placeholder="Search sources" value="' + esc(q) + '"><div class="srclist">' +
+      (rows.length ? rows.map(s => '<div class="srow2"><div><b>' + esc(s.title || "(untitled)") + "</b><small>" + esc(authorsShort(s)) + " · " + esc(s.year) + (s.journal ? " · " + esc(s.journal) : "") + '</small></div><button class="btn" data-cite="' + s.id + '" type="button">Cite</button><button class="btn" data-rm="' + s.id + '" type="button" aria-label="Remove source">✕</button></div>').join("")
+        : '<p class="cn" style="font-weight:500;font-size:13px">No sources yet. Sync Zotero, import a Mendeley export, or add one manually.</p>') +
+      '</div><div class="srcbtn"><button class="btn" id="lAdd" type="button">Add manually</button><button class="btn" id="lImp" type="button">Import file</button><button class="btn" id="lZot" type="button">Zotero</button><button class="btn" id="lMen" type="button">Mendeley</button></div>', true);
+  }
+  $("db").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    if (b.dataset.cite) insertCite(b.dataset.cite);
+    else if (b.dataset.rm) { srcs = srcs.filter(s => s.id !== b.dataset.rm); saveLib(); openLibrary($("lq") ? $("lq").value : ""); }
+    else if (b.id === "lAdd") addSource(); else if (b.id === "lImp") $("refIn").click();
+    else if (b.id === "lZot") zotDlg(); else if (b.id === "lMen") menDlg();
+  });
+  $("db").addEventListener("input", e => { if (e.target.id === "lq") { openLibrary(e.target.value); const n = $("lq"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); } });
+  function addSource() {
+    dlg("Add Source", '<select id="mT" class="fin"><option value="article-journal">Journal article</option><option value="book">Book</option><option value="webpage">Website</option></select>' +
+      '<textarea id="mA" class="fin" rows="3" placeholder="Authors, one per line (Last, First)"></textarea><input id="mTi" class="fin" placeholder="Title"><input id="mY" class="fin" placeholder="Year">' +
+      '<input id="mJ" class="fin" placeholder="Journal or website name"><input id="mP" class="fin" placeholder="Publisher"><div class="two"><input id="mV" class="fin" placeholder="Volume"><input id="mI" class="fin" placeholder="Issue"><input id="mPg" class="fin" placeholder="Pages"></div>' +
+      '<input id="mD" class="fin" placeholder="DOI or URL"><div class="srcbtn"><button class="btn pri" id="mSave" type="button">Save source</button><button class="btn" id="mBk" type="button">Cancel</button></div>');
+    $("mBk").onclick = () => openLibrary();
+    $("mSave").onclick = () => {
+      const title = $("mTi").value.trim(); if (!title) { toast("Enter a title"); return; }
+      const d = $("mD").value.trim(), isDoi = /^10\.\d|doi\.org/i.test(d);
+      srcs.push(mkSrc({ type: $("mT").value, title, author: $("mA").value.split(/\n|;/).map(x => x.trim()).filter(Boolean).map(nameOf), year: $("mY").value.trim() || "n.d.", journal: $("mJ").value.trim(), publisher: $("mP").value.trim(), volume: $("mV").value.trim(), issue: $("mI").value.trim(), pages: $("mPg").value.trim().replace(/-/g, "–"), doi: isDoi ? d : "", url: isDoi ? "" : d }));
+      saveLib(); openLibrary();
+    };
+  }
+
+  /* ---------- Word (.docx) open and save ---------- */
+  function openDocx(f) {
+    if (typeof mammoth === "undefined") { toast("The Word reader could not load. Check your internet connection"); return; }
+    f.arrayBuffer().then(buf => mammoth.convertToHtml({ arrayBuffer: buf })).then(res => {
+      importHtml("<body>" + res.value + "</body>", f.name.replace(/\.docx$/i, ""));
+      toast("Opened " + f.name + (res.messages && res.messages.length ? " (some formatting simplified)" : ""));
+    }).catch(() => toast("Could not read that .docx file"));
+  }
+  function exportDocx() {
+    if (typeof htmlDocx === "undefined") { toast("Word export could not load. Use .doc instead"); return; }
+    const m = (MARGINS[page.margin] || MARGINS.normal)[0] * 15;
+    const html = '<!DOCTYPE html><html><head><meta charset="utf-8"><style>body{font-family:Calibri,Arial,sans-serif;font-size:12pt}table{border-collapse:collapse}td,th{border:1px solid #777;padding:4px 6px}blockquote{border-left:4px solid #bbb;margin:10px 24px;padding-left:12px;color:#555}.ttl{font-size:28pt;text-align:center}</style></head><body>' + cleanHtml().replace(/<hr class="pagebreak">/g, '<br style="page-break-before:always">') + "</body></html>";
+    const blob = htmlDocx.asBlob(html, { orientation: page.orient === "l" ? "landscape" : "portrait", margins: { top: m, right: m, bottom: m, left: m } });
+    const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = fname() + ".docx";
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  }
+
+  /* Review: spelling, word count, read aloud, translate */
+  function toggleSpell() { doc.spellcheck = !doc.spellcheck; $("spBtn").setAttribute("aria-pressed", String(doc.spellcheck)); doc.blur(); doc.focus(); toast("Spelling " + (doc.spellcheck ? "on" : "off")); }
+  function wcDlg() {
+    const t = doc.innerText || "", w = (t.match(/\S+/g) || []).length;
+    const paras = [...doc.querySelectorAll("p,h1,h2,h3,li,blockquote,div")].filter(b => !b.querySelector("p,div,h1,h2,h3,li") && b.textContent.trim()).length;
+    const pgs = Math.max(1, Math.round(paper.offsetHeight / pageDims().h));
+    dlg("Word Count", "<table><tr><td>Pages</td><td>" + pgs + "</td></tr><tr><td>Words</td><td>" + w + "</td></tr><tr><td>Characters (no spaces)</td><td>" + t.replace(/\s/g, "").length + "</td></tr><tr><td>Characters (with spaces)</td><td>" + t.replace(/\n/g, "").length + "</td></tr><tr><td>Paragraphs</td><td>" + paras + "</td></tr></table>");
+  }
+  function readAloud() {
+    if (!window.speechSynthesis) { toast("Read Aloud is not supported in this browser"); return; }
+    if (speechSynthesis.speaking) { speechSynthesis.cancel(); toast("Stopped"); return; }
+    const t = String(saved || "").trim() || doc.innerText; if (!t.trim()) return;
+    const u = new SpeechSynthesisUtterance(t); u.lang = "en-US"; speechSynthesis.speak(u); toast("Reading aloud. Tap Read Aloud again to stop");
+  }
+  function translateSel() {
+    const t = (String(saved || "").trim() || doc.innerText).slice(0, 1500); if (!t.trim()) return;
+    window.open("https://translate.google.com/?sl=auto&tl=bn&op=translate&text=" + encodeURIComponent(t), "_blank", "noopener");
+  }
+
+  /* Comments */
+  const cpane = $("cpane"); let composing = false, cIdx = -1;
+  const cmts = () => [...doc.querySelectorAll(".cmt")];
+  function showPane(v) {
+    cpane.hidden = !v; cpane.style.setProperty("--pt", document.querySelector(".ribbon").getBoundingClientRect().bottom + "px");
+    work.style.paddingRight = v && innerWidth > 900 ? "292px" : ""; if (v) renderComments(); else composing = false;
+  }
+  function renderComments() {
+    const cs = cmts();
+    cpane.innerHTML = '<div class="ch"><b>Comments</b><button class="btn" id="cNew" type="button">+ New</button><button class="btn" id="cX" type="button" aria-label="Close">✕</button></div>' +
+      (composing ? '<div class="cc"><textarea id="cTx" placeholder="Start a conversation"></textarea><div style="display:flex;gap:6px"><button class="btn pri" id="cPost" type="button">Post</button><button class="btn" id="cCancel" type="button">Cancel</button></div></div>' : "") +
+      (cs.length ? cs.map((c, i) => '<div class="ci" data-i="' + i + '"><small>You · ' + new Date(+c.dataset.t || Date.now()).toLocaleString() + "</small><q>" + esc(c.textContent.slice(0, 70)) + "</q><div>" + esc(c.dataset.note) + '</div><button class="btn" data-del="' + i + '" type="button" style="margin-top:6px">Delete</button></div>').join("") : (composing ? "" : '<p class="cn">No comments yet. Select text, then choose New Comment.</p>'));
+  }
+  function newComment() {
+    saveSel(); if (!saved || saved.collapsed || !String(saved).trim()) { toast("Select some text to comment on"); return; }
+    composing = true; showPane(true); setTimeout(() => { const t = $("cTx"); if (t) t.focus(); }, 60);
+  }
+  function unwrap(el) { const p = el.parentNode; while (el.firstChild) p.insertBefore(el.firstChild, el); el.remove(); }
+  function deleteComment() {
+    let n = saved && saved.startContainer; n = n && (n.nodeType === 3 ? n.parentNode : n);
+    const c = n && n.closest ? n.closest(".cmt") : null;
+    if (!c) { toast("Place the cursor inside a comment first"); return; }
+    unwrap(c); changed(); if (!cpane.hidden) renderComments();
+  }
+  function jumpCm(d) {
+    const cs = cmts(); if (!cs.length) { toast("No comments"); return; }
+    cIdx = (cIdx + d + cs.length) % cs.length; const el = cs[cIdx];
+    el.scrollIntoView({ block: "center", behavior: "smooth" }); el.classList.add("fl"); setTimeout(() => el.classList.remove("fl"), 1200);
+  }
+  cpane.addEventListener("click", e => {
+    const t = e.target;
+    if (t.id === "cX") { showPane(false); return; }
+    if (t.id === "cNew") { newComment(); return; }
+    if (t.id === "cCancel") { composing = false; renderComments(); return; }
+    if (t.id === "cPost") {
+      const note = $("cTx").value.trim(); if (!note) return;
+      restore(); const s = getSelection(); if (!s.rangeCount || s.isCollapsed) { composing = false; renderComments(); return; }
+      const d = document.createElement("div"); d.appendChild(s.getRangeAt(0).cloneContents());
+      document.execCommand("insertHTML", false, '<span class="cmt" data-t="' + Date.now() + '" data-note="' + esc(note) + '">' + d.innerHTML + "</span>");
+      composing = false; renderComments(); changed(); return;
+    }
+    const del = t.closest("[data-del]");
+    if (del) { const c = cmts()[+del.dataset.del]; if (c) { unwrap(c); changed(); renderComments(); } return; }
+    const it = t.closest(".ci");
+    if (it) { cIdx = +it.dataset.i - 1; jumpCm(1); }
+  });
+  $("cmBtn").addEventListener("click", () => showPane(cpane.hidden));
+
+  /* Track changes (simple): typing is marked as an insertion, deleting is marked as a deletion */
+  let track = false;
+  function toggleTrack() { track = !track; $("trBtn").setAttribute("aria-pressed", String(track)); toast("Track Changes " + (track ? "on" : "off")); }
+  function markDel(r) {
+    const d = document.createElement("div"); d.appendChild(r.cloneContents());
+    document.execCommand("insertHTML", false, '<del class="trk">' + d.innerHTML + "</del>");
+  }
+  doc.addEventListener("beforeinput", e => {
+    if (!track) return;
+    const s = getSelection(); if (!s.rangeCount) return;
+    const t = e.inputType, anc = s.getRangeAt(0).commonAncestorContainer, el = anc.nodeType === 3 ? anc.parentNode : anc;
+    if (t === "insertText" && e.data) {
+      e.preventDefault();
+      if (!s.isCollapsed) markDel(s.getRangeAt(0));
+      if (el.closest && el.closest("ins.trk")) document.execCommand("insertText", false, e.data);
+      else document.execCommand("insertHTML", false, '<ins class="trk">' + esc(e.data) + "</ins>");
+      changed();
+    } else if (/^delete(Content|Word)(Backward|Forward)$/.test(t)) {
+      if (el.closest && el.closest("ins.trk")) return;
+      e.preventDefault();
+      if (s.isCollapsed && s.modify) s.modify("extend", /Backward/.test(t) ? "backward" : "forward", /Word/.test(t) ? "word" : "character");
+      if (!s.isCollapsed) { markDel(s.getRangeAt(0)); changed(); }
+    }
+  });
+  function resolveTrk(accept) {
+    const all = doc.querySelectorAll("ins.trk,del.trk"); if (!all.length) { toast("No tracked changes"); return; }
+    all.forEach(el => { const keep = (el.tagName === "INS") === accept; if (keep) unwrap(el); else el.remove(); });
+    changed(); toast(accept ? "All changes accepted" : "All changes rejected");
+  }
+
+  /* AutoSave switch and top search */
+  function paintAs() { $("asBtn").setAttribute("aria-checked", String(autosave)); }
+  $("asBtn").addEventListener("click", () => { autosave = !autosave; store.set("wauto", autosave ? "1" : "0"); paintAs(); if (autosave) saveNow(); else $("sstat").textContent = "AutoSave off"; });
+  paintAs();
+  $("tsearch").addEventListener("keydown", e => {
+    if (e.key !== "Enter") return;
+    const q = e.target.value.trim(); if (!q) return;
+    openFind(false); fq.value = q; findNext(false);
+  });
+
+  /* ---------- Start ---------- */
+  if (!(cid && loadDoc(cid))) { applyPage(); }
+  if (innerWidth < page_w()) fitWidth(); else setZoom(1);
+  function page_w() { return pageDims().w + 24; }
+
+  /* Quotes sent from the Reader arrive here as block quotes with a citation */
+  function takeInbox() {
+    let box = []; try { box = JSON.parse(store.get("winbox") || "[]"); } catch (e) {}
+    if (!Array.isArray(box) || !box.length) return;
+    store.set("winbox", "[]");
+    try { srcs = JSON.parse(store.get("wlib") || "[]"); } catch (e) {}
+    if (!doc.textContent.trim() && !doc.querySelector("img,table")) doc.innerHTML = "";
+    box.forEach(i => {
+      doc.insertAdjacentHTML("beforeend", "<blockquote>“" + esc(i.text) + "” " + '<span class="cite" data-id="' + esc(i.src) + '" contenteditable="false">(…)</span>' +
+        (i.p ? " p. " + esc(i.p) : "") + (i.note ? "<br><i>Note: " + esc(i.note) + "</i>" : "") + "</blockquote>");
+    });
+    doc.insertAdjacentHTML("beforeend", "<p><br></p>");
+    refreshRefs(true); toast(box.length + (box.length === 1 ? " quote" : " quotes") + " added from the Reader");
+  }
+  takeInbox();
+  window.addEventListener("focus", takeInbox);
+  layout();
+  doc.focus();
+})();
+</script>
+</body>
+</html>
