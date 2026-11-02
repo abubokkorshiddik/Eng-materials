@@ -327,6 +327,13 @@ details li { margin: 6px 0; font-size: 1rem; break-inside: avoid; }
   <p class="msg" id="installMessage" aria-live="polite">If direct installation is unavailable, tap Install app and we will show you how to add this site to your home screen.</p>
 </section>
 
+<!-- ABSOLUTE READER APP -->
+<section class="install" id="absapp" style="margin-top:20px" aria-labelledby="absTitle">
+  <h3 id="absTitle">📖 Absolute Reader: the PDF reader app</h3>
+  <p>All books above open in Absolute Reader. It has highlights, handwriting, notes, a dictionary and annotated PDF export, and works as its own app with its own icon. Open it, then tap Install on its home page.</p>
+  <a class="btn" href="https://abubokkorshiddik.github.io/absReader/reader.html">Open Absolute Reader</a>
+</section>
+
 <noscript><p class="note">Turn on JavaScript to browse the book library and Cambridge IELTS list.</p></noscript>
 
 </main>
@@ -358,6 +365,7 @@ details li { margin: 6px 0; font-size: 1rem; break-inside: avoid; }
         <h4>App</h4>
         <ul>
           <li><a href="#app">Install on your phone</a></li>
+          <li><a href="#absapp">Absolute Reader app</a></li>
           <li><a href="https://abubokkorshiddik.github.io/Eng-materials/" target="_blank" rel="noopener">Visit website: English Materials</a></li>
         </ul>
       </div>
@@ -376,6 +384,7 @@ details li { margin: 6px 0; font-size: 1rem; break-inside: avoid; }
   var KEY = "ielts-gl-reader";
   var GH = "https://github.com/abubokkorshiddik/Eng-materials/raw/main/";
   var GD = "https://drive.google.com/uc?export=download&id=";
+  var APP = "https://abubokkorshiddik.github.io/absReader/reader.html"; /* Absolute Reader app */
 
   /* ---------- Data (one place to add or edit books) ---------- */
   var CATS = [
@@ -433,7 +442,7 @@ details li { margin: 6px 0; font-size: 1rem; break-inside: avoid; }
     return d + (d === 1 ? " day ago" : " days ago");
   }
   function recHref(r) {
-    return r.local ? "reader.html?l=" + encodeURIComponent(String(r.k).slice(6)) : "reader.html?b=" + encodeURIComponent(r.k);
+    return r.local ? APP + "?l=" + encodeURIComponent(String(r.k).slice(6)) : APP + "?b=" + encodeURIComponent(r.k);
   }
   function renderResume() {
     var box = document.getElementById("resume"), list = [];
@@ -457,7 +466,7 @@ details li { margin: 6px 0; font-size: 1rem; break-inside: avoid; }
 
   /* ---------- Cambridge IELTS list ---------- */
   document.getElementById("series").innerHTML = IELTS.map(function (id, i) {
-    var n = i + 1, read = "reader.html?b=ielts" + n;
+    var n = i + 1, read = APP + "?b=ielts" + n;
     return '<div class="row"><a class="title-link" href="' + read + '">Cambridge IELTS ' + n + '</a>' +
       '<div class="acts"><a class="btn sm" href="' + read + '">Read</a>' +
       '<a class="btn sm alt" href="' + GD + id + '" target="_blank" rel="noopener">Download</a></div></div>';
@@ -473,7 +482,7 @@ details li { margin: 6px 0; font-size: 1rem; break-inside: avoid; }
   }).join("");
 
   function bookHTML(b) {
-    var read = "reader.html?b=" + b.id;
+    var read = APP + "?b=" + b.id;
     return '<div class="book"><h3><a class="title-link" href="' + read + '">' + esc(b.title) + '</a></h3>' +
       '<p>' + esc(b.desc) + '</p>' +
       '<a class="btn" href="' + read + '">Read</a>' +
