@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Speaking scripts | English Materials</title>
-<meta name="description" content="Twenty five-minute speaking scripts. Read them aloud as the words move up the screen, check your pronunciation, or add your own script.">
+<meta name="description" content="Twenty five-minute speaking scripts. Read them aloud as the lines move up the screen at 60 to 250 words a minute, or add your own script.">
 <meta name="theme-color" content="#1f2a44">
 <link rel="icon" href="https://raw.githubusercontent.com/abubokkorshiddik/Eng-materials/main/10719400.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Literata:wght@400;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -569,7 +569,7 @@ function ls(k){try{return localStorage.getItem(k)}catch(e){return null}}function
 function jp(k,d){try{var v=JSON.parse(ls(k));return v==null?d:v}catch(e){return d}}
 var IC={list:'<path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/>',home:'<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v12h5v-6h4v6h5V9"/>',plus:'<path d="M12 5v14M5 12h14"/>',sliders:'<path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/>'};
 [].forEach.call(document.querySelectorAll("[data-i]"),function(b){b.insertAdjacentHTML("afterbegin",'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+IC[b.dataset.i]+'</svg>')});
-var CFG=Object.assign({acc:"en-GB",fs:16,tps:26,wpm:100,font:"serif"},jp("ps-cfg",{}));
+var CFG=Object.assign({acc:"en-GB",fs:16,tps:26,wpm:100,font:"serif"},jp("ps-cfg",{}));CFG.wpm=Math.max(60,Math.min(250,+CFG.wpm||100));
 function saveCfg(){lw("ps-cfg",JSON.stringify(CFG))}
 function applyCfg(){var r=document.documentElement;r.style.setProperty("--fs",CFG.fs+"px");r.style.setProperty("--tps",CFG.tps+"px");r.dataset.font=CFG.font}applyCfg();
 var MY=jp("ps-my",[]),BEST=jp("ps-best",{});
@@ -577,82 +577,51 @@ function all(){return SC.concat(MY.map(function(m){return{id:m.id,type:"My scrip
 function wc(t){return(t.match(/\S+/g)||[]).length}
 function grp(t){return t==="Story"?"Stories":t==="Book summary"?"Book summaries":t==="Presentation"?"Presentations":t==="My script"?"My scripts":"New formats"}
 var GROUPS=["Stories","Book summaries","Presentations","New formats","My scripts"];
-var view=$("view"),cur=null,mode=null,running=false;
+var view=$("view"),cur=null,mode=null,running=false,finished=false;
 
-/* ---------- text -> lines and words ---------- */
+/* ---------- text -> lines ---------- */
 function chunks(s){var raw=s.replace(/([,;:])\s+/g,"$1|").split("|"),ch=[];raw.forEach(function(p){var l=ch.length?ch[ch.length-1].split(" ").length:0,n=p.split(" ").length;if(ch.length&&(l<4||n<3)&&l+n<=12)ch[ch.length-1]+=" "+p;else ch.push(p)});var res=[];ch.forEach(function(p){var w=p.split(" ");while(w.length>13)res.push(w.splice(0,Math.ceil(w.length/2)).join(" "));res.push(w.join(" "))});return res}
-function toLines(text){var out=[];text.replace(/[\u2013\u2014-]/g," ").split(/\n\s*\n/).forEach(function(par){par=par.replace(/\s+/g," ").trim();if(!par)return;(par.match(/[^.!?]+[.!?]+["')\]]*|[^.!?]+$/g)||[par]).forEach(function(s){s=s.trim();if(s)chunks(s).forEach(function(c){out.push(c)})});out.push(null)});return out}
-function norm(w){w=w.toLowerCase().replace(/[\u2018\u2019]/g,"'").replace(/[^a-z0-9']/g,"").replace(/^'+|'+$/g,"");return/\d/.test(w)?"":w}
-function lev(a,b){var m=a.length,n=b.length,d=[],i,j;for(i=0;i<=m;i++){d[i]=[i]}for(j=1;j<=n;j++)d[0][j]=j;for(i=1;i<=m;i++)for(j=1;j<=n;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[m][n]}
-function eq(a,b){return a===b||(a.length>=5&&b.length>=5&&lev(a,b)<=1)}
+function toLines(text){var out=[];text.replace(/[\u2013\u2014]/g," - ").split(/\n\s*\n/).forEach(function(par){par=par.replace(/\s+/g," ").trim();if(!par)return;(par.match(/[^.!?]+[.!?]+["')\]]*|[^.!?]+$/g)||[par]).forEach(function(s){s=s.trim();if(s)chunks(s).forEach(function(c){out.push(c)})});out.push(null)});return out}
 
-/* ---------- player state ---------- */
-var WL=[],K=[],LN=[],ptr=0,st=[],tm=null,rec=null,active=false,curLine=-1,ui={};
-function say(t,done){if(!window.speechSynthesis){if(done)done();return}speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang=CFG.acc;u.rate=.88;if(done){u.onend=done;u.onerror=done}speechSynthesis.speak(u)}
-function stopAll(){clearTimeout(tm);tm=null;active=false;running=false;if(window.speechSynthesis)speechSynthesis.cancel();if(rec){try{rec.onend=null;rec.abort()}catch(e){}rec=null}}
-function setCurK(k){if(!K.length)return;var i=K[Math.min(k,K.length-1)],w=WL[i];if(ui.prev)ui.prev.classList.remove("cur");w.el.classList.add("cur");ui.prev=w.el;
- if(w.line!==curLine){curLine=w.line;LN.forEach(function(l,n){l.classList.toggle("now",n===curLine);l.classList.toggle("past",n<curLine)})}scroll()}
-function scroll(){var tp=ui.tp;if(!tp||tp.classList.contains("review")||curLine<0)return;var l=LN[curLine],a=tp.clientHeight*(running?0.4:0.78);ui.inn.style.transform="translateY("+Math.round(a-l.offsetTop-l.offsetHeight/2)+"px)"}
-function mark(i,s){st[i]=s;WL[i].el.classList.toggle("ok",s===1);WL[i].el.classList.toggle("bad",s===2)}
-function resetMarks(){st=[];WL.forEach(function(w){w.el.classList.remove("ok","bad","cur")});curLine=-1;ui.prev=null;LN.forEach(function(l){l.classList.remove("now","past")});ui.tp.classList.remove("review")}
-function dur(i){var t=WL[i].t,d=60000/CFG.wpm;if(/[,;:]$/.test(t))d+=180;else if(/[.!?]["')]*$/.test(t))d+=420;if(WL[i].last)d+=500;return d}
-
-/* ---------- three ways to practise ---------- */
-function btns(){var r=running;ui.bL.textContent=mode==="listen"&&r?"⏸ Pause":"🔊 Listen first";ui.bA.textContent=mode==="auto"&&r?"⏸ Pause":"▶ Auto-scroll";ui.bV.textContent=mode==="voice"&&r?"■ Finish":"🎤 Speak and check";ui.bR.hidden=false}
+/* ---------- player ---------- */
+var LNS=[],ptr=0,tm=null,ui={};
+function say(t,done){if(!window.speechSynthesis){if(done)setTimeout(done,600);return}speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang=CFG.acc;u.rate=Math.max(.5,Math.min(2,CFG.wpm/115));if(done){u.onend=done;u.onerror=done}speechSynthesis.speak(u)}
+function stopAll(){clearTimeout(tm);tm=null;running=false;if(window.speechSynthesis)speechSynthesis.cancel()}
+function dur(i){var l=LNS[i],d=l.words*60000/CFG.wpm;if(/[.!?]["')]*$/.test(l.text))d+=300;else if(/[,;:]$/.test(l.text))d+=120;if(l.last)d+=500;return d}
+function fmt(ms){var s=Math.round(ms/1000);return Math.floor(s/60)+":"+("0"+s%60).slice(-2)}
+function total(from){var t=0;for(var i=from;i<LNS.length;i++)t+=dur(i);return t}
+function scroll(){var l=LNS[ptr];if(!l||!ui.stg)return;var a=ui.stg.clientHeight*(running?0.4:0.78);ui.inn.style.transform="translateY("+Math.round(a-l.el.offsetTop-l.el.offsetHeight/2)+"px)"}
+function show(i){if(!LNS.length)return;ptr=Math.max(0,Math.min(LNS.length-1,i));LNS.forEach(function(l,n){l.el.classList.toggle("now",n===ptr);l.el.classList.toggle("past",n<ptr)});ui.prog.textContent="Line "+(ptr+1)+" of "+LNS.length+" · about "+fmt(total(ptr))+" left";scroll()}
+function btns(){ui.bL.textContent=mode==="listen"&&running?"⏸ Pause":"🔊 Listen first";ui.bA.textContent=mode==="auto"&&running?"⏸ Pause":"▶ Auto-scroll"}
 function note(t,c){ui.msg.textContent=t||"";ui.msg.className="res "+(c||"")}
-function startAuto(){if(mode==="auto"&&running){clearTimeout(tm);running=false;btns();scroll();return}stopAll();if(mode!=="auto"||ptr>=K.length){if(mode!=="auto"){resetMarks();ptr=0}}mode="auto";running=true;ui.res.hidden=true;note("");btns();(function step(){if(!running)return;if(ptr>=K.length){running=false;btns();note("Finished. Try “Speak and check” to test your pronunciation.","ok");return}setCurK(ptr);tm=setTimeout(function(){ptr++;step()},dur(K[ptr]))})()}
-function startListen(){if(mode==="listen"&&running){stopAll();running=false;btns();scroll();return}stopAll();if(mode!=="listen"){resetMarks();ptr=0}mode="listen";running=true;ui.res.hidden=true;note("");btns();(function line(){if(!running)return;if(ptr>=K.length){running=false;btns();note("Model reading finished. Now try it yourself.","ok");return}setCurK(ptr);var L=WL[K[ptr]].line,txt=[],n=ptr;while(n<K.length&&WL[K[n]].line===L){txt.push(WL[K[n]].t);n++}say(txt.join(" "),function(){if(!running)return;ptr=n;line()})})()}
-function startVoice(){var SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(mode==="voice"&&running){finishVoice();return}
- if(!SR){note("Voice checking needs Chrome or Edge on a computer or Android phone. You can still use Listen and Auto-scroll.","no");return}
- stopAll();resetMarks();ptr=0;mode="voice";running=true;active=true;ui.res.hidden=true;note("Listening… read the words naturally. Green = correct, red = missed or unclear.");btns();setCurK(0);
- rec=new SR();rec.lang=CFG.acc;rec.continuous=true;rec.interimResults=true;
- rec.onresult=function(e){var interim="";for(var i=e.resultIndex;i<e.results.length;i++){var r=e.results[i];if(r.isFinal)commit(toks(r[0].transcript));else interim+=" "+r[0].transcript}if(running)preview(toks(interim))};
- rec.onerror=function(e){if(e.error==="not-allowed"||e.error==="service-not-allowed"){stopAll();btns();note("Microphone blocked. Allow microphone access and try again.","no")}};
- rec.onend=function(){if(active){try{rec.start()}catch(x){}}};try{rec.start()}catch(x){}}
-function toks(t){return t.split(/\s+/).map(norm).filter(Boolean)}
-function find(tk,p){for(var j=p;j<Math.min(K.length,p+7);j++)if(eq(WL[K[j]].n,tk))return j;return -1}
-function commit(tokens){tokens.forEach(function(t){var j=find(t,ptr);if(j>=0){for(var m=ptr;m<j;m++)mark(K[m],2);mark(K[j],1);ptr=j+1}});if(ptr>=K.length){finishVoice();return}setCurK(ptr)}
-function preview(tokens){var p=ptr;tokens.forEach(function(t){var j=find(t,p);if(j>=0)p=j+1});if(p<K.length)setCurK(p)}
-function finishVoice(){var was=ptr;stopAll();btns();showResults()}
-
-/* ---------- results ---------- */
-function showResults(){var ok=0,bad=0;K.forEach(function(i){if(st[i]===1)ok++;else if(st[i]===2)bad++});var rest=K.length-ok-bad,acc=ok+bad?Math.round(ok/(ok+bad)*100):0;
- if(cur&&ok+bad>0){BEST[cur.id]=Math.max(BEST[cur.id]||0,acc);lw("ps-best",JSON.stringify(BEST))}
- var r=ui.res;r.hidden=false;r.textContent="";r.appendChild(el("h3","Your result"));
- var g=el("div","","stats");[["Words in script",K.length,""],["Spoken correctly",ok,"ok"],["Missed or unclear",bad,"no"],["Not reached",rest,""],["Accuracy",acc+"%",acc>=80?"ok":"no"]].forEach(function(s){var c=el("div","","stat "+s[2]);c.appendChild(el("b",String(s[1])));c.appendChild(el("span",s[0]));g.appendChild(c)});r.appendChild(g);
- var seen={},probs=[];K.forEach(function(i){if(st[i]===2){var n=WL[i].n;if(!seen[n]){seen[n]={w:WL[i].t.replace(/[^A-Za-z'’]/g,""),n:1};probs.push(seen[n])}else seen[n].n++}});
- if(ok+bad===0)r.appendChild(el("p","No words were checked. Use “Speak and check” and read aloud.","m"));
- else if(!probs.length)r.appendChild(el("p","Excellent! No problem words. Try a faster pace or a new script.","ok"));
- else{r.appendChild(el("h3","Words to practise ("+probs.length+")"));r.appendChild(el("p","Tap 🔊 to hear the word, then 🎤 to say it. The coloured text above shows where each problem happened.","m hint"));var ch=el("div","","wlist");
-  probs.forEach(function(p){var b=el("div","","pw"),o=el("span","","pwr");b.appendChild(el("b",p.w+(p.n>1?" ×"+p.n:"")));b.appendChild(el("button","🔊","sp",function(){say(p.w)}));b.appendChild(el("button","🎤","sp",function(){checkWord(p.w,o)}));b.appendChild(o);ch.appendChild(b)});r.appendChild(ch)}
- var a=el("div");a.style.marginTop="12px";a.appendChild(el("button","Review coloured text","btn alt",function(){ui.tp.classList.add("review");ui.inn.style.transform="none";ui.tp.scrollTop=0;note("Tap any word to hear it.")}));a.appendChild(el("button","Try again","btn",restart));r.appendChild(a);r.scrollIntoView({behavior:"smooth",block:"nearest"})}
-function checkWord(w,out){var SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){out.textContent=" needs Chrome/Edge";return}var r=new SR();r.lang=CFG.acc;r.onresult=function(e){var s=e.results[0][0].transcript,ok=toks(s).some(function(t){return eq(norm(w),t)});out.textContent=ok?" ✓ good":" heard: "+s;out.className="pwr "+(ok?"ok":"no")};r.onerror=function(){out.textContent=" try again"};out.textContent=" listening…";out.className="pwr";try{r.start()}catch(x){}}
-function restart(){stopAll();mode=null;ptr=0;resetMarks();ui.res.hidden=true;note("");btns();setCurK(0);ui.tp.scrollTop=0}
+function startAuto(){if(!cur)return;if(mode==="auto"&&running){stopAll();btns();scroll();return}stopAll();if(mode!=="auto"&&finished||finished){ptr=0;finished=false}mode="auto";running=true;note("");btns();(function step(){if(!running)return;show(ptr);tm=setTimeout(function(){if(ptr>=LNS.length-1){running=false;finished=true;btns();note("Finished. Well done!","ok");return}ptr++;step()},dur(ptr))})()}
+function startListen(){if(!cur)return;if(mode==="listen"&&running){stopAll();btns();scroll();return}stopAll();if(finished){ptr=0;finished=false}mode="listen";running=true;note("");btns();(function line(){if(!running)return;show(ptr);say(LNS[ptr].text,function(){if(!running)return;if(ptr>=LNS.length-1){running=false;finished=true;btns();note("Model reading finished. Now read it yourself.","ok");return}ptr++;line()})})()}
+function restart(){stopAll();mode=null;finished=false;note("");btns();show(0)}
 
 /* ---------- views ---------- */
-function openScript(id,noScroll){var s=all().filter(function(x){return x.id===id})[0];if(!s)return showLib();stopAll();cur=s;mode=null;ptr=0;lw("ps-last",id);if(history.replaceState)history.replaceState(null,"","#"+id);
+function openScript(id,noScroll){var s=all().filter(function(x){return x.id===id})[0];if(!s)return showLib();stopAll();cur=s;mode=null;finished=false;lw("ps-last",id);if(history.replaceState)history.replaceState(null,"","#"+id);
  view.textContent="";ui={};var words=wc(s.text);
  view.appendChild(el("div",s.e+" "+s.type,"chap"));view.appendChild(el("h2",s.title));
- var meta=el("p",words+" words · about "+(words/CFG.wpm).toFixed(1)+" minutes at "+CFG.wpm+" words a minute","m");meta.style.textAlign="center";view.appendChild(meta);ui.meta=meta;
- var cb=el("div","","ctl");ui.bL=el("button","","btn alt",startListen);ui.bA=el("button","","btn",startAuto);ui.bV=el("button","","btn alt",startVoice);ui.bR=el("button","↺ Restart","sp",restart);[ui.bL,ui.bA,ui.bV,ui.bR].forEach(function(b){cb.appendChild(b)});view.appendChild(cb);
- var pc=el("div","","pace");var pl=el("span","Pace: "+CFG.wpm+" words/min"),pr=document.createElement("input");pr.type="range";pr.min=60;pr.max=160;pr.step=5;pr.value=CFG.wpm;pr.setAttribute("aria-label","Pace");pr.oninput=function(){CFG.wpm=+pr.value;saveCfg();pl.textContent="Pace: "+CFG.wpm+" words/min";meta.textContent=words+" words · about "+(words/CFG.wpm).toFixed(1)+" minutes at "+CFG.wpm+" words a minute"};
+ var meta=el("p","","m");meta.style.textAlign="center";view.appendChild(meta);ui.meta=meta;
+ function upMeta(){meta.textContent=words+" words · about "+(words/CFG.wpm).toFixed(1)+" minutes at "+CFG.wpm+" words a minute"}upMeta();
+ var cb=el("div","","ctl");ui.bL=el("button","","btn alt",startListen);ui.bA=el("button","","btn",startAuto);var bR=el("button","↺ Restart","sp",restart);[ui.bL,ui.bA,bR].forEach(function(b){cb.appendChild(b)});view.appendChild(cb);
+ var pc=el("div","","pace"),pl=el("span","Pace: "+CFG.wpm+" words/min"),pr=document.createElement("input");pr.type="range";pr.min=60;pr.max=250;pr.step=5;pr.value=CFG.wpm;pr.setAttribute("aria-label","Pace in words per minute");
+ pr.oninput=function(){CFG.wpm=+pr.value;saveCfg();pl.textContent="Pace: "+CFG.wpm+" words/min";upMeta();show(ptr)};
  pc.appendChild(pl);pc.appendChild(pr);pc.appendChild(el("button","A−","sp",function(){CFG.tps=Math.max(16,CFG.tps-2);saveCfg();applyCfg();scroll()}));pc.appendChild(el("button","A+","sp",function(){CFG.tps=Math.min(44,CFG.tps+2);saveCfg();applyCfg();scroll()}));view.appendChild(pc);
- ui.msg=el("p","","res");view.appendChild(ui.msg);
- var tp=el("div","","stg"),inn=el("div","","tpin");tp.appendChild(inn);view.appendChild(tp);ui.tp=tp;ui.inn=inn;
- ui.res=el("div","","resbox");ui.res.hidden=true;view.appendChild(ui.res);
- WL=[];K=[];LN=[];var ln=toLines(s.text);
- ln.forEach(function(t,li){var d=el("div","","ln");LN.push(d);if(t===null){d.classList.add("gap");if(WL.length)WL[WL.length-1].last=true;inn.appendChild(d);return}
-  t.split(" ").forEach(function(w){var sp=el("span",w,"w"),o={el:sp,t:w,n:norm(w),line:li,last:false},idx=WL.length;WL.push(o);if(o.n)K.push(idx);sp.onclick=function(){if(tp.classList.contains("review"))say(w.replace(/[^A-Za-z'’]/g,""))};d.appendChild(sp);d.appendChild(document.createTextNode(" "))});inn.appendChild(d)});
- btns();setCurK(0);
+ ui.prog=el("p","","m hint");ui.prog.style.textAlign="center";view.appendChild(ui.prog);ui.msg=el("p","","res");ui.msg.style.textAlign="center";view.appendChild(ui.msg);
+ var stg=el("div","","stg"),inn=el("div","","tpin");stg.appendChild(inn);view.appendChild(stg);ui.stg=stg;ui.inn=inn;
+ LNS=[];var last=null;
+ toLines(s.text).forEach(function(t){var d=el("div","","ln");if(t===null){d.classList.add("gap");if(last)last.last=true;inn.appendChild(d);return}d.textContent=t;var o={el:d,text:t,words:wc(t),last:false},k=LNS.length;LNS.push(o);last=o;d.onclick=function(){stopAll();finished=false;btns();show(k)};inn.appendChild(d)});
+ btns();show(0);
  var all2=all(),n=all2.map(function(x){return x.id}).indexOf(id),pn=el("div","","pn");pn.appendChild(el("button","← All scripts","btn alt",showLib));if(n<all2.length-1)pn.appendChild(el("button",all2[n+1].title+" →","btn",function(){openScript(all2[n+1].id)}));view.appendChild(pn);
- view.appendChild(el("p","Tip: Listen first, then try Auto-scroll, then Speak and check. For voice checking, use Chrome or Edge and speak in a quiet place.","m hint"));
+ view.appendChild(el("p","Tip: Press Listen first to hear the script, then press Auto-scroll and read the lines aloud as they move up. Tap any line to start from there. Raise the pace as you improve.","m hint"));
  drawToc();if(!wide())setToc(false);if(!noScroll)window.scrollTo(0,0)}
 function showLib(){stopAll();cur=null;lw("ps-last","");if(history.replaceState)history.replaceState(null,"",location.pathname);view.textContent="";
  view.appendChild(el("div","Speaking scripts","chap"));view.appendChild(el("h2","Choose a script to speak"));
- var p=el("p","Twenty scripts of about five minutes each: stories, book summaries, presentations and new formats. The words move up the screen, and you speak them aloud. Tap + in the top bar to add your own script.","m");p.style.textAlign="center";view.appendChild(p);
+ var p=el("p","Twenty scripts of about five minutes each: stories, book summaries, presentations and new formats. The lines move up the screen and you read them aloud at your own pace, from 60 to 250 words a minute. Tap + in the top bar to add your own script.","m");p.style.textAlign="center";view.appendChild(p);
  var f="All",chips=el("div","","chips"),grid=el("div","","lib");
  function draw(){chips.textContent="";["All"].concat(GROUPS).forEach(function(g){if(g==="My scripts"&&!MY.length)return;chips.appendChild(el("button",g,"chip"+(f===g?" on":""),function(){f=g;draw()}))});grid.textContent="";
-  all().forEach(function(s,i){if(f!=="All"&&grp(s.type)!==f)return;var c=el("div","","sc"),b=el("button","","scb",function(){openScript(s.id)}),w=wc(s.text);b.appendChild(el("span",s.e,"ic"));b.appendChild(el("b",s.title));b.appendChild(el("span",s.blurb,"d"));b.appendChild(el("small",s.type+" · "+w+" words · ≈ "+(w/100).toFixed(1)+" min"+(BEST[s.id]?" · Best "+BEST[s.id]+"%":"")));c.appendChild(b);
+  all().forEach(function(s){if(f!=="All"&&grp(s.type)!==f)return;var c=el("div","","sc"),b=el("button","","scb",function(){openScript(s.id)}),w=wc(s.text);b.appendChild(el("span",s.e,"ic"));b.appendChild(el("b",s.title));b.appendChild(el("span",s.blurb,"d"));b.appendChild(el("small",s.type+" · "+w+" words · ≈ "+(w/100).toFixed(1)+" min at 100 wpm"));c.appendChild(b);
    if(s.mine){c.appendChild(el("button","✕","sp del",function(){if(confirm("Delete this script?")){MY=MY.filter(function(m){return m.id!==s.id});lw("ps-my",JSON.stringify(MY));showLib();drawToc()}}))}grid.appendChild(c)})}
  view.appendChild(chips);view.appendChild(grid);draw();drawToc();if(!wide())setToc(false);window.scrollTo(0,0)}
 
@@ -660,7 +629,7 @@ function showLib(){stopAll();cur=null;lw("ps-last","");if(history.replaceState)h
 var tocOpen=false;function wide(){return window.matchMedia("(min-width:1000px)").matches}
 function setToc(v){tocOpen=v;document.body.classList.toggle("tocOpen",v);if(wide())lw("ps-toc",v?"1":"0");else $("bg").classList.toggle("on",v)}
 function drawToc(){var t=$("toc"),n=0;t.textContent="";t.appendChild(el("h2","Contents"));t.appendChild(el("button","📚 All scripts","te"+(cur?"":" on"),showLib));var A=all();
- GROUPS.forEach(function(g,gi){var items=A.filter(function(s){return grp(s.type)===g});if(!items.length)return;t.appendChild(el("div",g,"tp"));items.forEach(function(s){n++;var b=el("button","","te"+(cur&&cur.id===s.id?" on":""),function(){openScript(s.id)});b.appendChild(el("span",String(n),"n"));b.appendChild(el("span",s.title,"t"));b.appendChild(el("span","","l"));b.appendChild(el("small",BEST[s.id]?BEST[s.id]+"%":""));t.appendChild(b)})})}
+ GROUPS.forEach(function(g,gi){var items=A.filter(function(s){return grp(s.type)===g});if(!items.length)return;t.appendChild(el("div",g,"tp"));items.forEach(function(s){n++;var b=el("button","","te"+(cur&&cur.id===s.id?" on":""),function(){openScript(s.id)});b.appendChild(el("span",String(n),"n"));b.appendChild(el("span",s.title,"t"));b.appendChild(el("span","","l"));t.appendChild(b)})})}
 $("bToc").onclick=function(){setToc(!tocOpen)};$("bt").onclick=function(){showLib()};
 
 /* ---------- right panel: add script and settings ---------- */
@@ -687,7 +656,7 @@ function rSet(){var H=function(t){dr2.appendChild(el("div",t,"sh"))};dr2.appendC
  H("Typeface");dr2.appendChild(seg([["serif","Serif"],["sans","Sans"]],CFG.font,function(v){setOpt("font",v)}));
  H("Page text size");dr2.appendChild(rng(13,26,CFG.fs,function(v){CFG.fs=v;saveCfg();applyCfg()}));
  H("Prompter text size");dr2.appendChild(rng(16,44,CFG.tps,function(v){CFG.tps=v;saveCfg();applyCfg();scroll()}));
- H("Accent (voice and checking)");dr2.appendChild(seg([["en-GB","British"],["en-US","American"]],CFG.acc,function(v){setOpt("acc",v)}));
+ H("Accent (listening voice)");dr2.appendChild(seg([["en-GB","British"],["en-US","American"]],CFG.acc,function(v){setOpt("acc",v)}));
  H("Eye comfort");dr2.appendChild(el("div","Brightness","m"));dr2.appendChild(rng(30,100,EYE.b,function(v){EYE.b=v;applyEye();saveEye()}));
  dr2.appendChild(el("div","Warm light (less blue)","m"));dr2.appendChild(rng(0,100,EYE.w,function(v){EYE.w=v;applyEye();saveEye()}));
  dr2.appendChild(chk("Auto night mode (sepia from 6 pm, dark from 10 pm)",EYE.auto,function(v){EYE.auto=v;saveEye();autoTheme();renderR()}));
